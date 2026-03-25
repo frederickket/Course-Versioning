@@ -1,0 +1,14 @@
+.component-body {
+    
+}
+
+
+.button-remove-border {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.rich-text-multiline {
+    white-space: normal;
+}

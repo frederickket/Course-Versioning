@@ -1,0 +1,12 @@
+{
+  "activeViewId" : "7ecb2b97-52ab-4e86-a48f-eb4ba3a76930",
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "configurationTags" : [ ],
+  "devName" : "Study_Pathway_List__c",
+  "id" : "a1156a88-dbff-4408-a88b-0c16f3028219",
+  "label" : "Study Pathway List",
+  "objectApiName" : "reduivy__Study_Pathway__c",
+  "routeType" : "list-a0x",
+  "type" : "route",
+  "urlPrefix" : "study-pathway"
+}

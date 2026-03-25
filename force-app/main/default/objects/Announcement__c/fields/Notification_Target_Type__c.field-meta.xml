@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Notification_Target_Type__c</fullName>
+    <deprecated>false</deprecated>
+    <description>The landing page or record when user clicks on the notification.</description>
+    <inlineHelpText>The landing page or record when user clicks on the notification.</inlineHelpText>
+    <label>Notification Target Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Named Page (Experience Cloud)</fullName>
+                <default>false</default>
+                <label>Named Page (Experience Cloud)</label>
+            </value>
+            <value>
+                <fullName>Named Page (Standard)</fullName>
+                <default>false</default>
+                <label>Named Page (Standard)</label>
+            </value>
+            <value>
+                <fullName>Record Page</fullName>
+                <default>false</default>
+                <label>Record Page</label>
+            </value>
+            <value>
+                <fullName>Web Page</fullName>
+                <default>false</default>
+                <label>Web Page</label>
+            </value>
+            <value>
+                <fullName>Navigation Item Page</fullName>
+                <default>false</default>
+                <label>Navigation Item Page</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

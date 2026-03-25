@@ -1,0 +1,86 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="slds-m-around_medium">
+                <div class="ivyappconsole-header slds-m-bottom_medium slds-p-bottom_medium slds-border_bottom">
+                    <lightning-layout class="slds-wrap">
+                        <lightning-layout-item size="12" large-device-size="4">
+                            <div class="ivyappconsole-title slds-card__header-title">
+                                <lightning-icon icon-name={modalIconName} size="medium" class="slds-m-right_xx-small"></lightning-icon>
+                                <lightning-formatted-text value={modalTitle}></lightning-formatted-text>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item alignment-bump="left">
+                            <div class="ivyappconsole-nav-button-group">
+                                <lightning-button-group>
+                                    <lightning-button-icon title={label.REFRESH_LABEL} icon-name="utility:refresh" value="refresh" onclick={handleRefreshOnclick}></lightning-button-icon>
+                                </lightning-button-group>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+                <div class="ivyappconsole-content">
+                    <div class="slds-p-around_small">
+                        <lightning-tabset>
+                            <lightning-tab label={label.userLicenses} icon-name="utility:user">
+                                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                                    <thead>
+                                        <th>{label.LICENSE_FIELD_NAME_LABEL}</th>
+                                        <th>{label.LICENSE_FIELD_TOTAL_LABEL}</th>
+                                        <th>{label.LICENSE_FIELD_USED_LABEL}</th>
+                                        <th>{label.LICENSE_FIELD_REMAINING_LABEL}</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{label.LICENSE_TYPE_ADMIN_LABEL}</td>
+                                            <td>
+                                                <lightning-formatted-number value={adminTotalLicenses}></lightning-formatted-number>
+                                            </td>
+                                            <td>
+                                                <lightning-formatted-number value={adminUsedLicenses}></lightning-formatted-number>
+                                            </td>
+                                            <td>
+                                                <lightning-formatted-number value={adminRemainingLicenses}></lightning-formatted-number>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>{label.LICENSE_TYPE_FACULTY_LABEL}</td>
+                                            <td>
+                                                <lightning-formatted-number value={facultyTotalLicenses}></lightning-formatted-number>
+                                            </td>
+                                            <td>
+                                                <lightning-formatted-number value={facultyUsedLicenses}></lightning-formatted-number>
+                                            </td>
+                                            <td>
+                                                <lightning-formatted-number value={facultyRemainingLicenses}></lightning-formatted-number>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>{label.LICENSE_TYPE_STUDENT_LABEL}</td>
+                                            <td>
+                                                <lightning-formatted-number value={studentTotalLicenses}></lightning-formatted-number>
+                                            </td>
+                                            <td>
+                                                <lightning-formatted-number value={studentUsedLicenses}></lightning-formatted-number>
+                                            </td>
+                                            <td>
+                                                <lightning-formatted-number value={studentRemainingLicenses}></lightning-formatted-number>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </lightning-tab>
+                        </lightning-tabset>
+                    </div>
+                </div>
+            </div>
+        </template>
+	</div>
+	
+</template>

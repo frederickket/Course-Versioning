@@ -1,0 +1,70 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="recordinfotile-content">
+                <article class="slds-tile slds-media">
+                    <div class="slds-media__figure">
+                        <template lwc:if={showRecordAvatar}>
+                            <lightning-avatar size="large" src={recordAvatarSrc} fallback-icon-name="standard:avatar" alternative-text={tileTitle}></lightning-avatar>
+                        </template>
+                        <template lwc:else>
+                            <lightning-icon if:true={recordIconName} size={recordIconSize} icon-name={recordIconName} title={tileTitle}></lightning-icon>
+                        </template>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-grid">
+                            <span if:true={recordColor} class="record-bar-color slds-m-right_xx-small" >&nbsp;</span>
+                            
+                            <template lwc:if={isTitleClickable}>
+                                <button value={tileTitle} title={tileTitle} onclick={handleRecordTitleClick} class={tileTitleButtonCssClass}>
+                                    <span class={tiileTitleHeadingCssClass}>{tileTitle}</span>
+                                </button>
+                            </template>
+                            <template lwc:else>
+                                <div title={tileTitle} class="truncate-div">
+                                    <span class={tiileTitleHeadingCssClass}>{tileTitle}</span>
+                                </div>
+                            </template>
+                        </div>
+                        <div class="slds-tile__detail">
+                            <c-record-view-form 
+                                record-id={recordId}
+                                object-api-name={objectApiName}
+                                fields={tileInfoFields}
+                                enable-debug-mode={enableDebugMode}
+                            >
+                            <template lwc:if={showFieldLabel}>
+                                <lightning-layout multiple-rows="true">
+                                    <template for:each={tileInfoFields} for:item="field">
+                                        <lightning-layout-item key={field} size="12" large-device-size={recordInfoFieldSize}>
+                                            <c-output-field field-name={field} ></c-output-field>
+                                        </lightning-layout-item>
+                                    </template>
+                                </lightning-layout>
+                            </template>
+
+                            <template lwc:else>
+                                <ul class="slds-list_horizontal slds-has-dividers_right">
+                                    <template for:each={tileInfoFields} for:item="field">
+                                        <li key={field} class="slds-item">
+                                            <c-output-field variant="label-hidden" field-name={field} ></c-output-field>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </template>
+                                
+                            </c-record-view-form>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </template>
+	</div>
+	
+</template>

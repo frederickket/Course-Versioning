@@ -1,0 +1,35 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+      
+        <div class="slds-modal__content slds-var-p-around_xxx-small">
+
+            <div class="component-body slds-is-relative">
+                <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv">
+                    <lightning-spinner alternative-text={label.LOADING_LABEL}></lightning-spinner>
+                </div>
+
+                <div class="studySessionSchedulerAssignFacilityModal-content slds-var-m-around_medium">
+                    <div class="studySessionSchedulerAssignFacilityModal-action slds-p-bottom_small">
+                        <lightning-radio-group name="action" label={actionLabel} options={actionOptions} type="radio"
+                            value={actionValue} onchange={handleActionsChange}></lightning-radio-group>
+                    </div>
+                    <div class="studySessionSchedulerAssignFacilityModal-sessionTime">
+                        <lightning-combobox name="sessionTime" label="Study Session Time" value={sessionTimeValue}
+                            options={sessionTimeOptions} onchange={handleSessionTimeChange}></lightning-combobox>
+                    </div>
+                    <div class="studySessionSchedulerAssignFacilityModal-facility">
+                        <c-searchable-combobox field-label={facilityLabel} field-name="facility"
+                            icon-name="custom:custom24" options={facilityOptions} onchange={handleFacilityChange}
+                            enable-debug-mode={enableDebugMode}></c-searchable-combobox>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" disabled={isLoading} onclick={handleCancelClick} label={cancelButtonLabel} ></lightning-button>
+        <lightning-button variant="brand" disabled={isLoading} onclick={handleSaveClick} label={saveButtonLabel} class="slds-var-m-left_x-small"></lightning-button>
+    </lightning-modal-footer>
+</template>

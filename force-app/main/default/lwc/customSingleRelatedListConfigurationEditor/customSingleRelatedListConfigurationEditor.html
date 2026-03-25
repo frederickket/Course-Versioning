@@ -1,0 +1,54 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+    <div class="component-body">
+
+        <lightning-combobox label="Records Source" value={recordsSourceValue} options={recordsSourceOptions} onchange={handleRecordsSourceChange}></lightning-combobox>
+        <lightning-input type="text" label="Title" value={modalTitle} onchange={handleChange} data-id="modalTitle" data-type="String" field-level-help="Title."></lightning-input>
+        <lightning-input type="text" label="Modal Icon Name" value={modalIconName} onchange={handleChange} data-id="modalIconName" data-type="String" field-level-help="Modal Icon Name."></lightning-input>
+        <lightning-input type="text" label="Record Id" value={recordId} onchange={handleChange} data-id="recordId" data-type="String" lwc:if={sourceAuto} required="true" field-level-help="Record Id."></lightning-input>
+        <lightning-input type="text" label="Target Record Id Field" value={targetRecordIdField} onchange={handleChange} data-id="targetRecordIdField" data-type="String" lwc:if={sourceAuto} required="true" field-level-help="The Id field (master-detailed/lookup) API name from the current object to be used in searching related child records based on Parent Object Reference Field."></lightning-input>
+        <lightning-input type="text" label="Parent Object Reference Field" value={parentObjectRefField} onchange={handleChange} data-id="parentObjectRefField" data-type="String" lwc:if={sourceAuto} required="true" field-level-help="The Id field (master-detailed/lookup) API name of the parent object used in child object." ></lightning-input>
+        <lightning-input type="text" label="Child Object API Name" value={childObjectApiName} onchange={handleChange} data-id="childObjectApiName" data-type="String" lwc:if={sourceAuto} required="true" field-level-help="E.g, OpportunityLineItem or rio_ed__Fee_Line__c" ></lightning-input>
+        <lightning-input type="text" label="Child Object Fields API Name" value={childObjectFields} onchange={handleChange} data-id="childObjectFields" data-type="String" required="true" field-level-help="Enter the API name of the fields seperated by semicolons to display the list of columns. Please note that Rich Text and Time are not supported." ></lightning-input>
+        <lightning-input type="text" label="Source Collection" value={sourceCollection} onchange={handleChange} data-id="sourceCollection" lwc:if={sourceManual} data-type="String" required="true" field-level-help="The API name of the collection to display. E.g: {!listName}"></lightning-input>
+        <lightning-input type="text" label="Child Record Filter Criteria" value={childObjectFilterCriteria} onchange={handleChange} data-id="childObjectFilterCriteria" data-type="String" lwc:if={sourceAuto} field-level-help="E.g, RecordTypeId = 'xxxxxx' or Account.Name = 'Acme'." ></lightning-input>
+        <lightning-accordion active-section-name="sort" allow-multiple-sections-open>
+
+            <lightning-accordion-section name="sort" label="Sort">
+                <lightning-input type="text" label="Sorted By" value={sortedBy} onchange={handleChange} data-id="sortedBy" data-type="String" required="true" field-level-help="E.g, Name" ></lightning-input>
+                <lightning-combobox label="Sorted Direction" value={sortedDirection} options={sortedDirectionOptions} onchange={handleChange} data-id="sortedDirection" data-type="String" field-level-help="E.g, Acsending or Descending. Supported options are: asc,desc."></lightning-combobox>
+            </lightning-accordion-section>
+
+            <lightning-accordion-section name="action" label="Action">
+                <lightning-input type="checkbox" label="Show New Button" checked={enableNewButton} onchange={handleChange} data-id="enableNewButton" data-type="Boolean" field-level-help="Show new button for user to create record." ></lightning-input>
+                <lightning-input type="checkbox" label="Show View Button" checked={enableRowViewButton} onchange={handleChange} data-id="enableRowViewButton" data-type="Boolean" field-level-help="Show view button for user to view a record." ></lightning-input>
+                <lightning-input type="checkbox" label="Show Edit Button" checked={enableRowEditButton} onchange={handleChange} data-id="enableRowEditButton" data-type="Boolean" field-level-help="Show edit button for user to edit a record." ></lightning-input>
+                <lightning-input type="text" label="Edit Field Set API Name" value={editFieldSetName} onchange={handleChange} data-id="editFieldSetName" data-type="String" field-level-help="The Field Set Name used to display on the edit and new record modal."></lightning-input>
+                <lightning-input type="checkbox" label="Show Delete Button" checked={enableRowDeleteButton} onchange={handleChange} data-id="enableRowDeleteButton" data-type="Boolean" field-level-help="Show delete button for user to delete a record." ></lightning-input>
+                <lightning-input type="checkbox" label="Show Download Button" checked={enableRowDownloadButton} onchange={handleChange} data-id="enableRowDownloadButton" data-type="Boolean" field-level-help="Show download button for user to download the file. Only applies when the child object is ContentVersion" ></lightning-input>
+                <lightning-input type="text" label="Download URL" value={downloadUrl} onchange={handleChange} data-id="downloadUrl" data-type="String" field-level-help="The url to download the file. {0} will be replaced by the record id. Only applies when the child object is ContentVersion."></lightning-input>
+            </lightning-accordion-section>
+            
+            <lightning-accordion-section name="enable" label="Enable Feature">
+                <lightning-input type="checkbox" label="Show Row Number" checked={showRowNumber} onchange={handleChange} data-id="showRowNumber" data-type="Boolean" field-level-help="Show sequence number for each row." ></lightning-input>
+                <lightning-input type="checkbox" label="Enable Infinite Loading" checked={enableInfiniteLoading} onchange={handleChange} data-id="enableInfiniteLoading" data-type="Boolean" lwc:if={sourceAuto} field-level-help="To enable infinite loading." ></lightning-input>
+                <lightning-input type="checkbox" label="Make reference field clickable" checked={enableClickableRefField} onchange={handleChange} data-id="enableClickableRefField" data-type="Boolean" lwc:if={sourceAuto} field-level-help="Make master-detail or lookup field clickable to open the record." ></lightning-input>
+                <lightning-input type="checkbox" label="Enable multiple row selection" checked={enableRowSelection} onchange={handleChange} data-id="enableRowSelection" data-type="Boolean" field-level-help="Enable checkboxes and allow multiple row selection."></lightning-input>
+                <lightning-input type="checkbox" label="Inline Editing" checked={enableInlineEditing} onchange={handleChange} data-id="enableInlineEditing" data-type="Boolean" field-level-help="Enable inline editing." ></lightning-input>
+                <lightning-input type="checkbox" label="Enable Quick Search" checked={enableQuickSearch} onchange={handleChange} data-id="enableQuickSearch" data-type="Boolean" field-level-help="Enable Quick Search" ></lightning-input>
+                <lightning-input type="checkbox" label="Debug Mode" checked={enableDebugMode} onchange={handleChange} data-id="enableDebugMode" data-type="Boolean" field-level-help="Enable debug mode."></lightning-input>
+            </lightning-accordion-section>
+            
+            <lightning-accordion-section name="others" label="Others">
+                <lightning-input type="text" label="Maximum Height" value={maxHeight} onchange={handleChange} data-id="maxHeight" data-type="Number" field-level-help="Maximum height of the component in pixel." ></lightning-input>
+                <lightning-input type="text" label="Rows to Load" value={rowsToLoad} onchange={handleChange} data-id="rowsToLoad" data-type="Number" lwc:if={sourceAuto} field-level-help="Rows to Load. Default is 10."></lightning-input>
+                <lightning-input type="text" label="No Record Found Message" value={noRecordFoundMessage} onchange={handleChange} data-id="noRecordFoundMessage" data-type="String" field-level-help="Message to show when there is no record found."></lightning-input>
+                <lightning-combobox label="Reference Target" value={refTarget} options={refTargetOptions} onchange={handleChange} data-id="refTarget" data-type="String" field-level-help="Target for opening reference (lookup) fields. Default is _blank."></lightning-combobox>
+                <lightning-combobox label="View Mode" value={viewMode} options={viewModeOptions} onchange={handleChange} data-id="viewMode" data-type="String" field-level-help="Display as related list or table only."></lightning-combobox>
+            </lightning-accordion-section>
+            
+        </lightning-accordion>
+    </div>
+	
+</template>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Percentage/Letter</fullName>
+        <default>true</default>
+        <label>Percentage/Letter</label>
+    </customValue>
+    <customValue>
+        <fullName>Pass/Fail</fullName>
+        <default>false</default>
+        <label>Pass/Fail</label>
+    </customValue>
+    <masterLabel>Grade Setting Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

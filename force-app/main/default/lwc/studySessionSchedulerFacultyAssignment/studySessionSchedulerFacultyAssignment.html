@@ -1,0 +1,126 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="slds-m-around_medium assignnewfaculty-content">                
+                <template lwc:if={showHeader}>
+                    <div class="assignnewfaculty-header slds-m-bottom_medium slds-p-bottom_medium slds-border_bottom">
+                        <lightning-layout class="slds-wrap">
+                            <lightning-layout-item size="12" large-device-size="4">
+                                <div class="assignnewfaculty-title slds-card__header-title">
+                                    <lightning-icon icon-name={modalIconName} size="medium" class="slds-m-right_xx-small"></lightning-icon>
+                                    <lightning-formatted-text value={modalTitleLabel}></lightning-formatted-text>
+                                </div> 
+                            </lightning-layout-item>
+                            <lightning-layout-item alignment-bump="left">
+                                <lightning-button variant="brand" disabled={isLoading} onclick={handleSave} label={saveButtonLabel}></lightning-button>
+                            </lightning-layout-item>
+                                
+                        </lightning-layout>
+                    </div>
+                </template>
+                
+                <template lwc:if={showingMessageBox}>
+                    <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_warning assignnewfaculty-messagebox" role="alert">
+                        <p><b>{messageBoxTitle}:&nbsp;</b>{messageBoxMessage}</p>
+                    </div>
+                </template>
+
+                <lightning-layout horizontal-align="space" multiple-rows vertical-align="start">
+                    <lightning-layout-item size="12" large-device-size="8" class="slds-p-right_small">
+                        <div class="assignnewfaculty-sectionleft">
+
+                            
+                            <!--qualified faculty-->
+                            <table class="slds-table slds-table_cell-buffer slds-table_bordered assignnewfaculty-qualifiedfacultytable">
+                                <thead>
+                                    <tr class="slds-line-height_reset">
+                                        <th scope="col">{qualifiedFacultyLabel}</th>
+                                        <th scope="col">{qualifiedRolesLabel}</th>
+                                        <th scope="col"><!--button--></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template for:each={filteredQualifiedFaculty} for:item="faculty">
+                                        <tr key={faculty.reduivy__Contact__c}>
+                                            <td class="slds-cell-wrap">{faculty.reduivy__Contact__r.Name}</td>
+                                            <td class="slds-cell-wrap">{faculty.qualifiedRoles}</td>
+                                            <td class="slds-cell-wrap">
+                                                <template lwc:if={faculty.isSelected}>
+                                                    <lightning-button variant="neutral" label={unselectButtonLabel} onclick={handleUnselectButton} value={faculty.reduivy__Contact__c}></lightning-button>
+                                                </template>
+                                                <template lwc:else>
+                                                    <lightning-button variant="brand" label={selectButtonLabel} onclick={handleSelectButton} value={faculty.reduivy__Contact__c}></lightning-button>
+                                                </template>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+
+                            <div class="assignnewfaculty-recordPickerFaculty form-input">
+                                <lightning-record-picker lwc:ref="recordPickerFaculty" label={recordPickerFacultyLabel} object-api-name="Contact"
+                                filter={recordPickerFacultyFilter} value={recordPickerFacultyValue} onchange={handleRecordPicker}></lightning-record-picker>
+                            </div>
+
+                            <div class="assignnewfaculty-studySessionTime form-input">
+                                <lightning-combobox name="studySessionTime" label={studySessionTimeLabel} value={studySessionTimeValue}
+                                options={studySessionTimeOptions} onchange={handleStudySessionTime} data-name="sstcombobox"></lightning-combobox>
+                            </div>
+
+                            <lightning-pill-container 
+                              items={selectedStudySessionTimes} onitemremove={handleSstPillRemoved}
+                            ></lightning-pill-container>
+
+                            <div class="assignnewfaculty-responseStatus form-input">
+                                <lightning-combobox name="responseStatus" label={statusLabel} value={responseStatusValue}
+                                options={responseStatusOptions} onchange={handleResponseStatus}></lightning-combobox>
+                            </div>
+
+                            <div class="assignnewfaculty-startDateInput form-input">
+                                <lightning-input type="date" name="startDateInput" label={startDateLabel} value={startDateValue} onchange={handleDateChange}></lightning-input>
+                            </div>
+
+                            <div class="assignnewfaculty-endDateInput form-input">
+                                <lightning-input type="date" name="endDateInput" label={endDateLabel} value={endDateValue} onchange={handleDateChange}></lightning-input>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="12" large-device-size="4">
+                        
+                        <div class="assignnewfaculty-sectionright">
+                            <lightning-input type="toggle" label={filterByFacultyRolesLabel} name="filterByFacultyRoles" checked={filterRoles} onchange={handleFilterChange} ></lightning-input>
+                            <div class="slds-box assignnewfaculty-filterroles">
+                                <b>{facultyRolesLabel}</b>
+                                <lightning-checkbox-group name="facultyRolesFilter"
+                                options={facultyRolesOptions}
+                                value={facultyRolesValue}
+                                onchange={handleFacultyRolesChange}
+                                variant="standard"
+                                ></lightning-checkbox-group>
+                                
+                            </div>
+                            
+                            <div class="slds-box slds-m-top_medium assignnewfaculty-primaryfaculty">
+                                <b>{primaryFacultyLabel}</b>
+                                <lightning-input type="checkbox" label={makePrimaryForStudySessionLabel} name="primarySession" checked={makePrimaryStudySessionValue} onchange={handleMakePrimaryStudySession}></lightning-input>
+                                <lightning-input type="checkbox" label={makePrimaryForStudyOfferingLabel} name="primaryOffering" checked={makePrimaryStudyOfferingValue} onchange={handleMakePrimaryStudyOffering}></lightning-input>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                        
+
+                </lightning-layout>
+            </div>
+
+
+        </template>
+	</div>
+	
+</template>

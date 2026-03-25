@@ -1,0 +1,40 @@
+<template>
+	<div class="ipepathwaytermunitcell-body" title={fieldValue}>
+        <template lwc:if={isUnitNameField}>
+            <!-- using html button instead of lightning-button to overcome the long button name -->
+            <button class="slds-button button-remove-border" title={fieldValue} value={fieldValue} onclick={handleUnitNameOnclick}>
+                <span class="slds-text-align_left">{fieldValue}</span>
+            </button>
+        </template>
+        <template lwc:elseif={isUnitCodeField}>
+            <!-- using html button instead of lightning-button to overcome the long button name -->
+            <button class="slds-button button-remove-border" title={fieldValue} value={fieldValue} onclick={handleUnitCodeOnclick}>
+                <span class="slds-text-align_left">{fieldValue}</span>
+            </button>
+        </template>
+        <template lwc:elseif={isDateField}>
+            <lightning-formatted-date-time value={fieldValue} date-style="short" time-zone="UTC"></lightning-formatted-date-time>
+        </template>
+        <template lwc:elseif={isDateTimeField}>
+            <lightning-formatted-date-time value={fieldValue} year="numeric" month="numeric" day="numeric" hour="numeric" minute="2-digit" time-zone={timeZone}></lightning-formatted-date-time>
+        </template>
+        <template lwc:elseif={isTimeField}>
+            <lightning-formatted-date-time value={fieldValue} hour="2-digit" minute="2-digit" time-zone="UTC"></lightning-formatted-date-time>
+        </template>
+        <template lwc:elseif={isDecimalField}>
+            <lightning-formatted-number value={fieldValue} maximum-fraction-digits="4"></lightning-formatted-number>
+        </template>
+        <template lwc:elseif={isCurrencyField}>
+            <lightning-formatted-number value={fieldValue} format-style="currency" currency-code={currencyIsoCode} minimum-fraction-digits="2" maximum-fraction-digits="2"></lightning-formatted-number>
+        </template>
+        <template lwc:elseif={isPercentField}>
+            <lightning-formatted-number value={fieldValue} format-style="percent-fixed" maximum-fraction-digits="2"></lightning-formatted-number>
+        </template>
+        <template lwc:elseif={isUrlField}>
+            <lightning-formatted-url value={fieldValue} target="_blank"></lightning-formatted-url>
+        </template>
+        <template lwc:else>
+            <lightning-formatted-rich-text class="rich-text-multiline" value={fieldValue} title={fieldValue}></lightning-formatted-rich-text>
+        </template>
+    </div>
+</template>

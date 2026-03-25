@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Pre-Requisite</fullName>
+        <default>true</default>
+        <label>Pre-Requisite</label>
+    </customValue>
+    <customValue>
+        <fullName>Pre-Requisite (Allow Bypass)</fullName>
+        <default>false</default>
+        <label>Pre-Requisite (Allow Bypass)</label>
+    </customValue>
+    <customValue>
+        <fullName>Co-Requisite</fullName>
+        <default>false</default>
+        <label>Co-Requisite</label>
+    </customValue>
+    <customValue>
+        <fullName>Credits</fullName>
+        <default>false</default>
+        <label>Credits</label>
+    </customValue>
+    <customValue>
+        <fullName>Custom</fullName>
+        <default>false</default>
+        <label>Custom</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Enrolled or Completed</fullName>
+        <default>false</default>
+        <label>Enrolled or Completed</label>
+    </customValue>
+    <customValue>
+        <fullName>Conflict</fullName>
+        <isActive>false</isActive>
+        <default>false</default>
+        <label>(Obsolete) Conflict</label>
+    </customValue>
+    <masterLabel>Unit Requirement Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

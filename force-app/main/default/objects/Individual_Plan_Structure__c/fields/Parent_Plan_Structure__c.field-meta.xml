@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Parent_Plan_Structure__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <label>Parent Plan Structure</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Individual_Plan_Structure__c.RecordType.DeveloperName</field>
+            <operation>equals</operation>
+            <value>Group</value>
+        </filterItems>
+        <filterItems>
+            <field>Individual_Plan_Structure__c.Individual_Program_Enrollment__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.Individual_Program_Enrollment__c</valueField>
+        </filterItems>
+        <infoMessage>Please select a group plan structure from the same individual program enrollment.</infoMessage>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>Individual_Plan_Structure__c</referenceTo>
+    <relationshipLabel>Individual Plan Structures</relationshipLabel>
+    <relationshipName>Individual_Plan_Structures</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

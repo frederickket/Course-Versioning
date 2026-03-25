@@ -1,0 +1,27 @@
+<template>
+    <div class="component-body slds-is-relative">
+        <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={customFilters} >
+            <lightning-layout multiple-rows="true" class="customfilters-layout">
+                <template for:each={customFilters} for:item="cf">
+                    <template if:true={cf.showFilter}>
+                        <lightning-layout-item key={cf.sourceFieldName} size={defaultColumnSize} large-device-size={largeDeviceColumnSize} class={cssClass}>
+                            <c-custom-filter-field 
+                                custom-filter={cf}
+                                lwc-reactor={cf.lwcReactor}
+                                show-picklist-as-multi-select={showPicklistAsMultiSelect}
+                                enable-debug-mode={enableDebugMode}
+
+                                onfilterchange={handleFilterChange}
+                            ></c-custom-filter-field>
+                        </lightning-layout-item>
+                    </template>
+                </template>
+            </lightning-layout>
+        </template>
+	</div>
+	
+</template>

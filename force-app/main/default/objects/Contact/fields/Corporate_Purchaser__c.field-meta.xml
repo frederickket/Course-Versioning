@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Corporate_Purchaser__c</fullName>
+    <defaultValue>false</defaultValue>
+    <externalId>false</externalId>
+    <label>Corporate Purchaser</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <description>Tick if this is corporate contact e.g., to show "Pay by Company" during the checkout.</description>
+    <inlineHelpText>Tick if this is corporate contact e.g., to show "Pay by Company" during the checkout.</inlineHelpText>
+    <type>Checkbox</type>
+</CustomField>

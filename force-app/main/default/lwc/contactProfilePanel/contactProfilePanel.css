@@ -1,0 +1,18 @@
+.component-body {
+
+}
+
+.contactprofilepanel-img-desc {
+    opacity: 0;
+    text-align: center;
+    display: none;
+}
+
+.contactprofilepanel-img-container:hover .contactprofilepanel-img-desc {
+    opacity: 1;
+    display: block;
+}
+
+.contactprofilepanel-img-desc-text {
+    cursor: pointer;
+}

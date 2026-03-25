@@ -1,0 +1,96 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template lwc:if={isInitSuccess}>
+            <template lwc:if={showRecordForGrading}>
+                <c-student-grading-registry
+                    record-id={selectedRecordId}
+                    user-mode={userMode}
+                    modal-icon-name={modalIconName}
+                    object-api-name={selectedObjectApiName}
+                    valid-student-ien-status={validStudentIenStatus}
+                    valid-student-isn-status={validStudentIsnStatus}
+                    show-close-button={showCloseButton}
+                    show-save-button={showSaveButton}
+                    show-save-and-submit-button={showSaveAndSubmitButton}
+                    save-button-igd-status={saveButtonIgdStatus}
+                    save-and-submit-button-igd-status={saveAndSubmitButtonIgdStatus}
+                    individual-enrollment-grade-field-set={individualEnrollmentGradeFieldSet}
+                    individual-grade-item-notes-field-set-name={individualGradeItemNotesFieldSetName}
+                    contact-tile-info-fields={contactTileInfoFields}
+                    contact-image-file-name={contactImageFileName}
+                    contact-image-url-field-name={contactImageUrlFieldName}
+                    contact-tile-click-action={contactTileClickAction}
+                    info-modal-fields-for-contact={infoModalFieldsForContact}
+                    info-modal-section-name-for-contact={infoModalSectionNameForContact}
+                    enable-debug-mode={enableDebugMode}
+                    onclose={handleClose}
+                ></c-student-grading-registry>
+            </template>
+            <template lwc:else>
+                <div class="slds-m-around_medium">
+                    <div class="studentgrading-header slds-m-bottom_medium slds-p-bottom_medium slds-border_bottom">
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item size="12" large-device-size="4">
+                                <template if:true={showModalHeader}>
+                                    <div class="studentgrading-title slds-card__header-title">
+                                        <lightning-icon icon-name={modalIconName} size="medium" class="slds-m-right_xx-small"></lightning-icon>
+                                        <lightning-formatted-text value={modalTitle}></lightning-formatted-text>
+                                    </div>
+                                </template>
+                            </lightning-layout-item>
+                            <lightning-layout-item alignment-bump="left">
+                                <div class="studentattendancelisting-date-input slds-p-right_large">
+                                    <div class="slds-grid">
+                                        <div class="slds-col slds-p-right_x-small slds-p-left_x-small">
+                                            <lightning-input type="date" label={label.GO_TO_LABEL} value={selectedDate} onchange={handleDateFieldOnchange} time-zone="UTC" ></lightning-input>
+                                        </div>
+                                    </div>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                    <div class="studentgrading-content">
+                        <template lwc:if={hasListings}>
+                            <lightning-layout multiple-rows="true">
+                                <template for:each={listings} for:item="listing">
+                                    <lightning-layout-item size="12" class="slds-box" key={listing.id}>
+                                        <lightning-layout multiple-rows="true">
+                                            <lightning-layout-item>
+                                               <c-record-info-tile
+                                                   record-id={listing.id}
+                                                   record-title-field-name={listing.nameField}
+                                                   record-info-fields={listing.infoFields}
+                                                   record-icon-name={listingIconName}
+                                                   object-api-name={listing.sObjectName}
+                                                   record-color={listing.backgroundColour}
+                                                   enable-debug-mode={enableDebugMode}
+                                               ></c-record-info-tile>    
+                                           </lightning-layout-item>
+                                           <lightning-layout-item alignment-bump="left">
+                                                <template lwc:if={listing.showNoGradeWarning}>
+                                                    <lightning-icon size="x-small" variant={noGradeWarningIconVariant} icon-name={noGradeWarningIcon} title={noGradeWarningText} class="slds-p-right_x-small"></lightning-icon>
+                                                </template>
+                                                <lightning-button variant="brand" label="Grading" onclick={handleListingClick}
+                                                data-id={listing.id} data-objectapiname={listing.sObjectName}></lightning-button>
+                                           </lightning-layout-item>
+                                        </lightning-layout>
+                                    </lightning-layout-item>
+                                </template>
+                            </lightning-layout>
+                        </template>
+                        <template lwc:else>
+                            {label.NO_RECORD_LABEL}
+                        </template>
+                    </div>
+                </div>
+            </template>
+        </template>
+	</div>
+	
+</template>

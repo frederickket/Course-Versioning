@@ -1,0 +1,1 @@
+sf code-analyzer run --rule-selector AppExchange --rule-selector Recommended:Security --workspace ./force-app --output-file code-analyzer-report.html

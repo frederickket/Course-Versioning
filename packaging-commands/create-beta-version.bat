@@ -1,0 +1,1 @@
+sf package version create --package "RIO Education IVY" --installation-key "ivy" --definition-file config/ga-release-scratch-def.json --code-coverage --wait 180 --verbose

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Default_Study_Plan__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <label>Default Study Plan</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>$Source.Study_Program__c</field>
+            <operation>equals</operation>
+            <valueField>Study_Plan__c.Study_Program__c</valueField>
+        </filterItems>
+        <infoMessage>Please select a study plan that belongs to the same study program.</infoMessage>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>Study_Plan__c</referenceTo>
+    <relationshipLabel>Study Intakes</relationshipLabel>
+    <relationshipName>Study_Intakes</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

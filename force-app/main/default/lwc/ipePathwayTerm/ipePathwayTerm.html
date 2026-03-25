@@ -1,0 +1,231 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess} >
+            <div class="slds-grid slds-m-bottom_medium slds-m-right_x-small">
+                <div class="ipepathwayterm-title slds-text-heading_small">
+                    {pathwayTitle}
+                </div>
+                <div class="ipepathwayterm-button-group slds-col_bump-left">
+                    <template if:true={isIpwRecordReady}>
+                        <lightning-button-group>
+                            <template lwc:if={hasTermSelected}>
+                                <template if:true={showEnrollmentFinalizationButton}>
+                                    <template lwc:if={showEnrollmentButtons}>
+                                        <lightning-button value="finalizeenrollment" variant="brand" label={finalizeEnrollmentButtonLabel} onclick={handleFinalizeEnrollmentOnClick} ></lightning-button>
+                                    </template>
+                                </template>
+                            </template>
+                            <template lwc:else>
+                                <lightning-button value="selecterm" label={label.SELECTERM_LABEL} onclick={handleSelectTermOnclick} ></lightning-button>
+                            </template>
+                        </lightning-button-group>
+                    </template>
+                </div>
+            </div>
+            <div class="ipepathwayterm-info slds-m-bottom_medium">
+                <template if:true={hasIpwInfoFields}>
+                    <c-record-view-form 
+                        record-id={individualPathwayId}
+                        object-api-name="reduivy__Individual_Pathway__c"
+                        fields={ipwInfoFields}
+                        enable-debug-mode={enableDebugMode}
+                    >
+                        <lightning-layout class="slds-wrap">
+                            <template for:each={ipwInfoFields} for:item="ipwField">
+                                <lightning-layout-item key={ipwField} size="12" large-device-size={ipwInfoFieldSize} >
+                                    <c-output-field field-name={ipwField} ></c-output-field>
+                                </lightning-layout-item>
+                            </template>
+                        </lightning-layout>
+                    </c-record-view-form>
+                </template>
+                    
+                <template if:true={hasIprInfoFields}>
+                    <c-record-view-form 
+                        record-id={ipwIndividualAcademicProgressId}
+                        object-api-name="reduivy__Individual_Academic_Progress__c"
+                        fields={iprInfoFields}
+                        enable-debug-mode={enableDebugMode}
+                    >
+                        <lightning-layout class="slds-wrap">
+                            <template for:each={iprInfoFields} for:item="iprField">
+                                <lightning-layout-item key={iprField} size="12" large-device-size={iprInfoFieldSize} >
+                                    <c-output-field field-name={iprField} ></c-output-field>
+                                </lightning-layout-item>
+                            </template>
+                        </lightning-layout>
+                    </c-record-view-form>
+                </template>
+            </div>
+            <div class="ipepathwayterm-details slds-m-bottom_medium">
+                <template lwc:if={hasTermSelected}>
+                    <template for:each={ipeList} for:item="ipe">
+                        <div key={ipe.Id} class="ipepathwayterm-ipe-listing" >
+                            <c-ipe-pathway-term-listing
+                                master-individual-pe-id={masterIpeId}
+                                individual-pe-id={ipe.Id}
+                                individual-pathway-id={individualPathwayId}
+                                ipw-academic-term-id={ipwAcademicTermId}
+
+                                user-mode={userMode}
+                                unit-listing-mode={unitListingMode}
+                                campus-id={campusId}
+                                accordion-background-color={accordionBackgroundColor}
+                                accordion-text-color={accordionTextColor}
+                                
+                                ipe-title-field={ipeTitleField}
+                                ips-group-title-field={ipsGroupTitleField}
+                                study-unit-quick-search-value={studyUnitQuickSearchValue}
+                                show-ips-group-info={showIpsGroupInfo}
+                                ips-group-info-fields={ipsGroupInfoFields}
+                                ips-group-info-column-no={ipsGroupInfoColumnNo}
+                                ips-unit-table-fields={ipsUnitTableFields}
+
+                                study-unit-info-fields={studyUnitInfoFields}
+                                study-offering-info-fields={studyOfferingInfoFields}
+                                study-plan-structure-unit-info-fields={studyPlanStructureUnitInfoFields}
+
+                                show-enrollment-buttons={canPerformEnrollmentActions}
+                                pre-enroll-button-icon-name={preEnrollButtonIconName}
+                                pre-enroll-button-label={preEnrollButtonLabel}
+                                pre-enroll-enrollment-status={preEnrollEnrollmentStatus}
+                                withdraw-pre-enroll-button-icon-name={withdrawPreEnrollButtonIconName}
+                                withdraw-pre-enroll-button-label={withdrawPreEnrollButtonLabel}
+                                withdraw-pre-enroll-enrollment-status={withdrawPreEnrollEnrollmentStatus}
+                                enroll-button-icon-name={enrollButtonIconName}
+                                enroll-button-label={enrollButtonLabel}
+                                enroll-enrollment-status={enrollEnrollmentStatus}
+                                unenroll-button-icon-name={unenrollButtonIconName}
+                                unenroll-button-label={unenrollButtonLabel}
+                                unenroll-enrollment-status={unenrollEnrollmentStatus}
+                                unenroll-request-button-icon-name={unenrollRequestButtonIconName}
+                                unenroll-request-button-label={unenrollRequestButtonLabel}
+                                unenroll-request-enrollment-status={unenrollRequestEnrollmentStatus}
+                                waitlist-button-icon-name={waitlistButtonIconName}
+                                waitlist-button-label={waitlistButtonLabel}
+                                waitlist-enrollment-status={waitlistEnrollmentStatus}
+                                withdraw-waitlist-button-icon-name={withdrawWaitlistButtonIconName}
+                                withdraw-waitlist-button-label={withdrawWaitlistButtonLabel}
+                                withdraw-waitlist-enrollment-status={withdrawWaitlistEnrollmentStatus}
+                                
+                                request-attempt-max={requestAttemptMax}
+                                request-attempt-waiting-time={requestAttemptWaitingTime}
+
+                                custom-filters={customFilters}
+                                
+                                missed-failed-unit-listing-option={missedFailedUnitListingOption}
+                                
+                                enable-debug-mode={enableDebugMode}
+                            >
+                            </c-ipe-pathway-term-listing>
+                        </div>
+                    </template>
+                    <!--<template lwc:if={isTermCompleted}>
+                        <div>{label.VIEWRESULT_LABEL}</div>
+                    </template>
+                    <template lwc:elseif={isTermInProgress}>
+                        <div>
+                            <template for:each={ipeList} for:item="ipe">
+                                <div key={ipe.Id} class="ipepathwayterm-ipe-listing" >
+                                    <c-ipe-pathway-term-listing
+                                        individual-pe-id={ipe.Id}
+                                        individual-pathway-id={individualPathwayId}
+                                        user-mode={userMode}
+                                        unit-listing-mode={unitListingMode}
+                                        campus-id={campusId}
+                                        accordion-background-color={accordionBackgroundColor}
+                                        accordion-text-color={accordionTextColor}
+
+                                        ipe-title-field={ipeTitleField}
+                                        ips-group-title-field={ipsGroupTitleField}
+                                        ips-unit-table-fields={ipsUnitTableFields}
+
+                                        study-unit-info-fields={studyUnitInfoFields}
+                                        study-offering-info-fields={studyOfferingInfoFields}
+                                        study-plan-structure-unit-info-fields={studyPlanStructureUnitInfoFields}
+
+                                        show-enrollment-buttons={showEnrollmentButtons}
+                                        pre-enroll-button-icon-name={preEnrollButtonIconName}
+                                        pre-enroll-button-label={preEnrollButtonLabel}
+                                        withdraw-pre-enroll-button-icon-name={withdrawPreEnrollButtonIconName}
+                                        withdraw-pre-enroll-button-label={withdrawPreEnrollButtonLabel}
+                                        enroll-button-icon-name={enrollButtonIconName}
+                                        enroll-button-label={enrollButtonLabel}
+                                        unenroll-button-icon-name={unenrollButtonIconName}
+                                        unenroll-button-label={unenrollButtonLabel}
+                                        unenroll-request-button-icon-name={unenrollRequestButtonIconName}
+                                        unenroll-request-button-label={unenrollRequestButtonLabel}
+                                        waitlist-button-icon-name={waitlistButtonIconName}
+                                        waitlist-button-label={waitlistButtonLabel}
+                                        withdraw-waitlist-button-icon-name={withdrawWaitlistButtonIconName}
+                                        withdraw-waitlist-button-label={withdrawWaitlistButtonLabel}
+                                        
+                                        request-attempt-max={requestAttemptMax}
+                                        request-attempt-waiting-time={requestAttemptWaitingTime}
+
+                                        enable-debug-mode={enableDebugMode}
+                                    >
+                                    </c-ipe-pathway-term-listing>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                    <template lwc:elseif={isTermFuture}>
+                        <div>
+                            <template for:each={ipeList} for:item="ipe">
+                                <div key={ipe.Id} class="ipepathwayterm-ipe-listing" >
+                                    <c-ipe-pathway-term-listing
+                                        individual-pe-id={ipe.Id}
+                                        individual-pathway-id={individualPathwayId}
+                                        user-mode={userMode}
+                                        unit-listing-mode={unitListingMode}
+                                        campus-id={campusId}
+                                        accordion-background-color={accordionBackgroundColor}
+                                        accordion-text-color={accordionTextColor}
+                                        
+                                        ipe-title-field={ipeTitleField}
+                                        ips-group-title-field={ipsGroupTitleField}
+                                        ips-unit-table-fields={ipsUnitTableFields}
+
+                                        study-unit-info-fields={studyUnitInfoFields}
+                                        study-offering-info-fields={studyOfferingInfoFields}
+                                        study-plan-structure-unit-info-fields={studyPlanStructureUnitInfoFields}
+
+                                        show-enrollment-buttons={showEnrollmentButtons}
+                                        pre-enroll-button-icon-name={preEnrollButtonIconName}
+                                        pre-enroll-button-label={preEnrollButtonLabel}
+                                        withdraw-pre-enroll-button-icon-name={withdrawPreEnrollButtonIconName}
+                                        withdraw-pre-enroll-button-label={withdrawPreEnrollButtonLabel}
+                                        enroll-button-icon-name={enrollButtonIconName}
+                                        enroll-button-label={enrollButtonLabel}
+                                        unenroll-button-icon-name={unenrollButtonIconName}
+                                        unenroll-button-label={unenrollButtonLabel}
+                                        unenroll-request-button-icon-name={unenrollRequestButtonIconName}
+                                        unenroll-request-button-label={unenrollRequestButtonLabel}
+                                        waitlist-button-icon-name={waitlistButtonIconName}
+                                        waitlist-button-label={waitlistButtonLabel}
+                                        withdraw-waitlist-button-icon-name={withdrawWaitlistButtonIconName}
+                                        withdraw-waitlist-button-label={withdrawWaitlistButtonLabel}
+                                        
+                                        request-attempt-max={requestAttemptMax}
+                                        request-attempt-waiting-time={requestAttemptWaitingTime}
+
+                                        enable-debug-mode={enableDebugMode}
+                                    >
+                                    </c-ipe-pathway-term-listing>
+                                </div>
+                            </template>
+                        </div>
+                    </template>-->
+                </template>
+            </div>
+        </template>
+	</div>
+	
+</template>

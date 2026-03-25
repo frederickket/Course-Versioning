@@ -1,0 +1,7 @@
+header.flexipageHeader { 
+    display: none;
+}
+
+app_flexipage-header {
+    display: none !important;
+}

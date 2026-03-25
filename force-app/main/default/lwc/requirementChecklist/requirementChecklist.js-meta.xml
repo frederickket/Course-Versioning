@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>REDU - Requirement Checklist</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="modalTitle" label="Modal Title" type="String" default="Checklist" description="Modal Title." />
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:guidance_center" description="Modal Icon Name." />
+            
+            <property name="userMode" label="User Mode" type="String" required="true" default="Admin" datasource="Admin,Faculty,Student" description="The mode used to determine the data visibility. Student = can only see requirements with visibility = Student, Faculty = can only see requirments with visibility = Student/Faculty, Admin = can see all requirements." />
+            
+            <property name="openIcon" label="Icon For Open Review Status Type" type="String" required="true" default="action:check" description="Icon for Individual Requirement with open review status type." />
+            <property name="submittedIcon" label="Icon For Submitted Review Status Type" required="true" type="String" default="action:update_status" description="Icon for Individual Requirement with submitted review status type." />
+            <property name="reviewingIcon" label="Icon For Reviewing Review Status Type" required="true" type="String" default="action:update_status" description="Icon for Individual Requirement with reviewing review status type." />
+            <property name="acceptedIcon" label="Icon For Accepted Review Status Type" required="true" type="String" default="action:approval" description="Icon for Individual Requirement with accepted review status type." />
+            <property name="rejectedIcon" label="Icon For Rejected Review Status Type" required="true" type="String" default="action:close" description="Icon for Individual Requirement with rejected review status type." />
+            <property name="cancelledIcon" label="Icon For Cancelled Review Status Type" required="true" type="String" default="action:remove" description="Icon for Individual Requirement with cancelled review status type." />
+            <property name="resubmissionRequestedIcon" label="Icon for Resubmission Requested" required="true" type="String" default="action:refresh" description="Icon for Individual Requirement with Resubmission Requested submission status type." />
+
+            <property name="requirementSetTitleField" label="Parent Requirement Set Title Format" type="String" required="true" default="{Name}" description="The Parent Individiual Requirement Set format to be displayed as the title for group. e.g., {reduivy__Individual_Achievement__r.Name} - {Name}"></property>
+            <property name="requirementTitleField" label="Individual Requirement Title Field" type="String" required="true" default="Name" description="The Individual Requirement object field to be used to display the title e.g., Name" />
+            <property name="requirementDetailsFields" label="Individual Requirement Details Fields" type="String" required="true" default="reduivy__Due_Date__c;reduivy__Requirement_Details__c" description="The Individual Requirement object fields to be used to display the details in semi-colon separated value. e.g., reduivy__Due_Date__c;reduivy__Requirement_Details__c" />
+            
+            <property name="showRequirementRowDetailsButton" label="Enable View Requirement Link/Button" type="Boolean" default="true" description="Allow users to click on the Individual Requirement title or details button to view the requirement record." />
+            <property name="showRequirementUserActionButton" label="Enable User Action Button" type="Boolean" default="true" description="Allow users to click on the done button to mark a Individual Requirement as submitted." />
+            <property name="showRequirementApprovalActionButton" label="Enable Admin Approval Action Button" type="Boolean" default="false" description="Allow faculty or admin users to click on the dropdown menu to update the requirement review status." />
+            <property name="showSubmittedCount" label="Show Submitted Count" type="Boolean" default="true" description="Display the total submitted requirement count." />
+            <property name="showReviewedCount" label="Show Reviewed Count" type="Boolean" default="true" description="Display the total reviewed requirement count." />
+
+            <property name="achievementDetailsFields" label="Individual Achievement Details Fields" type="String" default="Name;reduivy__Educational_Institution_Name__c;reduivy__Details__c" description="The Individual Achievement object fields to be used to display the details in semi-colon separated value. e.g., Name;reduivy__Educational_Institution_Name__c;reduivy__Details__c" />
+            <property name="createAchievementDetailsFieldSet" label="Details Field Set for Creating Individual Achievement" type="String" default="" description="The Individual Achievement object field setto be used when creating new Individual Achievement." />
+            
+            <property name="downloadUrl" type="String" label="File Download URL" default="/sfc/servlet.shepherd/version/download/{0}?operationContext=S1" description="The url to download the file. {0} will be replaced by the record id. Only applies when the child object is ContentVersion." />
+
+            <property name="promptRemarksAfterReviewStatusUpdate" label="Prompt Remarks After Review Status Update" type="Boolean" default="true" description="If true, show the Update Remarks Modal after the review status is updated." />
+            <property name="showRemarksAction" label="Show Remarks Action" type="Boolean" default="true" description="If true, show the update remarks option in menu." />
+            <property name="remarksFieldSetName" label="Remarks Field Set Name" type="String" default="reduivy__RequirementChecklistRemark" description="Individual Requirement Field set name of the fields to be displayed on Update Remarks modal." />
+
+            <property name="submissionStatus" label="Submission Status" type="String" default="Submitted" description="Submission status of the Individual Requirement when the Done button is clicked."/>
+
+            <property name="childrenRelationshipName" label="Related Relationship for Requirements" type="String" required="false" description="The child relationship name to the child record containing requirements." />
+            <property name="childrenRequirementSetTitleFormat" label="Children Requirement Set Title Format" type="String" required="false" default="{Name}" description="The Child Individiual Requirement Set format to be displayed as the title for group. e.g., {reduivy__Individual_Achievement_Unit__r.Name} - {Name}"></property>
+
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode." />
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="recordId" label="Record Id" type="String" default="{!recordId}" description="Automatically bind the page's record id to the component variable." />
+            <property name="objectApiName" type="String" label="Object Name" description="Automatically bind the page's object name to the component variable" default="{!objectApiName}"/>
+
+            <property name="modalTitle" label="Modal Title" type="String" default="Checklist" description="Modal Title." />
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:guidance_center" description="Modal Icon Name." />
+            
+            <property name="userMode" label="User Mode" type="String" required="true" default="Student" datasource="Admin,Faculty,Student" description="The mode used to determine the data visibility. Student = can only see requirements with visibility = Student, Faculty = can only see requirments with visibility = Student/Faculty, Admin = can see all requirements." />
+
+            <property name="openIcon" label="Icon For Open Review Status Type" type="String" required="true" default="action:check" description="Icon for Individual Requirement with open review status type." />
+            <property name="submittedIcon" label="Icon For Submitted Review Status Type" required="true" type="String" default="action:update_status" description="Icon for Individual Requirement with submitted review status type." />
+            <property name="reviewingIcon" label="Icon For Reviewing Review Status Type" required="true" type="String" default="action:update_status" description="Icon for Individual Requirement with reviewing review status type." />
+            <property name="acceptedIcon" label="Icon For Accepted Review Status Type" required="true" type="String" default="action:approval" description="Icon for Individual Requirement with accepted review status type." />
+            <property name="rejectedIcon" label="Icon For Rejected Review Status Type" required="true" type="String" default="action:close" description="Icon for Individual Requirement with rejected review status type." />
+            <property name="cancelledIcon" label="Icon For Cancelled Review Status Type" required="true" type="String" default="action:remove" description="Icon for Individual Requirement with cancelled review status type." />
+            <property name="resubmissionRequestedIcon" label="Icon for Resubmission Requested" required="true" type="String" default="action:refresh" description="Icon for Individual Requirement with Resubmission Requested submission status type." />
+
+            <property name="requirementSetTitleField" label="Parent Requirement Set Title Format" type="String" required="true" default="{Name}" description="The Parent Individiual Requirement Set format to be displayed as the title for group. e.g., {reduivy__Individual_Achievement__r.Name} - {Name}"></property>
+            <property name="requirementTitleField" label="Individual Requirement Title Field" type="String" required="true" default="Name" description="The Individual Requirement object field to be used to display the title e.g., Name" />
+            <property name="requirementDetailsFields" label="Individual Requirement Details Fields" type="String" required="true" default="reduivy__Due_Date__c;reduivy__Requirement_Details__c" description="The Individual Requirement object fields to be used to display the details in semi-colon separated value. e.g., reduivy__Due_Date__c;reduivy__Requirement_Details__c" />
+            
+            <property name="showRequirementRowDetailsButton" label="Enable View Requirement Link/Button" type="Boolean" default="true" description="Allow users to click on the Individual Requirement title or details button to view the requirement record." />
+            <property name="showRequirementUserActionButton" label="Enable User Action Button" type="Boolean" default="true" description="Allow users to click on the done button to mark a Individual Requirement as submitted." />
+            <property name="showRequirementApprovalActionButton" label="Enable Admin Approval Action Button" type="Boolean" default="false" description="Allow faculty or admin users to click on the dropdown menu to update the requirement review status." />
+            <property name="showSubmittedCount" label="Show Submitted Count" type="Boolean" default="true" description="Display the total submitted requirement count." />
+            <property name="showReviewedCount" label="Show Reviewed Count" type="Boolean" default="true" description="Display the total reviewed requirement count." />
+
+            <property name="achievementDetailsFields" label="Individual Achievement Details Fields" type="String" default="Name;reduivy__Educational_Institution_Name__c;reduivy__Details__c" description="The Individual Achievement object fields to be used to display the details in semi-colon separated value. e.g., Name;reduivy__Educational_Institution_Name__c;reduivy__Details__c" />
+            <property name="createAchievementDetailsFieldSet" label="Details Field Set for Creating Individual Achievement " type="String" default="" description="The Individual Achievement object field set to be used when creating new Individual Achievement." />
+
+            <property name="downloadUrl" type="String" label="File Download URL" default="/sfc/servlet.shepherd/version/download/{0}?operationContext=S1" description="The url to download the file. {0} will be replaced by the record id. Only applies when the child object is ContentVersion." />
+            
+            <property name="promptRemarksAfterReviewStatusUpdate" label="Prompt Remarks After Review Status Update" type="Boolean" default="true" description="If true, show the Update Remarks Modal after the review status is updated." />
+            <property name="showRemarksAction" label="Show Remarks Action" type="Boolean" default="true" description="If true, show the update remarks option in menu." />
+            <property name="remarksFieldSetName" label="Remarks Field Set Name" type="String" default="reduivy__RequirementChecklistRemark" description="Individual Requirement Field set name of the fields to be displayed on Update Remarks modal." />
+
+            <property name="submissionStatus" label="Submission Status" type="String" default="Submitted" description="Submission status of the Individual Requirement when the Done button is clicked."/>
+
+            <property name="childrenRelationshipName" label="Related Relationship for Requirements" type="String" required="false" description="The child relationship name to the child record containing requirements." />
+            <property name="childrenRequirementSetTitleFormat" label="Children Requirement Set Title Format" type="String" required="false" default="{Name}" description="The Child Individiual Requirement Set format to be displayed as the title for group. e.g., {reduivy__Individual_Achievement_Unit__r.Name} - {Name}"></property>
+
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode." />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

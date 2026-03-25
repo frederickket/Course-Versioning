@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>REDU - Term Student Enrollment</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="modalTitle" label="Modal Title" type="String" default="Term Auto Enrollment" description="Component modal title."/>
+            <property name="modalIconName" label="Modal Icon Name" type="String" description="Modal Icon Name" default="standard:queue"/>
+            <property name="jobOperation" label="Job Operation" type="String" description="The job operation name that matches the job config custom metadata." default="Term_Student_Enrollment"/>
+            <property name="jobQueueFields" label="Job Queue Group Fields" type="String" description="Job Queue Group table fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c." required="true" default="Name;CreatedDate;reduivy__Total_Records__c;reduivy__Success_Records__c;reduivy__Error_Records__c;reduivy__Status__c"/>
+            <property name="jobQueueStatuses" label="Job Queue Group Statuses" type="String" description="Semi-colon separated list of Job Queue Group Statuses to show in the table." required="true" default="Pending;Processing;Completed;Failed"/>
+            <property name="jobQueueTableMaxHeight" label="Job Queue Group Table Max Height" type="String" description="Job Queue Group Table Max Height" required="true" default="500"/>
+            <property name="studyIntakeSelectionTableFields" label="Study Intake Selection Table Fields" type="String" description="Study Intake selection table fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c." required="true" default="Name;reduivy__Study_Program__r.Name"/>
+            <property name="eligibleStudentCountTableStudyIntakeField" label="Eligible Student Count Table Study Intake Field" type="String" description="Eligible student count table Study Intake fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c." required="true" default="Name;"/>
+            <property name="existingIndividualEnrollmentStatuses" label="Existing Individual Enrollment Statuses" type="String" description="The individual enrollment statuses that will not be enrolled again in the unit enrollment process in semi-colon separated value e.g., Completed;Withdrawn;Enrolled;." required="true" default="Completed;Withdrawn;Enrolled;Cancelled;"/>
+            
+            <property name="tableTextDisplayMode" label="Table Text Display Mode" type="String" default="Clip Text" description="Supported options are: Wrap Text, Clip Text." datasource="Wrap Text,Clip Text"/>
+            
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

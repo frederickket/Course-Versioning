@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Required_Group_Completion_Type</fullName>
+    <active>true</active>
+    <description>To ensure that a group study plan structure has completion type defined.</description>
+    <errorConditionFormula>RecordType.DeveloperName == &quot;Group&quot; &amp;&amp; ISBLANK( Units_Required__c ) &amp;&amp; ISBLANK( Credits__c )</errorConditionFormula>
+    <errorMessage>The &quot;Credits&quot; or &quot;# of Units Required&quot; is required.</errorMessage>
+</ValidationRule>

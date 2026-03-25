@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Job_Handler_System_Params__c</fullName>
+    <description>The JSON serialized system params to be used by the job handler e.g., {&quot;hasCallout&quot;:true}. Supported params: hasCallout.</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>The JSON serialized system params to be used by the job handler e.g., {&quot;hasCallout&quot;:true}. Supported params: hasCallout.</inlineHelpText>
+    <label>Job Handler System Params</label>
+    <length>255</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

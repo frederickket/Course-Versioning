@@ -1,0 +1,20 @@
+.component-body {
+
+}
+
+.studysessionscheduler-sessionlist {
+    overflow-y: auto;
+    overflow-x: clip;
+    max-height: 62vh;
+}
+
+.studysessionscheduler-content {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+}
+
+.studysessionscheduler-timeline{
+    width: 100%;
+}

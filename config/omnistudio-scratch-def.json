@@ -1,0 +1,43 @@
+{
+	"orgName": "Omnistudio - Scratch Org",
+	"edition": "Developer",
+    "adminEmail": "devpool@wdcigroup.net",
+	"features": [
+		"EnableSetPasswordInApi", "EinsteinGPTForDevelopers", "OmniStudioDesigner", "OmniStudioRuntime", "OmnistudioMetadata"
+	],
+	"settings": {
+		"lightningExperienceSettings": {
+			"enableS1DesktopEnabled": true
+		},
+		"mobileSettings": {
+			"enableS1EncryptedStoragePref2": false
+		},
+		"communitiesSettings": {
+			"enableNetworksEnabled": true
+		},
+		"securitySettings": {
+			"enableAdminLoginAsAnyUser": true,
+			"sessionSettings": {
+				"forceRelogin": false
+			}
+		},
+		"userManagementSettings": {
+			"permsetsInFieldCreation": true
+		},
+		"chatterSettings": {
+			"enableChatter": true
+		},
+		"apexSettings": {
+			"enableDisableParallelApexTesting": true
+		}
+		
+	},
+	"objectSettings": {
+		"account": {
+			"sharingModel": "readWrite"
+		},
+		"contact": {
+			"sharingModel": "readWrite"
+		}
+	}
+}

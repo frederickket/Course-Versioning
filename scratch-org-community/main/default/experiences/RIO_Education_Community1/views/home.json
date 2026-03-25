@@ -1,0 +1,71 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:sldsOneColLayout",
+  "dataProviders" : [ ],
+  "id" : "9691dde7-8d5a-4478-86df-586ece5d6e8f",
+  "label" : "Home",
+  "regions" : [ {
+    "id" : "895a1d7c-3fe5-43eb-9a60-4cf736f682d1",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "richTextValue" : "<p style=\"text-align: center;\"><span style=\"color: rgb(68, 68, 68); font-size: 48px;\">Welcome to RIO Education portal!</span></p><p style=\"text-align: center;\"><span style=\"font-size: 24px; color: rgb(68, 68, 68);\">Here you can register for an account, browse courses, and enrol into them. </span></p><p style=\"text-align: center;\"><span style=\"font-size: 24px; color: rgb(68, 68, 68);\">If you have any questions, visit the RIO Education Centre at any time.</span></p><p style=\"text-align: center;\"><br></p>"
+      },
+      "componentName" : "forceCommunity:richTextInline",
+      "id" : "d731d7f6-a6f2-4219-b313-474dac6b6693",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "bannerBackgroundColor" : "rgba(88, 88, 88, 0)",
+        "bannerPosition" : "bottom",
+        "bannerSizePercent" : 35,
+        "borderRadius" : 20,
+        "boxShadow" : true,
+        "haveBanner" : true,
+        "iconBackgroundColor" : "rgb(255,255,255)",
+        "iconSize" : "medium",
+        "noImageColor" : "rgb(116,116,116)",
+        "overlay" : "rgba(0, 0, 0, 0.4)",
+        "templateType" : "full",
+        "tileMenuEditor" : "Guest_Navigation_Home",
+        "titleColor" : "",
+        "titleFontSize" : "large",
+        "titleHorizontalAlign" : "right"
+      },
+      "componentName" : "community_navigation:tileMenu",
+      "id" : "f0f3fe31-6bea-4284-b838-a43c43f966f7",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "8e5b397b-1bc8-499b-9755-b7e91c17b995",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "id" : "3916e469-13dd-49cd-bfab-caa043d230ca",
+    "regionName" : "footer",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "Home"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "c6d6c66b-debf-48bc-9a1d-f425c0711e50",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "15670478-2588-403a-b7db-313f61107920",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Tnmg3xEoH6s4JlNccMV3OMgU9ImCsA",
+  "type" : "view",
+  "viewType" : "home"
+}

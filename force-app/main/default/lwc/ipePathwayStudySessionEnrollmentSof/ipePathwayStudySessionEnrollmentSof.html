@@ -1,0 +1,70 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="ipepathwaystudysessionenrollmentsof-body">
+                <lightning-accordion active-section-name={sofObj.Name} allow-multiple-sections-open="true" class="slds-m-bottom_x-small">
+
+                    <lightning-accordion-section name={sofObj.Name} class="sessionenrollment-sof-accordion-section" label={sofTitle}>
+                        
+                        <c-record-view-form record-id={sofObj.Id}
+                            object-api-name="reduivy__Study_Offering__c"
+                            fields={infoFields}
+                            enable-debug-mode={enableDebugMode}>
+                            <lightning-layout class="slds-wrap">
+                                <template for:each={infoFields} for:item="field">
+                                    <lightning-layout-item key={field} size="12"
+                                        large-device-size="12">
+                                        <c-output-field field-name={field}></c-output-field>
+                                    </lightning-layout-item>
+                                </template>
+                            </lightning-layout>
+                        </c-record-view-form>
+
+                        <c-ipe-pathway-study-sessions
+                            user-mode={userMode}
+                            individual-pathway-id={individualPathwayId}
+                            study-offering-id={sofObj.Id}
+                            individual-enrollment-id={individualEnrollmentId}
+                            master-ipe-id={masterIpeId}
+                            contact-id={contactId}
+                            study-session-title-field={studySessionTitleField}
+                            study-session-info-fields={studySessionInfoFields}
+                            study-session-icon={studySessionIcon}
+                            study-session-time-title-field={studySessionTimeTitleField}
+                            study-session-time-info-fields={studySessionTimeInfoFields}
+                            study-session-time-icon={studySessionTimeIcon}
+                            show-study-session-time-field-label={showStudySessionTimeFieldLabel}
+
+                            request-attempt-max={requestAttemptMax}
+                            request-attempt-waiting-time={requestAttemptWaitingTime}
+                            
+                            show-enrollment-buttons={showEnrollmentButtons}
+                            pre-enroll-button-icon-name={preEnrollButtonIconName}
+                            pre-enroll-button-label={preEnrollButtonLabel}
+                            withdraw-pre-enroll-button-icon-name={withdrawPreEnrollButtonIconName}
+                            withdraw-pre-enroll-button-label={withdrawPreEnrollButtonLabel}
+                            enroll-button-icon-name={enrollButtonIconName}
+                            enroll-button-label={enrollButtonLabel}
+                            unenroll-button-icon-name={unenrollButtonIconName}
+                            unenroll-button-label={unenrollButtonLabel}
+                            waitlist-button-icon-name={waitlistButtonIconName}
+                            waitlist-button-label={waitlistButtonLabel}
+                            withdraw-waitlist-button-icon-name={withdrawWaitlistButtonIconName}
+                            withdraw-waitlist-button-label={withdrawWaitlistButtonLabel}
+                            
+                            enable-debug-mode={enableDebugMode}
+                        ></c-ipe-pathway-study-sessions>
+
+                    </lightning-accordion-section>
+                </lightning-accordion>
+            </div>
+        </template>
+	</div>
+	
+</template>

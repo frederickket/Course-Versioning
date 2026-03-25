@@ -1,0 +1,59 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="slds-m-around_medium">
+                <div class="studySessionEnrollmentRule-header slds-m-bottom_medium slds-p-bottom_medium slds-border_bottom">
+                    <lightning-layout class="slds-wrap">
+                        <lightning-layout-item size="12" large-device-size="4">
+                            <div class="studySessionEnrollmentRule-title slds-card__header-title">
+                                <lightning-icon icon-name={modalIconName} size="medium" class="slds-m-right_xx-small"></lightning-icon>
+                                <lightning-formatted-text value={modalTitle}></lightning-formatted-text>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item alignment-bump="left">
+                            <div class="studySessionEnrollmentRule-nav-button-group">
+                                <ul class="slds-button-group-row">
+                                    <li class="slds-button-group-item">
+                                        <lightning-button-icon title={addRuleLabel} onclick={handleButtonAddRule} icon-name="utility:add"></lightning-button-icon>
+                                    </li>
+                                    <li class="slds-button-group-item">
+                                        <lightning-button variant="brand" label={saveLabel} onclick={handleButtonSave} disabled={noUnsavedChanges} icon-name={warningIcon}></lightning-button>
+                                    </li>
+                                    <li class="slds-button-group-item">
+                                        <lightning-button variant="neutral" label={cancelLabel} onclick={handleButtonCancel} disabled={noUnsavedChanges} ></lightning-button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+                <div class="studySessionEnrollmentRule-content">
+                    <div class="studySessionEnrollmentRule-body">
+                        <template for:each={sessionRulesInWizard} for:item="rule">
+                            <lightning-layout vertical-align="start" key={rule.dataId} class="studySessionEnrollmentRule-rule" multiple-rows>
+                                <lightning-layout-item padding='around-small' size="12" small-device-size="12" large-device-size="7">
+                                    <lightning-combobox options={sessionTypeOptions} variant="label-hidden" data-id={rule.dataId} value={rule.typeValue} onchange={handleComboboxTypeChange} placeholder={typeLabel} required message-when-value-missing={selectTypeErrorMessage}></lightning-combobox>
+                                </lightning-layout-item>
+                                <lightning-layout-item padding='around-small' size="8" small-device-size="8" large-device-size="4">
+                                    <lightning-input type="number" variant="label-hidden" min="1" data-id={rule.dataId} value={rule.numberValue} onchange={handleInputNumberChange} placeholder={numberLabel}></lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item padding='around-small' size="4" small-device-size="4" large-device-size="1">
+                                    <lightning-button-icon title={deleteLabel} variant="neutral" onclick={handleButtonRemoveRule} icon-name="utility:delete" data-id={rule.dataId} class="slds-float_right"></lightning-button-icon>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </template>
+                    </div>
+                </div>
+                    
+            </div>
+            
+        </template>
+	</div>
+	
+</template>

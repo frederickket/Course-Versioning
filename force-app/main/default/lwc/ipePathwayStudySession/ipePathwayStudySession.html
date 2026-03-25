@@ -1,0 +1,93 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+    
+    <div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} class={spinnerCssClass} ></lightning-spinner>
+        </div>
+
+        <template if:true={isInitSuccess}>
+            <template if:true={sseWireRecord}>
+
+                <div class="ipepathwaystudysession-content slds-m-top_x-small slds-box">
+                    <lightning-card icon-name={studySessionIcon} class="ipepathwaystudysession-card">
+                        <div slot="title">
+                            <lightning-formatted-text class="ipepathwaystudysession-card-title" value={sessionCardTitle} title={sessionCardTitle}></lightning-formatted-text>
+                            <div class="ipepathwaystudysession-card-subtitle slds-text-heading_small">
+                                <lightning-formatted-text value={isnStatusValueLabel} title={isnStatusValueLabel}></lightning-formatted-text>
+                            </div>
+                        </div>
+                        <div slot="actions">
+                            <div class="ipepathwaystudysession-card-actions">
+                                <template if:true={showEnrollmentButtons}>
+                                    <template if:true={isEnrollable}>
+                                        <template if:true={showDoubleBookingWarning}>
+                                            <lightning-helptext  icon-name="utility:warning" icon-variant="warning" content={sessionConflictWarningText} class="slds-p-right_x-small"></lightning-helptext>
+                                        </template>
+                
+                                        <lightning-button-group>
+                
+                                            <template if:true={showPreEnrollButton}>
+                                                <lightning-button-icon title={preEnrollButtonLabel} icon-name={preEnrollButtonIconName} value="preenroll" onclick={handlePreEnrollClick} ></lightning-button-icon>
+                                            </template>
+                                            <template if:true={showWithdrawPreEnrollButton}>
+                                                <lightning-button-icon title={withdrawPreEnrollButtonLabel} icon-name={withdrawPreEnrollButtonIconName} value="withdrawpreenroll" onclick={handleWithdrawPreEnrollClick} ></lightning-button-icon>
+                                            </template>
+                                            <template if:true={showEnrollButton} >
+                                                <lightning-button-icon title={enrollButtonLabel} icon-name={enrollButtonIconName} value="enroll" onclick={handleEnrollClick} ></lightning-button-icon>
+                                            </template>
+                                            <template if:true={showUnenrollButton} >
+                                                <lightning-button-icon title={unenrollButtonLabel} icon-name={unenrollButtonIconName} value="unenroll" onclick={handleUnenrollClick} ></lightning-button-icon>
+                                            </template>
+                                            <template if:true={showWaitlistButton} >
+                                                <lightning-button-icon title={waitlistButtonLabel} icon-name={waitlistButtonIconName} value="joinwaitlist" onclick={handleJoinWaitListClick} ></lightning-button-icon>
+                                            </template>
+                                            <template if:true={showWithdrawWaitlistButton} >
+                                                <lightning-button-icon title={withdrawWaitlistButtonLabel} icon-name={withdrawWaitlistButtonIconName} value="withdrawwaitlist" onclick={handleWithdrawWaitListClick} ></lightning-button-icon>
+                                            </template>
+                
+                                        </lightning-button-group>
+                                    </template>
+                                </template>
+                            </div>
+                        </div>
+                        
+                        <div class="ipepathwaystudysession-card-body">
+                            <c-record-view-form record-id={studySessionId}
+                                object-api-name="reduivy__Study_Session__c"
+                                fields={sseInfoFields}
+                                enable-debug-mode={enableDebugMode}>
+                                <lightning-layout multiple-rows="true" >
+                                    <template for:each={sseInfoFields} for:item="field">
+                                        <lightning-layout-item key={field} size="12" small-device-size="6" medium-device-size="3">
+                                            <c-output-field field-name={field}></c-output-field>
+                                        </lightning-layout-item>
+                                    </template>
+                                </lightning-layout>
+                            </c-record-view-form>
+
+                            <template for:each={sstWireRecord} for:item="sst">
+
+                                <div key={sst.Id} class="slds-m-top_x-small slds-box">
+                                    <c-record-info-tile
+                                        record-id={sst.Id}
+                                        record-title-field-name={studySessionTimeTitleField}
+                                        record-info-fields={studySessionTimeInfoFields}
+                                        object-api-name="reduivy__Study_Session_Time__c"
+                                        record-icon-name={studySessionTimeIcon}
+                                        show-field-label={showStudySessionTimeFieldLabel}
+                                        record-icon-size={studySessionTimeIconSize}
+                                        enable-debug-mode={enableDebugMode}>
+                                    </c-record-info-tile>
+                                </div>
+                                
+                            </template>
+                        </div>
+                    </lightning-card>
+                </div>
+
+            </template>
+        </template>
+
+    </div>
+</template>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Test_Requirements_Complete_Admin__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indicates that the application has met all requirements from an administrative perspective</description>
+    <inlineHelpText>Indicates that the application has met all requirements from an administrative perspective</inlineHelpText>
+    <label>Requirements Complete (Admin)</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

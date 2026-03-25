@@ -1,0 +1,81 @@
+<template>
+    <td scope="row" class="ipepathwaytermunit-td-action">
+        <div>
+            <template if:true={hasOptions}>
+                <lightning-button-icon label="Options" icon-name={chevronIconName} variant="bare" onclick={handleOptionsOnclick} ></lightning-button-icon>
+            </template>
+        </div>
+    </td>
+    <template for:each={columnsMetadata} for:item="column">
+        <td key={column.fieldName} scope="row" data-label={column.label} class="ipepathwaytermunit-td-col">
+            <c-ipe-pathway-term-unit-cell
+                ips-record={localIpsRecord}
+                translation-info={translationInfo}
+                table-column={column}
+                sun-name-translation-field={sunNameTranslationField}
+                enable-debug-mode={enableDebugMode}
+
+                onunitcellclick={handleUnitcellClick}
+            ></c-ipe-pathway-term-unit-cell>
+        </td>
+    </template>
+    <td scope="row" data-label={label.STATUS_COL_LABEL} class="ipepathwaytermunit-td-status slds-cell-wrap">
+        <div class="ipepathwaytermunit-td-status-div">
+            <div if:true={showIpsEnrollmentStatusText} title={ipsEnrollmentStatusText}>
+                <span class="ipepathwaytermunit-td-status-heading slds-m-right_x-small">{label.ENROLLMENT_STATUS_COL_LABEL}:</span>
+                <lightning-formatted-rich-text value={ipsEnrollmentStatusText}></lightning-formatted-rich-text>
+            </div>
+            <div if:true={ipsOfferingStatusText} title={ipsOfferingStatusText}>
+                <span class="ipepathwaytermunit-td-status-heading slds-m-right_x-small">{label.OFFERING_STATUS_COL_LABEL}:</span>
+                <lightning-formatted-rich-text value={ipsOfferingStatusText}></lightning-formatted-rich-text>
+            </div>
+        </div>
+    </td>
+    <template if:true={showActionColumn}>
+        <td scope="row" data-label={label.ACTION_LABEL} class="ipepathwaytermunit-td-action slds-cell-wrap">
+            <div class="ipepathwaytermunit-td-action-div">
+                <template lwc:if={hasOptions}>
+                    {label.MULTIPLE_OFFERINGS_LABEL}
+                </template>
+                <template lwc:else>
+                    <template if:true={showActionButtons}>
+                        <lightning-button-group class="slds-m-around_xx-small">
+                            <template if:false={isEnrolledOfferingNotMatched}>
+                                <template if:true={showPreEnrollButton}>
+                                    <lightning-button-icon title={preEnrollButtonLabel} icon-name={preEnrollButtonIconName} value="preenroll" onclick={handlePreEnrollClick} ></lightning-button-icon>
+                                </template>
+                                <template if:true={showWithdrawPreEnrollButton}>
+                                    <lightning-button-icon title={withdrawPreEnrollButtonLabel} icon-name={withdrawPreEnrollButtonIconName} value="withdrawpreenroll" onclick={handleWithdrawPreEnrollClick} ></lightning-button-icon>
+                                </template>
+                                <template if:true={showEnrollButton} >
+                                    <lightning-button-icon title={enrollButtonLabel} icon-name={enrollButtonIconName} value="enroll" onclick={handleEnrollClick} ></lightning-button-icon>
+                                </template>
+                                <template if:true={showUnenrollButton} >
+                                    <lightning-button-icon title={unenrollButtonLabel} icon-name={unenrollButtonIconName} value="unenroll" onclick={handleUnenrollClick} ></lightning-button-icon>
+                                </template>
+                                <template if:true={showUnenrollRequestButton} >
+                                    <lightning-button-icon title={unenrollRequestButtonLabel} icon-name={unenrollRequestButtonIconName} value="unenrollrequest" onclick={handleUnenrollRequestClick} ></lightning-button-icon>
+                                </template>
+                                <template if:true={showWaitlistButton} >
+                                    <lightning-button-icon title={waitlistButtonLabel} icon-name={waitlistButtonIconName} value="joinwaitlist" onclick={handleJoinWaitListClick} ></lightning-button-icon>
+                                </template>
+                                <template if:true={showWithdrawWaitlistButton} >
+                                    <lightning-button-icon title={withdrawWaitlistButtonLabel} icon-name={withdrawWaitlistButtonIconName} value="withdrawwaitlist" onclick={handleWithdrawWaitListClick} ></lightning-button-icon>
+                                </template>
+                            </template>
+                        </lightning-button-group>
+                    </template>
+                </template>
+            </div>
+        </td>
+    </template>
+    <template if:true={showIndicatorColumn}>
+        <td scope="row" class="ipepathwaytermunit-td-indicator slds-cell-wrap">
+            <div class="ipepathwaytermunit-td-indicator-div">
+                <template if:true={isMissedFailed}>
+                    <lightning-helptext icon-name="utility:warning" icon-variant="warning" content={missedFailedUnitWarning} alternative-text={missedFailedUnitWarning} class="ipepathwaytermunit-missedfailed-indicator slds-p-left_xx-small"></lightning-helptext>
+                </template>
+            </div>
+        </td>
+    </template>
+</template>

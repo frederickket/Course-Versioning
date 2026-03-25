@@ -1,0 +1,13 @@
+{
+  "componentVariants" : [ {
+    "id" : "dccf09ce-3132-4600-926c-e28b5022a881",
+    "propertyOverrides" : {
+      "activeViewId" : "10659423-24a5-4e2e-b9f0-816426ee5b28"
+    },
+    "targetId" : "e0828cb9-7966-45ad-8f2d-85c5244217c2",
+    "type" : "componentVariant"
+  } ],
+  "developerName" : "Individual_Program_Enrollment_Detail_IPS_Detail_Student_Page",
+  "id" : "f828ea6e-0b83-4389-a243-1bb87f7ad9a2",
+  "type" : "experienceVariation"
+}

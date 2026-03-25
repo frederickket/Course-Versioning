@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Lecturer</fullName>
+        <default>false</default>
+        <label>Lecturer</label>
+    </customValue>
+    <customValue>
+        <fullName>Lab Assistant</fullName>
+        <default>false</default>
+        <label>Lab Assistant</label>
+    </customValue>
+    <customValue>
+        <fullName>Tutor</fullName>
+        <default>false</default>
+        <label>Tutor</label>
+    </customValue>
+    <customValue>
+        <fullName>Assistant</fullName>
+        <default>false</default>
+        <label>Assistant</label>
+    </customValue>
+    <customValue>
+        <fullName>Trainer</fullName>
+        <default>false</default>
+        <label>Trainer</label>
+    </customValue>
+    <masterLabel>Faculty Roles</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

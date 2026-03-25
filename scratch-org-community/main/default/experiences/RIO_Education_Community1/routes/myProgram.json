@@ -1,0 +1,12 @@
+{
+  "activeViewId" : "f0874ceb-e5da-4426-ba6d-c331ebef02b4",
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "configurationTags" : [ ],
+  "devName" : "My_Program__c",
+  "id" : "da541f86-08f5-41f2-83a9-09a95cbed4c1",
+  "label" : "My Program",
+  "pageAccess" : "RequiresLogin",
+  "routeType" : "custom-my-program",
+  "type" : "route",
+  "urlPrefix" : "my-program"
+}

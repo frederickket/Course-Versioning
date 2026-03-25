@@ -1,0 +1,37 @@
+<template>
+    <lightning-modal-header label={modalTitle}></lightning-modal-header>
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+        
+        <div class="component-body slds-is-relative slds-card">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel} ></lightning-spinner>
+            </div>
+            
+            <template if:true={isInitSuccess}>
+                <div class="studentgradingregistryeditmodal-body">
+                    <lightning-record-edit-form 
+                            object-api-name="reduivy__Individual_Grade_Item__c"
+                            optional-fields={igiFields}
+                        >
+                            <lightning-layout multiple-rows="true">
+                                <template for:each={igiFieldsData} for:item="field">
+                                    <lightning-layout-item key={field.fieldName} size="12" >
+                                        <div class="studentgradingregistryeditmodal-igiform-col" >
+                                            <lightning-input-field lwc:if={field.value} field-name={field.fieldName} value={field.value} required={field.isRequired} data-displaytype={field.displayType} data-save-required={field.isRequired} onchange={handleFieldChange}></lightning-input-field>
+                                            <lightning-input-field lwc:else field-name={field.fieldName} required={field.isRequired} data-displaytype={field.displayType} data-save-required={field.isRequired} onchange={handleFieldChange}></lightning-input-field>
+                                        </div>
+                                    </lightning-layout-item>
+                                </template>
+                            </lightning-layout>
+                        </lightning-record-edit-form>
+                </div>
+            </template>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" disabled={isLoading} onclick={handleCancelClick} label={cancelButtonLabel} class="slds-p-right_xx-small"></lightning-button>
+        <lightning-button variant="brand" disabled={isLoading} onclick={handleDoneClick} label={doneButtonLabel} ></lightning-button>
+    </lightning-modal-footer>
+	
+</template>

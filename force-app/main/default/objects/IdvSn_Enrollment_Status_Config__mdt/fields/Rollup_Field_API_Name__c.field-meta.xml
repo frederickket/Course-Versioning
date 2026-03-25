@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rollup_Field_API_Name__c</fullName>
+    <description>The API name of the target fields seperated by semicolons on reduivy__Study_Session__c where the count should be stored (e.g., reduivy__Booked_Places__c;reduivy__Waitlist_Places__c).</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>The API name of the target fields seperated by semicolons on reduivy__Study_Session__c where the count should be stored (e.g., reduivy__Booked_Places__c;reduivy__Waitlist_Places__c).</inlineHelpText>
+    <label>Rollup Field API Name</label>
+    <length>255</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,287 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:dynamicLayout",
+  "dataProviders" : [ ],
+  "id" : "cff9fe17-aa47-4510-833c-7063402e27de",
+  "label" : "Contact Detail (Student)",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "5511e18e-5eaa-4319-a7f9-70c17e86b0a0",
+          "columns" : [ {
+            "UUID" : "d04907a5-065a-43b9-a3dc-906ac7fd3d75",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 32
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "5511e18e-5eaa-4319-a7f9-70c17e86b0a0",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p style=\"text-align:right;color:#444444;\"><b>Logged on as: {!CurrentUser.name} </b></p>"
+          },
+          "componentName" : "forceCommunity:htmlBlock",
+          "id" : "cf0c1032-756d-44b8-b296-35d150150c4d",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "d04907a5-065a-43b9-a3dc-906ac7fd3d75",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,159,185,0) url(/sfsites/c/file-asset/reduivy__My_Profile_Banner?v=1) center center /cover",
+        "backgroundOverlay" : "rgba(0, 0, 0, 0.4)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "181dcba5-911e-43ee-b037-b65efb058d39",
+          "columns" : [ {
+            "UUID" : "0168743f-27b5-41a8-98cb-5e94c5c5a00c",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 200
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "181dcba5-911e-43ee-b037-b65efb058d39",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><span style=\"font-size: 48px; color: rgb(255, 255, 255);\">My Profile</span></p><p style=\"text-align: center;\"><span style=\"color: rgb(255, 255, 255); font-size: 16px;\">Easily manage your contact details, including email addressses and education history</span></p><p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><br></p>"
+          },
+          "componentName" : "forceCommunity:richTextInline",
+          "id" : "5690cab7-912d-4a5f-a8a6-6031da16be92",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "0168743f-27b5-41a8-98cb-5e94c5c5a00c",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "4ebeead3-7751-4353-b701-f2136f08defb",
+          "columns" : [ {
+            "UUID" : "8bd14a2a-89c9-4adf-96ce-626d0bb30614",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "9",
+            "seedComponents" : [ ]
+          }, {
+            "UUID" : "3e45643c-04ba-422f-9d40-e9dfcf06ba0f",
+            "columnKey" : "6cba9",
+            "columnName" : "Column 2",
+            "columnWidth" : "3",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "4ebeead3-7751-4353-b701-f2136f08defb",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p><img class=\"sfdcCbImage\" src=\"{!contentAsset.Line.1}\" alt=\"\"></p>"
+          },
+          "componentName" : "forceCommunity:richTextInline",
+          "id" : "3a75bd08-7dcc-4c7f-8069-c50ca1cdf97f",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        }, {
+          "componentAttributes" : {
+            "tabsetConfig" : {
+              "UUID" : "213e7436-a949-4af9-94f1-d0404e25a6f6",
+              "activeTab" : "",
+              "tabs" : [ {
+                "UUID" : "bc4216d1-6e15-4697-b21c-a3507422c11a",
+                "allowGuestUser" : false,
+                "locked" : false,
+                "seedComponents" : [ ],
+                "tabKey" : "1",
+                "tabName" : "Details"
+              }, {
+                "UUID" : "642d6547-c744-4457-b95b-72e832c78371",
+                "allowGuestUser" : false,
+                "locked" : false,
+                "seedComponents" : [ ],
+                "tabKey" : "2",
+                "tabName" : "Education History"
+              }, {
+                "UUID" : "6df5c29f-acb2-4b6b-8bd1-23a6908b76d4",
+                "allowGuestUser" : false,
+                "locked" : false,
+                "seedComponents" : [ ],
+                "tabKey" : "02585",
+                "tabName" : "Credit Transfer"
+              } ],
+              "useOverflowMenu" : true
+            }
+          },
+          "componentName" : "forceCommunity:tabLayout",
+          "id" : "213e7436-a949-4af9-94f1-d0404e25a6f6",
+          "regions" : [ {
+            "components" : [ {
+              "componentAttributes" : {
+                "richTextValue" : "<p> </p>"
+              },
+              "componentName" : "forceCommunity:richTextInline",
+              "id" : "04e79b05-7c6b-4576-88a8-74e5bc166409",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            }, {
+              "componentAttributes" : {
+                "recordId" : "{!recordId}"
+              },
+              "componentName" : "forceCommunity:recordDetail",
+              "id" : "a36ee36b-a8cb-4207-8728-19dec5c5e0d8",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            } ],
+            "id" : "bc4216d1-6e15-4697-b21c-a3507422c11a",
+            "regionLabel" : "Details",
+            "regionName" : "1",
+            "renditionMap" : { },
+            "type" : "region"
+          }, {
+            "components" : [ {
+              "componentAttributes" : {
+                "relatedListApiName" : "reduivy__Individual_Achievement__r",
+                "relatedListComponentOverride" : "GRID",
+                "width" : "MEDIUM"
+              },
+              "componentName" : "forceCommunity:responsiveRelatedListSingle",
+              "id" : "408045e9-5954-4353-a802-e1cfc62fddad",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            } ],
+            "id" : "642d6547-c744-4457-b95b-72e832c78371",
+            "regionLabel" : "Education History",
+            "regionName" : "2",
+            "renditionMap" : { },
+            "type" : "region"
+          }, {
+            "components" : [ {
+              "componentAttributes" : {
+                "agreementRpAdditionalField" : "reduivy__Educational_Institution__r.Name",
+                "agreementRpPrimaryField" : "Name",
+                "agreementUnitRpAdditionalField" : "reduivy__Agreement__r.Name",
+                "agreementUnitRpPrimaryField" : "Name",
+                "componentIcon" : "standard:product_request_line_item",
+                "componentIconSize" : "small",
+                "componentLabel" : "Credit Transfer",
+                "contactFieldApiName" : "Id",
+                "ctAppListFields" : "Name;reduivy__Agreement_Unit_Equivalent__c;reduivy__Approved_Unit_Codes__c;reduivy__Credits_Attempted__c;reduivy__Credits_Earned__c;reduivy__Completed_Date__c;reduivy__Status__c",
+                "enableClickableRefField" : true,
+                "enableDebugMode" : false,
+                "enableNewButton" : true,
+                "ipeRpAdditionalField" : "reduivy__Study_Program__r.Name",
+                "ipeRpPrimaryField" : "Name",
+                "ipsRpAdditionalField" : "reduivy__Study_Plan_Structure__r.Name",
+                "ipsRpPrimaryField" : "Name",
+                "objectApiName" : "Contact",
+                "recordId" : "{!recordId}",
+                "userMode" : "Student"
+              },
+              "componentName" : "reduivy:conCreditTransferList",
+              "id" : "57288d21-7b7b-4769-889a-451d3057fec8",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            } ],
+            "id" : "6df5c29f-acb2-4b6b-8bd1-23a6908b76d4",
+            "regionLabel" : "Credit Transfer",
+            "regionName" : "02585",
+            "renditionMap" : { },
+            "type" : "region"
+          } ],
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "8bd14a2a-89c9-4adf-96ce-626d0bb30614",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      }, {
+        "components" : [ {
+          "componentAttributes" : {
+            "allowedFileTypes" : ".jpg,.png,.jpeg",
+            "enableDebugMode" : false,
+            "fileCategory" : "Profile Picture",
+            "noImageMessage" : "Upload a profile picture",
+            "recordId" : "{!recordId}"
+          },
+          "componentName" : "reduivy:contactProfilePanel",
+          "id" : "b185260d-90de-467d-88d0-e4f648685d98",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "3e45643c-04ba-422f-9d40-e9dfcf06ba0f",
+        "regionLabel" : "Column 2",
+        "regionName" : "6cba9",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "466485b0-f181-456e-b77f-793ddfee49f6",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "{!Record._Object}: {!Record._Title}"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "d076cad7-5444-48b4-a7ac-74acb0c6efa2",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "5643a621-1f0a-41df-8cdb-3fdfb59b1433",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Tnmg3xEoH6s4JlNccMV3OMgU9ImCsA",
+  "type" : "view",
+  "viewType" : "detail-003"
+}

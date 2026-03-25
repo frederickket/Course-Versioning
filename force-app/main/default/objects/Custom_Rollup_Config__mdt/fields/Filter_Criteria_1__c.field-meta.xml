@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Filter_Criteria_1__c</fullName>
+    <description>If we have an extra criteria for this Custom Rollup to activate itself, put the criteria here in SOQL WHERE format (omit the WHERE itself, only include the syntax following it)</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <label>Filter Criteria 1</label>
+    <length>255</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

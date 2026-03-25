@@ -1,0 +1,12 @@
+{
+  "activeViewId" : "7e2830f5-34a0-4181-8c35-626c0dbfed52",
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "configurationTags" : [ ],
+  "devName" : "Student_Grading__c",
+  "id" : "e62d6623-679e-4b67-92db-0d83ba321add",
+  "label" : "Student Grading",
+  "pageAccess" : "UseParent",
+  "routeType" : "custom-student-grading",
+  "type" : "route",
+  "urlPrefix" : "student-grading"
+}

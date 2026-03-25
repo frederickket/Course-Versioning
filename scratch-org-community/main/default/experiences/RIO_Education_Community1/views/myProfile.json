@@ -1,0 +1,76 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:dynamicLayout",
+  "dataProviders" : [ ],
+  "id" : "4ef8f5c0-f607-4ee7-850d-6aac6cd1453e",
+  "label" : "My Profile",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "dbe3ce99-5e22-479e-bc4c-4b716b1ca132",
+          "columns" : [ {
+            "UUID" : "8b2de81f-d7c9-486a-95d1-51e15a079368",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "dbe3ce99-5e22-479e-bc4c-4b716b1ca132",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "autoRedirection" : true,
+            "description" : "Please hold on as we redirect you to your profile page...",
+            "enableDebugMode" : false,
+            "iconName" : "",
+            "iconSize" : "large",
+            "objectType" : "Contact",
+            "tileName" : ""
+          },
+          "componentName" : "reduivy:myProfileTile",
+          "id" : "efa44bcd-6fca-47d1-b833-bd2dcbb0f58b",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "8b2de81f-d7c9-486a-95d1-51e15a079368",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "e3bc0901-0a20-45ab-aac2-4580d35219f8",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "My Profile"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "4692c31b-5776-40d9-8117-8a3b9102206e",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "e2a1f672-79e2-49c5-8b61-6d804ad536a4",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Tnmg3xEoH6s4JlNccMV3OMgU9ImCsA",
+  "type" : "view",
+  "viewType" : "custom-my-profile"
+}

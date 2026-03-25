@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prevent_Empty_Individual_Requirement_Set</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISBLANK(Individual_Requirement_Set__c)</errorConditionFormula>
+    <errorDisplayField>Individual_Requirement_Set__c</errorDisplayField>
+    <errorMessage>A parent Individual Requirement Set is required.</errorMessage>
+</ValidationRule>

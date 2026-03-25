@@ -1,0 +1,12 @@
+{
+  "activeViewId" : "3f4bd43d-1299-456d-bd01-b34737cec7c0",
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "configurationTags" : [ ],
+  "devName" : "Individual_Program_Enrollment_List__c",
+  "id" : "a1c07905-f9c5-47f2-9f30-213c261901e6",
+  "label" : "Individual Program Enrollment List",
+  "objectApiName" : "reduivy__Individual_Program_Enrollment__c",
+  "routeType" : "list-a0Z",
+  "type" : "route",
+  "urlPrefix" : "individual-program-enrollment"
+}

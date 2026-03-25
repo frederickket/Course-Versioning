@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Study_Plan_Unit__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <label>Study Plan Unit</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Study_Plan_Structure__c.RecordType.DeveloperName</field>
+            <operation>equals</operation>
+            <value>Unit</value>
+        </filterItems>
+        <infoMessage>Please select a unit study plan structure.</infoMessage>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>Study_Plan_Structure__c</referenceTo>
+    <relationshipLabel>Study Plan Unit Requirements</relationshipLabel>
+    <relationshipName>Study_Plan_Unit_Requirements</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

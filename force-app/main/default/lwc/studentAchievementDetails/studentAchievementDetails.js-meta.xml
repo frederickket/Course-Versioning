@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <description>Individual Achievement details wizard.</description>
+    <masterLabel>REDU - Student Achievement Details</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="userMode" label="User Mode" type="String" default="Admin" description="Supported options are: Admin, Student." datasource="Admin,Student" required="true"/>
+            <property name="individualAchievementFormConfigurationName" label="Individual Achievement Form Configuration Name" type="String" description="The wizard config record Name. This is used to determine the fields to be rendered in the additional info details." datasource="apex://REDU_IdvAcFormConfiguration_VEDP"/>
+
+            <property name="agreementCreationFieldSetName" label="Agreement Creation Field Set Name" type="String" description="The field set to use when creating a new Agreement."/>
+            <property name="departmentCreationFieldSetName" label="Department Creation Field Set Name" type="String" description="The field set to use when creating a new Department."/>
+            <property name="agreementRecognitionCreationFieldSetName" label="Agreement Recognition Creation Field Set Name" type="String" description="The field set to use when creating a new Agreement Recognition."/>
+            <property name="verificationDetailsFieldSetName" label="Verification Details Field Set Name" type="String" description="The field set to display in the verification details section."/>
+                        
+            <property name="agreementCustomFilter" label="Agreement Custom Filter" type="String" default="reduivy__Status__c = 'Active' AND ((reduivy__Start_Date__c &lt;= TODAY AND reduivy__End_Date__c > TODAY) OR (reduivy__Start_Date__c &lt;= TODAY AND reduivy__End_Date__c = null) OR (reduivy__Start_Date__c = null AND reduivy__End_Date__c = null))" description="The condition to filter the unrelated Agreement."/>
+            <property name="departmentCustomFilter" label="Department Custom Filter" type="String" default="reduivy__Status__c = 'Active' AND Parent.reduivy__Status__c = 'Active'" description="The condition to filter the unrelated Department."/>
+            <property name="agreementRecognitionCustomFilter" label="Agreement Recognition Custom Filter" type="String" default="reduivy__Status__c = 'Active' AND reduivy__Verification_Status__c = 'Verified'" description="The condition to filter the unrelated Agreement Recognition."/>
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+            
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+			<property name="recordId" type="String" label="Record Id" default="{!recordId}" description="ID of the salesforce record for which the record details are to be displayed e.g. {!recordId}" required="true"/>
+            <property name="userMode" label="User Mode" type="String" default="Student" description="Supported options are: Admin, Student." datasource="Admin,Student" required="true"/>
+            <property name="individualAchievementFormConfigurationName" label="Individual Achievement Form Configuration Name" type="String" description="The wizard config record Name. This is used to determine the fields to be rendered in the additional info details." datasource="apex://REDU_IdvAcFormConfiguration_VEDP"/>
+    
+            <property name="agreementCreationFieldSetName" label="Agreement Creation Field Set Name" type="String" description="The field set to use when creating a new Agreement."/>
+            <property name="departmentCreationFieldSetName" label="Department Creation Field Set Name" type="String" description="The field set to use when creating a new Department."/>
+            <property name="agreementRecognitionCreationFieldSetName" label="Agreement Recognition Creation Field Set Name" type="String" description="The field set to use when creating a new Agreement Recognition."/>
+            <property name="verificationDetailsFieldSetName" label="Verification Details Field Set Name" type="String" description="The field set to display in the verification details section."/>
+                        
+            <property name="agreementCustomFilter" label="Agreement Custom Filter" type="String" default="reduivy__Status__c = 'Active' AND ((reduivy__Start_Date__c &lt;= TODAY AND reduivy__End_Date__c > TODAY) OR (reduivy__Start_Date__c &lt;= TODAY AND reduivy__End_Date__c = null) OR (reduivy__Start_Date__c = null AND reduivy__End_Date__c = null))" description="The condition to filter the unrelated Agreement."/>
+            <property name="departmentCustomFilter" label="Department Custom Filter" type="String" default="reduivy__Status__c = 'Active' AND Parent.reduivy__Status__c = 'Active'" description="The condition to filter the unrelated Department."/>
+            <property name="agreementRecognitionCustomFilter" label="Agreement Recognition Custom Filter" type="String" default="reduivy__Status__c = 'Active' AND reduivy__Verification_Status__c = 'Verified'" description="The condition to filter the unrelated Agreement Recognition."/>
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+            
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

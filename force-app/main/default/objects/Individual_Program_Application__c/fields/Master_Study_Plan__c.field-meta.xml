@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Master_Study_Plan__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>The default study plan for master individual program enrollment.</description>
+    <inlineHelpText>The primary study plan.</inlineHelpText>
+    <label>Master Study Plan</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Study_Plan__c.Study_Program__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.Study_Program__c</valueField>
+        </filterItems>
+        <infoMessage>Please select a study plan that belongs to the same study program.</infoMessage>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>Study_Plan__c</referenceTo>
+    <relationshipLabel>Master Individual Program Applications</relationshipLabel>
+    <relationshipName>Master_Individual_Program_Applications</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

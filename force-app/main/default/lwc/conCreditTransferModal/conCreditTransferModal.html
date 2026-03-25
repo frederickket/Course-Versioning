@@ -1,0 +1,201 @@
+<template>
+
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+
+        <div class="component-body slds-is-relative slds-card">
+            
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel} ></lightning-spinner>
+            </div>
+            
+            <!-- Credit transfer application create or update form :: Start -->
+            <template if:true={isNewEditModal}>
+    
+                <div class="slds-p-bottom_medium">
+                    <p><lightning-formatted-text value={ctaNoteLabel} ></lightning-formatted-text></p>
+                </div>
+                <div>
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item size="10" medium-device-size="6" class="slds-p-left_xx-small slds-p-right_xx-small slds-m-bottom_x-small">
+                            <lightning-record-picker
+                                lwc:ref="agreementRP"
+                                label={agreementFieldLabel}
+                                matching-info={agreementMatchingInfo}
+                                display-info={agreementDisplayInfo}
+                                placeholder={agreementPlaceholderLabel}
+                                object-api-name="reduivy__Agreement__c"
+                                value={selectedAgreement}
+                                required=true
+                                onchange={handleAgreementChange}
+                            ></lightning-record-picker>
+                        </lightning-layout-item>
+                        <template if:true={isAdminMode}>
+                            <lightning-layout-item class="slds-p-left_xx-small slds-p-right_xx-small" >
+                                <div class="slds-p-top_large">
+                                    <lightning-button-icon title={newAgreementLabel} icon-name="utility:add" size="small" value={newAgreementLabel} onclick={handleNewOnclick}></lightning-button-icon>
+                                </div>
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item size="10" medium-device-size="6" class="slds-p-left_xx-small slds-p-right_xx-small slds-m-bottom_x-small">
+                            <lightning-record-picker
+                                lwc:ref="agreementUnitRP"
+                                label={agreementUnitFieldLabel}
+                                matching-info={agreementUnitMatchingInfo}
+                                display-info={agreementUnitDisplayInfo}
+                                placeholder={agreementUnitPlaceholderLabel}
+                                object-api-name="reduivy__Agreement_Unit_Equivalent__c"
+                                filter={agreementUnitfilter}
+                                required=true
+                                value={selectedAgreementUnit}
+                                onchange={handleAgreementUnitChange}
+                            ></lightning-record-picker>
+                        </lightning-layout-item>
+                        <template if:true={isAdminMode}>
+                            <lightning-layout-item class="slds-p-left_xx-small slds-p-right_xx-small">
+                                <div class="slds-p-top_large">
+                                    <lightning-button-icon title={newAgreementUnitLabel} icon-name="utility:add" size="small" value={newAgreementUnitLabel} onclick={handleNewOnclick}></lightning-button-icon>
+                                </div>
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+                </div>
+
+                <lightning-record-edit-form data-id="ctapplicationeditform"
+                    record-id={recordId} 
+                    object-api-name="reduivy__Credit_Transfer_Application__c"
+                    onsuccess={handleSaveSuccess} 
+                    onsubmit={handleSubmit} 
+                    onerror={handleError}
+                    optional-fields={infoFields}
+                    onload={handleLoad}> 
+
+                    <template if:true={ctaFieldMember}>
+                        <lightning-layout multiple-rows="true">
+                            <template for:each={ctaFieldMember} for:item="f">
+                                <lightning-layout-item key={f.fieldName} size="12" medium-device-size="6">
+                                    <lightning-input-field variant="label-stacked" name={f.fieldName} field-name={f.fieldName} required={f.isRequired} data-displaytype={f.displayType} data-customform-save-required={f.isRequired}></lightning-input-field>
+                                </lightning-layout-item>
+                            </template>
+                        </lightning-layout>
+                    </template>
+
+                    <input type="submit" class="submitFormHidden"/>
+                </lightning-record-edit-form>
+    
+                <template if:true={isAdminMode}>
+                    <template if:true={isManuaAssignment}>
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item size="12" medium-device-size="6" class="slds-p-left_xx-small slds-p-right_xx-small slds-m-bottom_x-small">
+                                <lightning-record-picker
+                                    lwc:ref="individualPeRP"
+                                    label={ipeFieldLabel}
+                                    matching-info={individualPeMatchingInfo}
+                                    display-info={individualPeDisplayInfo}
+                                    placeholder={ipePlaceholderLabel}
+                                    object-api-name="reduivy__Individual_Program_Enrollment__c"
+                                    filter={individualPefilter}
+                                    value={selectedIPE}
+                                    required=true
+                                    onchange={handleIpeChange}
+                                ></lightning-record-picker>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item size="12" medium-device-size="6" class="slds-p-left_xx-small slds-p-right_xx-small slds-m-bottom_x-small">
+                                <lightning-record-picker
+                                    lwc:ref="individualPsRP"
+                                    label={ipsFieldLabel}
+                                    matching-info={individualPsMatchingInfo}
+                                    display-info={individualPsDisplayInfo}
+                                    placeholder={ipsPlaceholderLabel}
+                                    object-api-name="reduivy__Individual_Plan_Structure__c"
+                                    filter={individualPsfilter}
+                                    required=true
+                                    value={selectedIPS}
+                                    onchange={handleIPSChange}
+                                ></lightning-record-picker>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </template>
+                </template>
+            </template>
+            <!-- Credit transfer application create or update form :: End -->
+
+            <!-- Credit transfer application approval :: Start -->
+            <template if:true={isApproveModal}>
+                <div if:true={manualAssignment} class="slds-p-left_xx-small slds-p-right_xx-small slds-m-bottom_x-small">
+                    <div if:true={showipsGroupField}>
+                        <p>{confirmationMessage}</p>
+                        <br />
+                        <p><span class="field-label">{ipsLabel}:&nbsp;</span>{ctaFieldsDataSpsFieldValue}</p>
+                    </div>
+                    <div if:false={showipsGroupField}>
+                        {confirmationMessage}
+                    </div>
+                </div>
+                <div if:false={manualAssignment} class="slds-p-left_xx-small slds-p-right_xx-small slds-m-bottom_x-small">
+                    <div if:true={showUnitOptions}>
+                        <div class="slds-p-bottom_medium">{confirmationMessage}</div>
+                        <template if:true={multiStudyUnitSelect}>
+                            <lightning-checkbox-group 
+                                lwc:ref="suCheckboxGroup"
+                                name="checkboxGroup"
+                                label={sunLabelPlural}
+                                options={studyUnitOptions}
+                                value={selectedStudyUnits}
+                                onchange={handleMultiStudyUnitOnChange}
+                                required
+                            ></lightning-checkbox-group>
+                        </template>
+                        <template if:false={multiStudyUnitSelect}>
+                            <lightning-radio-group 
+                                lwc:ref="suRadioGroup"
+                                name="radioGroup"
+                                label={sunLabelPlural}
+                                options={studyUnitOptions}
+                                value={selectedStudyUnit}
+                                onchange={handleCourseOnChange}
+                                type="radio"
+                                required>
+                            </lightning-radio-group>
+                        </template>
+                    </div>
+                </div>
+                <div>
+                    <!-- start -->
+                    <lightning-record-edit-form data-id="ctapproveeditform"
+                        record-id={recordId} 
+                        object-api-name="reduivy__Credit_Transfer_Application__c"
+                        onsuccess={handleSaveSuccess} 
+                        onsubmit={handleApproveSubmit} 
+                        onerror={handleError}
+                        optional-fields={approveModalInfoFields}
+                        onload={handleLoad}>
+
+                        <template if:true={approveModalFieldMember}>
+                            <lightning-layout multiple-rows="true">
+                                <template for:each={approveModalFieldMember} for:item="f">
+                                    <lightning-layout-item key={f.fieldName} size="12" medium-device-size="6">
+                                        <lightning-input-field variant="label-stacked" name={f.fieldName} field-name={f.fieldName} required={f.isRequired} data-displaytype={f.displayType} data-customform-save-required={f.isRequired}></lightning-input-field>
+                                    </lightning-layout-item>
+                                </template>
+                            </lightning-layout>
+                        </template>                        
+                        <input type="submit" class="submitApproveFormHidden"/>
+                    </lightning-record-edit-form>
+                    <!-- end -->
+                </div>
+            </template>
+            <!-- Credit transfer application approval :: End -->
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+            <lightning-button variant="neutral" disabled={isLoading} onclick={handleCloseClick} label={cancelButtonLabel} class="slds-p-right_xx-small"></lightning-button>
+            <lightning-button variant="brand" disabled={saveButtonDisabled} onclick={handleSaveClick} label={saveButtonLabel}></lightning-button>
+    </lightning-modal-footer>
+</template>

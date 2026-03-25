@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Parent_Criteria__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Parent Criteria</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>Please select a Study Scoring Criteria that belongs to the same Study Scoring Config.</errorMessage>
+        <filterItems>
+            <field>Study_Scoring_Criteria__c.Study_Scoring_Config__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.Study_Scoring_Config__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Study_Scoring_Criteria__c</referenceTo>
+    <relationshipLabel>Study Scoring Criteria</relationshipLabel>
+    <relationshipName>Study_Scoring_Criteria</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Master_Individual_Program_Enrollment_Id__c</fullName>
+    <deprecated>false</deprecated>
+    <description>The related master individual program enrollment 18 characters id.</description>
+    <externalId>false</externalId>
+    <formula>IF(
+	NOT(ISBLANK(Individual_Program_Enrollment__r.Master_Enrollment__c)),
+	CASESAFEID(Individual_Program_Enrollment__r.Master_Enrollment__c),
+	CASESAFEID(Individual_Program_Enrollment__c)
+)</formula>
+    <inlineHelpText>The related master individual program enrollment 18 characters id.</inlineHelpText>
+    <label>Master Individual Program Enrollment Id</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

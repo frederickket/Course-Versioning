@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>File_Category__c</fullName>
+    <description>File category to group the files uploaded. This is also used by automation to set the file access.</description>
+    <inlineHelpText>File category to group the files uploaded.</inlineHelpText>
+    <label>File Category</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Letter of Acceptance</fullName>
+                <default>false</default>
+                <label>Letter of Acceptance</label>
+            </value>
+            <value>
+                <fullName>Personal Identity</fullName>
+                <default>false</default>
+                <label>Personal Identity</label>
+            </value>
+            <value>
+                <fullName>Profile Picture</fullName>
+                <default>false</default>
+                <label>Profile Picture</label>
+            </value>
+            <value>
+                <fullName>Referral Letter</fullName>
+                <default>false</default>
+                <label>Referral Letter</label>
+            </value>
+            <value>
+                <fullName>Transcript</fullName>
+                <default>false</default>
+                <label>Transcript</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

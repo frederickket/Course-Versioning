@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Translation_Config_Rich</label>
+    <protected>false</protected>
+    <values>
+        <field>reduivy__Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>reduivy__Formula__c</field>
+        <value xsi:type="xsd:string">CASE(&quot;{USERLANGUAGE}&quot;, &quot;en_US&quot;, reduivy__en_Rich__c, &quot;es&quot;, reduivy__es_Rich__c, reduivy__Default_Rich__c)</value>
+    </values>
+    <values>
+        <field>reduivy__Notes__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

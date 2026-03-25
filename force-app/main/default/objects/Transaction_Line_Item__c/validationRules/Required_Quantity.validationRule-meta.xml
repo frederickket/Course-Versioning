@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Required_Quantity</fullName>
+    <active>true</active>
+    <description>To ensure the quantity is set.</description>
+    <errorConditionFormula>AND(
+ISBLANK( Quantity__c ),
+NOT(ISPICKVAL(Transaction_Type__c, &apos;Non Transactional Entry&apos;))
+)</errorConditionFormula>
+    <errorDisplayField>Quantity__c</errorDisplayField>
+    <errorMessage>Please enter the quantity.</errorMessage>
+</ValidationRule>

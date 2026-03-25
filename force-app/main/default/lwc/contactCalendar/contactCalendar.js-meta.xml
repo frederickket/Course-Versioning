@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>REDU - Contact Calendar</masterLabel>
+    <description>Contact calendar</description>
+    <targets>
+        <target>lightning__Tab</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__UtilityBar</target>
+        <target>lightning__AppPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage,lightning__AppPage,lightning__UtilityBar">
+
+            <property name="modalTitle" label="Modal Title" type="String" default="Calendar" description="Component modal title."/>
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:event" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="timelineMinTime" label="Calendar First Hour" type="String" default="09:00" description="Determines the first hour/time that will be displayed, even when the scrollbars have been scrolled all the way up. e.g., 09:00 = 9AM."/>
+            <property name="timelineMaxTime" label="Calendar Last Hour" type="String" default="17:00" description="Determines the last hour/time (exclusively) that will be displayed, even when the scrollbars have been scrolled all the way down. e.g., 17:00 = 5PM."/>
+            <property name="calendarView" label="Calendar Default View" type="String" default="listWeek" description="The default view of calendar. The supported options are: timeGridDay, timeGridWeek, dayGridMonth and listWeek."/>
+            <property name="enrollmentStatuses" label="Individual Session Enrollment Statuses" type="String" default="Enrolled;Completed" description="The individual session enrollment's enrollment status API value to be considered for the listed in semi-colon separated value e.g., Enrolled;Completed."/>
+            <property name="calendarHeaderButtonLeft" label="Calendar Top Left" type="String" default="timeGridDay,timeGridWeek,dayGridMonth,listWeek" description="Buttons or title to show at top left in comma separated value e.g., timeGridDay,timeGridWeek. Supported options are: timeGridDay, timeGridWeek, dayGridMonth, listWeek, title, today, prev, and next."/>
+            <property name="calendarHeaderButtonCenter" label="Calendar Top Center" type="String" default="title" description="Buttons or title to show at top center in comma separated value e.g., title.  Supported options are: timeGridDay, timeGridWeek, dayGridMonth, listWeek, title, today, prev, and next."/>
+            <property name="calendarHeaderButtonRight" label="Calendar Top Right" type="String" default="today prev,next" description="Buttons or title to show at top right in comma separated value e.g., today,prev,next. Supported options are: timeGridDay, timeGridWeek, dayGridMonth, listWeek, title, today, prev, and next."/>
+            <property name="studySessionInfoFields" label="Event Info - Study Session Fields" type="String" default="Name;reduivy__Primary_Faculty__c" description="The study session fields for the event info in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            <property name="studySessionTimeInfoFields" label="Event Info - Study Session Time Fields" type="String" default="reduivy__Recurrence__c" description="The study session time fields for the event info in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            <property name="studyEventInfoFields" label="Event Info - Study Event Fields" type="String" default="reduivy__Start_Date_Non_TZ__c;reduivy__Start_Time_Non_TZ__c;reduivy__End_Time_Non_TZ__c" description="The study event fields for the event info in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            <property name="useIsoWeek" label="Use ISO Week" type="Boolean" default="false" description="To enable ISO week, which starting weeks on Monday."/>
+
+            <property name="tableTextDisplayMode" label="Table Text Display Mode" type="String" default="Clip Text" description="Supported options are: Wrap Text, Clip Text." datasource="Wrap Text,Clip Text"/>
+
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+        </targetConfig>
+
+
+        <targetConfig targets="lightningCommunity__Default">
+
+			<property name="recordId" type="String" label="Record Id" default="{!recordId}" description="ID of the salesforce record for which the record details are to be displayed e.g., {recordId}"/>
+            
+            <property name="modalTitle" label="Modal Title" type="String" default="Calendar" description="Component modal title."/>
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:event" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="timelineMinTime" label="Calendar First Hour" type="String" default="09:00" description="Determines the first hour/time that will be displayed, even when the scrollbars have been scrolled all the way up. e.g., 09:00 = 9AM."/>
+            <property name="timelineMaxTime" label="Calendar Last Hour" type="String" default="17:00" description="Determines the last hour/time (exclusively) that will be displayed, even when the scrollbars have been scrolled all the way down. e.g., 17:00 = 5PM."/>
+            <property name="calendarView" label="Calendar Default View" type="String" default="listWeek" description="The default view of calendar. The supported options are: timeGridDay, timeGridWeek, dayGridMonth and listWeek."/>
+            <property name="enrollmentStatuses" label="Individual Session Enrollment Statuses" type="String" default="Enrolled;Completed" description="The individual session enrollment's enrollment status API value to be considered for the listed in semi-colon separated value e.g., Enrolled;Completed."/>
+            <property name="calendarHeaderButtonLeft" label="Calendar Top Left" type="String" default="timeGridDay,timeGridWeek,dayGridMonth,listWeek" description="Buttons or title to show at top left in comma separated value e.g., timeGridDay,timeGridWeek. Supported options are: timeGridDay, timeGridWeek, dayGridMonth, listWeek, title, today, prev, and next."/>
+            <property name="calendarHeaderButtonCenter" label="Calendar Top Center" type="String" default="title" description="Buttons or title to show at top center in comma separated value e.g., title.  Supported options are: timeGridDay, timeGridWeek, dayGridMonth, listWeek, title, today, prev, and next."/>
+            <property name="calendarHeaderButtonRight" label="Calendar Top Right" type="String" default="today prev,next" description="Buttons or title to show at top right in comma separated value e.g., today,prev,next. Supported options are: timeGridDay, timeGridWeek, dayGridMonth, listWeek, title, today, prev, and next."/>
+            <property name="studySessionInfoFields" label="Event Info - Study Session Fields" type="String" default="Name;reduivy__Primary_Faculty__c" description="The study session fields for the event info in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            <property name="studySessionTimeInfoFields" label="Event Info - Study Session Time Fields" type="String" default="reduivy__Recurrence__c" description="The study session time fields for the event info in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            <property name="studyEventInfoFields" label="Event Info - Study Event Fields" type="String" default="reduivy__Start_Date_Non_TZ__c;reduivy__Start_Time_Non_TZ__c;reduivy__End_Time_Non_TZ__c" description="The study event fields for the event info in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            <property name="useIsoWeek" label="Use ISO Week" type="Boolean" default="false" description="To enable ISO week, which starting weeks on Monday."/>
+
+            <property name="tableTextDisplayMode" label="Table Text Display Mode" type="String" default="Clip Text" description="Supported options are: Wrap Text, Clip Text." datasource="Wrap Text,Clip Text"/>
+
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

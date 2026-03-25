@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <description>Individual Achievement wizard.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>REDU - Student Achievement Wizard</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="userMode" label="User Mode" type="String" default="Admin" description="Supported options are: Admin, Student." datasource="Admin,Student" required="true"/>
+            <property name="targetContactField" label="Target Contact Field" type="String" default="Id" description="The name of the contact field to be linked to from the current object" required="true"/>
+            <property name="modalTitle" label="Modal Title" type="String" default="My Achievements" description="Component modal title."/>
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:coaching" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="showQuickSearch" label="Show Quick Search" type="Boolean" default="false" description="Show Quick Search"/>
+            <property name="quickSearchKeyFields" label="Quick Search Key Fields" type="String" default="name={Name},verificationstatus={reduivy__Verification_Status__c}" description="The Quick Search key to match the shown Individual Achievement."/>
+            <property name="individualAchievementGroupByField" label="Individual Achievement Group By Field" type="String" default="reduivy__Type__c" description="The field to group the same type of Individual Achievements"/>
+            <property name="individualAchievementTitleFormat" label="Individual Achievement Title Format" type="String" default="{Name}" description="The merge field format to display as the title. Support fields are fields from Individual Achievement. Eg: &quot;{Name}&quot; "/>
+            <property name="individualAchievementSubtitleFormat" label="Individual Achievement Subtitle Format" type="String" default="{Name}" description="The merge field format to display as the subtitle. Support fields are fields from Individual Achievement. Eg: &quot;{Name}&quot; "/>
+            <property name="individualAchievementInfoFields1" label="Individual Achievement Info Fields 1" type="String" default="reduivy__Duration__c" description="The additional fields to display on the first section in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c.."/>
+            <property name="individualAchievementInfoFields2" label="Individual Achievement Info Fields 2" type="String" default="reduivy__Details__c" description="The additional fields to display on the second section in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c.."/>
+            
+            <property name="showVerificationIndicator" label="Show Verification Indicator" type="Boolean" default="true" description="To show the verification status badge."/>
+            <property name="showNewButton" label="Show New Button" type="Boolean" default="true" description="Show the new button."/>
+            <property name="showViewButton" label="Show View Button" type="Boolean" default="true" description="To show the View button with action required indicator."/>
+            <property name="showDeleteButton" label="Show Delete Button" type="Boolean" default="true" description="Show the delete button. Respect the Locking Mode of the individual achievement record."/>
+            
+            <property name="individualAchievementPrecreationFieldSet" label="Individual Achievement Precreation Field Set" type="String" default="reduivy__Student_Achievement_Precreation" description="The field set to be rendered in the new record creation screen."/>
+            
+            <property name="enableDebugMode" label="Enable Debug Mode" type="Boolean" default="false" description="Enable Debug Mode"/>
+            
+        </targetConfig>
+
+        <targetConfig targets="lightningCommunity__Default">
+
+			
+			<property name="recordId" type="String" label="Record Id" default="{!recordId}" description="ID of the salesforce record for which the record details are to be displayed e.g. {!recordId}" required="true"/>
+			
+            <property name="userMode" label="User Mode" type="String" default="Student" description="Supported options are: Admin, Student." datasource="Admin,Student"/>
+            <property name="targetContactField" label="Target Contact Field" type="String" default="Id" description="The name of the contact field to be linked to from the current object" required="true"/>
+            <property name="modalTitle" label="Modal Title" type="String" default="My Achievements" description="Component modal title." required="true"/>
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:coaching" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="showQuickSearch" label="Show Quick Search" type="Boolean" default="false" description="Show Quick Search"/>
+            <property name="quickSearchKeyFields" label="Quick Search Key Fields" type="String" default="name={Name},verificationstatus={reduivy__Verification_Status__c}" description="The Quick Search key to match the shown Individual Achievement."/>
+            <property name="individualAchievementGroupByField" label="Individual Achievement Group By Field" type="String" default="reduivy__Type__c" description="The field to group the same type of Individual Achievements"/>
+            <property name="individualAchievementTitleFormat" label="Individual Achievement Title Format" type="String" default="{Name}" description="The merge field format to display as the title. Support fields are fields from Individual Achievement. Eg: &quot;{Name}&quot; "/>
+            <property name="individualAchievementSubtitleFormat" label="Individual Achievement Subtitle Format" type="String" default="{Name}" description="The merge field format to display as the subtitle. Support fields are fields from Individual Achievement. Eg: &quot;{Name}&quot; "/>
+            <property name="individualAchievementInfoFields1" label="Individual Achievement Info Fields 1" type="String" default="reduivy__Duration__c" description="The additional fields to display on the first section in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c.."/>
+            <property name="individualAchievementInfoFields2" label="Individual Achievement Info Fields 2" type="String" default="reduivy__Details__c" description="The additional fields to display on the second section in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c.."/>
+            
+            <property name="showVerificationIndicator" label="Show Verification Indicator" type="Boolean" default="true" description="To show the verification status badge."/>
+            <property name="showNewButton" label="Show New Button" type="Boolean" default="true" description="Show the new button."/>
+            <property name="showViewButton" label="Show View Button" type="Boolean" default="true" description="To show the Review button with action required indicator."/>
+            <property name="showDeleteButton" label="Show Delete Button" type="Boolean" default="true" description="Show the delete button. Respect the Locking Mode of the individual achievement record."/>
+            
+            <property name="individualAchievementPrecreationFieldSet" label="Individual Achievement Precreation Field Set" type="String" default="reduivy__Student_Achievement_Precreation" description="The field set to be rendered in the new record creation screen."/>
+            
+            <property name="enableDebugMode" label="Enable Debug Mode" type="Boolean" default="false" description="Enable Debug Mode"/>
+        </targetConfig>
+
+    </targetConfigs>
+</LightningComponentBundle>

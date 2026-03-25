@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Description_for_Transactions__c</fullName>
+    <description>The description to be used for transaction line item.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The description to be used for transaction line item.</inlineHelpText>
+    <label>Description for Transactions</label>
+    <length>32768</length>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

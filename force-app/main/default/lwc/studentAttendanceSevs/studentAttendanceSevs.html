@@ -1,0 +1,40 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} size="small" ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="studentattendancesevs-content">
+                <template lwc:if={hasStudyEvents}>
+                    <template for:each={studyEvents} for:item="sev">
+                        <c-student-attendance-sev 
+                            key={sev.Id}
+                            sev-obj={sev}
+                            attendance-tile-icon={attendanceTileIcon}
+                            attendance-button-label={attendanceButtonLabel}
+                            sev-tile-info-fields={sevTileInfoFields}
+                            study-event-tile-click-action={studyEventTileClickAction}
+                            info-modal-fields-for-study-event={infoModalFieldsForStudyEvent}
+                            info-modal-section-name-for-study-event={infoModalSectionNameForStudyEvent}
+                            show-no-attendance-warning={showNoAttendanceWarning}
+                            no-attendance-warning-text={noAttendanceWarningText}
+                            no-attendance-warning-icon={noAttendanceWarningIcon}
+                            no-attendance-warning-icon-variant={noAttendanceWarningIconVariant}
+                            
+                            onviewattendanceregistry={handleViewAttendanceRegistry}
+                            
+                            enable-debug-mode={enableDebugMode}
+                        ></c-student-attendance-sev>
+                    </template>
+                </template>
+                <template lwc:else>
+                    <lightning-formatted-rich-text value={noEventFoundText}></lightning-formatted-rich-text>
+                </template>
+            </div>
+        </template>
+	</div>
+	
+</template>

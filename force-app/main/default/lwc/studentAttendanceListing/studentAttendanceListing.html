@@ -1,0 +1,80 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="slds-m-around_medium">
+                <div class="studentattendancelisting-header slds-m-bottom_medium slds-p-bottom_medium slds-border_bottom">
+                    <lightning-layout class="slds-wrap">
+                        <lightning-layout-item size="12" large-device-size="4">
+                            <template if:true={showModalHeader}>
+                                <div class="studentattendancelisting-title slds-card__header-title">
+                                    <lightning-icon icon-name={modalIconName} size="medium" class="slds-m-right_xx-small"></lightning-icon>
+                                    <lightning-formatted-text value={modalTitle}></lightning-formatted-text>
+                                </div>
+                            </template>
+                        </lightning-layout-item>
+                        <lightning-layout-item alignment-bump="left">
+                            <div class="studentattendancelisting-date-input slds-p-right_large">
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-p-top_xx-small">
+                                        <lightning-button-icon icon-name="utility:chevronleft" title={label.PREVIOUS_LABEL} variant="bare" size="medium" onclick={handlePreviousWeekClick}></lightning-button-icon>
+                                    </div>
+                                    <div class="slds-col slds-p-right_x-small slds-p-left_x-small">
+                                        <lightning-input variant="label-hidden" type="date" label="Date" value={selectedDate} onchange={handleDateFieldOnchange} time-zone="UTC" ></lightning-input>
+                                    </div>
+                                    <div class="slds-col slds-p-top_xx-small">
+                                        <lightning-button-icon icon-name="utility:chevronright" title={label.NEXT_LABEL} variant="bare" size="medium" onclick={handleNextWeekClick}></lightning-button-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item>
+                            <div class="studentattendancelisting-nav-button-group">
+                                <lightning-button-group>
+                                    <lightning-button-icon title={label.REFRESH_LABEL} icon-name="utility:refresh" value="refresh" onclick={handleRefreshOnclick}></lightning-button-icon>
+                                </lightning-button-group>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+                <div class="studentattendancelisting-content">
+                    <lightning-accordion allow-multiple-sections-open active-section-name={activeSections}> 
+                        <template for:each={weekDays} for:item="day">
+                            <lightning-accordion-section key={day.dateLocaleFormat} label={day.dateLocaleFormat} name={day.dateIsoFormat} title={day.dateLocaleFormat}>
+                                <div>
+                                    <c-student-attendance-sevs
+                                        record-id={recordId}
+                                        user-mode={userMode}
+                                        for-date={day.dateIsoFormat}
+                                        attendance-tile-icon={attendanceTileIcon}
+                                        attendance-button-label={attendanceButtonLabel}
+                                        sev-tile-info-fields={sevTileInfoFields}
+                                        study-event-tile-click-action={studyEventTileClickAction}
+                                        info-modal-fields-for-study-event={infoModalFieldsForStudyEvent}
+                                        info-modal-section-name-for-study-event={infoModalSectionNameForStudyEvent}
+                                        show-no-attendance-warning={showNoAttendanceWarning}
+                                        no-attendance-warning-text={noAttendanceWarningText}
+                                        no-attendance-warning-icon={noAttendanceWarningIcon}
+                                        no-attendance-warning-icon-variant={noAttendanceWarningIconVariant}
+                                        valid-faculty-isn-status={validFacultyIsnStatus}
+                                        
+                                        onviewattendanceregistry={handleViewAttendanceRegistry}
+                                        show-records-based-on-allocation={showRecordsBasedOnAllocation}
+
+                                        enable-debug-mode={enableDebugMode}
+                                    ></c-student-attendance-sevs>
+                                </div>
+                            </lightning-accordion-section>
+                        </template>
+                    </lightning-accordion>
+                </div>
+            </div>
+        </template>
+	</div>
+	
+</template>

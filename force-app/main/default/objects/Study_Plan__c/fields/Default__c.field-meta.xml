@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Default__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>The default study plan</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The default study plan</inlineHelpText>
+    <label>Default</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

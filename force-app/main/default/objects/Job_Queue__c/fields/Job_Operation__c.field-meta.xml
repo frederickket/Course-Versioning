@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Job_Operation__c</fullName>
+    <description>The job operation to match the job config metadata.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The job operation to match the job config metadata.</inlineHelpText>
+    <label>Job Operation</label>
+    <length>80</length>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

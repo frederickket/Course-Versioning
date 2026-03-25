@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Approved_Letter_Grade__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Please ensure that the picklist values are a subset of the global value set &quot;Letter Grade.&quot;</description>
+    <inlineHelpText>The letter grade to be populated in the individual enrollment or to be used for reporting purposes.</inlineHelpText>
+    <label>Approved Letter Grade</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CT</fullName>
+                <default>false</default>
+                <label>CT</label>
+            </value>
+            <value>
+                <fullName>RPL</fullName>
+                <default>false</default>
+                <label>RPL</label>
+            </value>
+            <value>
+                <fullName>Waive</fullName>
+                <default>false</default>
+                <label>Waive</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

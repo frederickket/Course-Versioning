@@ -1,0 +1,116 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+
+
+            <div class="slds-m-around_medium">
+                <template lwc:if={showComponentHeader}>
+                    
+                    <div class="studentachievementunittable-header slds-m-bottom_medium slds-p-bottom_medium slds-border_bottom">
+                        <lightning-layout class="slds-wrap">
+                            <lightning-layout-item size="12" large-device-size="4">
+                                <div class="studentachievementunittable-title slds-card__header-title">
+                                    <lightning-icon icon-name={modalIconName} size="medium" class="slds-m-right_xx-small"></lightning-icon>
+                                    <lightning-formatted-text value={modalTitle}></lightning-formatted-text>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item alignment-bump="left">
+                                <div class="studentachievementunittable-nav-button-group">
+                                    <template lwc:if={showAddIndividualAchievementUnitButton}>
+                                        <lightning-button-group>
+                                            <lightning-button variant='neutral' label={newLabel} title={newLabel} onclick={handleAddIndividualAchievementUnit}></lightning-button>
+                                        </lightning-button-group>
+                                    </template>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                </template>
+
+                <div class="slds-scrollable_x">
+                    <template lwc:if={hasIndividualAchievementUnit}>
+                        <table class="slds-table slds-table_bordered slds-max-medium-table_stacked studentachievementunittable-table">
+                            <!--header of the unit results table-->
+                            <thead> 
+                                <tr class="slds-line-height_reset">
+                                    <template lwc:if={showUnitCodeField}>
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title={unitCodeLabel}>
+                                                <lightning-formatted-rich-text value={unitCodeLabel}></lightning-formatted-rich-text>
+                                            </div>
+                                        </th>
+                                    </template>
+
+                                    <template lwc:if={showUnitNameField}>
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title={unitNameLabel}>
+                                                <lightning-formatted-rich-text value={unitNameLabel}></lightning-formatted-rich-text>
+                                            </div>
+                                        </th>
+                                    </template>
+                                    
+                                    <template for:each={individualAchievementUnitTableFields} for:item='fieldInfo'>
+                                        <th class="" scope="col" key={fieldInfo.fieldName}>
+                                            <div class="slds-truncate" title={fieldInfo.label}>
+                                                <lightning-formatted-rich-text value={fieldInfo.label}></lightning-formatted-rich-text>
+                                            </div>
+                                        </th>
+                                    </template>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title={actionLabel}>
+                                            <lightning-formatted-rich-text value={actionLabel}></lightning-formatted-rich-text>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={individualAchievementUnitIdList} for:item='individualAchievementUnitId'>
+
+                                    <c-student-achievement-unit
+                                        key={individualAchievementUnitId}
+                                        individual-achievement-unit-id={individualAchievementUnitId}
+                                        user-mode={userMode}
+                                        unit-table-fields={unitTableDisplayFields}
+                                        
+                                        individual-achievement-id={recordId}
+                                        matched-wizard-form-config={matchedWizardFormConfig}
+                                        individual-achievement-verification-statuses-info={individualAchievementVerificationStatusesInfoResponse}
+                                        verification-details-field-set-name={verificationDetailsFieldSetName}
+                                        agreement-unit-creation-field-set-name={agreementRecognitionUnitCreationFieldSetName}
+                                        is-community={isCommunity}
+                                        site-path={sitePath}
+                                        individual-achievement-unit-verification-statuses-info={individualAchievementUnitVerificationStatusesInfoResponse}
+
+                                        enable-debug-mode={enableDebugMode}
+                                        onpublishrefresh={handlePublishRefresh}
+                                    ></c-student-achievement-unit>
+                                </template>
+                                
+                            </tbody>
+                        </table>
+                        
+                    </template>
+                    <template lwc:else>
+                        <div class="slds-align_absolute-center" if:false={isLoading}>
+                            
+                            <template lwc:if={showUnitTable}>
+                                <lightning-formatted-rich-text value={unitIsRequiredLabel}></lightning-formatted-rich-text>
+                            </template>
+                            <template lwc:else>
+                                <lightning-formatted-rich-text value={unitIsNotRequiredLabel}></lightning-formatted-rich-text>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </div>
+                                    
+        </template>
+	</div>
+	
+</template>

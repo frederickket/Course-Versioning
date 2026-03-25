@@ -1,0 +1,75 @@
+/**
+ * @author      WDCi (Jordan)
+ * @date        Jan 2024
+ * @group       Custom Rollup Engine
+ * @description Generic trigger controller to handle the rollup for objects
+ * @changehistory
+ * ISS-001847 30-01-2024 Jordan - generic trigger controller to handle the rollup for objects
+ * ISS-001993 03-07-2024 Lean - Updated to use REDU_CustomRollupManager 
+ */
+public inherited sharing class SOBJ_CustomRollup_EXE extends REDU_TriggerExecutable {
+
+    /**
+     * @description AfterInsert
+     * @param operationType Trigger operation type enum
+     * @param newList Trigger new list
+     * @param newMap Trigger new map
+     * @param oldList Trigger old list
+     * @param oldMap Trigger old map
+     * @param sobjResult DescribeSObjectResult for the trigger object
+     */
+    public override void executeAfterInsert(System.TriggerOperation operationType, List<SObject> newList, Map<Id, SObject> newMap, List<SObject> oldList, Map<Id, SObject> oldMap, Schema.DescribeSObjectResult sobjResult) {
+
+        if (operationType == TriggerOperation.AFTER_INSERT) {
+            REDU_CustomRollupManager.execute(operationType, newList, oldList, sobjResult);
+        }
+    }
+
+    /**
+     * @description AfterUpdate
+     * @param operationType Trigger operation type enum
+     * @param newList Trigger new list
+     * @param newMap Trigger new map
+     * @param oldList Trigger old list
+     * @param oldMap Trigger old map
+     * @param sobjResult DescribeSObjectResult for the trigger object
+     */
+    public override void executeAfterUpdate(System.TriggerOperation operationType, List<SObject> newList, Map<Id, SObject> newMap, List<SObject> oldList, Map<Id, SObject> oldMap, Schema.DescribeSObjectResult sobjResult) {
+
+        if (operationType == TriggerOperation.AFTER_UPDATE) {
+            REDU_CustomRollupManager.execute(operationType, newList, oldList, sobjResult);
+        }
+    }
+
+    /**
+     * @description AfterDelete
+     * @param operationType Trigger operation type enum
+     * @param newList Trigger new list
+     * @param newMap Trigger new map
+     * @param oldList Trigger old list
+     * @param oldMap Trigger old map
+     * @param sobjResult DescribeSObjectResult for the trigger object
+     */
+    public override void executeAfterDelete(System.TriggerOperation operationType, List<SObject> newList, Map<Id, SObject> newMap, List<SObject> oldList, Map<Id, SObject> oldMap, Schema.DescribeSObjectResult sobjResult) {
+
+        if (operationType == TriggerOperation.AFTER_DELETE) {
+            REDU_CustomRollupManager.execute(operationType, newList, oldList, sobjResult);
+        }
+    }
+
+    /**
+     * @description AfterUndelete
+     * @param operationType Trigger operation type enum
+     * @param newList Trigger new list
+     * @param newMap Trigger new map
+     * @param oldList Trigger old list
+     * @param oldMap Trigger old map
+     * @param sobjResult DescribeSObjectResult for the trigger object
+     */
+    public override void executeAfterUndelete(System.TriggerOperation operationType, List<SObject> newList, Map<Id, SObject> newMap, List<SObject> oldList, Map<Id, SObject> oldMap, Schema.DescribeSObjectResult sobjResult) {
+
+        if (operationType == TriggerOperation.AFTER_UNDELETE) {
+            REDU_CustomRollupManager.execute(operationType, newList, oldList, sobjResult);
+        }
+    }
+}

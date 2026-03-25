@@ -1,0 +1,113 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+
+    <lightning-modal-body>
+
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+    
+        <div class="component-body slds-is-relative">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+            </div>
+            
+            <template if:true={isInitSuccess}>
+                <template if:true={showInvalidFieldSetNameMessage}>
+                    <div class="slds-text-color_error">
+                        {invalidFieldSetNameMessage}
+                    </div>
+                </template>
+                <template if:false={showInvalidFieldSetNameMessage}>
+                    <div class="slds-m-around_medium recordeditmodal-content">
+
+                        <template if:true={showRecordTypeSelection}>    
+                            <div class="recordeditmodal-selectrecordtype">
+                                <lightning-radio-group 
+                                name="selectRecordType"
+                                variant="label-hidden"
+                                options={recordTypeOptions}
+                                value={selectedRecordTypeId}
+                                onchange={handleRecordTypeChange}
+                                ></lightning-radio-group>
+                            </div>
+                        </template>
+                        <template if:false={showRecordTypeSelection}>
+
+                            <lightning-record-edit-form 
+                                object-api-name={objectApiName} 
+                                onload={handleOnLoad}
+                                onsubmit={handleSaveSubmit}
+                                onsuccess={handleSaveSuccess} 
+                                onerror={handleSaveError}
+                                record-id={recordId} 
+                                class="recordeditmodal-editform" record-type-id={selectedRecordTypeId}>
+                                <lightning-layout class="slds-wrap" multiple-rows="true">
+
+                                    <template for:each={fields} for:item='field'>
+                                        <lightning-layout-item key={field.fieldName} size="12" large-device-size={defaultInputSize} class="slds-p-around_x-small">
+
+                                            <template lwc:if={field.isReference}>
+                                                <c-custom-lookup-field 
+                                                    root-object-name={objectApiName}
+                                                    lookup-field-name={field.fieldName}
+                                                    title-format="\{Name}"
+                                                    subtitle-format="\{Name}"
+                                                    search-fields="Id;Name"
+                                                    enable-new-record-creation={enableNewParentCreation}
+                                                    enable-debug-mode={enableDebugMode}
+                                                    data-save-required={field.isRequired}
+                                                    required={field.isRequired}
+                                                    onlookupchange={handleLookupChange}
+                                                    preselected-record-id={field.defaultValue}
+                                                    lookup-field-data={field.lookupFieldData}
+                                                ></c-custom-lookup-field>
+                                            </template>
+                                            <template lwc:else>
+                                                <lightning-input-field 
+                                                    class="recordEditModal-field"
+                                                    field-name={field.fieldName}
+                                                    data-field-name={field.fieldName}
+                                                    data-displaytype={field.displayType}
+                                                    data-save-required={field.isRequired}
+                                                    required={field.isRequired}
+                                                    value={field.defaultValue}
+                                                ></lightning-input-field>
+                                            </template>
+
+                                        </lightning-layout-item>
+                                    </template>
+                                </lightning-layout>
+
+                                <lightning-button type="submit" class="slds-hide editFormSave"></lightning-button>
+                            </lightning-record-edit-form>
+                        </template>
+
+    
+                    </div>
+                </template>
+            </template>
+        </div>
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+        <template if:true={showRecordTypeSelection}>
+            <lightning-button variant="neutral" disabled={isLoading} onclick={handleCancelClick} label={cancelButtonLabel} class="slds-p-right_xx-small"></lightning-button>
+            <lightning-button variant="brand" disabled={disableButtons} onclick={handleNextClick} label={nextLabel}></lightning-button>
+        </template>
+
+        <template if:false={showRecordTypeSelection}>
+            <lightning-layout horizontal-align='spread' vertical-align='center'>
+                <lightning-layout-item>
+                    <template if:true={showPreviousButton}>
+                        <lightning-button variant="neutral" disabled={isLoading} onclick={handlePreviousClick} label={previousButtonLabel} class="slds-p-right_xx-small"></lightning-button>
+                    </template>
+                </lightning-layout-item>
+                <lightning-layout-item alignment-bump="left">
+                    <lightning-button variant="neutral" disabled={isLoading} onclick={handleCancelClick} label={cancelButtonLabel} class="slds-p-right_xx-small"></lightning-button>
+                    <lightning-button variant="brand" disabled={disableButtons} onclick={handleSaveClick} label={saveButtonLabel}></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+            
+            
+        </template>
+    </lightning-modal-footer>
+</template>

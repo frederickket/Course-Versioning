@@ -1,0 +1,359 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:dynamicLayout",
+  "dataProviders" : [ ],
+  "id" : "5cb76d51-c621-4409-845d-0af0490078a0",
+  "label" : "IPE Detail (Faculty)",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "4244d4bd-0e23-4a07-9506-e69b7e8cbbb7",
+          "columns" : [ {
+            "UUID" : "425c1c1e-41c1-4884-9bb1-2fb29428a89b",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 32
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "4244d4bd-0e23-4a07-9506-e69b7e8cbbb7",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p style=\"text-align:right;color:#444444;\"><b>Logged on as: {!CurrentUser.name} </b></p>"
+          },
+          "componentName" : "forceCommunity:htmlBlock",
+          "id" : "0b4120b7-569c-4d81-86e1-0bf85d168005",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "425c1c1e-41c1-4884-9bb1-2fb29428a89b",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0) url(/sfsites/c/file-asset/reduivy__My_Enrollments_Banner?v=1) bottom center /cover",
+        "backgroundOverlay" : "rgba(0, 0, 0, 0.4)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "789b101a-90c6-47c3-822f-dd80c6d59e7a",
+          "columns" : [ {
+            "UUID" : "d0e2fc66-d4fe-4fdb-8c97-35728d998766",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 200
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "789b101a-90c6-47c3-822f-dd80c6d59e7a",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><span style=\"color: rgb(255, 255, 255); font-size: 48px;\">My Program</span></p><p style=\"text-align: center;\"><span style=\"font-size: 16px; color: rgb(255, 255, 255);\">My Program is your one stop module to allow you to enroll into classes, pay your fees, and check your results and program progress.</span></p><p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><br></p>"
+          },
+          "componentName" : "forceCommunity:richTextInline",
+          "id" : "1bdf8493-21b6-4381-822a-184e6fc25e97",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "d0e2fc66-d4fe-4fdb-8c97-35728d998766",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "6897f3a6-8921-458e-a9f9-a7d5e5079a9b",
+          "columns" : [ {
+            "UUID" : "fcb823c7-4a1f-4851-b974-0044cca005c6",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 32
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "6897f3a6-8921-458e-a9f9-a7d5e5079a9b",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p><img class=\"sfdcCbImage\" src=\"{!contentAsset.Line.1}\" alt=\"\"></p>"
+          },
+          "componentName" : "forceCommunity:richTextInline",
+          "id" : "4727e171-7b8c-4812-ad9e-3401f0592470",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        }, {
+          "componentAttributes" : {
+            "tabsetConfig" : {
+              "UUID" : "38ff514f-5099-41f3-abe4-d0697f0862cc",
+              "activeTab" : "",
+              "tabs" : [ {
+                "UUID" : "264a1153-cd80-4bf7-b767-de0ff29f3159",
+                "allowGuestUser" : false,
+                "locked" : false,
+                "seedComponents" : [ ],
+                "tabKey" : "63b3a",
+                "tabName" : "Details"
+              }, {
+                "UUID" : "3b43e054-ad85-4f5d-9029-80c5f6449ec9",
+                "allowGuestUser" : false,
+                "locked" : false,
+                "seedComponents" : [ ],
+                "tabKey" : "1",
+                "tabName" : "Course Enrollment"
+              }, {
+                "UUID" : "bf624d24-b935-41ad-be99-104cb3fbd15f",
+                "allowGuestUser" : false,
+                "locked" : false,
+                "seedComponents" : [ ],
+                "tabKey" : "2",
+                "tabName" : "Program Completion"
+              } ],
+              "useOverflowMenu" : true
+            }
+          },
+          "componentName" : "forceCommunity:tabLayout",
+          "id" : "38ff514f-5099-41f3-abe4-d0697f0862cc",
+          "regions" : [ {
+            "components" : [ {
+              "componentAttributes" : {
+                "recordId" : "{!recordId}"
+              },
+              "componentName" : "forceCommunity:recordDetail",
+              "id" : "cd36f47e-305d-47d3-9b44-1e3fc972e8d9",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            } ],
+            "id" : "264a1153-cd80-4bf7-b767-de0ff29f3159",
+            "regionLabel" : "Details",
+            "regionName" : "63b3a",
+            "renditionMap" : { },
+            "type" : "region"
+          }, {
+            "components" : [ {
+              "componentAttributes" : {
+                "accordionBackgroundColor" : "#cccccc",
+                "accordionTextColor" : "#000000",
+                "addPathwayButtonIconName" : "utility:add",
+                "childIpeEnrollmentButtonIconName" : "utility:replace",
+                "customFilter1Active" : false,
+                "customFilter1Label" : "",
+                "customFilter1Mapping" : "",
+                "customFilter1Visible" : false,
+                "customFilter2Active" : false,
+                "customFilter2Label" : "",
+                "customFilter2Mapping" : "",
+                "customFilter2Visible" : false,
+                "customFilter3Active" : false,
+                "customFilter3Label" : "",
+                "customFilter3Mapping" : "",
+                "customFilter3Visible" : false,
+                "defaultUnitListingMode" : "Recommended Pathway",
+                "enableDebugMode" : false,
+                "enrollButtonIconName" : "utility:check",
+                "enrollButtonLabel" : "Enroll",
+                "individualEnrollmentHelptext" : "You can use the filter on the right to filter the units. To enroll to a unit, click on the \"Enroll\" button next to a unit.",
+                "individualEnrollmentTabLabel" : "Unit Enrollment",
+                "individualPathwayInfoColumnNo" : 4,
+                "individualPathwayInfoFields" : "reduivy__Status__c;reduivy__IPR_Recommended_Credits__c;reduivy__IPR_Max_Credits__c;reduivy__IPR_Credits_Enrolled__c",
+                "ipeTitleField" : "reduivy__Study_Plan__r.Name",
+                "ipsGroupInfoColumnNo" : 4,
+                "ipsGroupInfoFields" : "reduivy__Category__c;reduivy__Credits__c;reduivy__Credits_Earned__c;reduivy__Completion_Progress__c",
+                "ipsGroupTitleField" : "reduivy__Study_Plan_Structure__r.Name",
+                "ipsUnitTableFields" : "reduivy__Study_Unit__c.Name;reduivy__Study_Unit__c.reduivy__Unit_Code__c;reduivy__Study_Plan_Structure__c.reduivy__Credits__c",
+                "missedFailedUnitListingOption" : "All",
+                "modalIconName" : "standard:sales_path",
+                "modalTitle" : "My Pathway",
+                "myCalendarButtonIconName" : "utility:weeklyview",
+                "myCalendarEnrollmentStatuses" : "Enrolled;Completed",
+                "myCalendarHeaderButtonCenter" : "title",
+                "myCalendarHeaderButtonLeft" : "timeGridDay,timeGridWeek,dayGridMonth,listWeek",
+                "myCalendarHeaderButtonRight" : "today prev,next",
+                "myCalendarModalIconName" : "standard:event",
+                "myCalendarModalTitle" : "Calendar",
+                "myCalendarStudyEventInfoFields" : "reduivy__Start_Date_Non_TZ__c;reduivy__Start_Time_Non_TZ__c;reduivy__End_Time_Non_TZ__c",
+                "myCalendarStudySessionInfoFields" : "Name;reduivy__Primary_Faculty__c",
+                "myCalendarStudySessionTimeInfoFields" : "reduivy__Recurrence__c",
+                "myCalendarTimelineMaxTime" : "17:00",
+                "myCalendarTimelineMinTime" : "09:00",
+                "myCalendarUseIsoWeek" : false,
+                "myCalendarView" : "listWeek",
+                "preEnrollButtonIconName" : "utility:bookmark_stroke",
+                "preEnrollButtonLabel" : "Pre-enroll",
+                "recordId" : "{!recordId}",
+                "requestAttemptMax" : 3,
+                "requestAttemptWaitingTime" : 5,
+                "requirementDescriptionField" : "reduivy__Requirement_Description__c",
+                "sessionEnrollmentHelptext" : "To enroll to a study unit, you need to enroll to at least one unit.",
+                "sessionEnrollmentShowSstFieldLabel" : true,
+                "sessionEnrollmentSofAccordionBackgroundColor" : "#cccccc",
+                "sessionEnrollmentSofAccordionTextColor" : "#000000",
+                "sessionEnrollmentSofInfoFields" : "reduivy__Session_Instruction__c",
+                "sessionEnrollmentSseIcon" : "standard:snippet_alt",
+                "sessionEnrollmentSseInfoFields" : "reduivy__Available_Places__c;reduivy__Start_Date_Calculated__c;reduivy__End_Date_Calculated__c;reduivy__Status__c",
+                "sessionEnrollmentSstIcon" : "standard:time_period",
+                "sessionEnrollmentSstInfoFields" : "reduivy__Recurrence__c;reduivy__Day_of_Week__c;reduivy__Start_Date__c;reduivy__Start_Time__c;reduivy__End_Time__c;reduivy__Default_Facility__c",
+                "sessionEnrollmentTabLabel" : "Session Enrollment",
+                "showCampusOptions" : true,
+                "showChildIpeEnrollmentButton" : true,
+                "showEnrollmentButtons" : true,
+                "showIpsGroupInfo" : true,
+                "showMyCalendarButton" : true,
+                "showNewPathwayButton" : true,
+                "showStudyPathwayButton" : true,
+                "showStudyUnitQuickSearch" : true,
+                "showUnitListingOption" : true,
+                "studyOfferingInfoFields" : "Name",
+                "studyPathwayAccordionBackgroundColor" : "#cccccc",
+                "studyPathwayAccordionTextColor" : "#000000",
+                "studyPathwayButtonIconName" : "utility:hierarchy",
+                "studyPathwayComboboxLabel" : "Preview with major/minor",
+                "studyPathwayGroupIcon" : "standard:all",
+                "studyPathwayGroupInfoFields" : "Name",
+                "studyPathwayGroupTitleField" : "Name",
+                "studyPathwayInfoFields" : "reduivy__Study_Mode__c",
+                "studyPathwayShowStudyPlanOptions" : false,
+                "studyPathwayShowStudyUnitQuickSearch" : false,
+                "studyPathwayTermInfoFields" : "reduivy__Recommended_Credits__c;reduivy__Max_Credits__c",
+                "studyPathwayTermTitlePrefix" : "Term",
+                "studyPathwayUnitIcon" : "standard:catalog",
+                "studyPathwayUnitInfoFields" : "Name",
+                "studyPathwayUnitTitleField" : "Name",
+                "studyPlanStructureUnitInfoFields" : "",
+                "studyUnitInfoFields" : "Name;reduivy__Unit_Code__c;reduivy__Description__c",
+                "unenrollButtonIconName" : "utility:close",
+                "unenrollButtonLabel" : "Unenroll",
+                "unenrollRequestButtonIconName" : "utility:cancel_file_request",
+                "unenrollRequestButtonLabel" : "Request to Unenroll",
+                "userMode" : "Admin",
+                "waitlistButtonIconName" : "utility:buyer_group_qualifier",
+                "waitlistButtonLabel" : "Join Waiting List",
+                "withdrawPreEnrollButtonIconName" : "utility:bookmark_alt",
+                "withdrawPreEnrollButtonLabel" : "Withdraw Pre-enroll",
+                "withdrawWaitlistButtonIconName" : "utility:leave_conference",
+                "withdrawWaitlistButtonLabel" : "Withdraw Waiting List"
+              },
+              "componentName" : "reduivy:ipePathways",
+              "id" : "b1d624fc-5b56-4299-b45f-1892537ac651",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            } ],
+            "id" : "3b43e054-ad85-4f5d-9029-80c5f6449ec9",
+            "regionLabel" : "Course Enrollment",
+            "regionName" : "1",
+            "renditionMap" : { },
+            "type" : "region"
+          }, {
+            "components" : [ {
+              "componentAttributes" : {
+                "richTextValue" : "<p> </p>"
+              },
+              "componentName" : "forceCommunity:richTextInline",
+              "id" : "c84bdf25-303a-4963-b61a-e0dacc8aaebb",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            }, {
+              "componentAttributes" : {
+                "accordionBackgroundColor" : "#014486",
+                "accordionTextColor" : "#ffffff",
+                "enableClickableRefField" : true,
+                "enableDebugMode" : false,
+                "forCommunity" : true,
+                "hrefTargetType" : "_self",
+                "idvEnrollmentFields" : "Name;reduivy__Enrollment_Date__c;reduivy__Attempt_Number__c;reduivy__Credits_Earned__c;reduivy__Grade_Result__c;reduivy__Grade_Points__c;reduivy__Enrollment_Status__c",
+                "ipeInfoColumnNo" : 6,
+                "ipeInfoFields" : "reduivy__Enrollment_Status__c;reduivy__Start_Date__c;reduivy__End_Date__c;reduivy__Total_Credits_Required__c;reduivy__Credits_Earned__c;reduivy__Completion_Progress__c",
+                "ipeTitleField" : "Name",
+                "ipsGroupTitleField" : "reduivy__Study_Plan_Structure__r.Name",
+                "ipsInfoColumnNo" : 4,
+                "ipsInfoFields" : "reduivy__Category__c;reduivy__Credits__c;reduivy__Credits_Earned__c;reduivy__Completion_Progress__c",
+                "ipsInfoFieldsUnit" : "reduivy__Category__c;reduivy__Units_Required__c;reduivy__Units_Contributed__c;reduivy__Completion_Progress__c",
+                "ipsUnitFields" : "Name;reduivy__Study_Plan_Structure__r.reduivy__Study_Unit__c;reduivy__Status__c;reduivy__Credits__c;reduivy__Individual_Enrollment__r.reduivy__Grade_Result__c",
+                "modalIconName" : "standard:sales_path",
+                "modalTitle" : "My Program Completion",
+                "recordId" : "{!recordId}",
+                "showIpsGroupInfo" : true,
+                "tabVariant" : "vertical"
+              },
+              "componentName" : "reduivy:ipeAudit",
+              "id" : "bc1217b0-b11e-4bf6-b504-6641b6226e64",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            } ],
+            "id" : "bf624d24-b935-41ad-be99-104cb3fbd15f",
+            "regionLabel" : "Program Completion",
+            "regionName" : "2",
+            "renditionMap" : { },
+            "type" : "region"
+          } ],
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "fcb823c7-4a1f-4851-b974-0044cca005c6",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "779dea76-455a-4714-b050-4d276a0d1810",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "{!Record._Object}: {!Record._Title}"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "806eabb0-bef1-42f0-ba65-90420c9d7872",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "47127cac-bea1-4da3-9cf8-3a956dadf69f",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Tnmg3xEoH6s4JlNccMV3OMgU9ImCsA",
+  "type" : "view",
+  "viewType" : "detail-a0Z"
+}

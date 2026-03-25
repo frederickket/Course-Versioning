@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Max_Credits_Enrolled</fullName>
+    <active>true</active>
+    <description>This is to ensure that a student enrolls more than the max credits defined.</description>
+    <errorConditionFormula>AND( $Permission.REDU_Student,
+   Max_Credits__c != 0,
+   Credits_Enrolled__c &gt; Max_Credits__c 
+)</errorConditionFormula>
+    <errorDisplayField>Credits_Enrolled__c</errorDisplayField>
+    <errorMessage>You have exceeded the maximum credits for this term.</errorMessage>
+</ValidationRule>

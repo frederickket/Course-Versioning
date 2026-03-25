@@ -1,0 +1,85 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+
+        <div class="component-body slds-is-relative slds-card">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel} ></lightning-spinner>
+            </div>
+            <template if:true={isInitSuccess}>
+
+                <div if:true={noObjectFoundMessage} class="requirementchecklistidvacmodal-noobjectfoundmessage slds-align_absolute-center">
+                    {noObjectFoundMessage}
+                </div>
+
+
+                <template if:false={noObjectFoundMessage}>
+
+                
+                    <lightning-layout>
+                        <lightning-layout-item size="12" alignment-bump="right">
+                            <lightning-button variant="neutral" label={newIndividualAchievementLabel} onclick={handleCreateIndividualAchievement} class="requirementchecklistidvacmodal-createiacbutton slds-m-bottom_small slds-float_right"></lightning-button>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                    
+                    <lightning-tabset variant="vertical" >
+                        
+                        <template for:each={cdcWrapperList} for:item='cdcWrapper'>
+                            <lightning-tab label={cdcWrapper.name} key={cdcWrapper.id} >
+                                
+                                <div class="slds-m-around_small">
+                                    <lightning-formatted-rich-text value={cdcWrapper.iacSectionLabel}></lightning-formatted-rich-text>
+                                </div>
+                                
+                                <template for:each={cdcWrapper.iacWrapperList} for:item="iacWrapper">
+                                    <div class="slds-visual-picker flex slds-m-around_small" key={iacWrapper.cdcIacKey}>
+                                        <input type="checkbox" id={iacWrapper.cdcIacKey} value={iacWrapper.cdcIacKey} name={iacWrapper.cdcIacKey} checked={iacWrapper.checked} class="requirementchecklistidvacmodal-iaccheckbox"/>
+                                        <label for={iacWrapper.cdcIacKey} class="requirementchecklistidvacmodal-file">
+                                            <span class="slds-visual-picker__figure slds-visual-picker__text slds-p-around_x-small">
+                                                <span>
+                                                    <lightning-layout horizontal-align="center" vertical-align="center">
+                                                        <lightning-layout-item size="12" large-device-size="11">
+                                                            
+                                                            <template for:each={iacWrapper.iacDetailWrapper} for:item="iacDetail"> 
+                                                                <lightning-layout key={iacDetail.apiName} multiple-rows="true" class="slds-text-align_left slds-m-around_small">
+                                                                    <lightning-layout-item size="12" large-device-size="4" class="slds-text-title slds-p-around_xxx-small">
+                                                                        {iacDetail.label}
+                                                                    </lightning-layout-item>
+                                                                    <lightning-layout-item size="12" large-device-size="8" class="slds-p-around_xxx-small">
+                                                                        <lightning-formatted-rich-text value={iacDetail.value}></lightning-formatted-rich-text>
+                                                                    </lightning-layout-item>
+                                                                </lightning-layout>
+                                                            </template>
+                                                        </lightning-layout-item>
+                                                        
+                                                        <lightning-layout-item size="12" large-device-size="1">
+                                                            <lightning-button-icon icon-name="utility:edit" size="medium" type="button" onclick={handleEditIndividualAchievement} data-id={iacWrapper.iac.Id}></lightning-button-icon>
+                                                        </lightning-layout-item>
+                                                        
+                                                    </lightning-layout>
+                                                </span>
+                                            </span>
+                                            <span class="slds-icon_container slds-visual-picker__text-check">
+                                                <lightning-icon icon-name='utility:check' title='title' class="slds-icon slds-icon-text-check slds-icon_x-small" size="x-small" variant="inverse"></lightning-icon>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </template>
+
+                            </lightning-tab>
+                        </template>
+                    </lightning-tabset>
+                </template>
+            </template>
+        </div>
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" onclick={handleCancelClick} label={cancelLabel} class="slds-p-right_xx-small requirementchecklistidvacmodal-cancelbutton"></lightning-button>
+        <lightning-button if:false={noObjectFoundMessage} variant="brand" onclick={handleSaveClick} label={saveLabel} class="requirementchecklistidvacmodal-savebutton"></lightning-button>
+        
+    </lightning-modal-footer>
+	
+</template>

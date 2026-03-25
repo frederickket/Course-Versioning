@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Program</fullName>
+        <default>false</default>
+        <label>Program</label>
+    </customValue>
+    <customValue>
+        <fullName>Term</fullName>
+        <default>true</default>
+        <label>Term</label>
+    </customValue>
+    <customValue>
+        <fullName>Fixed Term</fullName>
+        <default>false</default>
+        <label>Fixed Term</label>
+    </customValue>
+    <customValue>
+        <fullName>Unit</fullName>
+        <default>false</default>
+        <label>Unit</label>
+    </customValue>
+    <masterLabel>Fee Method</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

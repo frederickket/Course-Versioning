@@ -1,0 +1,94 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>                
+            <div class="studyplangroup-content slds-m-top_small slds-m-bottom_medium">
+                <lightning-accordion class="studyplangroup-accordion" allow-multiple-sections-open="true" active-section-name={activeSectionName}>
+                    <lightning-accordion-section class="studyplangroup-accordion-section" label={title} name={accordionSectionName}>
+                        <template if:false={isModeView}>
+                            <lightning-button-menu class="slds-p-right_x-small" slot="actions" alternative-text="Show menu" icon-size="x-small" 
+                                menu-alignment="right" variant="border-filled" onselect={handleButtonEvent}>
+                                <template if:true={newGroupAvailable}>
+                                    <lightning-menu-item value={newGroupActionName} label={newGroupLabel}></lightning-menu-item>
+                                </template>
+                                <template if:true={newUnitAvailable}>
+                                    <lightning-menu-item value={newUnitActionName} label={newUnitLabel}></lightning-menu-item>
+                                </template>
+                                <lightning-menu-item value={editActionName} label={label.EDIT_LABEL}></lightning-menu-item>
+                                <lightning-menu-item value={deleteActionName} label={label.DELETE_LABEL}></lightning-menu-item>
+                            </lightning-button-menu>
+                        </template>
+                        <div>
+                            <template if:true={showSpsGroupInfo}>
+                                <c-record-view-form 
+                                    record-id={spsId}
+                                    object-api-name="reduivy__Study_Plan_Structure__c"
+                                    fields={infoFields}
+                                    enable-debug-mode={enableDebugMode}
+                                >
+                                    <lightning-layout class="slds-wrap">
+                                        <template for:each={infoFields} for:item="field">
+                                            <lightning-layout-item key={field} size="12" large-device-size={infoFieldSize} >
+                                                <c-output-field field-name={field} ></c-output-field>
+                                            </lightning-layout-item>
+                                        </template>
+                                    </lightning-layout>
+                                </c-record-view-form>
+                            </template>
+                        </div>
+
+                        <template lwc:if={hasChildGroups}>
+                            <template for:each={childGroups} for:item="childSps">
+                                <c-study-plan-group key={childSps.Id}
+                                    sps-id={childSps.Id}
+                                    level={nextLevel}
+                                    sps-record-type-info={spsRecordTypeInfo}
+                                    show-sps-group-info={showSpsGroupInfo}
+                                    sps-group-title-field={spsGroupTitleField}
+                                    sps-group-info-fields={spsGroupInfoFields}
+                                    sps-group-info-column-no={spsGroupInfoColumnNo}
+                                    group-modal-fields={groupModalFields}
+                                    unit-modal-fields={unitModalFields}
+                                    accordion-background-color={accordionBackgroundColorShaded}
+                                    accordion-text-color={accordionTextColor}
+                                    sps-unit-table-fields={spsUnitTableFields}
+                                    enable-clickable-ref-field={enableClickableRefField}
+                                    href-target-type={hrefTargetType}
+                                    is-community={isCommunity}
+                                    is-mode-view={isModeView}
+                                    table-text-display-mode={tableTextDisplayMode}
+                                    enable-debug-mode={enableDebugMode}
+
+                                    onselection={handleChildButtonEvent}
+                                ></c-study-plan-group>
+                            </template>
+                        </template>
+                        <template lwc:else>
+                            <c-study-plan-unit-table
+                                sps-parent-id={spsId}
+                                sps-record-type-info={spsRecordTypeInfo}
+                                sps-unit-table-fields={spsUnitTableFields}
+                                enable-clickable-ref-field={enableClickableRefField}
+                                href-target-type={hrefTargetType}
+                                is-community={isCommunity}
+                                is-mode-view={isModeView}
+                                unit-modal-fields={unitModalFields}
+                                table-text-display-mode={tableTextDisplayMode}
+
+                                enable-debug-mode={enableDebugMode}
+                                
+                                onselection={handleChildButtonEvent}
+                            ></c-study-plan-unit-table>
+                        </template>
+                    </lightning-accordion-section>
+                </lightning-accordion>
+            </div>
+        </template>
+	</div>
+	
+</template>

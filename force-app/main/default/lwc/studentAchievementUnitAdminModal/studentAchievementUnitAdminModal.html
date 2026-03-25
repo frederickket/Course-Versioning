@@ -1,0 +1,187 @@
+<template>
+    <lightning-modal-header label={modalTitle}></lightning-modal-header>
+
+
+    <lightning-modal-body>
+
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+        
+        <div class="component-body slds-is-relative slds-card">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel} ></lightning-spinner>
+            </div>
+            
+            <template if:true={isInitSuccess}>
+                <div class="studentachievementunitadminmodal-content">
+
+                    <lightning-record-edit-form
+                        lwc:ref="recordEditForm"
+                        object-api-name="reduivy__Individual_Achievement_Unit__c"
+                        onload={handleRecordEditFormLoad}
+                        record-id={individualAchievementUnitId}
+                        onsubmit={handleSaveRecordEditForm}
+                        onsuccess={handleRecordEditFormSuccess}
+                        onerror={handleRecordEditFormFail}
+                    >
+                      
+                        <lightning-accordion allow-multiple-sections-open active-section-name={activeAccordion}>
+                            <lightning-accordion-section name="details" label={detailsLabel}>
+                                
+                                <lightning-layout multiple-rows>
+                                    <lightning-layout-item size="12" large-device-size="6" padding="horizontal-small">
+                                        <lightning-input type='text' label={unitNameLabel} onchange={handleOnChange} disabled value={agreementRecognitionUnitDisplayValue}></lightning-input>
+                                    </lightning-layout-item>
+                                    
+                                    <lightning-layout-item size="12" large-device-size="6" padding="horizontal-small">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label">
+                                                <lightning-formatted-rich-text value={optionsLabel}></lightning-formatted-rich-text>
+                                            </label>
+                                            <div class="slds-form-element__control">
+                                                <lightning-button-group>
+                                                    <lightning-button label={linkButtonLabel} variant="neutral" data-fallback-value={agreementRecognitionUnitDisplayValue} disabled={agreementRecognitionUnitLinkButtonDisabled} onclick={handleLinkButton}></lightning-button>
+                                                    <lightning-button label={newLabel} variant="neutral" disabled={agreementRecognitionUnitLinkButtonDisabled} onclick={handleNewAgreementRecognitionUnitButton} data-reference-object-name="reduivy__Agreement_Recognition_Unit__c" data-fallback-value={agreementRecognitionUnitName}></lightning-button>
+                                                </lightning-button-group>
+                                            </div>
+                                        </div>
+
+                                        <!--the agreement Recognition unit (external unit) lookup field to link-->
+                                        <c-custom-lookup-field 
+                                            root-object-name="reduivy__Individual_Achievement_Unit__c"
+                                            lookup-field-name="reduivy__Agreement_Recognition_Unit__c"
+                                            title-format="\{Name}"
+                                            subtitle-format="\{Name}"
+                                            search-fields="Id;Name"
+                                            enable-debug-mode={enableDebugMode}
+                                            onlookupchange={handleAgreementRecognitionUnitLookupChange}
+                                            read-only={displayModeIsViewing}
+                                            data-type="agreementRecognitionUnit"
+                                            required={unitRequired}
+                                            custom-filter={agreementRecognitionUnitCustomFilter}
+                                            custom-filter-bind-map={agreementRecognitionUnitCustomFilterBindMap}
+                                            data-required={unitRequired}
+                                        ></c-custom-lookup-field>
+                                        
+                                    </lightning-layout-item>
+                                        
+                                    <template lwc:if={additionalUnitFieldSetName}>
+                                        
+                                        <template lwc:if={hasAdditionalInfo}>
+                                            <template for:each={additionalInfoFieldSetWrapperList} for:item="additionalField">
+                                                
+                                                <lightning-layout-item padding='horizontal-small' size="12" large-device-size="6" key={additionalField.fieldName}>
+
+                                                    <template lwc:if={additionalField.isReference}>
+                                                        <c-custom-lookup-field 
+                                                            root-object-name={additionalField.objectName}
+                                                            lookup-field-name={additionalField.fieldName}
+                                                            title-format="\{Name}"
+                                                            subtitle-format="\{Name}"
+                                                            search-fields="Id;Name"
+                                                            enable-debug-mode={enableDebugMode}
+                                                            data-required={additionalField.isRequired}
+                                                            required={additionalField.isRequired}
+                                                            onlookupchange={handleAdditionalDetailsLookupChange}
+                                                            read-only={displayModeIsViewing}
+                                                            data-type="additionalInfo"
+                                                        ></c-custom-lookup-field>
+                                                    </template>
+                                                    <template lwc:else>
+                                                        <lightning-input-field 
+                                                            field-name={additionalField.fieldName} 
+                                                            data-display-type={additionalField.displayType} 
+                                                            value={additionalField.value} 
+                                                            required={additionalField.isRequired}
+                                                            data-type="additionalInfo"
+                                                            data-field-name={additionalField.fieldName} 
+                                                            data-required={additionalField.isRequired}
+                                                            onchange={handleInputFieldChange}
+                                                        ></lightning-input-field>
+                                                    </template>
+                                                    
+                                                </lightning-layout-item>
+                                            </template>
+                                        </template>
+                                    </template>
+                                </lightning-layout>
+                            </lightning-accordion-section>
+                            
+                            <lightning-accordion-section name="uploadedFiles" label={uploadedFilesLabel}>
+                                <template lwc:if={hasExistingFiles}>
+                                    <lightning-layout multiple-rows class="slds-m-around_medium">
+                                        <template for:each={existingUploadedFiles} for:item='file'>
+                                            <lightning-layout-item size='12' key={file.Id}>
+                                                <lightning-formatted-rich-text value={file.displayName}></lightning-formatted-rich-text>
+                                                    <lightning-button-group class="slds-m-left_x-small">
+                                                        <lightning-button-icon icon-name="utility:document_preview" alternative-text={label.PREVIEW_LABEL} data-documentid={file.ContentDocumentId} onclick={handleFilePreview} size="small" if:false={isCommunity} class="requirementchecklistitem-previewicon"></lightning-button-icon>
+                                                        <lightning-button-icon icon-name="utility:download" alternative-text={label.DOWNLOAD_LABEL} data-cvs-id={file.Id} onclick={handleFileDownload} size="small" class="requirementchecklistitem-downloadicon"></lightning-button-icon>
+                                                        <lightning-button-icon if:false={file.fileDeleteDisabled} icon-name="utility:delete" alternative-text={label.DELETE_LABEL} data-documentid={file.ContentDocumentId} data-filetitle={file.Title} data-fileextension={file.FileExtension} onclick={handleFileDelete} size="small" class="requirementchecklistitem-deleteicon"></lightning-button-icon>
+                                                    </lightning-button-group>
+                                            </lightning-layout-item>
+                                        </template>
+                                    </lightning-layout>
+                                </template>
+                                <template lwc:else>
+                                    <div class="slds-align_absolute-center">
+                                        <lightning-formatted-rich-text value={noUploadedFilesLabel}></lightning-formatted-rich-text>
+                                    </div>
+                                </template>
+                            </lightning-accordion-section>
+                            
+                            <template lwc:if={verificationDetailsFieldSetName}>
+                                <template lwc:if={hasVerificationDetails}>
+                                    <lightning-accordion-section name="verificationDetails" label={verificationDetailsLabel}>
+                                        <lightning-layout multiple-rows>
+                                            <template for:each={verificationDetailsFieldSetWrapperList} for:item='verificationField'>
+                                                <lightning-layout-item size="12" large-device-size="6" padding="horizontal-small" key={verificationField.fieldName}>
+                                                    <template lwc:if={verificationField.isReference}>
+                                                        <c-custom-lookup-field 
+                                                            root-object-name={verificationField.objectName}
+                                                            lookup-field-name={verificationField.fieldName}
+                                                            title-format="\{Name}"
+                                                            subtitle-format="\{Name}"
+                                                            search-fields="Id;Name"
+                                                            enable-debug-mode={enableDebugMode}
+                                                            data-required={verificationField.isRequired}
+                                                            required={verificationField.isRequired}
+                                                            onlookupchange={handleVerificationFieldLookupChange}
+                                                            read-only={displayModeIsViewing}
+                                                            data-type="verificationDetails"
+                                                        ></c-custom-lookup-field>
+                                                    </template>
+                                                    <template lwc:else>
+                                                        <lightning-input-field 
+                                                            field-name={verificationField.fieldName} 
+                                                            data-display-type={verificationField.displayType} 
+                                                            value={verificationField.value} 
+                                                            required={verificationField.isRequired}
+                                                            data-type="verificationDetails"
+                                                            data-field-name={verificationField.fieldName} 
+                                                            data-required={verificationField.isRequired}
+                                                            onchange={handleInputFieldChange}
+                                                        ></lightning-input-field>
+                                                    </template>
+                                                </lightning-layout-item>
+                                            </template>
+                                        </lightning-layout>
+                                    </lightning-accordion-section>
+                                </template>
+                            </template>
+                        </lightning-accordion>
+                        <button type="submit" class="slds-hide" lwc:ref="editFormButton"></button>
+                    </lightning-record-edit-form>
+                </div>
+            </template>
+        </div>
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+        <lightning-layout horizontal-align='end' vertical-align='center'>
+            <lightning-layout-item>
+                <lightning-button variant="neutral" disabled={isLoading} onclick={handleCancelClick} label={cancelButtonLabel} class="slds-p-right_xx-small"></lightning-button>
+                <lightning-button variant="brand" disabled={disableButtons} onclick={handleSaveClick} label={saveButtonLabel}></lightning-button>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-modal-footer>
+	
+</template>

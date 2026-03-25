@@ -1,0 +1,12 @@
+{
+  "activeViewId" : "bb51c197-b38b-43ec-ae93-a9fe0c809ae5",
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "configurationTags" : [ ],
+  "devName" : "Student_Attendance__c",
+  "id" : "9b048f72-1ead-4c4a-a6e0-04dab2cbfbb9",
+  "label" : "Student Attendance",
+  "pageAccess" : "UseParent",
+  "routeType" : "custom-student-attendance",
+  "type" : "route",
+  "urlPrefix" : "student-attendance"
+}

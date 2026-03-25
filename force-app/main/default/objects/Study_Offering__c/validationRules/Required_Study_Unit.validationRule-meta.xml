@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Required_Study_Unit</fullName>
+    <active>true</active>
+    <description>This is to ensure the study unit is populated.</description>
+    <errorConditionFormula>ISBLANK(Study_Unit__c)</errorConditionFormula>
+    <errorDisplayField>Study_Unit__c</errorDisplayField>
+    <errorMessage>The study unit is required.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <description>Grading wizard.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>REDU - Student Grading Wizard</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="userMode" label="User Mode" type="String" default="Admin" description="Supported options are: Admin, Faculty." datasource="Admin,Faculty"/>
+
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:record" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="validStudentIenStatus" label="Student Individual Enrollment Statuses" type="String" default="Enrolled" description="Students with these statuses will be displayed in the grading table. For multiple statuses, separate each one with ; e.g. Enrolled;Completed. The status should match the reduivy__Enrollment_Status__c picklist option API value."/>
+            <property name="validStudentIsnStatus" label="Student Individual Session Enrollment Statuses" type="String" default="Enrolled" description="(Only applies to Study Sessions) Students with these statuses will be displayed in the grading table. For multiple statuses, separate each one with ; e.g. Enrolled;Completed. The status should match the reduivy__Enrollment_Status__c picklist option API value."/>
+            <property name="showSaveButton" label="Show Save Button" type="Boolean" default="true" description="Shows the Save button."/>
+            <property name="saveButtonIgdStatus" label="Save Button Status" type="String" default="Draft" description="Status given to all Individual Enrollment Grade records when clicking the Save button."/>
+            <property name="showSaveAndSubmitButton" label="Show Save and Submit Button" type="Boolean" default="true" description="Shows the Save and Submit button."/>
+            <property name="saveAndSubmitButtonIgdStatus" label="Save and Submit Button Status" type="String" default="Submitted" description="Status given to all Individual Enrollment Grade records when clicking the Save and Submit button."/>
+            <property name="individualEnrollmentGradeFieldSet" label="Individual Enrollment Grade Field Set" type="String" description="Individual Enrollment Grade field set API name for extra fields to edit."/>
+            <property name="individualGradeItemNotesFieldSetName" label="Grading Note Field Set Name" type="String" default="reduivy__GradingWizard_Notes" description="The individual grade item field set API name for grading notes."/>
+
+            <property name="contactTileInfoFields" label="Contact Tile Info Fields" type="String" default="reduivy__Student_ID__c;Email" description="The contact tile info fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="contactImageUrlFieldName" label="Contact Image Url Field Name" type="String" default="" description="The contact field API name that stores the image url. This will take precendence if this and Contact Image File Name is defined."/>
+            <property name="contactImageFileName" label="Contact Image File Name" type="String" default="Profile" description="The text to find the contact profile image file name using CONTAINS."/>
+            <property name="contactTileClickAction" label="Contact Tile Click Action" type="String" default="View Info" description="The action when clicking on contact tile title. Supported options are: None, View Info, View Record." datasource="None,View Info,View Record" />
+            <property name="infoModalFieldsForContact" label="Contact Info Popup Fields" type="String" default="reduivy__Student_ID__c;Email" description="The contact info popup fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="infoModalSectionNameForContact" label="Contact Info Section Name" type="String" default="Contact" description="The contact info popup section name."/>
+            <property name="showRecordsBasedOnAllocation" label="Show Records Based On Allocation" type="Boolean" default="false" description="After enabling this checkbox, the wizard will display the study offerings and study sessions based on the faculty's allocation which is the study event relation for faculty's individual session enrollment."/>
+
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="recordId" type="String" label="Record Id" description="ID of the salesforce record for the current object. e.g. {!recordId}." default="{!recordId}"/>
+            <property name="objectApiName" type="String" label="Current Object API Name" description="API Name of the current object e.g., {!objectApiName} or reduivy__Study_Session__c." default="{!objectApiName}"/>
+
+            <property name="userMode" label="User Mode" type="String" default="Admin" description="Supported options are: Admin, Faculty." datasource="Admin,Faculty"/>
+            <property name="modalTitle" label="Modal Title" type="String" default="Gradebook" description="Component modal title."/>
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:record" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="listingIconName" label="Listing Icon Name" type="String" default="action:record" description="Study Offering and Study Session listing icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="validStudentIenStatus" label="Student Individual Enrollment Statuses" type="String" default="Enrolled" description="Students with these statuses will be displayed in the grading table. For multiple statuses, separate each one with ; e.g. Enrolled;Completed. The status should match the reduivy__Enrollment_Status__c picklist option API value."/>
+            <property name="validStudentIsnStatus" label="Student Individual Session Enrollment Statuses" type="String" default="Enrolled" description="(Only applies to Study Sessions) Students with these statuses will be displayed in the grading table. For multiple statuses, separate each one with ; e.g. Enrolled;Completed. The status should match the reduivy__Enrollment_Status__c picklist option API value."/>
+            <property name="validFacultyIenStatus" label="Faculty Individual Enrollment Statuses" type="String" default="Enrolled" description="Displays listings if the Faculty user has these statuses. For multiple statuses, separate each one with ; e.g. Enrolled;Completed. The status should match the reduivy__Enrollment_Status__c picklist option API value."/>
+            <property name="validFacultyIsnStatus" label="Faculty Individual Session Enrollment Statuses" type="String" default="Enrolled" description="(Only applies to Study Sessions) Displays listings if the Faculty user has these statuses. For multiple statuses, separate each one with ; e.g. Enrolled;Completed. The status should match the reduivy__Enrollment_Status__c picklist option API value."/>
+            <property name="sofListingNameField" label="Study Offering Listing Name Field" type="String" default="Name" description="The Name for field to display for Study Offering listings."/>
+            <property name="sofListingInfoFields" label="Study Offering Listing Info Fields" type="String" default="reduivy__Description__c" description="The info fields to display for Study Offering listings in a semi-colon separated list e.g. Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="sseListingNameField" label="Study Session Listing Name Field" type="String" default="Name" description="The Name for field to display for Study Session listings."/>
+            <property name="sseListingInfoFields" label="Study Session Listing Info Fields" type="String" default="reduivy__Description__c" description="The info fields to display for Study Session listings in a semi-colon separated list e.g. Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="showNoGradeWarning" label="Show No Grade Warning" type="Boolean" default="true" description="Show warning when no grades have been marked yet."/>
+            <property name="noGradeWarningText" label="No Grade Warning Text" type="String" default="No grades marked." description="The warning for when no grades have been marked."/>
+            <property name="noGradeWarningIcon" label="No Grade Warning Icon" type="String" default="utility:warning" description="The icon name for when no grades have been marked. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="noGradeWarningIconVariant" label="No Grade Warning Icon Variant" type="String" default="warning" description="The icon variant/colour for when no grades have been marked." datasource="inverse,success,warning,error" />
+            <property name="showSaveButton" label="Show Save Button" type="Boolean" default="true" description="Shows the Save button."/>
+            <property name="saveButtonIgdStatus" label="Save Button Status" type="String" default="Draft" description="Status given to all Individual Enrollment Grade records when clicking the Save button."/>
+            <property name="showSaveAndSubmitButton" label="Show Save and Submit Button" type="Boolean" default="true" description="Shows the Save and Submit button."/>
+            <property name="saveAndSubmitButtonIgdStatus" label="Save and Submit Button Status" type="String" default="Submitted" description="Status given to all Individual Enrollment Grade records when clicking the Save and Submit button."/>
+            <property name="individualEnrollmentGradeFieldSet" label="Individual Enrollment Grade Field Set" type="String" description="Individual Enrollment Grade field set API name for extra fields to edit."/>
+            <property name="individualGradeItemNotesFieldSetName" label="Grading Note Field Set Name" type="String" default="reduivy__GradingWizard_Notes" description="The individual grade item field set API name for grading notes."/>
+
+            <property name="contactTileInfoFields" label="Contact Tile Info Fields" type="String" default="reduivy__Student_ID__c;Email" description="The contact tile info fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="contactImageUrlFieldName" label="Contact Image Url Field Name" type="String" default="" description="The contact field API name that stores the image url. This will take precendence if this and Contact Image File Name is defined."/>
+            <property name="contactImageFileName" label="Contact Image File Name" type="String" default="Profile" description="The text to find the contact profile image file name using CONTAINS."/>
+            <property name="contactTileClickAction" label="Contact Tile Click Action" type="String" default="View Info" description="The action when clicking on contact tile title. Supported options are: None, View Info, View Record." datasource="None,View Info,View Record" />
+            <property name="infoModalFieldsForContact" label="Contact Info Popup Fields" type="String" default="reduivy__Student_ID__c;Email" description="The contact info popup fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="infoModalSectionNameForContact" label="Contact Info Section Name" type="String" default="Contact" description="The contact info popup section name."/>
+            <property name="showRecordsBasedOnAllocation" label="Show Records Based On Allocation" type="Boolean" default="false" description="After enabling this checkbox, the wizard will display the study offerings and study sessions based on the faculty's allocation which is the study event relation for faculty's individual session enrollment."/>
+
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

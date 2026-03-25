@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Debug_Mode__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Tick to have System.debug visible in the execution log files.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Tick to have System.debug visible in the execution log files.</inlineHelpText>
+    <label>Debug Mode</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

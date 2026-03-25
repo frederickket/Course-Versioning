@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>sv_Rich__c</fullName>
+    <description>Swedish rich text value of the record value.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Swedish rich text value of the record value.</inlineHelpText>
+    <label>Swedish Rich Text</label>
+    <length>32768</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <visibleLines>25</visibleLines>
+    <type>Html</type>
+</CustomField>

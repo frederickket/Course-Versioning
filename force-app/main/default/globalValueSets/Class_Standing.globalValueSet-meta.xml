@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Freshman</fullName>
+        <default>false</default>
+        <label>Freshman</label>
+    </customValue>
+    <customValue>
+        <fullName>Sophomore</fullName>
+        <default>false</default>
+        <label>Sophomore</label>
+    </customValue>
+    <customValue>
+        <fullName>Junior</fullName>
+        <default>false</default>
+        <label>Junior</label>
+    </customValue>
+    <customValue>
+        <fullName>Senior</fullName>
+        <default>false</default>
+        <label>Senior</label>
+    </customValue>
+    <masterLabel>Class Standing</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

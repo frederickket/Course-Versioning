@@ -1,0 +1,46 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:sldsOneColLayout",
+  "dataProviders" : [ ],
+  "id" : "3f4bd43d-1299-456d-bd01-b34737cec7c0",
+  "label" : "Individual Program Enrollment List",
+  "regions" : [ {
+    "id" : "b9b30c7d-3251-48cc-b948-a96e0a012eff",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "enableInlineEdit" : true,
+        "filterName" : "My_Program_Enrollment",
+        "layout" : "FULL",
+        "pageSize" : 25,
+        "scope" : "reduivy__Individual_Program_Enrollment__c",
+        "showActionBar" : true,
+        "showChartsPanel" : true,
+        "showDisplay" : "showall",
+        "showFilterPanel" : true,
+        "showImageIcon" : true,
+        "showManualRefreshButton" : true,
+        "showObjectName" : true,
+        "showPinnedList" : true,
+        "showSearchBar" : true
+      },
+      "componentName" : "forceCommunity:objectHome",
+      "id" : "c9c70175-0493-4070-8444-6844dfecd54a",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "02e6a283-c2d8-4a78-bad5-c5d2edae6c01",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "id" : "9b573c4e-630b-480a-b948-9f385164c275",
+    "regionName" : "footer",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "list-a0Z"
+}

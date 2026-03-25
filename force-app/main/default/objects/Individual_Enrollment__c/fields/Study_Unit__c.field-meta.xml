@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Study_Unit__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Alternate field to define the study unit for the individual enrollment if there is no study offering. This is used by credit transfer application and placeholder enrollment.</description>
+    <label>Study Unit</label>
+    <referenceTo>Study_Unit__c</referenceTo>
+    <relationshipLabel>Individual Enrollments</relationshipLabel>
+    <relationshipName>Individual_Enrollments</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

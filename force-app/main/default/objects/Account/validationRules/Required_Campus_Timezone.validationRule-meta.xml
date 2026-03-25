@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Required_Campus_Timezone</fullName>
+    <active>true</active>
+    <description>To ensure timezone is populated for campus account.</description>
+    <errorConditionFormula>RecordType.DeveloperName == &apos;Campus&apos; &amp;&amp; ISBLANK( TEXT(Timezone__c) )</errorConditionFormula>
+    <errorDisplayField>Timezone__c</errorDisplayField>
+    <errorMessage>The timezone is required.</errorMessage>
+</ValidationRule>

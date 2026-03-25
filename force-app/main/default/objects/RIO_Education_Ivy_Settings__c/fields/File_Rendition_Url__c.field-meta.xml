@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>File_Rendition_Url__c</fullName>
+    <defaultValue>&apos;/sfc/servlet.shepherd/version/renditionDownload?rendition=THUMB720BY480&amp;versionId={0}&amp;contentId={1}&apos;</defaultValue>
+    <description>Salesforce Default Content Location URL</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Salesforce Default Content Location URL</inlineHelpText>
+    <label>File Rendition Url</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

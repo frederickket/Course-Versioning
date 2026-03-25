@@ -1,0 +1,7 @@
+.component-body {
+    
+}
+
+.cell-status {
+    background-color: var(--cell-background-color);
+}

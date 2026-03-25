@@ -1,0 +1,90 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card slds-m-around_small">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <lightning-layout>
+                <lightning-layout-item size="7" large-device-size="8" alignment-bump="right" class="requirementchecklistitem-details">
+                    <lightning-tile type="media">
+                        <lightning-icon slot="media" icon-name={statusTypeIcon} alternative-text={statusTypeIconAlternateTextAndTitle} size="small" title={statusTypeIconAlternateTextAndTitle}></lightning-icon>
+                    
+                        <div class="requirementchecklistitem-title slds-m-bottom_x-small">
+                            <template lwc:if={showRequirementRowDetailsButton}>
+                                <lightning-button label={irqTitle} variant="base" onclick={handleRequirementTitleClick}></lightning-button>
+                            </template>
+                            <template lwc:else>
+                                <lightning-formatted-rich-text value={irqTitle}></lightning-formatted-rich-text>
+                            </template>
+                        </div>
+
+                        <c-record-view-form class="requirementchecklistitem-recordviewform"
+                            object-api-name="reduivy__Individual_Requirement__c"
+                            record-id={irqWrapper.irq.Id}
+                            fields={requirementDetailsFieldsList}
+                            enable-debug-mode={enableDebugMode}>
+                            
+                            <template for:each={requirementDetailsFieldsList} for:item='fieldName'>
+                                <c-output-field field-name={fieldName} key={fieldName}></c-output-field>
+                            </template>
+                        </c-record-view-form>
+
+                        <div class="slds-m-around_xx-small" if:true={showUploadedFilesButton}>
+                            <lightning-button if:true={showUploadedFilesSection} variant="base" label={label.HIDE_UPLOADED_FILES_LABEL} onclick={handleToggleShowUploadedFiles} class="requirementchecklistitem-hideuploadedfiles"></lightning-button>
+                            <lightning-button if:false={showUploadedFilesSection} variant="base" label={label.SHOW_UPLOADED_FILES_LABEL} onclick={handleToggleShowUploadedFiles} class="requirementchecklistitem-showuploadedfiles"></lightning-button>
+                        </div>
+
+                        <template if:true={showUploadedFilesSection}>
+                            <template for:each={existingUploadedFilesWrapperList} for:item="file">
+                                <div class="slds-m-around_x-small" key={file.id}>
+                                    {file.Title}.{file.FileExtension}
+                                    <lightning-button-group class="slds-m-left_x-small">
+                                        <lightning-button-icon icon-name="utility:document_preview" alternative-text={label.PREVIEW_LABEL} data-id={file.id} onclick={handleFilePreview} size="small" if:false={isCommunity} class="requirementchecklistitem-previewicon"></lightning-button-icon>
+                                        <lightning-button-icon icon-name="utility:download" alternative-text={label.DOWNLOAD_LABEL} data-download={file.download} onclick={handleFileDownload} size="small" class="requirementchecklistitem-downloadicon"></lightning-button-icon>
+                                        <lightning-button-icon if:false={isSubmitDisabled} icon-name="utility:delete" alternative-text={label.DELETE_LABEL} data-id={file.id} data-filetitle={file.Title} data-fileextension={file.FileExtension} onclick={handleFileDelete} size="small" class="requirementchecklistitem-deleteicon"></lightning-button-icon>
+                                    </lightning-button-group>
+                                </div>
+                            </template>
+                        </template>
+                    </lightning-tile>
+                </lightning-layout-item>
+
+                <lightning-layout-item>
+                    <lightning-button-group class="requirementchecklistitem-buttongroup">
+                        <lightning-button if:true={showRequirementRowDetailsButton} label={label.DETAILS_LABEL} onclick={handleRequirementTitleClick} class="requirementchecklistitem-detailbutton"></lightning-button>
+
+                        <template if:true={showRequirementUserActionButton} >
+                            <lightning-button if:true={showDoneButton} label={label.DONE_LABEL} onclick={handleRequirementDoneClick} disabled={isSubmitDisabled} class="requirementchecklistitem-donebutton" ></lightning-button>
+                            <lightning-button if:true={showUploadButton} label={label.UPLOAD_LABEL} onclick={handleRequirementUploadClick} disabled={isSubmitDisabled} class="requirementchecklistitem-uploadbutton"></lightning-button>
+                            <lightning-button if:true={showUpdateButton} label={label.UPDATE_LABEL} onclick={handleRequirementFieldUpdateClick} disabled={isSubmitDisabled} class="requirementchecklistitem-uploadbutton"></lightning-button>
+                        </template>
+
+                        <lightning-button-menu if:true={showRequirementApprovalActionButton} onselect={handleApprovalStatusClick} menu-alignment="right" class="requirementchecklistitem-buttonmenu">
+                            <template for:each={irqReviewStatusMenuItems} for:item="menuItem" >
+                                <template if:true={menuItem.isSubHeader}>
+                                    <lightning-menu-subheader key={menuItem.label} label={menuItem.label}  class="requirementchecklistitem-menuitemsubheader"></lightning-menu-subheader>
+                                </template>
+                                <template if:false={menuItem.isSubHeader}>
+                                    <lightning-menu-item key={menuItem.label} label={menuItem.label} value={menuItem.value} disabled={menuItem.disabled}  class="requirementchecklistitem-menuitembutton"></lightning-menu-item>
+                                </template>
+                            </template>
+
+
+                            <template if:true={showActionMenuItem}>
+                                <lightning-menu-subheader label={label.ACTION_LABEL} class="requirementchecklistitem-menuitemsubheader"></lightning-menu-subheader>
+                                <lightning-menu-item if:true={showLinkToIac} label={linkToIacLabel} value="iac" class="requirementchecklistitem-menuitembutton"></lightning-menu-item>
+                                <lightning-menu-item if:true={showRemarksAction} label={label.UPDATE_REMARKS_LABEL} value="remarks" class="requirementchecklistitem-menuitembutton"></lightning-menu-item>
+                            </template>
+
+                        </lightning-button-menu>
+                        
+                    </lightning-button-group>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+	</div>
+	
+</template>

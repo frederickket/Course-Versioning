@@ -1,0 +1,34 @@
+<template>
+    
+    <lightning-modal-header label={modalTitle}></lightning-modal-header>
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+      
+        <div class="component-body slds-is-relative">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={label.LOADING_LABEL}></lightning-spinner>
+            </div>
+            <div class="studySessionSchedulerSessionDoubleBookedModal-content">
+                {doubleBookedTitle}
+                <ul class="slds-list_dotted">
+                    <template for:each={doubleBookedDescriptionList} for:item="info">
+                        <li key={info.id}>
+                            <div class="studySessionSchedulerSessionDoubleBookedModal-description">
+                                {info.description}
+                                <lightning-icon onclick={handleStudyEventClick} data-id={info.id} data-datetime={info.datetime}
+                                class="slds-m-left_x-small studySessionSchedulerSessionDoubleBookedModal-info"
+                                icon-name="utility:info_alt" alternative-text="Connected" size="xx-small" title={doubleBookedIconHint}></lightning-icon>
+                            </div> 
+                        </li>
+                    </template>
+                </ul>
+            </div>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" onclick={handleCloseClick} label={closeButtonLabel} class="slds-p-right_xx-small"></lightning-button>
+        <lightning-button variant="brand" disabled={isLoading} onclick={handleAssignFacilityClick} label={assignFacilityLabel} class="slds-p-right_xx-small"></lightning-button>
+        <lightning-button variant="brand" disabled={isLoading} onclick={handleAssignFacultyClick} label={assignFacultyLabel} class="slds-p-right_xx-small"></lightning-button>
+    </lightning-modal-footer>
+	
+</template>

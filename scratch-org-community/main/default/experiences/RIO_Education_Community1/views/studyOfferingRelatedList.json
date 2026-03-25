@@ -1,0 +1,39 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:sldsOneColLayout",
+  "dataProviders" : [ ],
+  "id" : "a26deda6-fd6f-416a-a5eb-f227d40422e7",
+  "label" : "Study Offering Related List",
+  "regions" : [ {
+    "id" : "5662901b-3b51-4fdc-b0e5-4f01f83c5199",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customTitle" : "",
+        "parentRecordId" : "{!recordId}",
+        "relatedListName" : "{!relationshipApiName}",
+        "showBreadCrumbs" : true,
+        "showCustomTitle" : false,
+        "showManualRefreshButton" : true,
+        "showRowNumbers" : true
+      },
+      "componentName" : "forceCommunity:relatedList",
+      "id" : "a52f2c2d-bcc3-4361-8dad-fdaf01815a37",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "e90a0533-dcc1-4697-9b3c-c97b70f64b57",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "id" : "fff2948b-022a-4588-b9d1-cef62a8f8344",
+    "regionName" : "footer",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "relatedlist-a0u"
+}

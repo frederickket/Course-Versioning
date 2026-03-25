@@ -1,0 +1,103 @@
+<template>
+
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+    
+    <div class="component-body slds-is-relative slds-card">
+
+        <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL}></lightning-spinner>
+        </div>
+
+        <div class="ipeaudit-info slds-var-m-bottom_medium">
+            <lightning-layout vertical-align="center" horizontal-align="center" multiple-rows>
+              
+                <lightning-layout-item size="6" large-device-size="10" >
+                    <template if:true={hasIpeInfoFields}>
+                        <lightning-layout multiple-rows> 
+                            <lightning-layout-item class="slds-text-align_left" size="12">
+                                <c-record-view-form 
+                                record-id={ipeId}
+                                object-api-name="reduivy__Individual_Program_Enrollment__c"
+                                fields={ipeInfoFieldsList}
+                                enable-debug-mode={enableDebugMode}
+                                >
+                            
+                                    <lightning-layout multiple-rows>
+                                        <template for:each={ipeInfoFieldsList} for:item="ipeField">
+                                            <lightning-layout-item key={ipeField} size="12" large-device-size={ipeInfoFieldSize} >
+                                                <c-output-field field-name={ipeField} ></c-output-field>
+                                            </lightning-layout-item>
+                                        </template>
+                                    </lightning-layout>
+                                
+                                </c-record-view-form>
+                            </lightning-layout-item>        
+                                    
+                        </lightning-layout>
+                    </template>
+                        
+                    <template if:true={hasIpfInfoFields}>
+                        <lightning-layout multiple-rows> 
+                            <lightning-layout-item class="slds-text-align_left" size="12">
+                                <c-record-view-form 
+                                record-id={ipfId}
+                                object-api-name="reduivy__Individual_Academic_Profile__c"
+                                fields={ipfInfoFieldsList}
+                                enable-debug-mode={enableDebugMode}
+                                >
+                            
+                                    <lightning-layout multiple-rows>
+                                        <template for:each={ipfInfoFieldsList} for:item="ipfField">
+                                            <lightning-layout-item key={ipfField} size="12" large-device-size={ipfInfoFieldSize} >
+                                                <c-output-field field-name={ipfField} ></c-output-field>
+                                            </lightning-layout-item>
+                                        </template>
+                                    </lightning-layout>
+                                
+                                </c-record-view-form>
+                            </lightning-layout-item>        
+                                    
+                        </lightning-layout>
+                    </template>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="2">
+                    <c-custom-progress-ring progress={progressRingValue} width={PROGRESS_RING_SIZE} height={PROGRESS_RING_SIZE} path-color={progressRingColor} path-thickness={PROGRESS_RING_THICKNESS} draw-in-clockwise="true">
+                        <span class="slds-text-align_center ipeauditprogramenrollment-progressringlabel">{progressRingLabel}</span>
+                    </c-custom-progress-ring>
+                </lightning-layout-item>
+            
+            </lightning-layout>
+            
+        </div>
+
+        
+        <div if:true={individualPSList} class="ipeaudit-parentgroup slds-var-m-bottom_xxx-small">
+
+            <template for:each={individualPSList} for:item="currentIPS">
+                <c-ipe-audit-individual-plan-structure 
+                    key={currentIPS.Id}
+                    record-id = {currentIPS.Id}
+                    ips-group-title-field = {ipsGroupTitleField}
+                    ips-group-title-format = {ipsGroupTitleFormat}
+                    show-ips-group-info = {showIpsGroupInfo}
+                    ips-info-fields = {ipsInfoFields}
+                    ips-info-fields-unit = {ipsInfoFieldsUnit}
+                    ips-info-column-no = {ipsInfoColumnNo}
+                    ips-unit-fields = {ipsUnitFields}
+                    idv-enrollment-fields = {idvEnrollmentFields}
+                    accordion-background-color = {accordionBackgroundColor}
+                    accordion-text-color = {accordionTextColor}
+                    enable-clickable-ref-field = {enableClickableRefField}
+                    enable-set-primary-ips = {enableSetPrimaryIps}
+                    enable-view-enrollment-history = {enableViewEnrollmentHistory}
+                    href-target-type = {hrefTargetType}
+                    table-text-display-mode = {tableTextDisplayMode}
+                    is-community = {isCommunity}
+                    enable-debug-mode = {enableDebugMode}>
+                </c-ipe-audit-individual-plan-structure>
+            </template>
+        </div>
+
+    </div>
+</template>

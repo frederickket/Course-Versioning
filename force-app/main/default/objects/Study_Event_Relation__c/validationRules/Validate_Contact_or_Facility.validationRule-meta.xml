@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Contact_or_Facility</fullName>
+    <active>true</active>
+    <description>Ensure that the study event relation can only link to either contact or facility.</description>
+    <errorConditionFormula>(NOT(ISBLANK( Contact__c )) &amp;&amp; NOT(ISBLANK( Facility__c ))) &amp;&amp;
+(ISBLANK( Contact__c ) &amp;&amp; ISBLANK( Facility__c ))</errorConditionFormula>
+    <errorMessage>Please select either a contact or a facility.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RestrictionRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <enforcementType>Restrict</enforcementType>
+    <masterLabel>Restrict Appointment Events</masterLabel>
+    <recordFilter>ISPICKVAL(reduivy__Type__c, &apos;Study Session&apos;)=true</recordFilter>
+    <targetEntity>reduivy__Study_Event__c</targetEntity>
+    <userCriteria>$Permission.reduivy__REDU_Admin=false</userCriteria>
+    <version>1</version>
+</RestrictionRule>

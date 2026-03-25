@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <description>Credit transfer application and management wizard.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>REDU - Credit Transfer Wizard</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="userMode" label="User Mode" type="String" default="Admin" description="Supported options are: Admin, Student." datasource="Admin,Student"/>
+            <property name="componentIcon" type="String" label="Component Icon" description="Component Icon" default="standard:product_request_line_item"/>
+            <property name="componentIconSize" type="String" label="Component Icon Size" description="Component Icon Size" default="small" datasource="large,medium,small"/>
+            <property name="componentLabel" type="String" label="Title" description="Displays top-left of the component" placeholder="Component label" required="false" default="Credit Transfer"/>
+            <property name="contactFieldApiName" label="Contact Field API Name" type="String" default="reduivy__Contact__c" required="true" description="The API name of the contact field that is used as a lookup in related object."/>
+            <property name="ctAppListFields" label="Credit Transfer Application List Fields" type="String" default="Name;reduivy__Agreement_Unit_Equivalent__c;reduivy__Approved_Unit_Codes__c;reduivy__Credits_Attempted__c;reduivy__Credits_Earned__c;reduivy__Completed_Date__c;reduivy__Status__c" required="true" description="The fields to be displayed in the Credit Transfer Application tables in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="enableClickableRefField" label="Enable Clickable Ref Field" type="Boolean" default="true" description="Enable reference e.g., Lookup and Master Detail field as clicklable in the datatable."/>
+            <property name="enableNewButton" label="Enable New Button" type="Boolean" default="true" description="Enable new button to allow creation of new Credit Transfer Application"/>
+            
+            <property name="applicationFormFieldSetName" label="Credit Transfer Application Form Field Set Name" type="String" default="reduivy__CreditTransferApplicationModal" description="The credit transfer application field set API name for application form."/>
+            <property name="approvalFormFieldSetName" label="Credit Transfer Approval Form Field Set Name" type="String" default="reduivy__CreditTransferApproveModal" description="The credit transfer application field set API name for approval form."/>
+
+            <property name="agreementRpPrimaryField" label="Agreement Picker's Primary Field" type="String" default="Name" required="true" description="Primary field to be used for matching and display in the record picker field"/>
+            <property name="agreementRpAdditionalField" label="Agreement Picker's Additional field" type="String" default="reduivy__Educational_Institution__r.Name" description="Additional field to be used for matching and display in the record picker field"/>
+            <property name="agreementUnitRpPrimaryField" label="Agreement Unit Picker's Primary Field" type="String" default="Name" required="true" description="Primary field to be used for matching and display in the record picker field"/>
+            <property name="agreementUnitRpAdditionalField" label="Agreement Unit Picker's Additional field" type="String" default="reduivy__Agreement__r.Name" description="Additional field to be used for matching and display in the record picker field"/>
+            <property name="ipeRpPrimaryField" label="Program Enrollment Picker's Primary Field" type="String" default="Name" required="true" description="Primary field to be used for matching and display in the record picker field"/>
+            <property name="ipeRpAdditionalField" label="Program Enrollment Picker's Additional field" type="String" default="reduivy__Study_Program__r.Name" description="Additional field to be used for matching and display in the record picker field"/>
+            <property name="ipsRpPrimaryField" label="Individual Plan Structure Picker's Primary Field" type="String" default="Name" required="true" description="Primary field to be used for matching and display in the record picker field"/>
+            <property name="ipsRpAdditionalField" label="Individual Plan Structure Picker's Additional field" type="String" default="reduivy__Study_Plan_Structure__r.Name" description="Additional field to be used for matching and display in the record picker field"/>
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="userMode" label="User Mode" type="String" default="Student" description="Supported options are: Admin, Student." datasource="Admin,Student"/>
+            <property name="recordId" type="String" label="Record Id" description="ID of the salesforce record for the current object. e.g. {!recordId}" default="{!recordId}"/>
+            <property name="objectApiName" type="String" label="Current Object API Name" description="API Name of the current object" default="Contact"/>
+            <property name="componentIcon" type="String" label="Component Icon" description="Component Icon" default="standard:product_request_line_item"/>
+            <property name="componentIconSize" type="String" label="Component Icon Size" description="Component Icon Size" default="small" datasource="large,medium,small"/>
+            <property name="componentLabel" type="String" label="Title" description="Displays top-left of the component" placeholder="Component label" required="false" default="Credit Transfer"/>
+            <property name="contactFieldApiName" label="Contact Field API Name" type="String" default="reduivy__Contact__c" required="true" description="The API name of the contact field that is used as a lookup in related object."/>
+            <property name="ctAppListFields" label="Credit Transfer Application List Fields" type="String" default="Name;reduivy__Agreement_Unit_Equivalent__c;reduivy__Approved_Unit_Codes__c;reduivy__Credits_Attempted__c;reduivy__Credits_Earned__c;reduivy__Completed_Date__c;reduivy__Status__c" required="true" description="The fields to be displayed in the Credit Transfer Application tables in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="enableClickableRefField" label="Enable Clickable Ref Field" type="Boolean" default="true" description="Enable reference e.g., Lookup and Master Detail field as clicklable in the datatable."/>
+            <property name="enableNewButton" label="Enable New Button" type="Boolean" default="true" description="Enable new button to allow creation of new Credit Transfer Application"/>
+            
+            <property name="applicationFormFieldSetName" label="Credit Transfer Application Form Field Set Name" type="String" default="reduivy__CreditTransferApplicationModal" description="The credit transfer application field set API name for application form."/>
+            <property name="approvalFormFieldSetName" label="Credit Transfer Approval Form Field Set Name" type="String" default="reduivy__CreditTransferApproveModal" description="The credit transfer application field set API name for approval form."/>
+            
+            <property name="agreementRpPrimaryField" label="Agreement Picker's Primary Field" type="String" default="Name" required="true" description="Primary field to be used for matching and display in the record picker field"/>
+            <property name="agreementRpAdditionalField" label="Agreement Picker's Additional field" type="String" default="reduivy__Educational_Institution__r.Name" description="Additional field to be used for matching and display in the record picker field"/>
+            <property name="agreementUnitRpPrimaryField" label="Agreement Unit Picker's Primary Field" type="String" default="Name" required="true" description="Primary field to be used for matching and display in the record picker field"/>
+            <property name="agreementUnitRpAdditionalField" label="Agreement Unit Picker's Additional field" type="String" default="reduivy__Agreement__r.Name" description="Additional field to be used for matching and display in the record picker field"/>
+            <property name="ipeRpPrimaryField" label="Program Enrollment Picker's Primary Field" type="String" default="Name" required="true" description="Primary field to be used for matching and display in the record picker field"/>
+            <property name="ipeRpAdditionalField" label="Program Enrollment Picker's Additional field" type="String" default="reduivy__Study_Program__r.Name" description="Additional field to be used for matching and display in the record picker field"/>
+            <property name="ipsRpPrimaryField" label="Individual Plan Structure Picker's Primary Field" type="String" default="Name" required="true" description="Primary field to be used for matching and display in the record picker field"/>
+            <property name="ipsRpAdditionalField" label="Individual Plan Structure Picker's Additional field" type="String" default="reduivy__Study_Plan_Structure__r.Name" description="Additional field to be used for matching and display in the record picker field"/>
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

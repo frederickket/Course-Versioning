@@ -1,0 +1,33 @@
+<template>
+
+    <lightning-modal-header label={modalTitle}>
+    </lightning-modal-header>
+
+    <lightning-modal-body>
+
+        <c-study-pathway enable-debug-mode={enableDebugMode} record-id={recordId}
+        modal-title={modalTitle}
+        modal-icon-name={modalIconName}
+        study-pathway-info-fields={studyPathwayInfoFields}
+        study-pathway-term-title-prefix={studyPathwayTermTitlePrefix}
+        study-pathway-term-info-fields={studyPathwayTermInfoFields}
+        study-pathway-unit-title-field={studyPathwayUnitTitleField}
+        study-pathway-unit-info-fields={studyPathwayUnitInfoFields}
+        study-pathway-unit-icon={studyPathwayUnitIcon}
+        study-pathway-group-title-field={studyPathwayGroupTitleField}
+        study-pathway-group-info-fields={studyPathwayGroupInfoFields}
+        study-pathway-group-icon={studyPathwayGroupIcon}
+        show-study-unit-quick-search={showStudyUnitQuickSearch}
+        show-study-plan-options={showStudyPlanOptions}
+        accordion-background-color={accordionBackgroundColor}
+        accordion-text-color={accordionTextColor}
+        combobox-label={comboboxLabel}
+        href-target-type={hrefTargetType}
+        ></c-study-pathway>
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+        <lightning-button label="Close" onclick={handleClose}></lightning-button>
+    </lightning-modal-footer>
+
+</template>

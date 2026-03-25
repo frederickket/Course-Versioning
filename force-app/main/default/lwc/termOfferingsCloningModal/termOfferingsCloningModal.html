@@ -1,0 +1,233 @@
+<template>
+    <lightning-modal-header label={modalTitle}></lightning-modal-header>
+
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+        
+        <div class="component-body slds-is-relative slds-card">
+            <div lwc:if={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel}></lightning-spinner>
+            </div>
+
+            <div class="termofferingscloningmodal-body">
+                <div class="slds-grid slds-p-horizontal_xx-small slds-align_center">
+                    <div class="termofferingscloningmodal-modalsubtitle slds-text-heading_small slds-grow slds-align-middle">
+                        <lightning-formatted-rich-text value={modalSubTitle}></lightning-formatted-rich-text>
+                    </div>
+                </div>
+
+                <lightning-progress-indicator current-step={currentStep} type="path" variant="base">
+                    <lightning-progress-step class="termofferingscloningmodal-progressindicator" label={progressIndicatorStep1Label} value="1"></lightning-progress-step>
+                    <lightning-progress-step class="termofferingscloningmodal-progressindicator" label={progressIndicatorStep2Label} value="2"></lightning-progress-step>
+                    <lightning-progress-step class="termofferingscloningmodal-progressindicator" label={progressIndicatorStep3Label} value="3"></lightning-progress-step>
+                    <lightning-progress-step class="termofferingscloningmodal-progressindicator" label={progressIndicatorStep4Label} value="4"></lightning-progress-step>
+                </lightning-progress-indicator>
+
+                <div class="termofferingscloningmodal-description-div slds-m-left_x-small slds-m-right_x-small slds-m-top_x-small">
+                    <lightning-formatted-rich-text lwc:if={isStudyUnitSelectionScreen} value={selectionScreenDescription}></lightning-formatted-rich-text>
+                </div>
+
+                <hr class="slds-m-top_small slds-m-bottom_small slds-m-left_none slds-m-right_none">
+                
+                <!-- Study Unit Selection Screen -->
+                <template if:true={isStudyUnitSelectionScreen}>
+                    <div class="termofferingscloningmodal-studyunitselection-div">
+                        <div if:true={academicTermsComboboxOptions}>
+                            <div class="slds-col slds-size_1-of-3 slds-p-bottom_small">
+                                <c-searchable-combobox
+                                    field-label={termComboboxLabel}
+                                    field-name={TERM_COMBOBOX_FIELD_NAME}
+                                    options={academicTermsComboboxOptions}
+                                    onchange={handleComboboxChange}
+                                    required="true"
+                                    default-value={selectedTermId}
+                                    help-text={termComboboxHelptext}
+                                    message-when-value-missing={messageWhenComboboxNotSelected}
+                                    enable-debug-mode={enableDebugMode}
+                                ></c-searchable-combobox>
+                            </div>
+                        </div>
+
+                        <div if:true={campusComboboxOptions}>
+                            <div class="slds-col slds-size_1-of-3 slds-p-bottom_small">
+                                <c-searchable-combobox
+                                    field-label={campusComboboxLabel}
+                                    field-name={CAMPUS_COMBOBOX_FIELD_NAME}
+                                    options={campusComboboxOptions}
+                                    onchange={handleComboboxChange}
+                                    required="true"
+                                    default-value={selectedCampusId}
+                                    help-text={campusComboboxHelptext}
+                                    message-when-value-missing={messageWhenComboboxNotSelected}
+                                    enable-debug-mode={enableDebugMode}
+                                ></c-searchable-combobox>
+                            </div>
+                        </div>
+
+                        <div if:true={isStudyUnitListReady}>
+                            <div class="slds-col slds-size_1-of-3 slds-p-bottom_small">
+                                <lightning-combobox 
+                                    label={studyUnitSelectionTypeComboboxLabel} 
+                                    options={selectionTypeOptions} 
+                                    value={selectedStudyUnitSelectionType} 
+                                    onchange={handleStudyUnitSelectionTypeChange}
+                                    field-level-help={studyUnitSelectionTypeHelpText}
+                                    required>
+                                </lightning-combobox>
+                            </div>
+
+                            <div class="slds-col slds-size_12-of-12">
+                                <c-custom-single-related-list
+                                    record-id={recordId}
+                                    modal-title={studyUnitLabel}
+                                    target-record-id-field=""
+                                    parent-object-ref-field=""
+                                    child-object-api-name="reduivy__Study_Unit__c"
+                                    child-object-fields={studyUnitFields}
+                                    enable-clickable-ref-field="true"
+                                    enable-row-selection={selectedStudyUnitManualSelectionType}
+                                    enable-quick-search="true"
+                                    max-height={studyUnitTableMaxHeight}
+                                    view-mode="Related List"
+                                    no-record-found-message={noRecordToDisplayLabel}
+
+                                    selected-rows-id={studyUnitIdsToBeProcessed}
+
+                                    use-source-collection-records="true"
+                                    source-collection={studyUnitRecords}
+
+                                    table-text-display-mode={tableTextDisplayMode}
+
+                                    enable-debug-mode={enableDebugMode}
+
+                                    onrowselection={handleStudyUnitRowSelect}
+                                ></c-custom-single-related-list>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Study Offering Selection Screen -->
+                <template if:true={isStudyOfferingSelectionScreen}>
+                    <div class="termofferingscloningmodal-studyofferingselection-div">
+                        <div class="slds-col slds-size_1-of-3 slds-p-bottom_small">
+                            <lightning-combobox 
+                                label={studyOfferingSelectionTypeComboboxLabel} 
+                                options={selectionTypeOptions} 
+                                value={selectedStudyOfferingSelectionType} 
+                                onchange={handleStudyOfferingSelectionTypeChange}
+                                field-level-help={studyOfferingSelectionTypeHelpText}
+                                required>
+                            </lightning-combobox>
+                        </div>
+
+                        <lightning-formatted-rich-text class="slds-text-body_small" value={studyOfferingDatatableMessage}></lightning-formatted-rich-text>
+
+                        <div if:true={selectedStudyOfferingManualSelectionType} class="slds-grid">
+                            <div class="slds-col slds-size_12-of-12">
+                                <c-custom-single-related-list
+                                    record-id={recordId}
+                                    modal-title={studyOfferingLabel}
+                                    target-record-id-field=""
+                                    parent-object-ref-field=""
+                                    child-object-api-name="reduivy__Study_Offering__c"
+                                    child-object-fields={studyOfferingFields}
+                                    enable-clickable-ref-field="true"
+                                    enable-row-selection={selectedStudyOfferingManualSelectionType}
+                                    enable-quick-search="true"
+                                    max-height={studyOfferingTableMaxHeight}
+                                    view-mode="Related List"
+                                    no-record-found-message={noRecordToDisplayLabel}
+
+                                    selected-rows-id={manualSelectedStudyOfferingIds}
+
+                                    use-source-collection-records="true"
+                                    source-collection={studyOfferingRecordsToShowInDatatable}
+
+                                    table-text-display-mode={tableTextDisplayMode}
+
+                                    enable-debug-mode={enableDebugMode}
+
+                                    onrowselection={handleStudyOfferingRowSelect}
+                                ></c-custom-single-related-list>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Additional Option Screen -->
+                <template if:true={isAdditionalOptionScreen}>
+                    <div class="termofferingscloningmodal-additionaloption-div">
+                        <div class="slds-col slds-size_1-of-3 slds-p-bottom_small">
+                            <lightning-combobox 
+                                label={retainStudyOfferingNameComboboxLabel} 
+                                options={retainStudyOfferingNameOptions} 
+                                value={selectedRetainStudyOfferingNameOption} 
+                                onchange={handleRetainStudyOfferingNameOptionsChange}
+                                field-level-help={retainStudyOfferingNameComboboxHelptext}
+                                required>
+                            </lightning-combobox>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-3 slds-p-bottom_small">
+                            <lightning-combobox 
+                                label={cloneStudySesssionComboboxLabel} 
+                                options={cloneStudySessionComboboxOptions} 
+                                value={selectedCloneStudySessionOption} 
+                                onchange={handleCloneStudySessionOptionChange}
+                                required>
+                            </lightning-combobox>
+                        </div>
+
+                        <div if:true={proceedToCloneStudySession} class="slds-col slds-size_1-of-3 slds-p-bottom_small">
+                            <lightning-combobox 
+                                label={retainStudySessionNameComboboxLabel} 
+                                options={retainStudySessionNameOptions} 
+                                value={selectedRetainStudySessionNameOption} 
+                                onchange={handleRetainStudySessionNameOptionsChange}
+                                field-level-help={retainStudySessionNameComboboxHelptext}
+                                required>
+                            </lightning-combobox>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Confirmation Screen -->
+                <template if:true={isConfirmationScreen}>
+                    <div class="termofferingscloningmodal-confirmation-div">
+                        <div if:true={summaryDetails} class="slds-p-bottom_small">
+                            <lightning-formatted-rich-text value={summaryDetails} ></lightning-formatted-rich-text>
+                        </div>
+                        <div if:true={finalConfirmationStudyOfferingSummary} class="slds-p-bottom_small">
+                            <lightning-formatted-rich-text value={finalConfirmationStudyOfferingSummary}></lightning-formatted-rich-text>
+                        </div>
+                        <div if:true={finalConfirmationStudySessionSummary} class="slds-p-bottom_small">
+                            <lightning-formatted-rich-text if:true={finalConfirmationStudySessionSummary} value={finalConfirmationStudySessionSummary}></lightning-formatted-rich-text>
+                        </div>
+                        <div if:true={finalRetainRecordSummary} class="slds-p-bottom_small">
+                            <lightning-formatted-rich-text if:true={finalRetainRecordSummary} value={finalRetainRecordSummary}></lightning-formatted-rich-text>
+                        </div>
+                        <div if:true={finalConfirmation} class="slds-p-bottom_small">
+                            <lightning-formatted-rich-text value={finalConfirmation} ></lightning-formatted-rich-text>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+        <lightning-button class="slds-m-right_medium" variant="neutral" onclick={handleCancelOnClick} label={cancelButtonLabel} disabled={isLoading}></lightning-button>
+
+        <lightning-button lwc:if={isStudyUnitSelectionScreen} class="slds-p-left_xx-small" variant="brand" onclick={handleStudyUnitSelectionScreenNextOnClick} label={nextScreenButtonLabel} disabled={isStudyUnitSelectionScreenNextDisabled}></lightning-button>
+
+        <lightning-button lwc:if={isStudyOfferingSelectionScreen} variant="neutral" onclick={handleStudyOfferingSelectionScreenPreviousOnClick} label={previousScreenButtonLabel} disabled={isLoading}></lightning-button>
+        <lightning-button lwc:if={isStudyOfferingSelectionScreen} class="slds-p-left_xx-small" variant="brand" onclick={handleStudyOfferingSelectionScreenNextOnClick} label={nextScreenButtonLabel} disabled={isStudyOfferingSelectionScreenNextDisabled}></lightning-button>
+
+        <lightning-button lwc:if={isAdditionalOptionScreen} variant="neutral" onclick={handleAdditionalOptionScreenPreviousOnClick} label={previousScreenButtonLabel} disabled={isLoading}></lightning-button>
+        <lightning-button lwc:if={isAdditionalOptionScreen} class="slds-p-left_xx-small" variant="brand" onclick={handleAdditionalOptionScreenNextOnClick} label={nextScreenButtonLabel} disabled={isAdditionalOptionScreenNextDisabled}></lightning-button>
+
+        <lightning-button lwc:if={isConfirmationScreen} variant="neutral" onclick={handleConfirmationScreenPreviousOnClick} label={previousScreenButtonLabel} disabled={isLoading}></lightning-button>
+        <lightning-button lwc:if={isConfirmationScreen} class="slds-p-left_xx-small" variant="brand" onclick={handleConfirmationScreenAddJobOnClick} label={addJobButtonLabel} disabled={isLoading}></lightning-button>
+    </lightning-modal-footer>
+</template>

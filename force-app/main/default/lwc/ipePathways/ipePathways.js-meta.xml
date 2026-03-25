@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <description>Enrollment wizard.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>REDU - Enrollment Wizard</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="userMode" label="User Mode" type="String" default="Admin" description="Supported options are: Admin, Student." required="true" datasource="Admin,Student"/>
+            <property name="modalTitle" label="Modal Title" type="String" default="My Pathway" description="Component modal title."/>
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:sales_path" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            
+            <property name="ipwButtonLabelPrefix" label="Individual Pathway Button Label Prefix" type="String" default="T - {0}" description="Individual Pathway Button Label Prefix. E.g. T - {0}. The {0} will be replaced by the Term #."/>
+
+            <property name="individualEnrollmentTabLabel" label="Unit Enrollment Tab Label" type="String" default="Unit Enrollment" description="Unit enrollment tab label."/>
+            <property name="sessionEnrollmentTabLabel" label="Session Enrollment Tab Label" type="String" default="Session Enrollment" description="Session enrollment tab label."/>
+            
+            <property name="individualEnrollmentHelptext" label="Unit Enrollment Help/Instruction Text" type="String" default="You can use the filter on the right to filter the units. To enroll to a unit, click on the &quot;Enroll&quot; button next to a unit." description="Unit enrollment help or instruction text."/>
+            <property name="sessionEnrollmentHelptext" label="Session Enrollment Help/Instruction Text" type="String" default="To enroll to a study unit, you need to enroll to at least one unit." description="Session enrollment help or instruction text."/>
+            
+            <property name="individualPathwayInfoFields" label="Individual Pathway Highlights Panel Fields" type="String" default="reduivy__Status_Label__c;reduivy__IPR_Recommended_Credits__c;reduivy__IPR_Max_Credits__c;reduivy__IPR_Credits_Enrolled__c" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="individualPathwayInfoColumnNo" label="Individual Pathway Highlights Panel Column Number" type="Integer" default="4" description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12."/>
+
+            <property name="individualAcademicProgressInfoFields" label="Individual Academic Progress Highlights Panel Fields" type="String" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="individualAcademicProgressInfoColumnNo" label="Individual Academic Progress Highlights Panel Column Number" type="Integer" default="4" description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12."/>
+
+            <property name="ipeTitleField" label="Individual Program Enrollment Title Field" type="String" default="reduivy__Study_Plan__r.Name" description="The individual program enrollment field API name to be displayed as the title e.g., Field_A__c or Field_A__r.Parent_Field__c." required="true" />
+            <property name="ipsGroupTitleField" label="Individual Plan Structure Group Title Field" type="String" default="reduivy__Study_Plan_Structure__r.Name" description="The individual plan structure field API name to be displayed as the title for group e.g., Field_A__c or Field_A__r.Parent_Field__c." required="true" />
+            <property name="showIpsGroupInfo" label="Show Individual Plan Structure Group Panel" type="Boolean" default="true" description="Show individual plan structure group record info panel."/>
+            <property name="ipsGroupInfoFields" label="Individual Plan Structure Group Panel Fields" type="String" default="reduivy__Category__c;reduivy__Credits__c;reduivy__Credits_Earned__c;reduivy__Completion_Progress__c" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="ipsGroupInfoColumnNo" label="Individual Plan Structure Group Panel Column Number" type="Integer" default="4" description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12."/>
+            <property name="ipsUnitTableFields" label="Individual Plan Structure Unit Table Fields" type="String" required="true" default="reduivy__Study_Unit__c.Name;reduivy__Study_Unit__c.reduivy__Unit_Code__c;reduivy__Study_Plan_Structure__c.reduivy__Credits__c" description="The fields to be displayed in the unit tables in semi-colon separated value in the [objectName].[fieldName] format e.g., reduivy__Study_Unit__c.Field_A__c;reduivy__Study_Plan_Structure__c.Field_B__c,reduivy__Study_Plan_Structure__c.Field_C__r.Parent__c. The supported objects are: reduivy__Study_Plan_Structure__c, reduivy__Study_Unit__c, reduivy__Study_Offering__c."/>
+            <property name="accordionBackgroundColor" label="Group Accordion Background Color" type="String" default="#cccccc" description="The individual plan structure group accordion backgound color in hex code. e.g., #cccccc."/>
+            <property name="accordionTextColor" label="Group Accordion Text Color" type="String" default="#000000" description="The individual plan structure group accordion text color in hex code. e.g., #000000."/>
+
+            <property name="studyUnitInfoFields" label="Unit Info - Study Unit Fields" type="String" default="Name;reduivy__Unit_Code__c;reduivy__Description__c" description="The study unit fields for the unit info in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            <property name="studyOfferingInfoFields" label="Unit Info - Study Offering Fields" type="String" default="Name" description="The study offering fields for the unit info in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            <property name="studyPlanStructureUnitInfoFields" label="Unit Info - Study Plan Structure Fields" type="String" default="" description="The study plan structure fields for the unit info in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+
+            <property name="showEnrollmentButtons" label="Show Enrollment Buttons" type="Boolean" default="true" description="Show enrollment action buttons."/>
+            <property name="preEnrollButtonIconName" label="Button Icon Name - Pre-Enroll" type="String" default="utility:bookmark_stroke" description="Button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="preEnrollButtonLabel" label="Button Label - Pre-Enroll" type="String" default="Pre-enroll" description="Button label."/>
+            <property name="preEnrollEnrollmentStatus" label="Enrollment Status - Pre-Enroll" type="String" default="Enrollment Requested" description="Individual Enrollment Status after pre-enroll into Study Offering."/>
+            <property name="withdrawPreEnrollButtonIconName" label="Button Icon Name - Withdraw from Pre-Enroll" type="String" default="utility:bookmark_alt" description="Button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="withdrawPreEnrollButtonLabel" label="Button Label - Withdraw from Pre-Enroll" type="String" default="Withdraw Pre-enroll" description="Button label."/>
+            <property name="withdrawPreEnrollEnrollmentStatus" label="Enrollment Status - Withdraw Pre-Enroll" type="String" default="Not Started" description="Individual Enrollment Status after withdrawing pre-enroll from Study Offering."/>
+            <property name="enrollButtonIconName" label="Button Icon Name - Enroll" type="String" default="utility:check" description="Button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="enrollButtonLabel" label="Button Label - Enroll" type="String" default="Enroll" description="Button label."/>
+            <property name="enrollEnrollmentStatus" label="Enrollment Status - Enroll" type="String" default="Enrolled" description="Individual Enrollment Status after enrolling to Study Offering."/>
+            <property name="unenrollButtonIconName" label="Button Icon Name - Unenroll" type="String" default="utility:close" description="Button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="unenrollButtonLabel" label="Button Label - Unenroll" type="String" default="Unenroll" description="Button label."/>
+            <property name="unenrollEnrollmentStatus" label="Enrollment Status - Unenroll" type="String" default="Withdrawn" description="Individual Enrollment Status after unenrolling from Study Offering."/>
+            <property name="unenrollRequestButtonIconName" label="Button Icon Name - Request Unenroll" type="String" default="utility:cancel_file_request" description="Button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="unenrollRequestButtonLabel" label="Button Label - Request Unenroll" type="String" default="Request to Unenroll" description="Button label."/>
+            <property name="unenrollRequestEnrollmentStatus" label="Enrollment Status - Unenroll Request" type="String" default="Withdrawal Requested" description="Individual Enrollment Status after requesting unenrollment from Study Offering."/>
+            <property name="waitlistButtonIconName" label="Button Icon Name - Join Waitlist" type="String" default="utility:buyer_group_qualifier" description="Button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="waitlistButtonLabel" label="Button Label - Join Waitlist" type="String" default="Join Waiting List" description="Button label."/>
+            <property name="waitlistEnrollmentStatus" label="Enrollment Status - Waitlist" type="String" default="Waitlisted" description="Individual Enrollment Status after joining waitlist of Study Offering."/>
+            <property name="withdrawWaitlistButtonIconName" label="Button Icon Name - Withdraw from Waitlist" type="String" default="utility:leave_conference" description="Button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="withdrawWaitlistButtonLabel" label="Button Label - Withdraw from Waitlist" type="String" default="Withdraw Waiting List" description="Button label."/>
+            <property name="withdrawWaitlistEnrollmentStatus" label="Enrollment Status - Withdraw Waitlist" type="String" default="Not Started" description="Individual Enrollment Status after withdrawing waitlist from Study Offering."/>
+            
+            <property name="childIpeEnrollmentButtonIconName" label="Child Individual Program Enrollment Button Icon Name" type="String" default="utility:replace" description="Child individual program enrollment button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="showChildIpeEnrollmentButton" label="Show Child Individual Program Enrollment Button" type="Boolean" default="true" description="Show the child individual program enrollment button to allow user to enroll into or unenroll from child program."/>
+            <property name="addPathwayButtonIconName" label="Add Pathway Button Icon Name" type="String" default="utility:add" description="Add pathway button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="showNewPathwayButton" label="Show New Pathway Button" type="Boolean" default="true" description="Show the new pathway button to add new pathway."/>
+            <property name="showStudyUnitQuickSearch" label="Show Study Unit Quick Search" type="Boolean" default="true" description="Show the search box to search for Study Unit name or Study Unit code." />
+            
+            <property name="showUnitListingOption" label="Show View Study Units Option" type="Boolean" default="true" description="Show the view study units option to allow user to switch the unit listing." />
+            <property name="defaultUnitListingMode" label="Default View Study Units Mode" type="String" default="Recommended Pathway" description="Show the view study units option. Supported options are: All Study Units,Recommended Pathway." datasource="All Study Units,Recommended Pathway"/>
+            <property name="showCampusOptions" label="Show Campus Option" type="Boolean" default="true" description="Show the campus option to allow user to filter by campus."/>
+            
+            <property name="missedFailedUnitListingOption" label="Missed/Failed Units Listing Option" type="String" default="All" description="Show missed or failed study units from the previous academic term. Supported options are: All, None." datasource="All,None" />
+
+            <property name="customFilter1Active" label="Custom Filter 1 - Active" type="Boolean" default="false" description="Activate custom filter 1."/>
+            <property name="customFilter1Visible" label="Custom Filter 1 - Visible" type="Boolean" default="false" description="Display custom filter 1."/>
+            <property name="customFilter1Label" label="Custom Filter 1 - Label" type="String" default="" description="Label for custom filter 1."/>
+            <property name="customFilter1Mapping" label="Custom Filter 1 - Mapping" type="String" default="" description="Mapping between Individual Program Enrollment and Study Offering for custom filter 1 e.g., reduivy__IPE_Field__c=reduivy__SOF_Field__c." />
+
+            <property name="customFilter2Active" label="Custom Filter 2 - Active" type="Boolean" default="false" description="Activate custom filter 2."/>
+            <property name="customFilter2Visible" label="Custom Filter 2 - Visible" type="Boolean" default="false" description="Display custom filter 2."/>
+            <property name="customFilter2Label" label="Custom Filter 2 - Label" type="String" default="" description="Label for custom filter 2."/>
+            <property name="customFilter2Mapping" label="Custom Filter 2 - Mapping" type="String" default="" description="Mapping between Individual Program Enrollment and Study Offering for custom filter 2 e.g., reduivy__IPE_Field__c=reduivy__SOF_Field__c." />
+
+            <property name="customFilter3Active" label="Custom Filter 3 - Active" type="Boolean" default="false" description="Activate custom filter 3."/>
+            <property name="customFilter3Visible" label="Custom Filter 3 - Visible" type="Boolean" default="false" description="Display custom filter 3."/>
+            <property name="customFilter3Label" label="Custom Filter 3 - Label" type="String" default="" description="Label for custom filter 3."/>
+            <property name="customFilter3Mapping" label="Custom Filter 3 - Mapping" type="String" default="" description="Mapping between Individual Program Enrollment and Study Offering for custom filter 3 e.g., reduivy__IPE_Field__c=reduivy__SOF_Field__c." />
+
+            <property name="sessionEnrollmentSofAccordionBackgroundColor" label="Session Enrollment - Study Offering Accordion Background Color" type="String" default="#cccccc" description="The study offering accordion backgound color for session enrollment in hex code. e.g., #cccccc."/>
+            <property name="sessionEnrollmentSofAccordionTextColor" label="Session Enrollment - Study Offering Accordion Text Color" type="String" default="#000000" description="The study offering accordion text color for session enrollment in hex code. e.g., #000000."/>
+            
+            <property name="sessionEnrollmentSofTitleField" label="Session Enrollment - Study Offering Title Field" type="String" default="Name" description="The study offering field API name to be displayed as the title for study offering accordion e.g., Field_A__c or Field_A__r.Parent_Field__c." />
+            <property name="sessionEnrollmentSofInfoFields" label="Session Enrollment - Study Offering Fields" type="String" default="reduivy__Session_Instruction__c" description="The study offering fields for session enrollment in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            
+            <property name="sessionEnrollmentSseTitleField" label="Session Enrollment - Study Session Title Field" type="String" default="Name" description="The study session field API name to be displayed as the title for study session section e.g., Field_A__c or Field_A__r.Parent_Field__c." />
+            <property name="sessionEnrollmentSseInfoFields" label="Session Enrollment - Study Session Fields" type="String" default="reduivy__Available_Places__c;reduivy__Start_Date_Calculated__c;reduivy__End_Date_Calculated__c;reduivy__Status__c" description="The study session fields for session enrollment in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            <property name="sessionEnrollmentSseIcon" label="Session Enrollment - Study Session Icon Name" type="String" default="standard:snippet_alt" description="Study session button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            
+            <property name="sessionEnrollmentSstTitleField" label="Session Enrollment - Study Session Time Title Field" type="String" default="Name" description="The study session time field API name to be displayed as the title for study session time section e.g., Field_A__c or Field_A__r.Parent_Field__c." />
+            <property name="sessionEnrollmentSstInfoFields" label="Session Enrollment - Study Session Time Fields" type="String" default="reduivy__Recurrence__c;reduivy__Day_of_Week__c;reduivy__Start_Date__c;reduivy__Start_Time__c;reduivy__End_Time__c;reduivy__Default_Facility__c" description="The study session time fields for session enrollment in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            <property name="sessionEnrollmentSstIcon" label="Session Enrollment - Study Session Time Icon Name" type="String" default="standard:time_period" description="Study session time button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="sessionEnrollmentShowSstFieldLabel" label="Session Enrollment - Show Study Session Time Fields Label" type="Boolean" default="true" description="Show study session time record info label."/>
+
+            <property name="showMyCalendarButton" label="Show My Calendar Button" type="Boolean" default="true" description="Show my calendar button."/>
+            <property name="myCalendarButtonIconName" label="My Calendar Button Icon Name" type="String" default="utility:weeklyview" description="My calendar button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+
+            <property name="myCalendarModalTitle" label="My Calendar - Modal Title" type="String" default="Calendar" description="My calendar modal title."/>
+            <property name="myCalendarModalIconName" label="My Calendar - Modal Icon Name" type="String" default="standard:event" description="My calendar modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="myCalendarTimelineMinTime" label="My Calendar - Calendar First Hour" type="String" default="09:00" description="Determines the first hour/time that will be displayed in my calendar, even when the scrollbars have been scrolled all the way up. e.g., 09:00 = 9AM."/>
+            <property name="myCalendarTimelineMaxTime" label="My Calendar - Calendar Last Hour" type="String" default="17:00" description="Determines the last hour/time (exclusively) that will be displayed in my calendar, even when the scrollbars have been scrolled all the way down. e.g., 17:00 = 5PM."/>
+            <property name="myCalendarView" label="My Calendar - Calendar Default View" type="String" default="listWeek" description="The default view of calendar. The supported options are: timeGridDay, timeGridWeek, dayGridMonth and listWeek."/>
+            <property name="myCalendarEnrollmentStatuses" label="My Calendar - Individual Session Enrollment Statuses" type="String" default="Enrolled;Completed" description="The individual session enrollment's enrollment status API value to be considered in my calendar in semi-colon separated value e.g., Enrolled;Completed."/>
+            <property name="myCalendarHeaderButtonLeft" label="My Calendar - Calendar Top Left" type="String" default="timeGridDay,timeGridWeek,dayGridMonth,listWeek" description="My calendar buttons or title to show at top left in comma separated value e.g., timeGridDay,timeGridWeek. Supported options are: timeGridDay, timeGridWeek, dayGridMonth, listWeek, title, today, prev, and next."/>
+            <property name="myCalendarHeaderButtonCenter" label="My Calendar - Calendar Top Center" type="String" default="title" description="My calendar buttons or title to show at top center in comma separated value e.g., title.  Supported options are: timeGridDay, timeGridWeek, dayGridMonth, listWeek, title, today, prev, and next."/>
+            <property name="myCalendarHeaderButtonRight" label="My Calendar - Calendar Top Right" type="String" default="today prev,next" description="My calendar buttons or title to show at top right in comma separated value e.g., today,prev,next. Supported options are: timeGridDay, timeGridWeek, dayGridMonth, listWeek, title, today, prev, and next."/>
+            <property name="myCalendarStudySessionInfoFields" label="My Calendar - Study Session Info Fields" type="String" default="Name;reduivy__Primary_Faculty__c" description="My calendar study session fields for the event info in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            <property name="myCalendarStudySessionTimeInfoFields" label="My Calendar - Study Session Time Info Fields" type="String" default="reduivy__Recurrence__c" description="My calendar study session time fields for the event info in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            <property name="myCalendarStudyEventInfoFields" label="My Calendar - Study Event Info Fields" type="String" default="reduivy__Start_Date_Non_TZ__c;reduivy__Start_Time_Non_TZ__c;reduivy__End_Time_Non_TZ__c" description="My calendar study event fields for the event info in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            <property name="myCalendarUseIsoWeek" label="My Calendar - Use ISO Week" type="Boolean" default="false" description="To enable ISO week in my calendar, which starting weeks on Monday."/>
+
+            <property name="showStudyPathwayButton" label="Show Study Pathway Button" type="Boolean" default="true" description="Show study pathway button."/>
+            <property name="studyPathwayButtonIconName" label="Study Pathway Button Icon Name" type="String" default="utility:hierarchy" description="Study pathway button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+
+            <property name="studyPathwayAccordionBackgroundColor" label="Study Pathway - Accordion Background Color" type="String" default="#cccccc" description="The study pathway term accordion background color in hex code. e.g., #cccccc."/>
+            <property name="studyPathwayAccordionTextColor" label="Study Pathway - Accordion Text Color" type="String" default="#000000" description="The study pathway term accordion text color in hex code. e.g., #000000."/>
+            <property name="studyPathwayInfoFields" label="Study Pathway - Study Pathway Highlights Panel Fields" type="String" default="reduivy__Study_Mode__c" description="Study pathway hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="studyPathwayTermTitlePrefix" label="Study Pathway - Study Pathway Term Title Prefix" type="String" default="Term " description="Study pathway term prefix for the accordion title."/>
+            <property name="studyPathwayTermInfoFields" label="Study Pathway - Study Pathway Term Highlights Panel Fields" type="String" default="reduivy__Recommended_Credits__c;reduivy__Max_Credits__c" description="Study pathway term hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="studyPathwayUnitTitleField" label="Study Pathway Unit Highlights Title Field" type="String" default="Name" description="The Study Unit field API name to be displayed as the title for group e.g., Field_A__c."/>
+            <property name="studyPathwayUnitInfoFields" label="Study Pathway - Study Pathway Unit Highlights Panel Fields" type="String" default="Name" description="Study pathway unit ightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="studyPathwayUnitIcon" label="Study Pathway - Study Pathway Unit Icon Name" type="String" default="standard:catalog" description="Study pathway unit icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="studyPathwayGroupTitleField" label="Study Pathway Group Highlights Title Field" type="String" default="Name" description="The Study Plan Structure (Group) field API name to be displayed as the title for group e.g., Field_A__c."/>
+            <property name="studyPathwayGroupInfoFields" label="Study Pathway - Study Pathway Group Highlights Panel Fields" type="String" default="Name" description="Study pathway group hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="studyPathwayGroupIcon" label="Study Pathway - Study Pathway Group Icon Name" type="String" default="standard:all" description="Study pathway group icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="studyPathwayComboboxLabel" label="Study Pathway - Preview With Combobox Label" type="String" default="Preview with major/minor" description="Study pathway combobox label."/>
+            <property name="studyPathwayShowStudyUnitQuickSearch" label="Study Pathway - Show Study Unit Quick Search" type="Boolean"  default="false" description="Study Pathway Show Study Unit Quick Search."/>
+            <property name="studyPathwayShowStudyPlanOptions" label="Study Pathway - Show Study Plan Options" type="Boolean" default="false" description="Study pathway modal to show study plan options combobox."/>
+            <property name="showChangeStudyPathwayButton" label="Show Change Study Pathway Button" type="Boolean" default="true" description="Show change study pathway button."/>
+
+            <property name="showLockingButton" label="Show Locking/Unlocking Button" type="Boolean" default="false" description="Show Locking/Unlocking button."/>
+            <property name="showWithdrawFromTermButton" label="Show Withdraw From Term Button" type="Boolean" default="false" description="Show Withdraw From Term button."/>
+
+            <property name="withdrawFromTermIenStatusesForWithdrawal" label="Withdraw From Term - Individual Enrollment Status for Withdrawal" type="String" default="Enrolled;Enrollment Requested;Withdrawal Requested" description="The Individual Enrollment Status to be considered for withdrawal in semi-colon separated value e.g., Enrolled;Enrollment Requested;Withdrawal Requested." />
+            
+            <property name="showEnrollmentFinalizationButton" label="Show Enrollment Finalization Button" type="Boolean" default="false" description="Show enrollment finalization button."/>
+            <property name="enrollmentFinalizationMode" label="Enrollment Finalization Mode" type="String"  description="Use custom screen flow or custom LWC component to handle the enrollment finalization. Supported options are: Launch Flow, Dispatch LWC Event." datasource="Launch Flow,Dispatch LWC Event" />
+            <property name="enrollmentFinalizationFlowName" label="Enrollment Finalization Flow Name" type="String" description="The API name for the screen flow to handle the enrollment finalization." />
+
+            <property name="requestAttemptMax" label="Retry Attempt" type="Integer" default="3" description="The maximum retry attempt for enrollment request."/>
+            <property name="requestAttemptWaitingTime" label="Retry Waiting Time (Sec)" type="Integer" default="5" description="The incremental time for each retry attempt in seconds."/>
+
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+            <property name="requirementDescriptionField" label="(Obsolete) Requirement Description Field" type="String" default="" description="This is obsolete." required="false"/>
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="recordId" type="String" label="Record Id" default="{!recordId}" description="ID of the salesforce record for which the record details are to be displayed e.g. {!recordId}"/>
+            <property name="userMode" label="User Mode" type="String" default="Student" description="Supported options are: Admin, Student." required="true" datasource="Admin,Student"/>
+            <property name="modalTitle" label="Modal Title" type="String" default="My Pathway" description="Component modal title."/>
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:sales_path" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            
+            <property name="ipwButtonLabelPrefix" label="Individual Pathway Button Label Prefix" type="String" default="T - {0}" description="Individual Pathway Button Label Prefix. E.g. T - {0}. The {0} will be replaced by the Term #."/>
+
+            <property name="individualEnrollmentTabLabel" label="Unit Enrollment Tab Label" type="String" default="Unit Enrollment" description="Unit enrollment tab label."/>
+            <property name="sessionEnrollmentTabLabel" label="Session Enrollment Tab Label" type="String" default="Session Enrollment" description="Session enrollment tab label."/>
+            
+            <property name="individualEnrollmentHelptext" label="Unit Enrollment Help/Instruction Text" type="String" default="You can use the filter on the right to filter the units. To enroll to a unit, click on the &quot;Enroll&quot; button next to a unit." description="Unit enrollment help or instruction text."/>
+            <property name="sessionEnrollmentHelptext" label="Session Enrollment Help/Instruction Text" type="String" default="To enroll to a study unit, you need to enroll to at least one unit." description="Session enrollment help or instruction text."/>
+            
+            <property name="individualPathwayInfoFields" label="Individual Pathway Highlights Panel Fields" type="String" default="reduivy__Status_Label__c;reduivy__IPR_Recommended_Credits__c;reduivy__IPR_Max_Credits__c;reduivy__IPR_Credits_Enrolled__c" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="individualPathwayInfoColumnNo" label="Individual Pathway Highlights Panel Column Number" type="Integer" default="4" description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12."/>
+
+            <property name="individualAcademicProgressInfoFields" label="Individual Academic Progress Highlights Panel Fields" type="String" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="individualAcademicProgressInfoColumnNo" label="Individual Academic Progress Highlights Panel Column Number" type="Integer" default="4" description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12."/>
+
+            <property name="ipeTitleField" label="Individual Program Enrollment Title Field" type="String" default="reduivy__Study_Plan__r.Name" description="The individual program enrollment field API name to be displayed as the title e.g., Field_A__c or Field_A__r.Parent_Field__c." required="true" />
+            <property name="ipsGroupTitleField" label="Individual Plan Structure Group Title Field" type="String" default="reduivy__Study_Plan_Structure__r.Name" description="The individual plan structure field API name to be displayed as the title for group e.g., Field_A__c or Field_A__r.Parent_Field__c." required="true"/>
+            <property name="showIpsGroupInfo" label="Show Individual Plan Structure Group Panel" type="Boolean" default="true" description="Show individual plan structure group record info panel."/>
+            <property name="ipsGroupInfoFields" label="Individual Plan Structure Group Panel Fields" type="String" default="reduivy__Category__c;reduivy__Credits__c;reduivy__Credits_Earned__c;reduivy__Completion_Progress__c" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="ipsGroupInfoColumnNo" label="Individual Plan Structure Group Panel Column Number" type="Integer" default="4" description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12."/>
+            <property name="ipsUnitTableFields" label="Individual Plan Structure Unit Table Fields" type="String" default="reduivy__Study_Unit__c.Name;reduivy__Study_Unit__c.reduivy__Unit_Code__c;reduivy__Study_Plan_Structure__c.reduivy__Credits__c" required="true" description="The fields to be displayed in the unit tables in semi-colon separated value in the [objectName].[fieldName] format e.g., reduivy__Study_Unit__c.Field_A__c;reduivy__Study_Plan_Structure__c.Field_B__c,reduivy__Study_Plan_Structure__c.Field_C__r.Parent__c. The supported objects are: reduivy__Study_Plan_Structure__c, reduivy__Study_Unit__c, reduivy__Study_Offering__c."/>
+            <property name="accordionBackgroundColor" label="Group Accordion Background Color" type="String" default="#cccccc" description="The individual plan structure group accordion backgound color in hex code. e.g., #cccccc."/>
+            <property name="accordionTextColor" label="Group Accordion Text Color" type="String" default="#000000" description="The individual plan structure group accordion text color in hex code. e.g., #000000."/>
+
+            <property name="studyUnitInfoFields" label="Unit Info - Study Unit Fields" type="String" default="Name;reduivy__Unit_Code__c;reduivy__Description__c" description="The study unit fields for the unit info in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            <property name="studyOfferingInfoFields" label="Unit Info - Study Offering Fields" type="String" default="Name" description="The study offering fields for the unit info in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            <property name="studyPlanStructureUnitInfoFields" label="Unit Info - Study Plan Structure Fields" type="String" default="" description="The study plan structure fields for the unit info in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+
+            <property name="showEnrollmentButtons" label="Show Enrollment Buttons" type="Boolean" default="true" description="Show enrollment action buttons."/>
+            <property name="preEnrollButtonIconName" label="Button Icon Name - Pre-Enroll" type="String" default="utility:bookmark_stroke" description="Button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="preEnrollButtonLabel" label="Button Label - Pre-Enroll" type="String" default="Pre-enroll" description="Button label."/>
+            <property name="preEnrollEnrollmentStatus" label="Enrollment Status - Pre-Enroll" type="String" default="Enrollment Requested" description="Individual Enrollment Status after pre-enroll into Study Offering."/>
+            <property name="withdrawPreEnrollButtonIconName" label="Button Icon Name - Withdraw from Pre-Enroll" type="String" default="utility:bookmark_alt" description="Button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="withdrawPreEnrollButtonLabel" label="Button Label - Withdraw from Pre-Enroll" type="String" default="Withdraw Pre-enroll" description="Button label."/>
+            <property name="withdrawPreEnrollEnrollmentStatus" label="Enrollment Status - Withdraw Pre-Enroll" type="String" default="Not Started" description="Individual Enrollment Status after withdrawing pre-enroll from Study Offering."/>
+            <property name="enrollButtonIconName" label="Button Icon Name - Enroll" type="String" default="utility:check" description="Button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="enrollButtonLabel" label="Button Label - Enroll" type="String" default="Enroll" description="Button label."/>
+            <property name="enrollEnrollmentStatus" label="Enrollment Status - Enroll" type="String" default="Enrolled" description="Individual Enrollment Status after enrolling to Study Offering."/>
+            <property name="unenrollButtonIconName" label="Button Icon Name - Unenroll" type="String" default="utility:close" description="Button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="unenrollButtonLabel" label="Button Label - Unenroll" type="String" default="Unenroll" description="Button label."/>
+            <property name="unenrollEnrollmentStatus" label="Enrollment Status - Unenroll" type="String" default="Withdrawn" description="Individual Enrollment Status after unenrolling from Study Offering."/>
+            <property name="unenrollRequestButtonIconName" label="Button Icon Name - Request Unenroll" type="String" default="utility:cancel_file_request" description="Button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="unenrollRequestButtonLabel" label="Button Label - Request Unenroll" type="String" default="Request to Unenroll" description="Button label."/>
+            <property name="unenrollRequestEnrollmentStatus" label="Enrollment Status - Unenroll Request" type="String" default="Withdrawal Requested" description="Individual Enrollment Status after requesting unenrollment from Study Offering."/>
+            <property name="waitlistButtonIconName" label="Button Icon Name - Join Waitlist" type="String" default="utility:buyer_group_qualifier" description="Button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="waitlistButtonLabel" label="Button Label - Join Waitlist" type="String" default="Join Waiting List" description="Button label."/>
+            <property name="waitlistEnrollmentStatus" label="Enrollment Status - Waitlist" type="String" default="Waitlisted" description="Individual Enrollment Status after joining waitlist of Study Offering."/>
+            <property name="withdrawWaitlistButtonIconName" label="Button Icon Name - Withdraw from Waitlist" type="String" default="utility:leave_conference" description="Button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="withdrawWaitlistButtonLabel" label="Button Label - Withdraw from Waitlist" type="String" default="Withdraw Waiting List" description="Button label."/>
+            <property name="withdrawWaitlistEnrollmentStatus" label="Enrollment Status - Withdraw Waitlist" type="String" default="Not Started" description="Individual Enrollment Status after withdrawing waitlist from Study Offering."/>
+            
+            <property name="childIpeEnrollmentButtonIconName" label="Child Individual Program Enrollment Button Icon Name" type="String" default="utility:replace" description="Child individual program enrollment button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="showChildIpeEnrollmentButton" label="Show Child Individual Program Enrollment Button" type="Boolean" default="true" description="Show the child individual program enrollment button to allow user to enroll into or unenroll from child program."/>
+            <property name="addPathwayButtonIconName" label="Add Pathway Button Icon Name" type="String" default="utility:add" description="Add pathway button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="showNewPathwayButton" label="Show New Pathway Button" type="Boolean" default="true" description="Show the new pathway button to add new pathway."/>
+            <property name="showStudyUnitQuickSearch" label="Show Study Unit Quick Search" type="Boolean" default="true" description="Show the search box to search for Study Unit name or Study Unit code." />
+            <property name="showUnitListingOption" label="Show View Study Units Option" type="Boolean" default="true" description="Show the view study units option to allow user to switch the unit listing." />
+            <property name="defaultUnitListingMode" label="Default View Study Units Mode" type="String" default="Recommended Pathway" description="Show the view study units option. Supported options are: All Study Units,Recommended Pathway." datasource="All Study Units,Recommended Pathway"/>
+            <property name="showCampusOptions" label="Show Campus Option" type="Boolean" default="true" description="Show the campus option to allow user to filter by campus."/>
+
+            <property name="missedFailedUnitListingOption" label="Missed/Failed Units Listing Option" type="String" default="All" description="Show missed or failed study units from the previous academic term. Supported options are: All, None." datasource="All,None" />
+            
+            <property name="customFilter1Active" label="Custom Filter 1 - Active" type="Boolean" default="false" description="Activate custom filter 1."/>
+            <property name="customFilter1Visible" label="Custom Filter 1 - Visible" type="Boolean" default="false" description="Display custom filter 1."/>
+            <property name="customFilter1Label" label="Custom Filter 1 - Label" type="String" default="" description="Label for custom filter 1."/>
+            <property name="customFilter1Mapping" label="Custom Filter 1 - Mapping" type="String" default="" description="Mapping between Individual Program Enrollment and Study Offering for custom filter 1 e.g., reduivy__IPE_Field__c=reduivy__SOF_Field__c." />
+
+            <property name="customFilter2Active" label="Custom Filter 2 - Active" type="Boolean" default="false" description="Activate custom filter 2."/>
+            <property name="customFilter2Visible" label="Custom Filter 2 - Visible" type="Boolean" default="false" description="Display custom filter 2."/>
+            <property name="customFilter2Label" label="Custom Filter 2 - Label" type="String" default="" description="Label for custom filter 2."/>
+            <property name="customFilter2Mapping" label="Custom Filter 2 - Mapping" type="String" default="" description="Mapping between Individual Program Enrollment and Study Offering for custom filter 2 e.g., reduivy__IPE_Field__c=reduivy__SOF_Field__c." />
+
+            <property name="customFilter3Active" label="Custom Filter 3 - Active" type="Boolean" default="false" description="Activate custom filter 3."/>
+            <property name="customFilter3Visible" label="Custom Filter 3 - Visible" type="Boolean" default="false" description="Display custom filter 3."/>
+            <property name="customFilter3Label" label="Custom Filter 3 - Label" type="String" default="" description="Label for custom filter 3."/>
+            <property name="customFilter3Mapping" label="Custom Filter 3 - Mapping" type="String" default="" description="Mapping between Individual Program Enrollment and Study Offering for custom filter 3 e.g., reduivy__IPE_Field__c=reduivy__SOF_Field__c." />
+
+            <property name="sessionEnrollmentSofAccordionBackgroundColor" label="Session Enrollment - Study Offering Accordion Background Color" type="String" default="#cccccc" description="The study offering accordion backgound color for session enrollment in hex code. e.g., #cccccc."/>
+            <property name="sessionEnrollmentSofAccordionTextColor" label="Session Enrollment - Study Offering Accordion Text Color" type="String" default="#000000" description="The study offering accordion text color for session enrollment in hex code. e.g., #000000."/>
+            <property name="sessionEnrollmentSofTitleField" label="Session Enrollment - Study Offering Title Field" type="String" default="Name" description="The study offering field API name to be displayed as the title for study offering accordion e.g., Field_A__c or Field_A__r.Parent_Field__c." />
+            <property name="sessionEnrollmentSofInfoFields" label="Session Enrollment - Study Offering Fields" type="String" default="reduivy__Session_Instruction__c" description="The study offering fields for session enrollment in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            <property name="sessionEnrollmentSseTitleField" label="Session Enrollment - Study Session Title Field" type="String" default="Name" description="The study session field API name to be displayed as the title for study session section e.g., Field_A__c or Field_A__r.Parent_Field__c." />
+            <property name="sessionEnrollmentSseInfoFields" label="Session Enrollment - Study Session Fields" type="String" default="reduivy__Available_Places__c;reduivy__Start_Date_Calculated__c;reduivy__End_Date_Calculated__c;reduivy__Status__c" description="The study session fields for session enrollment in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            <property name="sessionEnrollmentSseIcon" label="Session Enrollment - Study Session Icon Name" type="String" default="standard:snippet_alt" description="Study session button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            
+            <property name="sessionEnrollmentSstTitleField" label="Session Enrollment - Study Session Time Title Field" type="String" default="Name" description="The study session time field API name to be displayed as the title for study session time section e.g., Field_A__c or Field_A__r.Parent_Field__c." />
+            <property name="sessionEnrollmentSstInfoFields" label="Session Enrollment - Study Session Time Fields" type="String" default="reduivy__Recurrence__c;reduivy__Day_of_Week__c;reduivy__Start_Date__c;reduivy__Start_Time__c;reduivy__End_Time__c;reduivy__Default_Facility__c" description="The study session time fields for session enrollment in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            <property name="sessionEnrollmentSstIcon" label="Session Enrollment - Study Session Time Icon Name" type="String" default="standard:time_period" description="Study session time button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="sessionEnrollmentShowSstFieldLabel" label="Session Enrollment - Show Study Session Time Fields Label" type="Boolean" default="true" description="Show study session time record info label."/>
+
+            <property name="showMyCalendarButton" label="Show My Calendar Button" type="Boolean" default="true" description="Show my calendar button."/>
+            <property name="myCalendarButtonIconName" label="My Calendar Button Icon Name" type="String" default="utility:weeklyview" description="My calendar button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+
+            <property name="myCalendarModalTitle" label="My Calendar - Modal Title" type="String" default="Calendar" description="My calendar modal title."/>
+            <property name="myCalendarModalIconName" label="My Calendar - Modal Icon Name" type="String" default="standard:event" description="My calendar modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="myCalendarTimelineMinTime" label="My Calendar - Calendar First Hour" type="String" default="09:00" description="Determines the first hour/time that will be displayed in my calendar, even when the scrollbars have been scrolled all the way up. e.g., 09:00 = 9AM."/>
+            <property name="myCalendarTimelineMaxTime" label="My Calendar - Calendar Last Hour" type="String" default="17:00" description="Determines the last hour/time (exclusively) that will be displayed in my calendar, even when the scrollbars have been scrolled all the way down. e.g., 17:00 = 5PM."/>
+            <property name="myCalendarView" label="My Calendar - Calendar Default View" type="String" default="listWeek" description="The default view of calendar. The supported options are: timeGridDay, timeGridWeek, dayGridMonth and listWeek."/>
+            <property name="myCalendarEnrollmentStatuses" label="My Calendar - Individual Session Enrollment Statuses" type="String" default="Enrolled;Completed" description="The individual session enrollment's enrollment status API value to be considered in my calendar in semi-colon separated value e.g., Enrolled;Completed."/>
+            <property name="myCalendarHeaderButtonLeft" label="My Calendar - Calendar Top Left" type="String" default="timeGridDay,timeGridWeek,dayGridMonth,listWeek" description="My calendar buttons or title to show at top left in comma separated value e.g., timeGridDay,timeGridWeek. Supported options are: timeGridDay, timeGridWeek, dayGridMonth, listWeek, title, today, prev, and next."/>
+            <property name="myCalendarHeaderButtonCenter" label="My Calendar - Calendar Top Center" type="String" default="title" description="My calendar buttons or title to show at top center in comma separated value e.g., title.  Supported options are: timeGridDay, timeGridWeek, dayGridMonth, listWeek, title, today, prev, and next."/>
+            <property name="myCalendarHeaderButtonRight" label="My Calendar - Calendar Top Right" type="String" default="today prev,next" description="My calendar buttons or title to show at top right in comma separated value e.g., today,prev,next. Supported options are: timeGridDay, timeGridWeek, dayGridMonth, listWeek, title, today, prev, and next."/>
+            <property name="myCalendarStudySessionInfoFields" label="My Calendar - Study Session Info Fields" type="String" default="Name;reduivy__Primary_Faculty__c" description="My calendar study session fields for the event info in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            <property name="myCalendarStudySessionTimeInfoFields" label="My Calendar - Study Session Time Info Fields" type="String" default="reduivy__Recurrence__c" description="My calendar study session time fields for the event info in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            <property name="myCalendarStudyEventInfoFields" label="My Calendar - Study Event Info Fields" type="String" default="reduivy__Start_Date_Non_TZ__c;reduivy__Start_Time_Non_TZ__c;reduivy__End_Time_Non_TZ__c" description="My calendar study event fields for the event info in semi-colon separated value e.g., Field_A__c;Field_B__c. Note that parent fields are not supported."/>
+            <property name="myCalendarUseIsoWeek" label="My Calendar - Use ISO Week" type="Boolean" default="false" description="To enable ISO week in my calendar, which starting weeks on Monday."/>
+
+            <property name="showStudyPathwayButton" label="Show Study Pathway Button" type="Boolean" default="true" description="Show study pathway button."/>
+            <property name="studyPathwayButtonIconName" label="Study Pathway Button Icon Name" type="String" default="utility:hierarchy" description="Study pathway button icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+
+            <property name="studyPathwayAccordionBackgroundColor" label="Study Pathway - Accordion Background Color" type="String" default="#cccccc" description="The study pathway term accordion background color in hex code. e.g., #cccccc."/>
+            <property name="studyPathwayAccordionTextColor" label="Study Pathway - Accordion Text Color" type="String" default="#000000" description="The study pathway term accordion text color in hex code. e.g., #000000."/>
+            <property name="studyPathwayInfoFields" label="Study Pathway - Study Pathway Highlights Panel Fields" type="String" default="reduivy__Study_Mode__c" description="Study pathway hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="studyPathwayTermTitlePrefix" label="Study Pathway - Study Pathway Term Title Prefix" type="String" default="Term " description="Study pathway term prefix for the accordion title."/>
+            <property name="studyPathwayTermInfoFields" label="Study Pathway - Study Pathway Term Highlights Panel Fields" type="String" default="reduivy__Recommended_Credits__c;reduivy__Max_Credits__c" description="Study pathway term hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="studyPathwayUnitTitleField" label="Study Pathway Unit Highlights Title Field" type="String" default="Name" description="The Study Unit field API name to be displayed as the title for group e.g., Field_A__c."/>
+            <property name="studyPathwayUnitInfoFields" label="Study Pathway - Study Pathway Unit Highlights Panel Fields" type="String" default="Name" description="Study pathway unit ightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="studyPathwayUnitIcon" label="Study Pathway - Study Pathway Unit Icon Name" type="String" default="standard:catalog" description="Study pathway unit icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="studyPathwayGroupTitleField" label="Study Pathway Group Highlights Title Field" type="String" default="Name" description="The Study Plan Structure (Group) field API name to be displayed as the title for group e.g., Field_A__c."/>
+            <property name="studyPathwayGroupInfoFields" label="Study Pathway - Study Pathway Group Highlights Panel Fields" type="String" default="Name" description="Study pathway group hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="studyPathwayGroupIcon" label="Study Pathway - Study Pathway Group Icon Name" type="String" default="standard:all" description="Study pathway group icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="studyPathwayComboboxLabel" label="Study Pathway - Preview With Combobox Label" type="String" default="Preview with major/minor" description="Study pathway combobox label."/>
+            <property name="studyPathwayShowStudyUnitQuickSearch" label="Study Pathway - Show Study Unit Quick Search" type="Boolean"  default="false" description="Study Pathway Show Study Unit Quick Search."/>
+            <property name="studyPathwayShowStudyPlanOptions" label="Study Pathway - Show Study Plan Options" type="Boolean" default="false" description="Study pathway modal to show study plan options combobox."/>
+            <property name="showChangeStudyPathwayButton" label="Show Change Study Pathway Button" type="Boolean" default="true" description="Show change study pathway button."/>
+            
+            <property name="showLockingButton" label="Show Locking/Unlocking Button" type="Boolean" default="false" description="Show Locking/Unlocking button."/>
+            <property name="showWithdrawFromTermButton" label="Show Withdraw From Term Button" type="Boolean" default="false" description="Show Withdraw From Term button."/>
+
+            <property name="withdrawFromTermIenStatusesForWithdrawal" label="Withdraw From Term - Individual Enrollment Status for Withdrawal " type="String" default="Enrolled;Enrollment Requested;Withdrawal Requested" description="The Individual Enrollment Status to be considered for withdrawal in semi-colon separated value e.g., Enrolled;Enrollment Requested;Withdrawal Requested." />
+            
+            <property name="showEnrollmentFinalizationButton" label="Show Enrollment Finalization Button" type="Boolean" default="false" description="Show enrollment finalization button."/>
+            <property name="enrollmentFinalizationMode" label="Enrollment Finalization Mode" type="String"  description="Use custom screen flow or custom LWC component to handle the enrollment finalization. Supported options are: Launch Flow, Dispatch LWC Event." datasource="Launch Flow,Dispatch LWC Event" />
+            <property name="enrollmentFinalizationFlowName" label="Enrollment Finalization Flow Name" type="String" description="The API name for the screen flow to handle the enrollment finalization." />
+
+            <property name="requestAttemptMax" label="Retry Attempt" type="Integer" default="3" description="The maximum retry attempt for enrollment request."/>
+            <property name="requestAttemptWaitingTime" label="Retry Waiting Time (Sec)" type="Integer" default="5" description="The incremental time for each retry attempt in seconds."/>
+
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+            <property name="requirementDescriptionField" label="(Obsolete) Requirement Description Field" type="String" default="" description="This is obsolete." required="false"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,92 @@
+<template>
+    <lightning-modal-header label={modalTitle}></lightning-modal-header>
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+        
+        <div class="component-body slds-is-relative slds-card">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel} ></lightning-spinner>
+            </div>
+
+            <div>
+                <div if:true={isUnqualified} class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_warning ">
+                    <lightning-formatted-rich-text
+                        value={unqualifiedMsg}
+                    ></lightning-formatted-rich-text>
+                </div>
+
+                <div class="slds-p-top_medium">
+                    <lightning-formatted-rich-text
+                        value={confirmationMsg}
+                    ></lightning-formatted-rich-text>
+                </div>
+
+                <template lwc:if={timeChanged}>
+                    <template if:true={isSstInfoReady}>
+                        <template if:true={isNewStart}>
+                            <div class="slds-p-top_small slds-grid slds-gutters">
+                                <div class="slds-col slds-size_1-of-2">
+                                    <div class="slds-p-bottom_small slds-text-heading_small">{currentInfoLabel}</div>
+                                    <ul>
+                                        <li><b>{schedulingTypeLabel}:&nbsp;</b>{currentResourceName}</li>
+                                        <li><b>{startTimeLabel}:&nbsp;</b><lightning-input type="datetime" name="newStart" variant="label-hidden" value={_timeChangedDetails.oldStart} disabled="true" ></lightning-input></li>
+                                        <li><b>{endTimeLabel}:&nbsp;</b><lightning-input type="datetime" name="newEnd" variant="label-hidden" value={_timeChangedDetails.oldEnd} disabled="true" ></lightning-input></li>
+                                    </ul>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <div class="slds-p-bottom_small slds-text-heading_small">{newInfoLabel}</div>
+                                    <ul>
+                                        <li><b>{schedulingTypeLabel}:&nbsp;</b>{newResourceName}</li>
+                                        <li><b>{startTimeLabel}:&nbsp;</b><lightning-input type="datetime" name="newStart" data-fieldname="newStart" variant="label-hidden" value={_timeChangedDetails.newStart} min={_timeChangedDetails.minDtAllowed} max={_timeChangedDetails.maxDtAllowed} onchange={handleTimeChange} required data-save-required="true" ></lightning-input></li>
+                                        <li><b>{endTimeLabel}:&nbsp;</b><lightning-input type="datetime" name="newEnd" data-fieldname="newEnd" variant="label-hidden" value={_timeChangedDetails.newEnd} min={_timeChangedDetails.minDtAllowed} max={_timeChangedDetails.maxDtAllowed} onchange={handleTimeChange} required data-save-required="true"></lightning-input></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+                </template>
+                <template lwc:else>
+                    <div class="slds-p-top_small">
+                        <lightning-radio-group name="radioGroup"
+                            variant="label-hidden"
+                            options={changeTypeOptions}
+                            value={selectedChangeType}
+                            type="radio" 
+                            onchange={handleChangeTypeOptionChange}    
+                        ></lightning-radio-group>
+                    </div>
+                    <template if:true={showSessionTimeOptions}>
+                        <div class="slds-p-top_small">
+                            <div class="sessiontimechangetype-checkboxgroup slds-p-bottom_small">
+                                <h2 class="slds-text-heading_small slds-m-bottom_medium">{applyThisForLabel}</h2>
+                                <div class="slds-grid slds-gutters slds-p-bottom_xx-small">
+                                    <div class="slds-col slds-size_1-of-12">
+                                        <lightning-input type="checkbox-button" label={allOptionLabel} value="all" checked={allSessionTimesSelected} onchange={handleSessionTimeChangeOnChange}></lightning-input>
+                                    </div>
+                                    <div class="slds-col slds-size_11-of-12">
+                                        {allOptionLabel}
+                                    </div>
+                                </div>
+                                <template for:each={sessionTimeOptions} for:item="opt">
+                                    <div key={opt.value} class="slds-grid slds-gutters slds-p-bottom_xx-small">
+                                        <div class="slds-col slds-size_1-of-12">
+                                            <lightning-input type="checkbox-button" label={opt.label} value={opt.value} checked={opt.selected} disabled={opt.default} onchange={handleSessionTimeChangeOnChange}></lightning-input>
+                                        </div>
+                                        <div class="slds-col slds-size_11-of-12">
+                                            {opt.label}
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+            </div>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" disabled={isLoading} onclick={handleCancelClick} label={cancelButtonLabel} class="slds-p-right_xx-small"></lightning-button>
+        <lightning-button variant="brand" disabled={isLoading} onclick={handleConfirmClick} label={confirmButtonLabel}></lightning-button>
+    </lightning-modal-footer>
+	
+</template>

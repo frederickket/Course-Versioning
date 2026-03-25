@@ -1,0 +1,28 @@
+.component-body {
+    
+}
+
+.ipepathwaytermunittable-th-anchor {
+    display: flex;
+    height: 2rem;
+}
+
+.ipepathwaytermunittable-th-info {
+    width: 2.5rem;
+}
+
+.ipepathwaytermunittable-th-action {
+    width: 15%;
+}
+
+.ipepathwaytermunittable-th-status {
+    width: 25%;
+}
+
+.ipepathwaytermunittable-th-indicator {
+    width: 30px;
+}
+
+.logging-details {
+    max-height:1px;
+}

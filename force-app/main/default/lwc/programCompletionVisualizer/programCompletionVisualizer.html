@@ -1,0 +1,40 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess}
+        onfail={handleLibLoadFail}></c-js-library-loader>
+
+    <div class="component-body slds-is-relative slds-card">
+        <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv">
+            <lightning-spinner alternative-text={label.LOADING_LABEL}></lightning-spinner>
+        </div>
+        
+        <div class="program-completion-visualizer-content">
+
+            <c-ipe-audit-program-enrollment 
+                ipe-id={previewIpeId} 
+                ips-group-title-field={ipsGroupTitleField}
+                ips-group-title-format = {ipsGroupTitleFormat}
+                show-ips-group-info={showIpsGroupInfo}
+                ipe-info-fields={ipeInfoFields} 
+                ipe-info-column-no={ipeInfoColumnNo} 
+                ips-info-fields={ipsInfoFields}
+                ips-info-fields-unit={ipsInfoFieldsUnit}
+                ips-info-column-no={ipsInfoColumnNo} 
+                ips-unit-fields={ipsUnitFields}
+                idv-enrollment-fields={idvEnrollmentFields} 
+                accordion-background-color={accordionBackgroundColor}
+                accordion-text-color={accordionTextColor} 
+                enable-clickable-ref-field={enableClickableRefField}
+                enable-set-primary-ips={enableSetPrimaryIps}
+                enable-view-enrollment-history={enableViewEnrollmentHistory} 
+                progress-ring-color = {progressRingColor}
+                progress-ring-percentage-field = {progressRingPercentageField}
+                href-target-type={hrefTargetType}
+                is-community={isCommunity} 
+                enable-debug-mode={enableDebugMode} 
+            ></c-ipe-audit-program-enrollment>
+
+        </div>
+
+    </div>
+
+</template>

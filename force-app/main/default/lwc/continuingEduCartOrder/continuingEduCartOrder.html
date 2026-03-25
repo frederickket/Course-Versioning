@@ -1,0 +1,96 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess}
+    onfail={handleLibLoadFail}></c-js-library-loader>
+
+    
+    <div class="component-body slds-is-relative slds-card">
+        <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv">
+            <lightning-spinner alternative-text={label.LOADING_LABEL}></lightning-spinner>
+        </div>
+        
+        <template if:true={isInitSuccess}>
+            <div class="continuingeducartorder-ordercontainer">
+                <div class="continuingeducartorder-orderheader slds-p-bottom_xx-small" >
+                    <lightning-formatted-rich-text 
+                        value={headerLabelText}
+                    ></lightning-formatted-rich-text>
+                </div>
+                <template if:true={orderLineRecords}>
+                    <div class="continuingeducartorder-lineitemcontainer slds-p-bottom_medium">
+                        <c-custom-type-datatable
+                            key-field="Id"
+                            columns={transactionLineColumns}
+                            data={orderLineRecords}
+                            hide-checkbox-column
+                            suppress-bottom-bar
+                            show-row-number-column="true"
+                            wrap-table-header={tableHeaderDisplayMode}
+                            onrowaction={handleRowAction}
+                            oncellchange={handleQuantityChange}
+                            class="continuingeducartorder-lineitemtable slds-table_col-bordered slds-max-medium-table_stacked"
+                            >
+                        </c-custom-type-datatable>
+                    </div>
+
+                    <lightning-layout class="continuingeducartorder-summarycontainer slds-grid_reverse slds-p-bottom_medium" multiple-rows="true">
+                        <lightning-layout-item size="12">
+
+                            <template for:each={summaryFieldsData} for:item="data">
+                                <lightning-layout key={data.key} class="slds-p-top_x-small continuingeducartorder-summaryfield">
+                                    <lightning-layout-item size="2" alignment-bump="left" class="continuingeducartorder-summaryfieldlabel">
+                                        <lightning-formatted-rich-text value={data.label}></lightning-formatted-rich-text>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="1" class="slds-text-align_right continuingeducartorder-summaryfieldvalue">
+                                        <!--ISS-002747 changed to use output-field to support different type -->
+                                        <c-output-field
+                                            field-value={data.value}
+                                            field-display-value={data.value}
+                                            field-name={data.key}
+                                            display-type={data.displayType}
+                                            variant="label-hidden"
+                                            fraction-digits="2"
+                                            parent-context-data={data.parentContextData}
+                                            enable-debug-mode={enableDebugMode}
+                                        ></c-output-field>
+                                    </lightning-layout-item>
+                                </lightning-layout>           
+                            </template>
+
+                        </lightning-layout-item>
+                        
+                                    
+                    </lightning-layout>
+
+                    <lightning-layout vertical-align="center" horizontal-align="start" lwc:if={showTncCheckbox}>
+                        <lightning-layout-item>
+                            <lightning-input type="checkbox" onchange={handleToggleTermsAndConditions} checked={agreedToTermsAndConditions} class="continuingeducartorder-tnccheckbox"></lightning-input>
+                        </lightning-layout-item>
+                        <lightning-layout-item>
+                            <lightning-formatted-rich-text value={agreedToTermsAndConditionsLabel}></lightning-formatted-rich-text>
+                        </lightning-layout-item>
+                    </lightning-layout> 
+
+                    <lightning-layout class="continuingeducartorder-buttoncontainer slds-grid_reverse">
+                        <lightning-layout-item>
+                            <lightning-button if:true={showClearAllButton}
+                                class="continuingeducartorder-clear-button slds-p-right_xx-small" 
+                                variant="neutral"
+                                label={clearAllButtonLabel} 
+                                onclick={handleClearAll}
+                                value={troRecord.Id}>
+                            </lightning-button>
+                            <lightning-button if:true={showCheckoutButton} 
+                                class="continuingeducartorder-checkout-button" 
+                                variant="brand"
+                                label={checkOutButtonLabel}
+                                onclick={handleCheckout} 
+                                disabled={checkoutDisabled}
+                                value={troRecord.Id}>
+                            </lightning-button>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>

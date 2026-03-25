@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Update_Action__c</fullName>
+    <deprecated>false</deprecated>
+    <description>This is used to determine if the study events related to the session time should be recreated or create/update when session is set to &quot;Create/Update Events&quot; status.</description>
+    <inlineHelpText>This is used to determine if the study events related to the session time should be recreated or create/update when session is set to &quot;Create/Update Events&quot; status.</inlineHelpText>
+    <label>Update Action</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Recreate</fullName>
+                <default>false</default>
+                <label>Recreate</label>
+            </value>
+            <value>
+                <fullName>Upsert</fullName>
+                <default>true</default>
+                <label>Upsert</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

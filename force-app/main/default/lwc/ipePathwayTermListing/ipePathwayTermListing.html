@@ -1,0 +1,82 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess} >
+            <div class="ipepathwaytermlisting-body slds-m-bottom_medium">
+                <lightning-accordion class="ipepathwaytermlisting-accordion" allow-multiple-sections-open="true" active-section-name={activeSectionName}>
+                    <lightning-accordion-section class="ipepathwaytermlisting-accordion-sction" label={title} name={accordionSectionName} >
+                        <template for:each={groupIpsList} for:item="groupIps">
+                            <div key={groupIps.newIndex}>
+                                <c-ipe-pathway-term-group
+                                    master-individual-pe-id={masterIndividualPeId}
+                                    individual-pe-id={individualPeId}
+                                    individual-plan-structure-group-id={groupIps.ips.Id}
+                                    individual-pathway-id={individualPathwayId}
+                                    ipw-academic-term-id={ipwAcademicTermId}
+                                    
+                                    user-mode={userMode}
+                                    study-unit-quick-search-value={studyUnitQuickSearchValue}
+                                    unit-listing-mode={unitListingMode}
+                                    campus-id={campusId}
+                                    restricted-to-units={groupIps.restrictedToUnits}
+                                    accordion-background-color={accordionBackgroundColor}
+                                    accordion-text-color={accordionTextColor}
+                                    description={groupIps.description}
+
+                                    ips-group-title-field={ipsGroupTitleField}
+                                    show-ips-group-info={showIpsGroupInfo}
+                                    ips-group-info-fields={ipsGroupInfoFields}
+                                    ips-group-info-column-no={ipsGroupInfoColumnNo}
+                                    ips-unit-table-fields={ipsUnitTableFields}
+
+                                    study-unit-info-fields={studyUnitInfoFields}
+                                    study-offering-info-fields={studyOfferingInfoFields}
+                                    study-plan-structure-unit-info-fields={studyPlanStructureUnitInfoFields}
+
+                                    show-enrollment-buttons={showEnrollmentButtons}
+                                    pre-enroll-button-icon-name={preEnrollButtonIconName}
+                                    pre-enroll-button-label={preEnrollButtonLabel}
+                                    pre-enroll-enrollment-status={preEnrollEnrollmentStatus}
+                                    withdraw-pre-enroll-button-icon-name={withdrawPreEnrollButtonIconName}
+                                    withdraw-pre-enroll-button-label={withdrawPreEnrollButtonLabel}
+                                    withdraw-pre-enroll-enrollment-status={withdrawPreEnrollEnrollmentStatus}
+                                    enroll-button-icon-name={enrollButtonIconName}
+                                    enroll-button-label={enrollButtonLabel}
+                                    enroll-enrollment-status={enrollEnrollmentStatus}
+                                    unenroll-button-icon-name={unenrollButtonIconName}
+                                    unenroll-button-label={unenrollButtonLabel}
+                                    unenroll-enrollment-status={unenrollEnrollmentStatus}
+                                    unenroll-request-button-icon-name={unenrollRequestButtonIconName}
+                                    unenroll-request-button-label={unenrollRequestButtonLabel}
+                                    unenroll-request-enrollment-status={unenrollRequestEnrollmentStatus}
+                                    waitlist-button-icon-name={waitlistButtonIconName}
+                                    waitlist-button-label={waitlistButtonLabel}
+                                    waitlist-enrollment-status={waitlistEnrollmentStatus}
+                                    withdraw-waitlist-button-icon-name={withdrawWaitlistButtonIconName}
+                                    withdraw-waitlist-button-label={withdrawWaitlistButtonLabel}
+                                    withdraw-waitlist-enrollment-status={withdrawWaitlistEnrollmentStatus}
+
+                                    request-attempt-max={requestAttemptMax}
+                                    request-attempt-waiting-time={requestAttemptWaitingTime}
+                                    
+                                    custom-filters={customFilters}
+
+                                    missed-failed-unit-listing-option={missedFailedUnitListingOption}
+                                    
+                                    enable-debug-mode={enableDebugMode}
+                                >
+                                </c-ipe-pathway-term-group>
+                            </div>
+                        </template>
+                    </lightning-accordion-section>
+                </lightning-accordion>
+            </div>
+        </template>
+	</div>
+	
+</template>

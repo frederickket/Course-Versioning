@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Academic_Term_Generate_Orders_Batch_Size__c</fullName>
+    <defaultValue>50</defaultValue>
+    <description>Batch size for the queueable job that updates Individual Academic Progress to generate transaction orders from the Academic Term.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Batch size for the queueable job that updates Individual Academic Progress to generate transaction orders from the Academic Term.</inlineHelpText>
+    <label>Academic Term Generate Orders Batch Size</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

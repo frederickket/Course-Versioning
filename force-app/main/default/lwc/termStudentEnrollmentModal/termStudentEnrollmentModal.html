@@ -1,0 +1,182 @@
+<template>
+    <lightning-modal-header label={modalTitle}></lightning-modal-header>
+
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+        
+        <div class="slds-is-relative">
+            <div lwc:if={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel}></lightning-spinner>
+            </div>
+
+            <div class="termstudentenrollmentmodal-body">
+                <div class="slds-grid slds-p-horizontal_xx-small slds-align_center">
+                    <div class="termstudentenrollmentmodal-modalsubtitle slds-text-heading_small slds-grow slds-align-middle">
+                        <lightning-formatted-rich-text value={modalSubTitle}></lightning-formatted-rich-text>
+                    </div>
+                </div>
+    
+                <lightning-progress-indicator current-step={currentStep} type="path" variant="base">
+                    <lightning-progress-step class="termstudentenrolllmentmodal-progressindicator" label={progressIndicatorStep1Label} value="1"></lightning-progress-step>
+                    <lightning-progress-step class="termstudentenrolllmentmodal-progressindicator" label={progressIndicatorStep2Label} value="2"></lightning-progress-step>
+                    <lightning-progress-step class="termstudentenrolllmentmodal-progressindicator" label={progressIndicatorStep3Label} value="3"></lightning-progress-step>
+                    <lightning-progress-step class="termstudentenrolllmentmodal-progressindicator" label={progressIndicatorStep4Label} value="4"></lightning-progress-step>
+                </lightning-progress-indicator>
+    
+                <div class="termstudentenrollmentmodal-description-div slds-m-left_x-small slds-m-right_x-small slds-m-top_x-small">
+                    <lightning-formatted-rich-text lwc:if={isTermEnrollmentSelectionScreen} value={termStudentEnrollmentStep1BriefDescription}></lightning-formatted-rich-text>
+                    <lightning-formatted-rich-text lwc:if={isTermEnrollmentCountScreen} value={termStudentEnrollmentStep2BriefDescription}></lightning-formatted-rich-text>
+                    <lightning-formatted-rich-text lwc:if={isUnitEnrollmentSelectionScreen} value={termStudentEnrollmentStep3BriefDescription}></lightning-formatted-rich-text>
+                    <lightning-formatted-rich-text lwc:if={isFinalScreen} value={termStudentEnrollmentStep4BriefDescription}></lightning-formatted-rich-text>
+                </div>
+                <hr class="slds-m-top_small slds-m-bottom_small slds-m-left_none slds-m-right_none">
+    
+                <!-- First Screen -->
+                <template lwc:if={isTermEnrollmentSelectionScreen}>
+                    <div class="termstudentenrollmentmodal-step1-div slds-p-horizontal_x-small">
+                        <div lwc:if={studyIntakeReady}>
+                            <div if:false={availableStudyIntakeFound} class="termstudentenrollmentmodal-alert-div slds-m-bottom_x-small slds-notify slds-notify_alert">
+                                <lightning-formatted-rich-text value={noAvailableStudyIntakeFoundErrorMsg}></lightning-formatted-rich-text>
+                            </div>
+                        </div>
+                        
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="termstudentenrollmentmodal-term-combobox-div slds-col slds-size_1-of-3 slds-p-bottom_small">
+                                <c-searchable-combobox
+                                    field-label={selectPastAcademicTermComboboxLabel}
+                                    field-name={PAST_ACADEMIC_TERM_COMBOBOX_FIELD_NAME}
+                                    options={termComboboxOptions}
+                                    onchange={handleComboboxChange}
+                                    required="true"
+                                    default-value={selectedTermId}
+                                    message-when-value-missing={messageWhenComboboxNotSelected}
+                                    enable-debug-mode={enableDebugMode}
+                                ></c-searchable-combobox>
+                            </div>
+                            
+                            <div class="termstudentenrollmentmodal-campus-combobox-div slds-col slds-size_1-of-3 slds-p-bottom_small">
+                                <c-searchable-combobox
+                                    field-label={campusComboboxLabel}
+                                    field-name={CAMPUS_COMBOBOX_FIELD_NAME}
+                                    options={campusComboboxOptions}
+                                    onchange={handleComboboxChange}
+                                    required="true"
+                                    default-value={selectedCampusId}
+                                    message-when-value-missing={messageWhenComboboxNotSelected}
+                                    enable-debug-mode={enableDebugMode}
+                                ></c-searchable-combobox>
+                            </div>
+                            
+                            <div class="termstudentenrollmentmodal-studyprogram-combobox-div slds-col slds-size_1-of-3 slds-p-bottom_small">
+                                <c-searchable-combobox
+                                    field-label={studyProgramComboboxLabel}
+                                    field-name={STUDY_PROGRAM_COMBOBOX_FIELD_NAME}
+                                    options={studyProgramComboboxOptions}
+                                    onchange={handleComboboxChange}
+                                    required="true"
+                                    default-value={selectedStudyProgramId}
+                                    message-when-value-missing={messageWhenComboboxNotSelected}
+                                    enable-debug-mode={enableDebugMode}
+                                ></c-searchable-combobox>
+                            </div>
+                        </div>
+                        
+                        <div lwc:if={studyIntakeReady} class="termstudentenrollmentmodal-studyintake-table-div slds-m-top_x-small">
+                            <span class="slds-text-color_error slds-text-body_small">* </span><span class="slds-text-body_small">{studyIntakesDatatableLabel}</span>
+                            <c-custom-type-datatable class="slds-table_header-fixed_container slds-scrollable_x slds-border_top slds-max-medium-table_stacked"
+                                key-field="Id"
+                                data={studyIntakesData}
+                                columns={studyIntakesColumn}
+                                wrap-table-header={tableHeaderDisplayMode}
+                                onrowselection={getSelectedStudyIntakes}
+                                selected-rows={selectedStudyIntakeIds}
+                                >
+                            </c-custom-type-datatable>
+                            <span if:false={studyIntakeSelected} class="slds-text-color_error slds-text-body_small">{studyIntakeNotSelectedErrorMsg}</span>
+                        </div>
+                    </div>
+                </template>                           
+    
+                <!-- Second Screen -->
+                <template lwc:if={isTermEnrollmentCountScreen}>
+                    <div class="termstudentenrollmentmodal-step2-div slds-m-left_x-small slds-m-right_x-small slds-m-top_x-small">
+                        <div if:false={toBeProcessedRecordsExists} class="slds-m-bottom_x-small slds-notify slds-notify_alert">
+                            <lightning-formatted-rich-text value={termStudentEnrollmentNoProgramEnrollmentFound}></lightning-formatted-rich-text>
+                        </div>
+                        
+                        <c-custom-type-datatable class="termEnrollmentRecordCountTable slds-table_header-fixed_container slds-scrollable_x slds-border_top slds-max-medium-table_stacked"
+                            key-field="Id"
+                            data={termEnrollmentRecordCountData}
+                            columns={termEnrollmentRecordCountColumn}
+                            wrap-table-header={tableHeaderDisplayMode}
+                            hide-checkbox-column="true"
+                            column-widths-mode="auto"
+                            >
+                        </c-custom-type-datatable>
+                    </div>
+                </template>
+    
+                <!-- Third Screen -->
+                <template lwc:if={isUnitEnrollmentSelectionScreen}>
+                    <div class="termstudentenrollmentmodal-step3-div slds-m-left_x-small slds-m-right_x-small slds-m-top_x-small">
+                        <div class="slds-grid slds-p-bottom_small">
+                            <div class="slds-col slds-size_1-of-3">
+                                <lightning-combobox
+                                    name="unitEnrollmentCombobox"
+                                    label={enrollMandatoryStudyUnitsComboboxLabel}
+                                    options={unitEnrollmentComboboxOptions}
+                                    value={selectedUnitEnrollmentResult}
+                                    onchange={handleUnitEnrollmentComboboxChange}
+                                    required
+                                ></lightning-combobox>
+                            </div>
+                        </div>
+                        <template lwc:if={proceedForUnitEnrollment}>
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-3">
+                                    <lightning-combobox
+                                        name="bypassRequirementRulesCombobox"
+                                        label={bypassRequirementMetRulesComboboxLabel}
+                                        options={unitEnrollmentComboboxOptions}
+                                        value={selectedBypassRequirementMetRules}
+                                        onchange={handleUnitEnrollmentBypassComboboxChange}
+                                        required
+                                    ></lightning-combobox>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+    
+                <!-- Last Screen -->
+                <template lwc:if={isFinalScreen}>
+                    <div class="termstudentenrollmentmodal-step4-div slds-m-left_x-small slds-m-right_x-small slds-m-top_x-small">
+                        <c-custom-type-datatable class="termEnrollmentRecordCountTable slds-table_header-fixed_container slds-scrollable_x slds-border_top slds-max-medium-table_stacked"
+                            key-field="Id"
+                            data={finalRecordCountData}
+                            columns={finalRecordCountColumn}
+                            wrap-table-header={tableHeaderDisplayMode}
+                            hide-checkbox-column="true">
+                        </c-custom-type-datatable>
+    
+                    </div>
+                </template>
+            </div>
+        </div>
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+        <lightning-button class="slds-m-right_medium" variant="neutral" onclick={handleCancelOnClick} label={cancelButtonLabel} disabled={isLoading}></lightning-button>
+
+        <lightning-button lwc:if={isTermEnrollmentSelectionScreen} class="slds-p-left_xx-small" variant="brand" onclick={handleTermEnrollmentSelectionScreenNextOnClick} label={nextScreenButtonLabel} disabled={isTermEnrollmentSelectionScreenNextDisabled}></lightning-button>
+
+        <lightning-button lwc:if={isTermEnrollmentCountScreen} variant="neutral" onclick={handleTermEnrollmentCountScreenPreviousOnClick} label={previousScreenButtonLabel} disabled={isLoading}></lightning-button>
+        <lightning-button lwc:if={isTermEnrollmentCountScreen} class="slds-m-left_xx-small" variant="brand" onclick={handleTermEnrollmentCountScreenNextOnClick} label={nextScreenButtonLabel} disabled={isTermEnrollmentCountScreenNextDisabled}></lightning-button>
+
+        <lightning-button lwc:if={isUnitEnrollmentSelectionScreen} variant="neutral" onclick={handleUnitEnrollmentSelectionScreenPreviousOnClick} label={previousScreenButtonLabel} disabled={isLoading}></lightning-button>
+        <lightning-button lwc:if={isUnitEnrollmentSelectionScreen} class="slds-m-left_xx-small" variant="brand" onclick={handleUnitEnrollmentSelectionScreenNextOnClick} label={nextScreenButtonLabel} disabled={isUnitEnrollmentSelectionScreenNextDisabled}></lightning-button>
+
+        <lightning-button lwc:if={isFinalScreen} variant="neutral" onclick={handleFinalScreenPreviousOnClick} label={previousScreenButtonLabel} disabled={isLoading}></lightning-button>
+        <lightning-button lwc:if={isFinalScreen} class="slds-p-left_xx-small" variant="brand" onclick={handleFinalScreenStartOnClick} label={addJobButtonLabel} disabled={isLoading}></lightning-button>
+    </lightning-modal-footer>
+</template>

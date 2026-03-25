@@ -1,0 +1,37 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+        
+        <div class="component-body slds-is-relative slds-card">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel} ></lightning-spinner>
+            </div>
+
+            <div class="unithistorymodal-body">
+                <div class="ipeaudit-unitdatatable">
+                    <template if:true={idvEnList}>
+                        <c-custom-type-datatable class="slds-table_header-fixed_container slds-scrollable_x slds-border_top slds-max-medium-table_stacked-horizontal"
+                            hide-checkbox-column
+                            key-field="Id"
+                            columns={tableColumns}
+                            data={idvEnList}
+                            sorted-by={sortBy}
+                            sorted-direction={sortDirection}
+                            wrap-table-header={tableHeaderDisplayMode}
+                            onsort={doSorting}
+                            onrowaction={handleRowAction}
+                        ></c-custom-type-datatable>
+                    </template>
+                    <template if:true={idvEnDataEmpty}>
+                        {noRecordLabel}
+                    </template>
+                </div>
+            </div>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" disabled={isLoading} onclick={handleCloseClick} label={closeButtonLabel} class="slds-p-right_xx-small"></lightning-button>
+    </lightning-modal-footer>
+	
+</template>

@@ -1,0 +1,17 @@
+.continuingeduheader-section {
+	background-color: #f3f3f3;
+}
+
+.continuingeduheader-details {
+	background-color: #f3f3f3;
+	box-shadow:#ccc 2px 4px 5px -4px;
+}
+
+.continuingeduheader-iconspace {
+	max-width: 50px;
+	padding-left: var(--lwc-spacingMedium, 1rem);
+}
+
+.continuingeduheader-titlefield {
+	font-weight: bold;
+}

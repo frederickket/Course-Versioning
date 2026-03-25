@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Attendance_Percentage__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Calculates the attendance percentage by considering attended, absent and excused sessions.</description>
+    <formula>(Total_Attended__c + Total_Excused__c) / IF((Total_Attended__c + Total_Excused__c + Total_Absent__c) &gt; 0, (Total_Attended__c + Total_Excused__c + Total_Absent__c), 1)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Calculates the attendance percentage by considering attended, absent and excused sessions.</inlineHelpText>
+    <label>Attendance %</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

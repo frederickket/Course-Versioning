@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Study session&apos;s status configuration.</description>
+    <label>Study Session Status Config</label>
+    <pluralLabel>Study Session Status Config</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

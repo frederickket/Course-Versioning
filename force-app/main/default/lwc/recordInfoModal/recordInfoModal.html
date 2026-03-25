@@ -1,0 +1,112 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+        
+        <div class="component-body slds-is-relative slds-card">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel} ></lightning-spinner>
+            </div>
+            
+            <div class="recordinfomodal-body">
+                <lightning-accordion allow-multiple-sections-open="true" active-section-name={activeAccordions}>
+                    <template lwc:if={recordImageUrl} >
+                        <lightning-accordion-section name="section1" label={recordInfoModalSection1Name} >
+                            <lightning-layout multiple-rows="true">
+                                <lightning-layout-item size="12" medium-device-size="6">
+                                    <template lwc:if={showRecord1Info} >
+                                        <c-record-view-form 
+                                            object-api-name={recordInfoModalRecord1ObjectName}
+                                            record-id={recordInfoModalRecord1Id}
+                                            class="recordinfomodal-form"
+                                            fields={record1InfoFields}
+                                            enable-debug-mode={enableDebugMode}
+                                        >
+                                            <template for:each={record1InfoFields} for:item="field">
+                                                <div key={field} class="recordinfomodal-field">
+                                                    <c-output-field field-name={field}></c-output-field>
+                                                </div>
+                                            </template>
+                                        </c-record-view-form>
+                                    </template>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" medium-device-size="6">
+                                    <div class="slds-illustration slds-illustration_small">
+                                        <img src={recordImageUrl} ></img>
+                                    </div>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-accordion-section>
+                    </template>
+                    <template lwc:elseif={showRecord1Info} >
+                        <lightning-accordion-section name="section1" label={recordInfoModalSection1Name} >
+                            <c-record-view-form 
+                                object-api-name={recordInfoModalRecord1ObjectName}
+                                record-id={recordInfoModalRecord1Id}
+                                class="recordinfomodal-form"
+                                fields={record1InfoFields}
+                                enable-debug-mode={enableDebugMode}
+                            >
+                                <lightning-layout multiple-rows="true">
+                                    <template for:each={record1InfoFields} for:item="field">
+                                        <lightning-layout-item size="12" medium-device-size="6" key={field}>
+                                            <div class="recordinfomodal-field">
+                                                <c-output-field field-name={field}></c-output-field>
+                                            </div>
+                                        </lightning-layout-item>
+                                    </template>
+                                </lightning-layout>
+                            </c-record-view-form>
+                        </lightning-accordion-section>
+                    </template>
+
+                    <template if:true={showRecord2Info} >
+                        <lightning-accordion-section name="section2" label={recordInfoModalSection2Name} >
+                            <c-record-view-form 
+                                object-api-name={recordInfoModalRecord2ObjectName}
+                                record-id={recordInfoModalRecord2Id}
+                                class="recordinfomodal-form"
+                                fields={record2InfoFields}
+                                enable-debug-mode={enableDebugMode}
+                            >
+                                <lightning-layout multiple-rows="true">
+                                    <template for:each={record2InfoFields} for:item="field">
+                                        <lightning-layout-item size="12" medium-device-size="6" key={field}>
+                                            <div class="recordinfomodal-field">
+                                                <c-output-field field-name={field}></c-output-field>
+                                            </div>
+                                        </lightning-layout-item>
+                                    </template>
+                                </lightning-layout>
+                            </c-record-view-form>
+                        </lightning-accordion-section>
+                    </template>
+                    <template if:true={showRecord3Info} >
+                        <lightning-accordion-section name="section3" label={recordInfoModalSection3Name} >
+                            <c-record-view-form 
+                                object-api-name={recordInfoModalRecord3ObjectName}
+                                record-id={recordInfoModalRecord3Id}
+                                class="recordinfomodal-form"
+                                fields={record3InfoFields}
+                                enable-debug-mode={enableDebugMode}
+                            >
+                                <lightning-layout multiple-rows="true">
+                                    <template for:each={record3InfoFields} for:item="field">
+                                        <lightning-layout-item size="12" medium-device-size="6" key={field}>
+                                            <div class="recordinfomodal-field">
+                                                <c-output-field field-name={field}></c-output-field>
+                                            </div>
+                                        </lightning-layout-item>
+                                    </template>
+                                </lightning-layout>
+                            </c-record-view-form>
+                        </lightning-accordion-section>
+                    </template>
+                </lightning-accordion>
+            </div>
+        </div>
+    </lightning-modal-body>
+	<lightning-modal-footer>
+        <lightning-button variant="neutral" disabled={isLoading} onclick={handleCloseClick} label={closeButtonLabel}></lightning-button>
+    </lightning-modal-footer>
+</template>

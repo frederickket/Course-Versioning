@@ -1,0 +1,50 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+
+    <div class="component-body slds-is-relative slds-card">
+        <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL}></lightning-spinner>
+        </div>
+
+        <div class="slds-card_boundary">
+            <lightning-card >
+                
+                <template if:true={showModalHeader}>
+                    <h3 slot="title">
+                        <lightning-icon icon-name={componentIcon} size={componentIconSize}></lightning-icon>
+                        &nbsp;{componentLabel}
+                    </h3>
+                </template>
+
+                <div slot="actions">
+                    <lightning-button-group>
+                        <lightning-button-icon title={label.REFRESH_LABEL} icon-name="utility:refresh" value="refresh" onclick={handleRefreshOnclick}></lightning-button-icon>
+                        <template if:true={enableNewButton}>
+                            <lightning-button variant="label-inline" label="New" onclick={handleNewOnclick}></lightning-button>
+                        </template>
+                    </lightning-button-group>
+                </div>
+                <div class="concredittransfer-datatable slds-m-horizontal_medium slds-border_right slds-border_left slds-border_bottom">
+
+                    <template if:true={ctaList}>
+                        <c-custom-type-datatable class="slds-table_header-fixed_container slds-scrollable_x slds-border_top slds-max-medium-table_stacked-horizontal"
+                            hide-checkbox-column
+                            key-field="Id"
+                            columns={tableColumns}
+                            data={ctaList}
+                            sorted-by={sortBy}
+                            sorted-direction={sortDirection}
+                            onsort={doSorting}
+                            onrowaction={handleRowAction}
+                        ></c-custom-type-datatable>
+                    </template>
+                    <template if:true={ctaDataEmpty}>
+                        <div class="slds-m-horizontal_x-small slds-m-vertical_xx-small">
+                            {noRecordLabel}
+                        </div>
+                    </template>
+                </div>
+            </lightning-card>
+        </div>
+    </div>
+</template>

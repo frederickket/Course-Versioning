@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Required_Study_Plan</fullName>
+    <active>true</active>
+    <description>To ensure study plan is populated.</description>
+    <errorConditionFormula>AND(
+    NOT(ISPICKVAL(Enrollment_Status__c, &quot;Draft&quot;)),
+    ISBLANK(Study_Plan__c)
+)</errorConditionFormula>
+    <errorDisplayField>Study_Plan__c</errorDisplayField>
+    <errorMessage>The study plan is required.</errorMessage>
+</ValidationRule>

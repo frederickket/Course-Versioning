@@ -1,0 +1,12 @@
+{
+  "activeViewId" : "fc9bf2c6-a2c8-4229-a23a-e03fbdf3c6a6",
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "configurationTags" : [ ],
+  "devName" : "Shopping_Cart__c",
+  "id" : "0f388c7e-7519-410d-9325-6b938e416b0d",
+  "label" : "Shopping Cart",
+  "pageAccess" : "UseParent",
+  "routeType" : "custom-shopping-cart",
+  "type" : "route",
+  "urlPrefix" : "shopping-cart"
+}

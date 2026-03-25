@@ -1,0 +1,11 @@
+{
+    "FirstName": "Test",
+    "LastName": "Admin",
+    "TimeZoneSidKey": "Australia/Sydney",
+    "LocaleSidKey": "en_US",
+    "EmailEncodingKey": "UTF-8",
+    "LanguageLocaleKey": "en_US",
+    "profileName": "Standard User",
+    "permsets": ["REDU_Admin", "REDU_Admin_Tabs"],
+    "generatePassword": true
+}

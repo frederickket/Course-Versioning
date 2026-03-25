@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Denotes the relationship between origin unit and target unit.</description>
+    <label>Type</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>One to One</fullName>
+                <default>true</default>
+                <label>One to One</label>
+            </value>
+            <value>
+                <fullName>One to Many</fullName>
+                <default>false</default>
+                <label>One to Many</label>
+            </value>
+            <value>
+                <fullName>Many to One</fullName>
+                <default>false</default>
+                <label>Many to One</label>
+            </value>
+            <value>
+                <fullName>Manual Assignment</fullName>
+                <default>false</default>
+                <label>Manual Assignment</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

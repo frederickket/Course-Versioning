@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Preserve_pre_enrollment_waitlist_date__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Preserves the waitlist date when moving enrollment status from enrollment requested to waitlisted</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Preserves the waitlist date when moving enrollment status from enrollment requested to waitlisted</inlineHelpText>
+    <label>Preserve pre-enrollment waitlist date</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

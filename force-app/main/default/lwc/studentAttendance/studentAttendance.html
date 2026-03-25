@@ -1,0 +1,60 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class={studentAttendanceListingClasses} >
+                <c-student-attendance-listing
+                    record-id={recordId}
+                    user-mode={userMode}
+                    modal-title={modalTitle}
+                    modal-icon-name={modalIconName}
+                    attendance-tile-icon={attendanceTileIcon}
+                    attendance-button-label={attendanceButtonLabel}
+                    sev-tile-info-fields={sevTileInfoFields}
+                    study-event-tile-click-action={studyEventTileClickAction}
+                    info-modal-fields-for-study-event={infoModalFieldsForStudyEvent}
+                    info-modal-section-name-for-study-event={infoModalSectionNameForStudyEvent}
+                    show-no-attendance-warning={showNoAttendanceWarning}
+                    no-attendance-warning-text={noAttendanceWarningText}
+                    no-attendance-warning-icon={noAttendanceWarningIcon}
+                    no-attendance-warning-icon-variant={noAttendanceWarningIconVariant}
+                    valid-faculty-isn-status={validFacultyIsnStatus}
+
+                    onviewattendanceregistry={handleViewAttendanceRegistry}
+                    show-records-based-on-allocation={showRecordsBasedOnAllocation}
+
+                    enable-debug-mode={enableDebugMode}
+                ></c-student-attendance-listing>
+            </div>
+            <div if:true={showAttendanceRegistry} class={studentAttendanceRegistryClasses} >
+                <c-student-attendance-registry
+                    user-mode={userMode}
+                    modal-title={modalTitle}
+                    modal-icon-name={modalIconName}
+                    record-id={selectedStudyEventId}
+                    sev-info-fields={sevTileInfoFields}
+                    study-event-relation-edit-field-set-name={studyEventRelationEditFieldSetName}
+                    attendance-statuses={attendanceStatuses}
+                    contact-tile-info-fields={contactTileInfoFields}
+                    contact-image-file-name={contactImageFileName}
+                    contact-image-url-field-name={contactImageUrlFieldName}
+                    contact-tile-click-action={contactTileClickAction}
+                    info-modal-fields-for-contact={infoModalFieldsForContact}
+                    info-modal-section-name-for-contact={infoModalSectionNameForContact}
+                    info-modal-fields-for-individual-session-enrollment={infoModalFieldsForIndividualSessionEnrollment}
+                    info-modal-section-name-for-individual-session-enrollment={infoModalSectionNameForIndividualSessionEnrollment}
+
+                    oncloseattendanceregistry={handleCloseAttendanceRegistry}
+
+                    enable-debug-mode={enableDebugMode}
+                ></c-student-attendance-registry>
+            </div>
+        </template>
+	</div>
+	
+</template>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Individual_Plan_Unit__c</fullName>
+    <deprecated>false</deprecated>
+    <label>Individual Plan Unit</label>
+    <referenceTo>Individual_Plan_Structure__c</referenceTo>
+    <relationshipLabel>Individual Plan Unit Requirements</relationshipLabel>
+    <relationshipName>Individual_Plan_Unit_Requirements</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>true</reparentableMasterDetail>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Apply_Repayable_FA__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>Indicator to apply Repayable Financial Aid as transaction payments on transaction orders.</description>
+    <inlineHelpText>Indicator to apply Repayable Financial Aid as transaction payments on transaction orders.</inlineHelpText>
+    <label>Apply Repayable FA</label>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,12 @@
+{
+  "activeViewId" : "79c30312-2e4e-4465-a3e1-a6ca6408501a",
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "configurationTags" : [ ],
+  "devName" : "Study_Plan_List__c",
+  "id" : "8f01d4d6-bf8b-4df6-9400-218b35923caa",
+  "label" : "Study Plan List",
+  "objectApiName" : "reduivy__Study_Plan__c",
+  "routeType" : "list-a11",
+  "type" : "route",
+  "urlPrefix" : "study-plan"
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Classroom</fullName>
+        <default>false</default>
+        <label>Classroom</label>
+    </customValue>
+    <customValue>
+        <fullName>Online - Instructor Lead</fullName>
+        <default>false</default>
+        <label>Online - Instructor Lead</label>
+    </customValue>
+    <customValue>
+        <fullName>Online - Self Learning</fullName>
+        <default>false</default>
+        <label>Online - Self Learning</label>
+    </customValue>
+    <customValue>
+        <fullName>Mixture</fullName>
+        <default>false</default>
+        <label>Mixture</label>
+    </customValue>
+    <masterLabel>Delivery Method</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

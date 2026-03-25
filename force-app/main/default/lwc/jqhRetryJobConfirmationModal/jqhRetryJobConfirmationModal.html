@@ -1,0 +1,35 @@
+<template>	
+    <lightning-modal-header label={confirmationTitle}></lightning-modal-header>
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+        
+        <div class="component-body slds-is-relative slds-card">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel} ></lightning-spinner>
+            </div>
+            <div class="jqhretryjob-body">
+                <div class="jqhretryjob-confirmation-text">
+                    {confirmationText}
+                </div>
+                <div class="jqhretryjob-option">
+                    <div class="slds-grid slds-p-top_small">
+                        <div class="slds-col slds-size_1-of-4">
+                            <lightning-combobox 
+                                name="retrycombobox"
+                                label={retryFieldLabel}
+                                options={retryOptions}
+                                value={selectedRetryOption}
+                                onchange={handleRetryComboboxChange}
+                                required="true"
+                            ></lightning-combobox>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" label={cancelLabel} onclick={handleCancelClick} class="slds-p-right_xx-small" disabled={isLoading}></lightning-button>
+        <lightning-button variant="brand" label={confirmLabel} onclick={handleConfirmClick} disabled={isLoading}></lightning-button>
+    </lightning-modal-footer>
+</template>

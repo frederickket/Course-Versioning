@@ -1,0 +1,55 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess}
+        onfail={handleLibLoadFail}></c-js-library-loader>
+
+    <div class="component-body slds-is-relative slds-card">
+        <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv">
+            <lightning-spinner alternative-text={label.LOADING_LABEL}></lightning-spinner>
+        </div>
+        <template if:true={studyPathwayTermRecord}>
+            <div class="slds-m-top_small slds-m-bottom_medium">
+                <lightning-accordion active-section-name={activeSectionName} allow-multiple-sections-open="true">
+                    <lightning-accordion-section class="studypathwayterm-accordion-section" name={accordionLabel} label={accordionLabel}>
+                        <c-record-view-form record-id={studyPathwayTermRecord.Id}
+                            object-api-name="reduivy__Study_Pathway_Term__c"
+                            fields={spwtInfoFields}
+                            enable-debug-mode={enableDebugMode}>
+                            <lightning-layout class="slds-wrap">
+                                <template for:each={spwtInfoFields} for:item="field">
+                                    <lightning-layout-item key={field} size="12"
+                                        large-device-size={spwtInfoFieldSize}>
+                                        <c-output-field field-name={field}></c-output-field>
+                                    </lightning-layout-item>
+                                </template>
+                            </lightning-layout>
+                        </c-record-view-form>
+
+                        <!-- for loop each unit component -->
+                        <template if:true={studyPathwayUnitRecord}>
+                            <template for:each={studyPathwayUnitRecord} for:item="spu">
+                                <c-study-pathway-unit 
+                                    key={spu.Id} 
+                                    enable-debug-mode={enableDebugMode}
+                                    selected-spo={selectedSpo}
+                                    study-pathway-term-id={studyPathwayTermId}
+                                    study-plan-id={studyPlanId} 
+                                    study-pathway-unit-id={spu.Id}
+                                    study-pathway-unit-title-field={studyPathwayUnitTitleField}
+                                    study-pathway-unit-info-fields={studyPathwayUnitInfoFields}
+                                    study-pathway-unit-icon={studyPathwayUnitIcon}
+                                    study-pathway-group-title-field={studyPathwayGroupTitleField}
+                                    study-pathway-group-info-fields={studyPathwayGroupInfoFields}
+                                    study-pathway-group-icon={studyPathwayGroupIcon}
+                                    href-target-type={hrefTargetType}
+                                    
+                                    study-unit-search-string={studyUnitSearchString}>
+                                </c-study-pathway-unit>
+                            </template>
+                        </template>
+
+                    </lightning-accordion-section>
+                </lightning-accordion>
+            </div>
+        </template>
+    </div>
+</template>

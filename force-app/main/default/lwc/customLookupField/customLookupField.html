@@ -1,0 +1,171 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="customlookupfield-content slds-m-left_xx-small slds-m-right_xx-small">
+
+
+                <lightning-layout vertical-align="center">
+                    <lightning-layout-item size={fallbackInputSize} class={inputClass}>
+                        
+                        <template lwc:if={showFallbackInput}>
+                            <template lwc:if={readOnly}>
+                                
+                                <div class="slds-form-element slds-form-element_readonly customlookupfield-fallback-readonly">
+                                    <lightning-formatted-text class="slds-form-element__label" value={fallbackLabelToDisplay} linkify></lightning-formatted-text>
+                                    <template lwc:if={helpText}>
+                                        <lightning-helptext content={helpText}></lightning-helptext>
+                                    </template>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <lightning-formatted-text value={searchKeywordValue} linkify></lightning-formatted-text>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                            <template lwc:else>
+                                <lightning-input 
+                                    type="text" 
+                                    label={fallbackLabelToDisplay} 
+                                    value={searchKeywordValue} 
+                                    placeholder={fallbackPlaceholder} 
+                                    data-required={required} 
+                                    required={required} 
+                                    onchange={handleFallbackFieldChange}
+                                    read-only={readOnly}
+                                    field-level-help={helpText}
+                                    class="customlookupfield-fallback-edit"
+                                ></lightning-input>
+                            </template>
+                        </template>
+
+                        <template lwc:else>
+                            <!--lookup field-->
+                            <div class={spanningClass}>
+                                <!--This part is for display search bar for lookup-->  
+                                <div class="slds-form-element__control">
+                                    
+                                    <label if:false={hideLabel} class="slds-form-element__label" for="lookup-348">
+                                        <template if:true={required}>
+                                            <abbr title="required" class="slds-required">*</abbr>
+                                        </template>
+                                        <lightning-formatted-text value={labelToDisplay} linkify></lightning-formatted-text>
+                                    </label>
+                                    <template lwc:if={helpText}>
+                                        <lightning-helptext content={helpText}></lightning-helptext>
+                                    </template>
+                                    
+                                    <div lwc:ref="combobodydiv" class="slds-input-has-icon slds-input-has-icon_right">
+                                        <!-- This markup is for when an record is selected -->
+                                        <template if:true={hasSelectedRecord}>
+
+                                            <template if:true={selectedValueIconName}>
+                                                <span class="slds-icon_container slds-combobox__input-entity-icon">
+                                                    <lightning-icon size="x-small" icon-name={selectedValueIconName}></lightning-icon>
+                                                </span>
+                                            </template>
+                                            <template lwc:if={readOnly}>
+                                                <div class="slds-form-element slds-form-element_readonly customlookupfield-selectedrecord-readonly" title={selectedRecord.hoverTitle}>
+                                                    <div class="slds-form-element__control">
+                                                        <div class="slds-form-element__static">
+                                                            <template lwc:if={selectedRecord.title}>
+                                                                <lightning-formatted-text value={selectedRecord.title} linkify></lightning-formatted-text>
+                                                            </template>
+                                                            <template lwc:elseif={selectedRecord.subtitle}>
+                                                                <lightning-formatted-text value={selectedRecord.subtitle} linkify></lightning-formatted-text>
+                                                            </template>
+                                                            <template lwc:else>
+                                                                <lightning-formatted-text value={selectedRecord.id} linkify></lightning-formatted-text>
+                                                            </template>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </template>
+                                            <template lwc:else>
+                                                <div role="combobox" tabindex="0" class="searchablecombobox-selectedvalue slds-input_faux slds-combobox__input slds-combobox__input-value customlookupfield-selectedrecord-edit" title={selectedRecord.hoverTitle}>
+                                                    <span class="slds-truncate">
+                                                        <template lwc:if={selectedRecord.title}>
+                                                            <lightning-formatted-text value={selectedRecord.title} linkify></lightning-formatted-text>
+                                                        </template>
+                                                        <template lwc:elseif={selectedRecord.subtitle}>
+                                                            <lightning-formatted-text value={selectedRecord.subtitle} linkify></lightning-formatted-text>
+                                                        </template>
+                                                        <template lwc:else>
+                                                            <lightning-formatted-text value={selectedRecord.id} linkify></lightning-formatted-text>
+                                                        </template>
+                                                    </span>
+                                                </div>
+                                                <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title={label.REMOVE_LABEL} onclick={handleClear}>
+                                                    <lightning-icon title={label.REMOVE_LABEL} size="x-small" icon-name="utility:clear"></lightning-icon>
+                                                </button>
+                                            </template>
+                                        </template>
+                                        <template if:false={hasSelectedRecord}>
+                                            <div>
+                                                <lightning-input lwc:ref="searchbox" type="search" variant="label-hidden" required={required} data-required={required} onfocus={handleFocus} onchange={handleKeyPress} 
+                                                value={searchKeywordValue} placeholder={searchFieldPlaceholder} onblur={handleBlur} disabled={disabled} read-only={readOnly} class="customlookupfield-searchrecord"></lightning-input>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                                <!--This part is for Display lookup result List-->
+                                <div lwc:ref="combodropdowndiv">
+                                    <template lwc:if={haveSelectableRecords}>
+                                        <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid slds-lookup__menu customlookupfield-selectablerecords" role="listbox">
+                                            <template for:each={selectableRecords} for:item="record">
+                                                <li key={record.id} role="presentation" class="slds-listbox__item" onmousedown={handleSelectRecord} data-id={record.id} title={record.hoverTitle}>
+                                                    <span class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta customlookupfield-selectablerecord" role="option">
+                                                        <span lwc:if={record.iconName} class="slds-media__figure">
+                                                            <span class="slds-icon_container" title="Icon">
+                                                                <lightning-icon icon-name={record.iconName} class="" size="small" alternative-text={record.title}></lightning-icon>
+                                                            </span>
+                                                        </span>    
+                                                        <span class="slds-media__body">  
+                                                            <template lwc:if={record.subtitle}>
+                                                                <span class="slds-listbox__option-text slds-listbox__option-text_entity">
+                                                                    <lightning-formatted-text value={record.title} linkify></lightning-formatted-text>
+                                                                    <br/>
+                                                                    <lightning-formatted-text value={record.subtitle} linkify></lightning-formatted-text>
+                                                                </span>
+                                                            </template>
+                                                            <template lwc:else>
+                                                                <lightning-formatted-text value={record.title} linkify></lightning-formatted-text>
+                                                            </template>
+                                                        </span>
+                                                    </span>
+                                                </li>
+                                            </template>
+                                        </ul>
+                                    </template>
+                                </div>
+                            </div>
+
+                        </template>
+
+                    </lightning-layout-item>
+                    <template lwc:if={showFallbackCheckbox}>
+                        <lightning-layout-item size={fallbackCheckboxSize}>
+
+                            <lightning-input type='checkbox' 
+                                label={isNotListedLabel} 
+                                checked={isNotListedValue} 
+                                onchange={handleNotListedCheckboxChange} 
+                                class="slds-m-around_medium customlookupfield-fallbackcheckbox"
+                                disabled={disableNotListedCheckbox}
+                            ></lightning-input>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+
+            </div>
+        </template>
+	</div>
+	
+</template>

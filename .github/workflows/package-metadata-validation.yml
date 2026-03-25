@@ -1,0 +1,606 @@
+name: Validate REDU Package Metadata
+
+on:
+  pull_request:
+    branches:
+     - master
+     - 'v4.**'
+     - 'release/**'
+  workflow_dispatch:
+
+jobs:
+  xml-metadata-validation:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate permission sets
+        id: validate-perm-sets
+        shell: bash
+        run: |
+          echo "Finding permission sets..."
+
+          FILES=$(find force-app/main/default/permissionsets -name "REDU_*.permissionset-meta.xml")
+          if [ -z "$FILES" ]; then
+            echo "❌ No permission set files found. Skipping validation."
+            exit 1
+          else
+            echo "Starting permission set validation..."
+          fi
+
+          INVALID=0
+          REPORT_CONTENT="Permission Set Validation Failed\n"
+          REPORT_CONTENT+="|File Name|Object|Violation|\n"
+          REPORT_CONTENT+="|---------|------|---------|\n"
+
+          for file in $FILES; do
+            BASENAME=$(basename "$file")
+            echo "Validating: $BASENAME"
+
+            if [[ "$BASENAME" == "REDU_Admin.permissionset-meta.xml" ]]; then
+              NORMAL_PATTERNS=(
+                "<viewAllRecords>false</viewAllRecords>"
+                "<modifyAllRecords>false</modifyAllRecords>"
+                "<viewAllFields>true</viewAllFields>"
+              )
+            else
+              NORMAL_PATTERNS=(
+                "<viewAllRecords>true</viewAllRecords>"
+                "<modifyAllRecords>true</modifyAllRecords>"
+                "<viewAllFields>true</viewAllFields>"
+              )
+            fi
+
+            EVENT_PATTERNS=(
+              "<viewAllRecords>true</viewAllRecords>"
+              "<modifyAllRecords>true</modifyAllRecords>"
+              "<viewAllFields>true</viewAllFields>"
+            )
+
+            BLOCKS=()
+            while IFS= read -r line; do
+              if [[ "$line" =~ "<objectPermissions>" ]]; then
+                block="$line"
+                while IFS= read -r subline && [[ "$subline" != *"</objectPermissions>"* ]]; do
+                  block+=$'\n'"$subline"
+                done
+                block+=$'\n'"</objectPermissions>"
+                BLOCKS+=("$block")
+              fi
+            done < "$file"
+
+            for block in "${BLOCKS[@]}"; do
+              OBJECT=$(echo "$block" | grep -oP '(?<=<object>)[^<]+(?=</object>)')
+              [[ -z "$OBJECT" ]] && continue
+
+              if [[ "$OBJECT" == *"__e" ]]; then
+                for pattern in "${EVENT_PATTERNS[@]}"; do
+                  if echo "$block" | grep -q "$pattern"; then
+                    REPORT_CONTENT+="| $BASENAME | $OBJECT | Invalid object permission: $pattern |\n"
+                    INVALID=1
+                  fi
+                done
+              else
+                for pattern in "${NORMAL_PATTERNS[@]}"; do
+                  if echo "$block" | grep -q "$pattern"; then
+                    REPORT_CONTENT+="| $BASENAME | $OBJECT | Invalid object permission: $pattern |\n"
+                    INVALID=1
+                  fi
+                done
+              fi
+            done
+          done
+
+          if [ $INVALID -ne 0 ]; then
+            echo "❌ Validation failed. See logs for more details."
+            echo "status=fail" >> $GITHUB_OUTPUT
+            echo "exit-code=1" >> $GITHUB_OUTPUT
+
+            echo "result<<EOF" >> $GITHUB_OUTPUT
+            echo -e "$REPORT_CONTENT" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "✅ All permission sets passed validation. No forbidden patterns found."
+            echo "status=pass" >> $GITHUB_OUTPUT
+            echo "exit-code=0" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Validate layout files
+        id: validate-layouts
+        shell: bash
+        run: |
+          echo "Finding layout files..."
+
+          FILES=$(find force-app/main/default/layouts -name "*.layout-meta.xml")
+
+          if [ -z "$FILES" ]; then
+            echo "❌ No layout files found. Skipping layout validation."
+            exit 1
+          else
+            echo "Starting layout validation..."
+          fi
+
+          INVALID=0
+          REPORT_CONTENT="Layout Validation Failed\n"
+          REPORT_CONTENT+="|File Name|Violation|\n"
+          REPORT_CONTENT+="|---------|---------|\n"
+
+          # Loop over files safely using `while IFS= read -r`
+          while IFS= read -r file; do
+            BASENAME=$(basename "$file")
+            echo "Validating: $BASENAME"
+
+            HAS_PLATFORM=$(grep -c "<platformActionList>" "$file" || true)
+            HAS_QUICK=$(grep -c "<quickActionList>" "$file" || true)
+
+            if [[ $HAS_PLATFORM -gt 0 || $HAS_QUICK -gt 0 ]]; then
+              REPORT_CONTENT+="| $BASENAME | Contains <platformActionList> or <quickActionList> |\n"
+              INVALID=1
+            fi
+          done <<< "$FILES"
+
+          if [ $INVALID -ne 0 ]; then
+            echo "❌ Validation failed. See logs for more details."
+            echo "status=fail" >> $GITHUB_OUTPUT
+            echo "exit-code=1" >> $GITHUB_OUTPUT
+
+            echo "result<<EOF" >> $GITHUB_OUTPUT
+            echo -e "$REPORT_CONTENT" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "✅ All layout passed validation. No forbidden patterns found."
+            echo "status=pass" >> $GITHUB_OUTPUT
+            echo "exit-code=0" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Validate Highlights Panel config in Flexipages
+        id: validate-flexipages
+        shell: bash
+        run: |
+          echo "Validating flexipage configurations..."
+          INVALID=0
+          REPORT_CONTENT="Flexipage Validation Failed (Missing properties in force:highlightsPanel)\n"
+          REPORT_CONTENT+="|File Name|Violation|\n"
+          REPORT_CONTENT+="|---------|---------|\n"
+
+          FLEXI_ROOT="force-app/main/default/flexipages"
+
+          if [ ! -d "$FLEXI_ROOT" ]; then
+            echo "✅ No flexipages folder found. Skipping validation."
+            echo "status=pass" >> $GITHUB_OUTPUT
+            echo "exit-code=0" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          for file in "$FLEXI_ROOT"/*.flexipage-meta.xml; do
+            [ -e "$file" ] || continue
+            BASENAME=$(basename "$file")
+            echo "Validating: $BASENAME"
+
+            # Extract each componentInstance block and evaluate
+            awk -v filename="$BASENAME" '
+              BEGIN {
+                in_block = 0;
+                block = "";
+              }
+              /<componentInstance>/ { in_block=1; block=$0; next }
+              in_block {
+                block = block "\n" $0;
+                if (/<\/componentInstance>/) {
+                  in_block=0;
+                  # Only check block if it contains force:highlightsPanel
+                  if (block ~ /<componentName>force:highlightsPanel<\/componentName>/) {
+                    missing=""
+                    if (block !~ /<name>enableActionsConfiguration<\/name>[[:space:]]*<value>true<\/value>/)
+                      missing=missing "enableActionsConfiguration=true "
+                    if (block !~ /<name>enableActionsInNative<\/name>[[:space:]]*<value>true<\/value>/)
+                      missing=missing "enableActionsInNative=true "
+                    if (block !~ /<name>hideChatterActions<\/name>[[:space:]]*<value>true<\/value>/)
+                      missing=missing "hideChatterActions=true "
+                    if (missing != "") {
+                      printf("| %s | %s |\n", filename, missing) >> "flexi_report.tmp"
+                    }
+                  }
+                }
+              }
+            ' "$file"
+          done
+
+          if [ -f flexi_report.tmp ]; then
+            INVALID=1
+            REPORT_CONTENT+=$(cat flexi_report.tmp)
+            rm flexi_report.tmp
+          fi
+
+          if [ $INVALID -ne 0 ]; then
+            echo "❌ Validation failed. See logs for more details."
+            echo "status=fail" >> $GITHUB_OUTPUT
+            echo "exit-code=1" >> $GITHUB_OUTPUT
+
+            echo "result<<EOF" >> $GITHUB_OUTPUT
+            echo -e "$REPORT_CONTENT" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "✅ All flexipages passed validation. No forbidden patterns found."
+            echo "status=pass" >> $GITHUB_OUTPUT
+            echo "exit-code=0" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Validate forbidden unmanaged metadata in force-app
+        id: validate-forbidden-metadata
+        shell: bash
+        run: |
+          echo "Checking for forbidden metadata files..."
+          INVALID=0
+          REPORT_CONTENT="Forbidden Metadata Validation Failed\n"
+          REPORT_CONTENT+="|File Name|Violation|\n"
+          REPORT_CONTENT+="|---------|---------|\n"
+
+          # Function to normalize path by removing 'reduivy__'
+          normalize_path() {
+            echo "$1" | sed 's/reduivy__//g'
+          }
+
+          UNMANAGED_ROOT="unit-test-metadata/main/default"
+          MANAGED_ROOT="force-app/main/default"
+
+          # Ensure unmanaged root exists
+          if [ ! -d "$UNMANAGED_ROOT" ]; then
+            echo "✅ No unmanaged metadata folder found. Skipping validation."
+            echo "status=pass" >> $GITHUB_OUTPUT
+            echo "exit-code=0" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Scan all unmanaged files recursively
+          while IFS= read -r unmanaged_file; do
+            # Remove root prefix -> relative path
+            REL_PATH="${unmanaged_file#$UNMANAGED_ROOT/}"
+
+            # Normalize by removing 'reduivy__' from folders + filenames
+            NORMALIZED_REL_PATH=$(normalize_path "$REL_PATH")
+
+            # Managed equivalent
+            MANAGED_FILE="$MANAGED_ROOT/$NORMALIZED_REL_PATH"
+
+            echo "Checking: $NORMALIZED_REL_PATH"
+
+            if [ -f "$MANAGED_FILE" ]; then
+              REPORT_CONTENT+="| $NORMALIZED_REL_PATH | The metadata is not allowed in force-app |\n"
+              INVALID=1
+            fi
+          done < <(find "$UNMANAGED_ROOT" -type f)
+
+          if [ $INVALID -ne 0 ]; then
+            echo "❌ Validation failed. See logs for more details."
+            echo "status=fail" >> $GITHUB_OUTPUT
+            echo "exit-code=1" >> $GITHUB_OUTPUT
+
+            echo "result<<EOF" >> $GITHUB_OUTPUT
+            echo -e "$REPORT_CONTENT" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "✅ All metadata passed validation. No forbidden patterns found."
+            echo "status=pass" >> $GITHUB_OUTPUT
+            echo "exit-code=0" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Validate Default Compact Layout for Custom Objects
+        id: validate-compact-layouts
+        shell: bash
+        run: |
+          echo "Validating Default Compact Layouts for Custom Objects..."
+          INVALID=0
+          REPORT_CONTENT="Compact Layout Validation Failed (Missing Default Compact Layout for __c Objects)\n"
+          REPORT_CONTENT+="|File Name|Violation|\n"
+          REPORT_CONTENT+="|---------|---------|\n"
+
+          OBJECTS_ROOT="force-app/main/default/objects"
+          SKIP_OBJECTS=("RIO_Education_Ivy_Settings__c")
+
+          # Helper function: check if an item is in SKIP_OBJECTS
+          is_skipped_object() {
+            local item="$1"
+            for skip in "${SKIP_OBJECTS[@]}"; do
+              if [ "$skip" = "$item" ]; then
+                return 0
+              fi
+            done
+            return 1
+          }
+
+          # If no objects folder exists, skip gracefully
+          if [ ! -d "$OBJECTS_ROOT" ]; then
+            echo "✅ No objects folder found. Skipping validation."
+            echo "status=pass" >> $GITHUB_OUTPUT
+            echo "exit-code=0" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          for obj_dir in "$OBJECTS_ROOT"/*__c; do
+            [ -d "$obj_dir" ] || continue  # ensure it's a directory
+            BASENAME=$(basename "$obj_dir")
+
+            # Check if this object is in the skip list
+            if is_skipped_object "$BASENAME"; then
+              echo "Skipping $BASENAME as it is not required."
+              continue
+            fi
+
+            TARGET_FILE="$obj_dir/compactLayouts/Default_Compact_Layout.compactLayout-meta.xml"
+
+            echo "Checking: $BASENAME"
+            if [ ! -f "$TARGET_FILE" ]; then
+              REPORT_CONTENT+="| $BASENAME | Missing Default_Compact_Layout.compactLayout-meta.xml |\n"
+              INVALID=1
+            fi
+          done
+
+          if [ $INVALID -ne 0 ]; then
+            echo "❌ Validation failed. Missing default compact layouts."
+            echo "status=fail" >> $GITHUB_OUTPUT
+            echo "exit-code=1" >> $GITHUB_OUTPUT
+
+            echo "result<<EOF" >> $GITHUB_OUTPUT
+            echo -e "$REPORT_CONTENT" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "✅ All custom objects have Default Compact Layout."
+            echo "status=pass" >> $GITHUB_OUTPUT
+            echo "exit-code=0" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Validate Custom Labels are not protected
+        id: validate-labels
+        shell: bash
+        run: |
+          echo "Validating that all Custom Labels have <protected>false</protected>..."
+
+          LABEL_FILE="force-app/main/default/labels/CustomLabels.labels-meta.xml"
+          INVALID=0
+          REPORT_CONTENT="Protected Label Validation Failed (Found labels with protected=true or missing tag)\n"
+          REPORT_CONTENT+="|Label Name|\n"
+          REPORT_CONTENT+="|----------|\n"
+
+          if [ ! -f "$LABEL_FILE" ]; then
+            echo "✅ No CustomLabels.labels-meta.xml found. Skipping validation."
+            echo "status=pass" >> $GITHUB_OUTPUT
+            echo "exit-code=0" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          INVALID_LABELS=$(awk '
+            /<labels>/ { inBlock=1; block="" }
+            inBlock { block = block $0 "\n" }
+            /<\/labels>/ {
+              inBlock=0
+              if (block !~ /<protected>[[:space:]]*false[[:space:]]*<\/protected>/) {
+                if (match(block, /<fullName>[[:space:]]*([^<]+)[[:space:]]*<\/fullName>/, arr)) {
+                  print arr[1]
+                } else {
+                  print "UNKNOWN_LABEL"
+                }
+              }
+            }
+          ' "$LABEL_FILE")
+
+          if [ -n "$INVALID_LABELS" ]; then
+            INVALID=1
+            while IFS= read -r label; do
+              REPORT_CONTENT+="| $label |\n"
+            done <<< "$INVALID_LABELS"
+          fi
+
+          if [ $INVALID -ne 0 ]; then
+            echo "❌ Protected or invalid labels detected."
+            echo "status=fail" >> $GITHUB_OUTPUT
+            echo "exit-code=1" >> $GITHUB_OUTPUT
+
+            echo "result<<EOF" >> $GITHUB_OUTPUT
+            echo -e "$REPORT_CONTENT" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "✅ All labels are correctly set as <protected>false</protected>."
+            echo "status=pass" >> $GITHUB_OUTPUT
+            echo "exit-code=0" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Validate LWC CSS files
+        id: validate-lwc-css
+        shell: bash
+        run: |
+          echo "Validating that all LWC components have a CSS file..."
+
+          LWC_ROOT="force-app/main/default/lwc"
+          INVALID=0
+          REPORT_CONTENT="LWC CSS Validation Failed (Missing .css file)\n"
+          REPORT_CONTENT+="|Component Name|Violation|\n"
+          REPORT_CONTENT+="|--------------|---------|\n"
+
+          # Load ignore list if file exists
+          IGNORE_FILE=".lwc-css-ignore"
+          SKIP_LWC=()
+
+          if [ -f "$IGNORE_FILE" ]; then
+            echo "Loading ignore list from $IGNORE_FILE"
+            while IFS= read -r line; do
+              # Remove comments and trim whitespace
+              CLEANED=$(echo "$line" | sed 's/#.*//' | xargs)
+              if [ -n "$CLEANED" ]; then
+                SKIP_LWC+=("$CLEANED")
+              fi
+            done < "$IGNORE_FILE"
+          else
+            echo "No .lwc-css-ignore file found. No exclusions applied."
+          fi
+
+          # Helper function
+          is_skipped_lwc() {
+            local item="$1"
+            for skip in "${SKIP_LWC[@]}"; do
+              if [ "$skip" = "$item" ]; then
+                return 0
+              fi
+            done
+            return 1
+          }
+
+          # If no lwc folder exists, skip
+          if [ ! -d "$LWC_ROOT" ]; then
+            echo "✅ No LWC folder found. Skipping validation."
+            echo "status=pass" >> $GITHUB_OUTPUT
+            echo "exit-code=0" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          for lwc_dir in "$LWC_ROOT"/*; do
+            [ -d "$lwc_dir" ] || continue
+
+            COMPONENT_NAME=$(basename "$lwc_dir")
+
+            # Skip ignored components
+            if is_skipped_lwc "$COMPONENT_NAME"; then
+              echo "Skipping $COMPONENT_NAME (listed in .lwc-css-ignore)"
+              continue
+            fi
+
+            EXPECTED_FILE="$lwc_dir/$COMPONENT_NAME.css"
+
+            echo "Checking: $COMPONENT_NAME"
+
+            if [ ! -f "$EXPECTED_FILE" ]; then
+              REPORT_CONTENT+="| $COMPONENT_NAME | Missing $COMPONENT_NAME.css |\n"
+              INVALID=1
+            fi
+          done
+
+          if [ $INVALID -ne 0 ]; then
+            echo "❌ LWC CSS validation failed."
+            echo "status=fail" >> $GITHUB_OUTPUT
+            echo "exit-code=1" >> $GITHUB_OUTPUT
+
+            echo "result<<EOF" >> $GITHUB_OUTPUT
+            echo -e "$REPORT_CONTENT" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "✅ All required LWC components have CSS files."
+            echo "status=pass" >> $GITHUB_OUTPUT
+            echo "exit-code=0" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Validate no inline styles in LWC HTML
+        id: validate-inline-style
+        shell: bash
+        run: |
+          echo "Validating that no LWC HTML contains inline style attributes..."
+
+          LWC_ROOT="force-app/main/default/lwc"
+          INVALID=0
+          REPORT_CONTENT="LWC Inline Style Validation Failed (Inline style attribute detected)\n"
+          REPORT_CONTENT+="|File Name|Line|Violation|\n"
+          REPORT_CONTENT+="|---------|----|---------|\n"
+
+          # If no LWC folder exists, skip gracefully
+          if [ ! -d "$LWC_ROOT" ]; then
+            echo "✅ No LWC folder found. Skipping validation."
+            echo "status=pass" >> $GITHUB_OUTPUT
+            echo "exit-code=0" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Scan all html files under lwc
+          while IFS= read -r file; do
+            BASENAME=$(basename "$file")
+
+            # Detect inline style usage (ignores HTML comments)
+            MATCHES=$(grep -nE '<[^>]+[[:space:]]style[[:space:]]*=' "$file" | grep -v '<!--' || true)
+
+            if [ -n "$MATCHES" ]; then
+              INVALID=1
+              while IFS= read -r line; do
+                LINENO=$(echo "$line" | cut -d: -f1)
+                REPORT_CONTENT+="| $BASENAME | $LINENO | Inline style attribute found |\n"
+              done <<< "$MATCHES"
+            fi
+
+          done < <(find "$LWC_ROOT" -name "*.html")
+
+          if [ $INVALID -ne 0 ]; then
+            echo "❌ Inline style validation failed."
+            echo "status=fail" >> $GITHUB_OUTPUT
+            echo "exit-code=1" >> $GITHUB_OUTPUT
+
+            echo "result<<EOF" >> $GITHUB_OUTPUT
+            echo -e "$REPORT_CONTENT" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "✅ No inline styles found in LWC HTML."
+            echo "status=pass" >> $GITHUB_OUTPUT
+            echo "exit-code=0" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Check the outputs to determine whether to fail
+        if: |
+          steps.validate-perm-sets.outputs.exit-code > 0 ||
+          steps.validate-layouts.outputs.exit-code > 0 ||
+          steps.validate-flexipages.outputs.exit-code > 0 || 
+          steps.validate-compact-layouts.outputs.exit-code > 0 || 
+          steps.validate-labels.outputs.exit-code > 0 || 
+          steps.validate-forbidden-metadata.outputs.exit-code > 0 ||
+          steps.validate-lwc-css.outputs.exit-code > 0 ||
+          steps.validate-inline-style.outputs.exit-code > 0
+        run: |
+          PERM_RESULTS="${{ steps.validate-perm-sets.outputs.result }}"
+          LAYOUT_RESULTS="${{ steps.validate-layouts.outputs.result }}"
+          FLEXI_RESULTS="${{ steps.validate-flexipages.outputs.result }}"
+          COMLAYOUT_RESULTS="${{ steps.validate-compact-layouts.outputs.result }}"
+          LABEL_RESULTS="${{ steps.validate-labels.outputs.result }}"
+          FORBMETA_RESULTS="${{ steps.validate-forbidden-metadata.outputs.result }}"
+          LWCCSS_RESULTS="${{ steps.validate-lwc-css.outputs.result }}"
+          INLINE_RESULTS="${{ steps.validate-inline-style.outputs.result }}"
+
+          if [ -n "$PERM_RESULTS" ]; then
+            printf "%b\n" "$PERM_RESULTS"
+            echo ""
+          fi
+
+          if [ -n "$LAYOUT_RESULTS" ]; then
+            printf "%b\n" "$LAYOUT_RESULTS"
+            echo ""
+          fi
+
+          if [ -n "$FLEXI_RESULTS" ]; then
+            printf "%b\n" "$FLEXI_RESULTS"
+            echo ""
+          fi
+
+          if [ -n "$COMLAYOUT_RESULTS" ]; then
+            printf "%b\n" "$COMLAYOUT_RESULTS"
+            echo ""
+          fi
+
+          if [ -n "$LABEL_RESULTS" ]; then
+            printf "%b\n" "$LABEL_RESULTS"
+            echo ""
+          fi
+
+          if [ -n "$FORBMETA_RESULTS" ]; then
+            printf "%b\n" "$FORBMETA_RESULTS"
+            echo ""
+          fi
+
+          if [ -n "$LWCCSS_RESULTS" ]; then
+            printf "%b\n" "$LWCCSS_RESULTS"
+            echo ""
+          fi
+          
+          if [ -n "$INLINE_RESULTS" ]; then
+            printf "%b\n" "$INLINE_RESULTS"
+            echo ""
+          fi
+
+          exit 1

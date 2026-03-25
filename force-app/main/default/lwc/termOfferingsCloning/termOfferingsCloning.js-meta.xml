@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>REDU - Term Offerings Cloning</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="modalTitle" label="Modal Title" type="String" default="Term Offerings Cloning Wizard" description="Component modal title."/>
+            <property name="modalIconName" label="Modal Icon Name" type="String" description="Modal Icon Name" default="standard:work_plan_template"/>
+            
+            <property name="jobOperation" label="Job Operation" type="String" description="The job operation name that matches the job config custom metadata." default="Term_Offerings_Cloning"/>
+            <property name="jobQueueFields" label="Job Queue Group Fields" type="String" description="Job Queue Group table fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c." required="true" default="Name;CreatedDate;reduivy__Total_Records__c;reduivy__Success_Records__c;reduivy__Error_Records__c;reduivy__Status__c"/>
+            <property name="jobQueueStatuses" label="Job Queue Group Statuses" type="String" description="Semi-colon separated list of Job Queue Group Statuses to show in the table." required="true" default="Pending;Processing;Completed;Failed"/>
+            <property name="jobQueueTableMaxHeight" label="Job Queue Group Table Max Height" type="String" description="Job Queue Group Table Max Height" required="true" default="500"/>
+            
+            <property name="studyUnitFields" label="Study Unit Fields" type="String" description="Semi-colon separated list of Study Unit fields for the selection screen." default="Name;reduivy__Unit_Code__c"></property>
+            <property name="studyUnitTableMaxHeight" label="Study Unit Table Max Height" type="String" description="Study Unit Table Max Height" required="true" default="500"/>
+
+            <property name="studyOfferingFields" label="Study Offering Fields" type="String" description="Semi-colon separated list of Study Offering fields for the study offering selection screen." default="Name;reduivy__Study_Unit__c"></property>
+            <property name="studyOfferingStatuses" label="Study Offering Statuses" type="String" description="Semi-colon separated list of study offering statuses used to filter the study units and study offerings displayed in the table." required="true" default="Draft;Not Started;Pre-enrollment Opened;Enrollment Opened;Enrollment Closed;Running (Enrollment Opened);Running;Completed"/>
+            <property name="studyOfferingTableMaxHeight" label="Study Offering Table Max Height" type="String" description="Study Offering Table Max Height" required="true" default="500"/>
+            <property name="studyOfferingTableMaximumRowNumber" label="Study Offering Table Maximum Row Number" type="Integer" description="Study Offering Table Maximum Row Number" required="true" default="500"/>
+
+            <property name="tableTextDisplayMode" label="Table Text Display Mode" type="String" default="Clip Text" description="Supported options are: Wrap Text, Clip Text." datasource="Wrap Text,Clip Text"/>
+            
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Faculty_Assignments</fullName>
+    <columns>NAME</columns>
+    <columns>Contact__c</columns>
+    <columns>Enrollment_Status__c</columns>
+    <columns>Study_Offering__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Individual_Enrollment__c.Faculty</value>
+    </filters>
+    <label>All Faculty Assignments</label>
+</ListView>

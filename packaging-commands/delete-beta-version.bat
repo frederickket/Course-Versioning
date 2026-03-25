@@ -1,0 +1,1 @@
+sf package version delete --package %1

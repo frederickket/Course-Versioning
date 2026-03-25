@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Default_Compact_Layout</fullName>
+    <fields>Study_Event__c</fields>
+    <fields>Relation_Name__c</fields>
+    <fields>Relation_Type__c</fields>
+    <fields>Response_Status__c</fields>
+    <label>Default Compact Layout</label>
+</CompactLayout>

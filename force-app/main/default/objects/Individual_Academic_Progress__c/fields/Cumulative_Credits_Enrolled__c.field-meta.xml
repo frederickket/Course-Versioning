@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cumulative_Credits_Enrolled__c</fullName>
+    <deprecated>false</deprecated>
+    <description>The cumulative credits enrolled from individual enrollments.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The cumulative credits enrolled from individual enrollments.</inlineHelpText>
+    <label>Cumulative Credits Enrolled</label>
+    <precision>7</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

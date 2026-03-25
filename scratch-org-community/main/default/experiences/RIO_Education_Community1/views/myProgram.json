@@ -1,0 +1,170 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:dynamicLayout",
+  "dataProviders" : [ ],
+  "id" : "f0874ceb-e5da-4426-ba6d-c331ebef02b4",
+  "label" : "My Program",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "c402d4f7-dfe9-44e3-b488-54b9578831ca",
+          "columns" : [ {
+            "UUID" : "497ab94f-0728-42c6-8dd7-43946a636ef0",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 32
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "c402d4f7-dfe9-44e3-b488-54b9578831ca",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p style=\"text-align:right;color:#444444;\"><b>Logged on as: {!CurrentUser.name} </b></p>"
+          },
+          "componentName" : "forceCommunity:htmlBlock",
+          "id" : "c8962b51-8fa3-4f54-ad69-8902d057ce02",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "497ab94f-0728-42c6-8dd7-43946a636ef0",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0) url(/sfsites/c/file-asset/reduivy__My_Enrollments_Banner?v=1) bottom center /cover",
+        "backgroundOverlay" : "rgba(0, 0, 0, 0.4)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "f556bc01-d31f-499f-8d6c-05dcea5d22ec",
+          "columns" : [ {
+            "UUID" : "8e6c1ce2-988b-4053-ae43-634dc5625b56",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 200
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "f556bc01-d31f-499f-8d6c-05dcea5d22ec",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p><br></p><p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><span style=\"font-size: 48px; color: rgb(255, 255, 255);\">My Program</span></p><p style=\"text-align: center;\"><span style=\"color: rgb(255, 255, 255); font-size: 16px;\">My Program is your one stop module to allow you to enroll into classes, pay your fees, and check your results and program progress.</span></p><p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><br></p><p>&nbsp;</p>"
+          },
+          "componentName" : "forceCommunity:richTextInline",
+          "id" : "c82e38a6-5426-4b15-aacd-96be88239c7a",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "8e6c1ce2-988b-4053-ae43-634dc5625b56",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "019b4124-0223-4fb9-a101-db0e98c9b4b4",
+          "columns" : [ {
+            "UUID" : "18f0e10f-4529-42bc-a4e7-0a64676c47f0",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "019b4124-0223-4fb9-a101-db0e98c9b4b4",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p><img class=\"sfdcCbImage\" src=\"{!contentAsset.Line.1}\" alt=\"\"></p>"
+          },
+          "componentName" : "forceCommunity:richTextInline",
+          "id" : "34f1d7a5-bfb7-4205-b842-1df48569e6b8",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        }, {
+          "componentAttributes" : {
+            "enableInlineEdit" : false,
+            "filterName" : "My_Program_Enrollment",
+            "layout" : "STANDARD",
+            "pageSize" : 25,
+            "scope" : "reduivy__Individual_Program_Enrollment__c",
+            "showActionBar" : false,
+            "showChartsPanel" : false,
+            "showDisplay" : "grid",
+            "showFilterPanel" : true,
+            "showImageIcon" : true,
+            "showManualRefreshButton" : true,
+            "showObjectName" : false,
+            "showPinnedList" : true,
+            "showSearchBar" : true
+          },
+          "componentName" : "forceCommunity:objectHome",
+          "id" : "701bf1d7-d8ac-450e-8366-c413f17f25f9",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "18f0e10f-4529-42bc-a4e7-0a64676c47f0",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "dbb3ef64-f6ef-4616-a773-64b8222c6226",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "My Program"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "49f97cf0-dbe5-45c2-a68a-dd878c63d74e",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "c3b4dd95-811d-4bb8-96c7-bd7a5e7be743",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Tnmg3xEoH6s4JlNccMV3OMgU9ImCsA",
+  "type" : "view",
+  "viewType" : "custom-my-program"
+}

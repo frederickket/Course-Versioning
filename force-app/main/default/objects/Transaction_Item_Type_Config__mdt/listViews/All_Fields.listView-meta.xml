@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Fields</fullName>
+    <columns>MasterLabel</columns>
+    <columns>Item_Type__c</columns>
+    <columns>Payment_Applicable_Item_Type__c</columns>
+    <columns>Payment_Refundable__c</columns>
+    <columns>Payment_Status__c</columns>
+    <columns>Payment_Transaction_Type__c</columns>
+    <columns>Support_Prepayment_Conversion__c</columns>
+    <columns>Active__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All Fields</label>
+</ListView>

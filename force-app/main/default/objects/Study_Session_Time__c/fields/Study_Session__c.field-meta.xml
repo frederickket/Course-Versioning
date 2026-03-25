@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Study_Session__c</fullName>
+    <deprecated>false</deprecated>
+    <label>Study Session</label>
+    <referenceTo>Study_Session__c</referenceTo>
+    <relationshipLabel>Study Session Times</relationshipLabel>
+    <relationshipName>Study_Session_Times</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Requirement_Logic__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>IF(
+	ISBLANK( Alternate_Study_Unit__c ),
+	IF(ISBLANK(Study_Plan_Structure__r.Requirement_Logic__c), Study_Plan_Structure__r.Study_Unit__r.Requirement_Logic__c, Study_Plan_Structure__r.Requirement_Logic__c),
+	Alternate_Study_Unit__r.Requirement_Logic__c 
+)</formula>
+    <label>Requirement Logic</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

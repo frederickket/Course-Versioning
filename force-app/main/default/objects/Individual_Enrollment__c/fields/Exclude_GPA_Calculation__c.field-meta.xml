@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Exclude_GPA_Calculation__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>Exclude/ignore the individual enrollment from the GPA calculation e.g., the Quality Points and Credits Attempted won&apos;t be rollup to Individual Academic Progress.</description>
+    <inlineHelpText>Exclude/ignore the individual enrollment from the GPA calculation e.g., the Quality Points and Credits Attempted won&apos;t be rollup to Individual Academic Progress.</inlineHelpText>
+    <label>Exclude GPA Calculation</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

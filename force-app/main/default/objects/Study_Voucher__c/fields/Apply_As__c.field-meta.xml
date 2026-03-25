@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Apply_As__c</fullName>
+    <deprecated>false</deprecated>
+    <description>This is used to determine if the discounted value is stored on the order line item record or as a separate line item that links to the order line item as offset.</description>
+    <inlineHelpText>This is used to determine if the discounted value is stored on the order line item record or as a separate line item that links to the order line item as offset.</inlineHelpText>
+    <label>Apply As</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Order Line Discount</fullName>
+                <default>true</default>
+                <label>Order Line Discount</label>
+            </value>
+            <value>
+                <fullName>Order Discount</fullName>
+                <default>false</default>
+                <label>Order Discount</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

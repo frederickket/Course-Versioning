@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Study_Fee_Config__c</fullName>
+    <deprecated>false</deprecated>
+    <label>Study Fee Config</label>
+    <referenceTo>Study_Fee_Config__c</referenceTo>
+    <relationshipLabel>Study Fee Matrix</relationshipLabel>
+    <relationshipName>Study_Fee_Matrix</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>true</reparentableMasterDetail>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

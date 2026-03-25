@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Job_Handler_Class_Name__c</fullName>
+    <description>The handler Apex class name to be initiated by Job Queue Worker.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The handler Apex class name to be initiated by Job Queue Worker.</inlineHelpText>
+    <label>Job Handler Class Name</label>
+    <length>255</length>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

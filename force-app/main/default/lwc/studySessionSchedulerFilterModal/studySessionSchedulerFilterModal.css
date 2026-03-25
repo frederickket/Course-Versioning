@@ -1,0 +1,6 @@
+.studysessionschedulerfiltermodal-body {
+    
+    max-height: 67vh;
+    overflow-y: auto;
+    overflow-x: clip;
+}

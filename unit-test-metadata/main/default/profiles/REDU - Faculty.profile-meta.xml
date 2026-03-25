@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+    <custom>true</custom>
+    <customPermissions>
+        <enabled>false</enabled>
+        <name>reduivy__REDU_Admin</name>
+    </customPermissions>
+    <customPermissions>
+        <enabled>false</enabled>
+        <name>reduivy__REDU_Faculty</name>
+    </customPermissions>
+    <customPermissions>
+        <enabled>false</enabled>
+        <name>reduivy__REDU_Guest</name>
+    </customPermissions>
+    <customPermissions>
+        <enabled>false</enabled>
+        <name>reduivy__REDU_Student</name>
+    </customPermissions>
+    
+    <recordTypeVisibilities>
+        <default>true</default>
+        <recordType>Account.reduivy__Administrative</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>reduivy__Individual_Enrollment__c.reduivy__Faculty</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>true</default>
+        <recordType>reduivy__Individual_Enrollment__c.reduivy__Student</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>reduivy__Individual_Plan_Structure__c.reduivy__Group</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>true</default>
+        <recordType>reduivy__Individual_Plan_Structure__c.reduivy__Unit</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>true</default>
+        <recordType>reduivy__Individual_Program_Enrollment__c.reduivy__Child_Enrollment</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>reduivy__Individual_Program_Enrollment__c.reduivy__Master_Enrollment</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>true</default>
+        <recordType>reduivy__Study_Plan_Structure__c.reduivy__Group</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>reduivy__Study_Plan_Structure__c.reduivy__Unit</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+
+    <layoutAssignments>
+        <layout>Account-reduivy__Administrative Layout</layout>
+        <recordType>Account.reduivy__Administrative</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-reduivy__Campus Layout</layout>
+        <recordType>Account.reduivy__Campus</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-reduivy__Department Layout</layout>
+        <recordType>Account.reduivy__Department</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-reduivy__Educational Institution Layout</layout>
+        <recordType>Account.reduivy__Educational_Institution</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-reduivy__Organization Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-reduivy__Organization Layout</layout>
+        <recordType>Account.reduivy__Organization</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-reduivy__Partner Institution Layout</layout>
+        <recordType>Account.reduivy__External_Educational_Institution</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Agreement_Unit_Equivalent__c-reduivy__Agreement Unit Equivalent Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Agreement__c-reduivy__Agreement Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Announcement__c-reduivy__Announcement Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Contact-reduivy__Individual Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Credit_Transfer_App_Status_Config__mdt-reduivy__Credit Transfer App Status Config Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Credit_Transfer_Application__c-reduivy__Credit Transfer Application Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Facility__c-reduivy__Facility Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Grade_Result_Config__mdt-reduivy__Grade Result Config Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Holiday__c-reduivy__Holiday Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__IdvEn_Enrollment_Status_Config__mdt-reduivy__IdvEn Enrollment Status Config Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__IdvPe_Enrollment_Status_Config__mdt-reduivy__IdvPe Enrollment Status Config Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__IdvPs_Status_Config__mdt-reduivy__IdvPs Status Config Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Individual_Achievement__c-reduivy__Individual Achievement Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Individual_Enrollment__c-reduivy__Individual Enrollment Student Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Individual_Enrollment__c-reduivy__Individual Enrollment Faculty Layout</layout>
+        <recordType>reduivy__Individual_Enrollment__c.reduivy__Faculty</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Individual_Enrollment__c-reduivy__Individual Enrollment Student Layout</layout>
+        <recordType>reduivy__Individual_Enrollment__c.reduivy__Student</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Individual_Pathway__c-reduivy__Individual Pathway Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Individual_Plan_Structure__c-reduivy__Individual Plan Structure Group Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Individual_Plan_Structure__c-reduivy__Individual Plan Structure Group Layout</layout>
+        <recordType>reduivy__Individual_Plan_Structure__c.reduivy__Group</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Individual_Plan_Structure__c-reduivy__Individual Plan Structure Unit Layout</layout>
+        <recordType>reduivy__Individual_Plan_Structure__c.reduivy__Unit</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Individual_Plan_Unit_Requirement__c-reduivy__Individual Plan Unit Requirement Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Individual_Program_Application__c-reduivy__Individual Program Application Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Individual_Program_Enrollment__c-reduivy__Individual Program Enrollment Child Layout</layout>
+        <recordType>reduivy__Individual_Program_Enrollment__c.reduivy__Child_Enrollment</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Individual_Program_Enrollment__c-reduivy__Individual Program Enrollment Master Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Individual_Program_Enrollment__c-reduivy__Individual Program Enrollment Master Layout</layout>
+        <recordType>reduivy__Individual_Program_Enrollment__c.reduivy__Master_Enrollment</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Individual_Session_Enrollment__c-reduivy__Individual Session Enrollment Student Layout</layout>
+        <recordType>reduivy__Individual_Session_Enrollment__c.reduivy__Student</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Individual_Session_Enrollment__c-reduivy__Individual Session Enrollment Student Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Individual_Session_Enrollment__c-reduivy__Individual Session Enrollment Faculty Layout</layout>
+        <recordType>reduivy__Individual_Session_Enrollment__c.reduivy__Faculty</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Log__c-reduivy__Log Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Study_Cohort_Enrollment__c-reduivy__Study Cohort Enrollment Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Study_Grade_Setting__c-reduivy__Study Grade Setting Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Study_Intake__c-reduivy__Study Intake Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Study_Offering_Status_Config__mdt-reduivy__Study Offering Status Config Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Study_Offering__c-reduivy__Study Offering Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Study_Pathway_Term__c-reduivy__Study Pathway Term Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Study_Pathway_Unit__c-reduivy__Study Pathway Unit Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Study_Pathway__c-reduivy__Study Pathway Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Study_Plan_Option__c-reduivy__Study Plan Option Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Study_Plan_Structure__c-reduivy__Study Plan Structure Group Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Study_Plan_Structure__c-reduivy__Study Plan Structure Group Layout</layout>
+        <recordType>reduivy__Study_Plan_Structure__c.reduivy__Group</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Study_Plan_Structure__c-reduivy__Study Plan Structure Unit Layout</layout>
+        <recordType>reduivy__Study_Plan_Structure__c.reduivy__Unit</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Study_Plan_Unit_Requirement__c-reduivy__Study Plan Unit Requirement Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Study_Plan__c-reduivy__Study Plan Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Study_Program__c-reduivy__Study Program Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Study_Term__c-reduivy__Study Academic Term Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Study_Term__c-reduivy__Study Academic Term Layout</layout>
+        <recordType>reduivy__Study_Term__c.reduivy__Academic_Term</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Study_Term__c-reduivy__Study Academic Year Layout</layout>
+        <recordType>reduivy__Study_Term__c.reduivy__Academic_Year</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Study_Unit_Requirement__c-reduivy__Study Unit Requirement Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Study_Unit__c-reduivy__Study Unit Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>reduivy__Trigger_Controller__mdt-reduivy__Trigger Controller Layout</layout>
+    </layoutAssignments>
+    
+    <userLicense>Salesforce Platform</userLicense>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ActivitiesAccess</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>AddDirectMessageMembers</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>AllowUniversalSearch</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>AllowViewKnowledge</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ApexRestServices</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ApiEnabled</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>AssignTopics</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ChatterFileLink</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ChatterInternalUser</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ChatterInviteExternalUsers</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ChatterOwnGroups</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ContentWorkspaces</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>CreateCustomizeFilters</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>CreateCustomizeReports</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>CreateTopics</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>CustomMobileAppsAccess</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>DistributeFromPersWksp</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>EditEvent</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>EditTask</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>EditTopics</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>EmailMass</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>EmailSingle</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>EnableCommunityAppLauncher</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>EnableNotifications</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ExportReport</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ImportPersonal</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>LightningExperienceUser</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ListEmailSend</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>MassInlineEdit</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>RemoveDirectMessageMembers</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>RunReports</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>SelectFilesFromSalesforce</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ShareFilesWithNetworks</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ShowCompanyNameAsUserBadge</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>SubscribeToLightningDashboards</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>TransactionalEmailSend</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>UseWebLink</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ViewDeveloperName</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ViewHelpLink</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ViewRoles</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ViewSetup</name>
+    </userPermissions>
+</Profile>

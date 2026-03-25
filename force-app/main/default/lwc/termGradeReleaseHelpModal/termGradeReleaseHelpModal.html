@@ -1,0 +1,32 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+        
+        <div class="component-body slds-is-relative slds-card">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel} ></lightning-spinner>
+            </div>
+            
+            <div class="termgradereleasehelpmodal-body">
+                <div>
+                    <div class="slds-p-bottom_small">
+                        <lightning-formatted-rich-text value={termGradeReleaseOverviewHelp}></lightning-formatted-rich-text>
+                    </div>
+                    <div class="slds-p-bottom_small">
+                        <lightning-formatted-rich-text value={termGradeReleaseStep1Help}></lightning-formatted-rich-text>
+                    </div>
+                    <div class="slds-p-bottom_small">
+                        <lightning-formatted-rich-text value={termGradeReleaseStep2Help}></lightning-formatted-rich-text>
+                    </div>
+                    <div class="slds-p-bottom_small">
+                        <lightning-formatted-rich-text value={termGradeReleaseStep3Help}></lightning-formatted-rich-text>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" onclick={handleCloseClick} label={closeButtonLabel}></lightning-button>
+    </lightning-modal-footer>
+</template>

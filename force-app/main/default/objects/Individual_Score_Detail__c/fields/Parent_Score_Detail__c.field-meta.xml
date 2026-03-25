@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Parent_Score_Detail__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Parent Score Detail</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>Please select an Individual Score Detail that belongs to the same Individual Score</errorMessage>
+        <filterItems>
+            <field>Individual_Score_Detail__c.Individual_Score__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.Individual_Score__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Individual_Score_Detail__c</referenceTo>
+    <relationshipLabel>Individual Score Details</relationshipLabel>
+    <relationshipName>Individual_Score_Details</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>To initiate the screen flow for funding disbursement.</description>
+    <flowDefinition>Study_Funding_Disbursement_For_Individual_Funding_Allocation</flowDefinition>
+    <label>Disburse Study Funding</label>
+    <optionsCreateFeedItem>false</optionsCreateFeedItem>
+    <type>Flow</type>
+</QuickAction>

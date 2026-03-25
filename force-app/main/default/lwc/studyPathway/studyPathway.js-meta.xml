@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>REDU - Pathway Visualizer</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="modalTitle" label="Modal Title" type="String" default="Pathway Visualizer" description="Component modal title."/>
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:sales_path" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="accordionBackgroundColor" label="Accordion Background Color" type="String" default="#cccccc" description="The study pathway term accordion background color in hex code. e.g., #cccccc."/>
+            <property name="accordionTextColor" label="Accordion Text Color" type="String" default="#000000" description="The study pathway term accordion text color in hex code. e.g., #000000."/>
+
+            <property name="studyPathwayInfoFields" label="Study Pathway Highlights Panel Fields" type="String" default="reduivy__Study_Mode__c" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="studyPathwayTermTitlePrefix" label="Study Pathway Term Title Prefix" type="String" default="Term " description="Study pathway term prefix for the accordion title."/>
+            <property name="studyPathwayTermInfoFields" label="Study Pathway Term Highlights Panel Fields" type="String" default="reduivy__Recommended_Credits__c;reduivy__Max_Credits__c" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="studyPathwayUnitTitleField" label="Study Pathway Unit Highlights Title Field" type="String" default="Name" description="The Study Unit field API name to be displayed as the title for group e.g., Field_A__c."/>
+            <property name="studyPathwayUnitInfoFields" label="Study Pathway Unit Highlights Panel Fields" type="String" default="Name" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="studyPathwayUnitIcon" label="Study Pathway Unit Icon Name" type="String" default="standard:catalog" description="Component study unit icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="studyPathwayGroupTitleField" label="Study Pathway Group Highlights Title Field" type="String" default="Name" description="The Study Plan Structure (Group) field API name to be displayed as the title for group e.g., Field_A__c."/>
+            <property name="studyPathwayGroupInfoFields" label="Study Pathway Group Highlights Panel Fields" type="String" default="Name" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="studyPathwayGroupIcon" label="Study Pathway Group Icon Name" type="String" default="standard:all" description="Component study group icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+
+            <property name="comboboxLabel" label="Combobox Label" type="String" default="Preview with major/minor" description="Component combobox label."/>
+            <property name="showStudyUnitQuickSearch" label="Show Study Unit Quick Search" type="Boolean" default="false" description="Show Study Unit Quick Search."/>
+            <property name="showStudyPlanOptions" label="Show Study Plan Options" type="Boolean" default="false" description="Show study plan options combobox."/>
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+        </targetConfig>
+
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="recordId" type="String" label="Record Id" default="{!recordId}" description="ID of the salesforce record for which the record details are to be displayed e.g. {!recordId}"/>
+            <property name="modalTitle" label="Modal Title" type="String" default="Pathway Visualizer" description="Component modal title."/>
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:sales_path" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="accordionBackgroundColor" label="Accordion Background Color" type="String" default="#cccccc" description="The study pathway term accordion background color in hex code. e.g., #cccccc."/>
+            <property name="accordionTextColor" label="Accordion Text Color" type="String" default="#000000" description="The study pathway term accordion text color in hex code. e.g., #000000."/>
+            
+            <property name="studyPathwayInfoFields" label="Study Pathway Highlights Panel Fields" type="String" default="reduivy__Study_Mode__c" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="studyPathwayTermTitlePrefix" label="Study Pathway Term Title Prefix" type="String" default="Term " description="Study pathway term prefix for the accordion title."/>
+            <property name="studyPathwayUnitTitleField" label="Study Pathway Unit Highlights Title Field" type="String" default="Name" description="The Study Pathway Unit field API name to be displayed as the title for group e.g., Field_A__c."/>
+            <property name="studyPathwayUnitInfoFields" label="Study Pathway Unit Highlights Panel Fields" type="String" default="Name" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="studyPathwayUnitIcon" label="Study Pathway Unit Icon Name" type="String" default="standard:catalog" description="Component study unit icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="studyPathwayGroupTitleField" label="Study Pathway Group Highlights Title Field" type="String" default="Name" description="The Study Pathway Group field API name to be displayed as the title for group e.g., Field_A__c."/>
+            <property name="studyPathwayGroupInfoFields" label="Study Pathway Group Highlights Panel Fields" type="String" default="Name" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="studyPathwayGroupIcon" label="Study Pathway Group Icon Name" type="String" default="standard:all" description="Component study group icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+
+            <property name="comboboxLabel" label="Preview With Combobox Label" type="String" default="Preview with major/minor" description="Component combobox label."/>
+            <property name="showStudyUnitQuickSearch" label="Show Study Unit Quick Search" type="Boolean" default="true" description="Show Study Unit Quick Search."/>
+            <property name="showStudyPlanOptions" label="Show Study Plan Options" type="Boolean" default="false" description="Show study plan options."/>
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

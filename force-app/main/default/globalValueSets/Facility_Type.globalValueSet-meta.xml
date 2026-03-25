@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Building</fullName>
+        <default>false</default>
+        <label>Building</label>
+    </customValue>
+    <customValue>
+        <fullName>Food Hall</fullName>
+        <default>false</default>
+        <label>Food Hall</label>
+    </customValue>
+    <customValue>
+        <fullName>Classroom</fullName>
+        <default>false</default>
+        <label>Classroom</label>
+    </customValue>
+    <customValue>
+        <fullName>Computer Lab</fullName>
+        <default>false</default>
+        <label>Computer Lab</label>
+    </customValue>
+    <customValue>
+        <fullName>Gymnasium</fullName>
+        <default>false</default>
+        <label>Gymnasium</label>
+    </customValue>
+    <customValue>
+        <fullName>Health Center</fullName>
+        <default>false</default>
+        <label>Health Center</label>
+    </customValue>
+    <customValue>
+        <fullName>Laboratory</fullName>
+        <default>false</default>
+        <label>Laboratory</label>
+    </customValue>
+    <customValue>
+        <fullName>Lecture Hall</fullName>
+        <default>false</default>
+        <label>Lecture Hall</label>
+    </customValue>
+    <customValue>
+        <fullName>Library</fullName>
+        <default>false</default>
+        <label>Library</label>
+    </customValue>
+    <customValue>
+        <fullName>Residential Building</fullName>
+        <default>false</default>
+        <label>Residential Building</label>
+    </customValue>
+    <customValue>
+        <fullName>Residential Floor</fullName>
+        <default>false</default>
+        <label>Residential Floor</label>
+    </customValue>
+    <customValue>
+        <fullName>Residential Unit</fullName>
+        <default>false</default>
+        <label>Residential Unit</label>
+    </customValue>
+    <masterLabel>Facility Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

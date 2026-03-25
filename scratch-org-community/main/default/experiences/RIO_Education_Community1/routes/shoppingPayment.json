@@ -1,0 +1,12 @@
+{
+  "activeViewId" : "697de5ec-9362-4ec6-9d4d-f8d6aea9437b",
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "configurationTags" : [ ],
+  "devName" : "Shopping_Payment__c",
+  "id" : "7168e33b-338f-4bf7-8ef9-3dbfd14290bd",
+  "label" : "Shopping Payment",
+  "pageAccess" : "UseParent",
+  "routeType" : "custom-shopping-payment",
+  "type" : "route",
+  "urlPrefix" : "shopping-payment"
+}

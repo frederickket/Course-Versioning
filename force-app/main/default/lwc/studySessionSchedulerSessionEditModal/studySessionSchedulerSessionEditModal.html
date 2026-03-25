@@ -1,0 +1,188 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+        
+        <div class="slds-is-relative">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner ></lightning-spinner>
+            </div>
+            <div class="studysessionschedulersessioneditmodal-body">
+                <template lwc:if={showNewRecordSelection}>
+                    <div class="studysessionschedulersessioneditmodal-newstudysessionselections">
+                        <div>
+                            <lightning-layout>
+                                <lightning-layout-item lwc:if={showRecordTypeSelection} size="4">
+                                    <lightning-radio-group name="recordTypeRadioGroup"
+                                        label={newStudySessionLabel}
+                                        options={recordTypeOptions}
+                                        value={recordTypeId}
+                                        onchange={handleRecordTypeOnchange}
+                                        required
+                                        type="radio"
+                                    ></lightning-radio-group>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                        <div>
+                            <lightning-layout>
+                                <lightning-layout-item lwc:if={educationalInstitutionResponse} size="4">
+                                    <c-searchable-combobox
+                                        field-label={educationalInstitutionLabel}
+                                        field-name="educationalInstitutionId"
+                                        icon-name="standard:account"
+                                        default-value={educationalInstitutionId}
+                                        options={educationalInstitutionOptions}
+                                        onchange={handleComboboxChange}
+                                        enable-debug-mode={enableDebugMode}
+                                    ></c-searchable-combobox>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                        <div>
+                            <lightning-layout>
+                                <lightning-layout-item lwc:if={studyUnitResponse} size="4">
+                                    <c-searchable-combobox
+                                        field-label={sunLabel}
+                                        field-name="studyUnitId"
+                                        icon-name="custom:custom55"
+                                        default-value={studyUnitId}
+                                        options={studyUnitOptions}
+                                        onchange={handleComboboxChange}
+                                        enable-debug-mode={enableDebugMode}
+                                    ></c-searchable-combobox>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                        <div>
+                            <lightning-layout>
+                                <lightning-layout-item lwc:if={academicTermResponse} size="4">
+                                    <c-searchable-combobox
+                                        field-label={academicTermLabel}
+                                        field-name="academicTermId"
+                                        icon-name="custom:custom55"
+                                        default-value={academicTermId}
+                                        options={academicTermOptions}
+                                        onchange={handleComboboxChange}
+                                        enable-debug-mode={enableDebugMode}
+                                    ></c-searchable-combobox>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                        <div>
+                            <lightning-layout>
+                                <lightning-layout-item lwc:if={studyOfferingResponse} size="4">
+                                    <c-searchable-combobox
+                                        field-label={sofLabel}
+                                        field-name="studyOfferingId"
+                                        icon-name="custom:custom55"
+                                        default-value={studyOfferingId}
+                                        options={studyOfferingOptions}
+                                        onchange={handleComboboxChange}
+                                        enable-debug-mode={enableDebugMode}
+                                    ></c-searchable-combobox>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                    </div>                    
+                </template>
+                <template lwc:else>
+                    <lightning-layout multiple-rows="true" class="studysessionschedulersessioneditmodal-sessionedit">
+                        <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small">
+                            <div if:true={sseFieldsData} class="studysessionschedulersessioneditmodal-session">
+                                <lightning-record-edit-form
+                                    record-id={studySessionId}
+                                    record-type-id={finalRecordTypeId}
+                                    object-api-name="reduivy__Study_Session__c"
+                                    class="studysessionschedulersessioneditmodal-sessionform"
+                                    optional-fields={sseOptionalFields}
+                                >
+                                    <!--mandatory name field-->
+                                    <div class="studysessionschedulersessioneditmodal-sessionform-row slds-grid slds-wrap">
+                                        <div class="slds-size_1-of-1">
+                                            <lightning-input-field field-name="Name" required="true" data-displaytype="STRING" data-save-required="true" onchange={handleSessionFieldChange}></lightning-input-field>
+                                        </div>
+                                    </div>
+
+                                    <lightning-layout class="slds-wrap" multiple-rows="true">
+
+                                        <template for:each={sseFieldsData} for:item="field">
+                                            <lightning-layout-item key={field.fieldName} size="12" large-device-size={sseColumnSize}>
+
+                                                <div class="studysessionschedulersessioneditmodal-sessionform-col" >
+                                                    <lightning-input-field lwc:if={field.value} field-name={field.fieldName} value={field.value} required={field.isRequired} data-displaytype={field.displayType} data-save-required={field.isRequired} onchange={handleSessionFieldChange}></lightning-input-field>
+                                                    <lightning-input-field lwc:else field-name={field.fieldName} required={field.isRequired} data-displaytype={field.displayType} data-save-required={field.isRequired} onchange={handleSessionFieldChange}></lightning-input-field>
+                                                </div>
+                                            </lightning-layout-item>
+                                            
+                                        </template>
+                                    </lightning-layout>
+                                </lightning-record-edit-form>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" medium-device-size="8">
+                            
+                            <lightning-layout class="slds-p-bottom_small">
+                                <lightning-layout-item size="6" alignment-bump="right">
+                                    <div class="sldx-text-heading_small">{studySessionTimePluralLabel}</div>
+                                </lightning-layout-item>
+                                <lightning-layout-item>
+                                    <lightning-button-icon label={newStudySessionTimeLabel} title={newStudySessionTimeLabel} icon-name="utility:add" size="small" onclick={handleAddNewStudySessionTimeClick}></lightning-button-icon>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                            <div if:true={sstFieldsData} class="studysessionschedulersessioneditmodal-sessiontime">
+                                <template lwc:if={studySessionTimes}>
+                                    <template for:each={studySessionTimes} for:item="sstObj" for:index="idx">
+                                        <c-study-session-scheduler-session-time-edit
+                                            key={sstObj.Id}
+                                            idx={idx}
+                                            campus-id={sofCampusId}
+                                            required-facility-type={sseRequiredFacilityType}
+                                            facility-default-criteria={facilityDefaultCriteria}
+                                            allow-cross-campus-facility-allocation={allowCrossCampusFacilityAllocation}
+
+                                            sst-column-no={sstColumnNo}
+                                            
+                                            sst-obj={sstObj}
+                                            sst-fields-data={sstFieldsData}
+
+                                            
+                                            accordion-background-color={accordionBackgroundColor}
+                                            accordion-text-color={accordionTextColor}
+                                            accordion-button-variant={accordionButtonVariant}
+
+                                            timeline-min-time={timelineMinTime}
+                                            timeline-max-time={timelineMaxTime}
+                                            edu-inst-start-time={eduInstStartTime}
+                                            edu-inst-end-time={eduInstEndTime}
+
+                                            onstudysessiontimechange={handleStudySessionTimeChange}
+                                            onstudysessiontimedelete={handleStudySessionTimeDelete}
+    
+                                            enable-debug-mode={enableDebugMode}
+                                        >
+                                        </c-study-session-scheduler-session-time-edit>
+                                    </template>
+                                </template>
+                                <template lwc:else>
+                                    
+                                </template>                                
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </template>
+            </div>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" disabled={isLoading} onclick={handleCancel} label={cancelButtonLabel} class="slds-p-right_xx-small"></lightning-button>
+        
+        <template lwc:if={showNextButton}>
+            <lightning-button variant="brand" disabled={isLoading} onclick={handleNext} label={nextButtonLabel}></lightning-button>
+        </template>
+        <template lwc:else>
+            <lightning-button variant="brand" disabled={isLoading} onclick={handleSaveAndUpdateSchedules} label={saveAndUpdateSchedulesButtonLabel} class="slds-p-right_xx-small"></lightning-button>
+            <lightning-button variant="brand" disabled={isLoading} onclick={handleSave} label={saveButtonLabel}></lightning-button>
+        </template>
+    </lightning-modal-footer>
+</template>

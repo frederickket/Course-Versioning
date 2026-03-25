@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>IEN_PATCH</label>
+    <protected>false</protected>
+    <values>
+        <field>Endpoint_URL__c</field>
+        <value xsi:type="xsd:string">/integration_queue/patch</value>
+    </values>
+    <values>
+        <field>HTTP_Method__c</field>
+        <value xsi:type="xsd:string">PATCH</value>
+    </values>
+    <values>
+        <field>Named_Credentials__c</field>
+        <value xsi:type="xsd:string">Integration_Queue_Callout_Named_Credential</value>
+    </values>
+    <values>
+        <field>Object_Type__c</field>
+        <value xsi:type="xsd:string">reduivy__Individual_Enrollment__c</value>
+    </values>
+    <values>
+        <field>Success_Status_Code__c</field>
+        <value xsi:type="xsd:string">200;201</value>
+    </values>
+    <values>
+        <field>Target_System__c</field>
+        <value xsi:type="xsd:string">External Portal</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+</CustomMetadata>

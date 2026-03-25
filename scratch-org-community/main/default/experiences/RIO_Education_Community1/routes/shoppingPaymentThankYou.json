@@ -1,0 +1,12 @@
+{
+  "activeViewId" : "a48ab83a-fec8-4947-9db3-f6b4a3ed0997",
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "configurationTags" : [ ],
+  "devName" : "Shopping_Payment_Thank_You__c",
+  "id" : "63eaff25-2245-4af5-9879-5c2101c092ec",
+  "label" : "Shopping Payment Thank You",
+  "pageAccess" : "UseParent",
+  "routeType" : "custom-shopping-payment-thank-you",
+  "type" : "route",
+  "urlPrefix" : "shopping-payment-thank-you"
+}

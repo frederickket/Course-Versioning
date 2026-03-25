@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <description>Attendance wizard.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>REDU - Student Attendance Wizard</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="userMode" label="User Mode" type="String" default="Admin" description="Supported options are: Admin, Faculty." datasource="Admin,Faculty"/>
+            <property name="modalTitle" label="Modal Title" type="String" default="Attendance" description="Component modal title."/>
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:product_required" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="attendanceTileIcon" label="Attendance Tile Icon Name" type="String" default="standard:product_required" description="Attendance tile icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="attendanceButtonLabel" label="Attendance Button Label" type="String" default="Attendance" description="The button label for opening the attendance registry table."/>
+            <property name="sevTileInfoFields" label="Attendance Tile Info Fields" type="String" default="reduivy__Start__c;reduivy__End__c;reduivy__Status__c" description="The attendance tile info fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="studyEventTileClickAction" label="Attendance Tile Click Action" type="String" default="View Info" description="The action when clicking on attendance tile title. Supported options are: None, View Info, View Record." datasource="None,View Info,View Record" />
+            <property name="infoModalFieldsForStudyEvent" label="Study Event Info Popup Fields" type="String" default="reduivy__Start__c;reduivy__End__c;reduivy__Status__c" description="The study event info popup fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="infoModalSectionNameForStudyEvent" label="Study Event Info Section Name" type="String" default="Study Event" description="The study event info popup section name."/>
+            <property name="showNoAttendanceWarning" label="Show No Attendance Warning" type="Boolean" default="true" description="Show warning when no attendance is taken yet."/>
+            <property name="noAttendanceWarningText" label="No Attendance Warning Text" type="String" default="No attendance taken." description="The warning for no attendance."/>
+            <property name="noAttendanceWarningIcon" label="No Attendance Warning Icon" type="String" default="utility:warning" description="The icon name for no attendance. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="noAttendanceWarningIconVariant" label="No Attendance Icon Warning Icon Variant" type="String" default="warning" description="The icon variant/colour for no attendance." datasource="inverse,success,warning,error" />
+            <property name="validFacultyIsnStatus" label="Faculty Individual Session Enrollment Statuses" type="String" default="Enrolled" description="(Only applies to Study Sessions) Displays listings if the Faculty user has these statuses. For multiple statuses, separate each one with ; e.g. Enrolled;Completed. The status should match the reduivy__Enrollment_Status__c picklist option API value."/>
+
+            <property name="attendanceStatuses" label="Attendance Status Options" type="String" default="Attended;Absent;Late" description="The attendance status to be displayed in the attendance registry table e.g., Attended;Absent;Late. The status should match the reduivy__Attendance_Status__c picklist option API value."/>
+            <property name="studyEventRelationEditFieldSetName" label="Attendance Note Field Set Name" type="String" default="reduivy__AttendanceWizard_Notes" description="The study event relation field set API name for attendance notes."/>
+            <property name="contactTileInfoFields" label="Contact Tile Info Fields" type="String" default="reduivy__Student_ID__c;Email" description="The contact tile info fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="contactImageUrlFieldName" label="Contact Image Url Field Name" type="String" default="" description="The contact field API name that stores the image url. This will take precendence if this and Contact Image File Name is defined."/>
+            <property name="contactImageFileName" label="Contact Image File Name" type="String" default="Profile" description="The text to find the contact profile image file name using CONTAINS."/>
+            <property name="contactTileClickAction" label="Contact Tile Click Action" type="String" default="View Info" description="The action when clicking on contact tile title. Supported options are: None, View Info, View Record." datasource="None,View Info,View Record" />
+            <property name="infoModalFieldsForContact" label="Contact Info Popup Fields" type="String" default="reduivy__Student_ID__c;Email" description="The contact info popup fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="infoModalSectionNameForContact" label="Contact Info Section Name" type="String" default="Contact" description="The contact info popup section name."/>
+            <property name="infoModalFieldsForIndividualSessionEnrollment" label="Individual Session Enrollment Popup Fields" type="String" default="reduivy__Enrollment_Status__c;reduivy__Enrollment_Date__c" description="The individual session enrollment info popup fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="infoModalSectionNameForIndividualSessionEnrollment" label="Individual Session Enrollment Info Section Name" type="String" default="Individual Session Enrollment" description="The individual session enrollment info popup section name."/>
+            <property name="showRecordsBasedOnAllocation" label="Show Records Based On Allocation" type="Boolean" default="false" description="After enabling this checkbox, the wizard will display the study sessions and study events based on the faculty's allocation which is the study event relation for faculty's individual session enrollment"/>
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="recordId" type="String" label="Record Id" default="{!recordId}" description="ID of the salesforce record for which the record details are to be displayed e.g. {!recordId}"/>
+            <property name="userMode" label="User Mode" type="String" default="Admin" description="Supported options are: Admin, Faculty." datasource="Admin,Faculty"/>
+            <property name="modalTitle" label="Modal Title" type="String" default="Attendance" description="Component modal title."/>
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:product_required" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="attendanceTileIcon" label="Attendance Tile Icon Name" type="String" default="standard:product_required" description="Attendance tile icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="attendanceButtonLabel" label="Attendance Button Label" type="String" default="Attendance" description="The button label for opening the attendance registry table."/>
+            <property name="sevTileInfoFields" label="Attendance Tile Info Fields" type="String" default="reduivy__Start__c;reduivy__End__c;reduivy__Status__c" description="The attendance tile info fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="studyEventTileClickAction" label="Attendance Tile Click Action" type="String" default="View Info" description="The action when clicking on attendance tile title. Supported options are: None, View Info, View Record." datasource="None,View Info,View Record" />
+            <property name="infoModalFieldsForStudyEvent" label="Study Event Info Popup Fields" type="String" default="reduivy__Start__c;reduivy__End__c;reduivy__Status__c" description="The study event info popup fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="infoModalSectionNameForStudyEvent" label="Study Event Info Section Name" type="String" default="Study Event" description="The study event info popup section name."/>
+            <property name="showNoAttendanceWarning" label="Show No Attendance Warning" type="Boolean" default="true" description="Show warning when no attendance is taken yet."/>
+            <property name="noAttendanceWarningText" label="No Attendance Warning Text" type="String" default="No attendance taken." description="The warning for no attendance."/>
+            <property name="noAttendanceWarningIcon" label="No Attendance Warning Icon" type="String" default="utility:warning" description="The icon name for no attendance. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="noAttendanceWarningIconVariant" label="No Attendance Icon Warning Icon Variant" type="String" default="warning" description="The icon variant/colour for no attendance." datasource="inverse,success,warning,error" />
+            <property name="validFacultyIsnStatus" label="Faculty Individual Session Enrollment Statuses" type="String" default="Enrolled" description="(Only applies to Study Sessions) Displays listings if the Faculty user has these statuses. For multiple statuses, separate each one with ; e.g. Enrolled;Completed. The status should match the reduivy__Enrollment_Status__c picklist option API value."/>
+
+            <property name="attendanceStatuses" label="Attendance Status Options" type="String" default="Attended;Absent;Late" description="The attendance status to be displayed in the attendance registry table e.g., Attended;Absent;Late. The status should match the reduivy__Attendance_Status__c picklist option API value."/>
+            <property name="studyEventRelationEditFieldSetName" label="Attendance Note Field Set Name" type="String" default="reduivy__AttendanceWizard_Notes" description="The study event relation field set API name for attendance notes."/>
+            <property name="contactTileInfoFields" label="Contact Tile Info Fields" type="String" default="reduivy__Student_ID__c;Email" description="The contact tile info fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="contactImageUrlFieldName" label="Contact Image Url Field Name" type="String" default="" description="The contact field API name that stores the image url. This will take precendence if this and Contact Image File Name is defined."/>
+            <property name="contactImageFileName" label="Contact Image File Name" type="String" default="Profile" description="The text to find the contact profile image file name using CONTAINS."/>
+            <property name="contactTileClickAction" label="Contact Tile Click Action" type="String" default="View Info" description="The action when clicking on contact tile title. Supported options are: None, View Info, View Record." datasource="None,View Info,View Record" />
+            <property name="infoModalFieldsForContact" label="Contact Info Popup Fields" type="String" default="reduivy__Student_ID__c;Email" description="The contact info popup fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="infoModalSectionNameForContact" label="Contact Info Section Name" type="String" default="Contact" description="The contact info popup section name."/>
+            <property name="infoModalFieldsForIndividualSessionEnrollment" label="Individual Session Enrollment Popup Fields" type="String" default="reduivy__Enrollment_Status__c;reduivy__Enrollment_Date__c" description="The individual session enrollment info popup fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="infoModalSectionNameForIndividualSessionEnrollment" label="Individual Session Enrollment Info Section Name" type="String" default="Individual Session Enrollment" description="The individual session enrollment info popup section name."/>
+            <property name="showRecordsBasedOnAllocation" label="Show Records Based On Allocation" type="Boolean" default="false" description="After enabling this checkbox, the wizard will display the study sessions and study events based on the faculty's allocation which is the study event relation for faculty's individual session enrollment"/>
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

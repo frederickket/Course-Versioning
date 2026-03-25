@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Allow_Enrollment__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Allow study unit and study session enrollment.</description>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Allow study unit and study session enrollment.</inlineHelpText>
+    <label>Allow Enrollment</label>
+    <type>Checkbox</type>
+</CustomField>

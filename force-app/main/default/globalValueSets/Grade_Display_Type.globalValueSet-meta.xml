@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Numerical Grade</fullName>
+        <default>false</default>
+        <label>Numerical Grade</label>
+    </customValue>
+    <customValue>
+        <fullName>Letter Grade</fullName>
+        <default>false</default>
+        <label>Letter Grade</label>
+    </customValue>
+    <masterLabel>Grade Display Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

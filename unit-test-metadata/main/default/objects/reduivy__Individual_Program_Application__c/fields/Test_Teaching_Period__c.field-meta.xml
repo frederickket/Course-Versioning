@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Test_Teaching_Period__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Testing for Application Scoring Mechanism</description>
+    <inlineHelpText>Testing for Application Scoring Mechanism</inlineHelpText>
+    <label>Test Teaching Period</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

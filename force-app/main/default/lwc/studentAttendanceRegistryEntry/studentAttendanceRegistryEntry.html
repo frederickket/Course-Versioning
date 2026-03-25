@@ -1,0 +1,57 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="slds-box">
+                <lightning-layout multiple-rows="true" horizontal-align="spread">
+                    <lightning-layout-item class="slds-p-bottom_x-small">
+                        <c-record-info-tile
+                            record-id={contactId}
+                            record-title-field-name="Name"
+                            record-info-fields={contactTileInfoFields}
+                            object-api-name="Contact"
+                            record-image-file-name={contactImageFileName}
+                            record-image-url-field-name={contactImageUrlFieldName}
+                            record-title-click-action={contactTileClickAction}
+                            record-info-modal-record1-info-fields={infoModalFieldsForContact}
+                            record-info-modal-section1-name={infoModalSectionNameForContact}
+                            record-info-modal-record2-object-name="reduivy__Individual_Session_Enrollment__c"
+                            record-info-modal-record2-id={individualSessionEnrollmentId}
+                            record-info-modal-record2-info-fields={infoModalFieldsForIndividualSessionEnrollment}
+                            record-info-modal-section2-name={infoModalSectionNameForIndividualSessionEnrollment}
+                            
+                            enable-debug-mode={enableDebugMode}
+                        ></c-record-info-tile>
+                    </lightning-layout-item>
+                    <lightning-layout-item>
+                        <lightning-layout>
+                            <lightning-layout-item padding="horizontal-small">
+                                <lightning-radio-group 
+                                    name={entryKey} 
+                                    label="Attendance Status" 
+                                    variant="label-hidden" 
+                                    type="button"
+                                    options={attendanceStatusOptions}
+                                    value={selectedAttendanceStatus}
+                                    onchange={handleAttendanceRecordChange}
+                                ></lightning-radio-group>
+                            </lightning-layout-item>
+                            <lightning-layout-item>
+                                <lightning-button-menu menu-alignment="auto" onselect={handleMenuSelect}>
+                                    <lightning-menu-item if:true={studyEventRelationEditFieldSetName} value="addnotes" label={label.ADD_NOTES_LABEL} prefix-icon-name="utility:note"></lightning-menu-item>
+                                    <lightning-menu-item value="undo" label={label.UNDO_LABEL} prefix-icon-name="utility:undo"></lightning-menu-item>
+                                </lightning-button-menu>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </template>
+	</div>
+	
+</template>

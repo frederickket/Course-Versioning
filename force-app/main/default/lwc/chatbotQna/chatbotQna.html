@@ -1,0 +1,94 @@
+<template>
+
+
+    
+    <div class="chatbotqna-content">
+        <div class={isFitContent}>
+                <template lwc:if={topText}>
+                    <div class="chatbotqna-question-section-toptext">
+                        <lightning-formatted-rich-text value={topText}></lightning-formatted-rich-text>
+                        <lightning-formatted-rich-text value="<br>"></lightning-formatted-rich-text>
+                    </div>
+                </template>
+                <template lwc:if={showQuestion}>
+                    <div class="chatbotqna-question-section-question">
+                        <lightning-formatted-rich-text value={question}></lightning-formatted-rich-text>
+                        <lightning-formatted-rich-text value="<br>"></lightning-formatted-rich-text>
+                    </div>
+                </template>
+
+                <template lwc:if={isRecordPicker}>
+                    <div class="chatbotqna-question-section-recordpicker">
+                        <lightning-record-picker value={recordPickerValue} object-api-name={recordPickerObjectApiName}
+                            onchange={handleAnswer} disabled={answerIsDisabled} variant="label-hidden" label="Hidden Label"
+                            filter={recordPickerFilter} nextlevel={questionSet.nextLevel} placeholder="Search here"
+                            display-info={recordPickerDisplayInfo}
+                            matching-info={recordPickerMatchingInfo}></lightning-record-picker>
+                    </div>
+                </template>
+
+                <template lwc:if={isCombobox}>
+                    <div class="chatbotqna-question-section-combobox">
+                        <lightning-combobox name="combobox" value={comboboxValue} options={comboboxOptions}
+                            onchange={handleAnswer} label="Hidden Label" variant="label-hidden" disabled={answerIsDisabled}
+                            dropdown-alignment="bottom-left" placeholder="Select here"></lightning-combobox>
+                    </div>
+                </template>
+                <template lwc:if={isComboboxPill}>
+                    
+                    <div class="chatbotqna-question-section-comboboxpill">
+                        <lightning-combobox data-name="comboboxPill" value={comboboxPillValue} options={comboboxPillOptions}
+                            onchange={handleAddPill} label="Hidden Label" variant="label-hidden" disabled={answerIsDisabled}
+                            dropdown-alignment="bottom-left" placeholder="Select here"></lightning-combobox>
+
+                        <lightning-pill-container items={pills} onitemremove={handleRemovePill}></lightning-pill-container>
+                    </div>  
+                </template>
+
+                <template lwc:if={bottomText}>
+                    <div class="chatbotqna-question-section-bottomtext">
+                        <lightning-formatted-rich-text class="slds-text-color_error"
+                            value={bottomText}></lightning-formatted-rich-text>
+                        <lightning-formatted-rich-text value="<br>"></lightning-formatted-rich-text>
+                    </div>
+                </template>
+                <template lwc:if={pageChangedText}>
+                    
+                    <div class="chatbotqna-question-section-pagechangedtext">
+                        <lightning-formatted-rich-text class="slds-text-color_error"
+                            value={pageChangedText}></lightning-formatted-rich-text>
+                    </div>
+                </template>
+
+                <template lwc:if={isList}>
+                    <div class="chatbotqna-question-section-answerlist">
+                        <template for:each={answersOptions} for:item="answer">
+                                <br key={answer.value}>
+                                <lightning-button variant="base" label={answer.label} onclick={handleAnswer} value={answer.value}  key={answer.value}
+                                    disabled={answerIsDisabled} nextlevel={answer.nextLevel}></lightning-button>
+
+                        </template>
+                    </div>
+                </template>
+        </div>
+
+        <template if:false={hideAnswer}>
+
+            <template lwc:if={isAnswered}>
+                <div class="chatbotqna-answer-section align-to-right">
+                    <div
+                        class="slds-p-around_x-small slds-m-around_x-small answer-bubble">
+                        <lightning-formatted-text value={selectedAnswer}></lightning-formatted-text>
+                    </div>
+                </div>
+            </template>
+        </template>
+        <div if:true={isLoading} id="spinnerDiv1" data-id="spinnerDiv" class="slds-is-relative slds-p-around_xx-large">
+            <lightning-spinner alternative-text={label.LOADING_LABEL}></lightning-spinner>
+        </div>
+        <div lwc:ref="bottomdiv"></div>
+
+    </div>
+
+
+</template>

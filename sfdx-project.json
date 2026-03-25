@@ -1,0 +1,72 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true,
+      "package": "RIO Education IVY",
+      "versionName": "Ver 4.7.0",
+      "versionNumber": "4.7.0.NEXT",
+      "versionDescription": "",
+      "ancestorVersion": "HIGHEST",
+      "postInstallScript": "REDU_PostInstallation",
+      "uninstallScript": "REDU_PostUninstallation",
+      "postInstallUrl": "https://help.rioeducation.com/",
+      "releaseNotesUrl": "https://help.rioeducation.com/",
+      "unpackagedMetadata": {
+        "path": "unit-test-metadata"
+      },
+      "apexTestAccess": {
+        "permissionSets": [
+          "REDU_Admin",
+          "REDU_Admin_Tabs",
+          "REDU_Unit_Test"
+        ]
+      }
+    },
+    {
+      "path": "unit-test-metadata",
+      "default": false
+    },
+    {
+      "path": "scratch-org-metadata",
+      "default": false
+    },
+    {
+      "path": "scratch-org-community",
+      "default": false
+    }
+  ],
+  "name": "RIO-Education-Ivy",
+  "namespace": "reduivy",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "66.0",
+  "packageAliases": {
+    "RIO Education IVY": "0Ho2t0000004CLsCAM",
+    "RIO Education IVY@0.1.0-4": "04t2t000000DEv7AAG",
+    "RIO Education IVY@0.1.1-2": "04t2t000000DEvbAAG",
+    "RIO Education IVY@0.1.2-3": "04t2t000000DEw0AAG",
+    "RIO Education IVY@0.1.3-1": "04t2t000000DExmAAG",
+    "RIO Education IVY@0.2.0-4": "04t2t000000DEyBAAW",
+    "RIO Education IVY@0.2.1-1": "04t2t000000DEyGAAW",
+    "RIO Education IVY@0.4.0-3": "04t2t000000DF2NAAW",
+    "RIO Education IVY@1.0.0-1": "04tIe000000LOsaIAG",
+    "RIO Education IVY@1.1.0-2": "04tRE000000yC4jYAE",
+    "RIO Education IVY@1.2.0-3": "04tRE0000012Ah3YAE",
+    "RIO Education IVY@1.2.1-1": "04tRE000001721JYAQ",
+    "RIO Education IVY@1.3.0-1": "04tRE0000017G4HYAU",
+    "RIO Education IVY@1.4.0-3": "04tRE000001NyMHYA0",
+    "RIO Education IVY@4.2.0-1": "04tRE000001SqkfYAC",
+    "RIO Education IVY@4.3.0-7": "04tRE000001jFAPYA2",
+    "RIO Education IVY@4.4.0-5": "04tRE000001v541YAA",
+    "RIO Education IVY@4.5.0-6": "04tRE0000029WE1YAM",
+    "RIO Education IVY@4.5.1-5": "04tRE000002AXBFYA4",
+    "RIO Education IVY@4.5.2-1": "04tRE000002AvVJYA0",
+    "RIO Education IVY@4.5.3-5": "04tRE000002FtJBYA0",
+    "RIO Education IVY@4.6.0-6": "04tRE000002JnBxYAK",
+    "RIO Education IVY@4.6.1-2": "04tRE000002MLKnYAO",
+    "RIO Education IVY@4.6.2-1": "04tRE000002QLNpYAO",
+    "RIO Education IVY@4.6.3-2": "04tRE000002S6FpYAK",
+    "RIO Education IVY@4.6.4-2": "04tRE000002UjGHYA0",
+    "RIO Education IVY@4.7.0-7": "04tRE000002coM1YAI"
+  }
+}

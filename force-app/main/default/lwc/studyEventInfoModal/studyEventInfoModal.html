@@ -1,0 +1,97 @@
+<template>
+
+    <lightning-modal-header label={modalTitle}></lightning-modal-header>
+
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail}></c-js-library-loader>
+
+        <div class="component-body slds-is-relative slds-card">
+            
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv">
+                <lightning-spinner alternative-text={loadingLabel}></lightning-spinner>
+            </div>
+            
+            <div class="slds-m-bottom_medium">
+                <template if:true={studySessionFields}>
+                    <c-record-view-form 
+                        record-id={studySessionId}
+                        object-api-name="reduivy__Study_Session__c"
+                        fields={studySessionFields}
+                        enable-debug-mode={enableDebugMode}>
+
+                        <lightning-layout class="slds-wrap">
+                            <template for:each={studySessionFields} for:item="field">
+                                <lightning-layout-item key={field} size="12" large-device-size="6">
+                                    <c-output-field field-name={field}></c-output-field>
+                                </lightning-layout-item>
+                            </template>
+                        </lightning-layout>
+                        
+                    </c-record-view-form>
+                </template>
+
+                <template if:true={studySessionTimeFields}>
+                    <c-record-view-form 
+                        record-id={studySessionTimeId}
+                        object-api-name="reduivy__Study_Session_Time__c"
+                        fields={studySessionTimeFields}
+                        enable-debug-mode={enableDebugMode}>
+
+                        <lightning-layout class="slds-wrap">
+                            <template for:each={studySessionTimeFields} for:item="field">
+                                <lightning-layout-item key={field} size="12" large-device-size="6">
+                                    <c-output-field field-name={field}></c-output-field>
+                                </lightning-layout-item>
+                            </template>
+                        </lightning-layout>
+                        
+                    </c-record-view-form>
+                </template>
+
+                <template if:true={studyEventFields}>
+                    <c-record-view-form 
+                        record-id={studyEvent.Id}
+                        object-api-name="reduivy__Study_Event__c"
+                        fields={studyEventFields}
+                        enable-debug-mode={enableDebugMode}>
+
+                        <lightning-layout class="slds-wrap">
+                            <template for:each={studyEventFields} for:item="field">
+                                <lightning-layout-item key={field} size="12" large-device-size="6">
+                                    <c-output-field field-name={field}></c-output-field>
+                                </lightning-layout-item>
+                            </template>
+                        </lightning-layout>
+                        
+                    </c-record-view-form>
+                </template>
+            </div>
+            <div class="slds-m-bottom_medium">
+                <c-custom-type-datatable
+                data={facilityDatatable.data}
+                columns={facilityDatatable.columns}
+                key-field="Id"
+                wrap-table-header={tableHeaderDisplayMode}
+                hide-checkbox-column="true"
+                ></c-custom-type-datatable>
+            </div>
+
+            <div class="slds-m-bottom_medium">
+                <c-custom-type-datatable
+                data={facultyDatatable.data}
+                columns={facultyDatatable.columns}
+                key-field="Id"
+                wrap-table-header={tableHeaderDisplayMode}
+                hide-checkbox-column="true"
+                ></c-custom-type-datatable>
+            </div>
+
+        </div>
+
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" disabled={isLoading} onclick={handleClose} label={closeLabel} class="slds-p-right_xx-small"></lightning-button>
+    </lightning-modal-footer>
+
+</template>

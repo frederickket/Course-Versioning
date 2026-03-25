@@ -1,0 +1,154 @@
+name: Detect Non-Auto-Upgraded Salesforce Metadata
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, review_requested]
+    branches:
+      - 'release/**'
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: changed_files
+        run: |
+          BASE=${{ github.base_ref }}
+          echo "Base branch: $BASE"
+          git diff --name-only origin/$BASE...HEAD > changed.txt
+          git diff --name-status origin/$BASE...HEAD > changed_with_status.txt
+          cat changed.txt
+
+      - name: Filter Non-Upgraded Metadata
+        id: filter_nonupgrade
+        run: |
+          NON_UPGRADE_REGEX='(layouts/|customMetadata/|sharingSets/)'
+          # Only include files with status M (modified), exclude A (added/new)
+          MATCHED=$(grep -E "$NON_UPGRADE_REGEX" changed_with_status.txt | grep '^M' | awk '{print $2}' || true)
+          echo "matched<<EOF" >> $GITHUB_OUTPUT
+          echo "$MATCHED" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          if [ -n "$MATCHED" ]; then
+            echo "has_matches=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_matches=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Detect Picklist Fields
+        id: detect_picklist
+        run: |
+          PICKLIST_FILES=""
+          for file in $(cat changed.txt | grep 'objects/.*/fields/.*\.field$' || true); do
+            if grep -q '<type>Picklist</type>' "$file"; then
+              PICKLIST_FILES="$PICKLIST_FILES"$'\n'"$file"
+            fi
+          done
+          echo "picklist_files<<EOF" >> $GITHUB_OUTPUT
+          echo "$PICKLIST_FILES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          if [ -n "$PICKLIST_FILES" ]; then
+            echo "has_picklist=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_picklist=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Detect RecordType Picklists
+        id: detect_recordtype_picklist
+        run: |
+          RECORDTYPE_FILES=""
+          RECORDTYPE_DETAILS=""
+          for file in $(cat changed.txt | grep 'objects/.*/recordTypes/.*\.recordType-meta\.xml$' || true); do
+            if grep -q '<picklistValues>' "$file"; then
+              RECORDTYPE_FILES="$RECORDTYPE_FILES"$'\n'"$file"
+              
+              # Extract object name and record type (pure bash, no xmllint needed)
+              OBJECT=$(echo "$file" | awk -F'/' '{print $5}')
+              RECORDTYPE=$(grep -oP '(?<=<fullName>)[^<]+' "$file" | head -1)
+              PICKLIST_NAMES=$(grep -oP '(?<=<picklist>)[^<]+' "$file" | tr '\n' ',' | sed 's/,$//')
+              
+              RECORDTYPE_DETAILS="$RECORDTYPE_DETAILS"$'\n'"Object: $OBJECT | RecordType: $RECORDTYPE | Picklists: $PICKLIST_NAMES"
+            fi
+          done
+
+          echo "recordtype_picklists<<EOF" >> $GITHUB_OUTPUT
+          echo "$RECORDTYPE_FILES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+          echo "recordtype_details<<EOF" >> $GITHUB_OUTPUT
+          echo "$RECORDTYPE_DETAILS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+          if [ -n "$RECORDTYPE_FILES" ]; then
+            echo "has_recordtype_picklist=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_recordtype_picklist=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Detect Deleted Custom Metadata
+        id: detect_deleted_custommetadata
+        run: |
+          DELETED_CM=$(grep '^D' changed_with_status.txt | grep 'customMetadata/' | awk '{print $2}' || true)
+          echo "deleted_custommetadata<<EOF" >> $GITHUB_OUTPUT
+          echo "$DELETED_CM" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          if [ -n "$DELETED_CM" ]; then
+            echo "has_deleted_custommetadata=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_deleted_custommetadata=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build PR Comment
+        id: build_comment
+        if: steps.filter_nonupgrade.outputs.has_matches == 'true' || steps.detect_picklist.outputs.has_picklist == 'true' || steps.detect_recordtype_picklist.outputs.has_recordtype_picklist == 'true' || steps.detect_deleted_custommetadata.outputs.has_deleted_custommetadata == 'true'
+        run: |
+          COMMENT="### ⚠️ Salesforce Metadata That Will NOT Auto-Upgrade"$'\n'
+          COMMENT="$COMMENT"$'\n'"The following metadata files changed in this PR and require **manual inclusion in the installer**:"$'\n'
+          
+          if [ "${{ steps.filter_nonupgrade.outputs.has_matches }}" == "true" ]; then
+            COMMENT="$COMMENT"$'\n'"#### Non-Auto-Upgraded Metadata"$'\n'
+            COMMENT="$COMMENT"'```'$'\n'
+            COMMENT="$COMMENT""${{ steps.filter_nonupgrade.outputs.matched }}"$'\n'
+            COMMENT="$COMMENT"'```'$'\n'
+          fi
+          
+          if [ "${{ steps.detect_picklist.outputs.has_picklist }}" == "true" ]; then
+            COMMENT="$COMMENT"$'\n'"#### Picklist Fields"$'\n'
+            COMMENT="$COMMENT"'```'$'\n'
+            COMMENT="$COMMENT""${{ steps.detect_picklist.outputs.picklist_files }}"$'\n'
+            COMMENT="$COMMENT"'```'$'\n'
+          fi
+          
+          if [ "${{ steps.detect_recordtype_picklist.outputs.has_recordtype_picklist }}" == "true" ]; then
+            COMMENT="$COMMENT"$'\n'"#### RecordType Picklists"$'\n'
+            COMMENT="$COMMENT"'```'$'\n'
+            COMMENT="$COMMENT""${{ steps.detect_recordtype_picklist.outputs.recordtype_details }}"$'\n'
+            COMMENT="$COMMENT"'```'$'\n'
+          fi
+          
+          if [ "${{ steps.detect_deleted_custommetadata.outputs.has_deleted_custommetadata }}" == "true" ]; then
+            COMMENT="$COMMENT"$'\n'"#### Deleted Custom Metadata Records"$'\n'
+            COMMENT="$COMMENT"'```'$'\n'
+            COMMENT="$COMMENT""${{ steps.detect_deleted_custommetadata.outputs.deleted_custommetadata }}"$'\n'
+            COMMENT="$COMMENT"'```'$'\n'
+          fi
+          
+          COMMENT="$COMMENT"$'\n'"_This check was automatically generated for PRs targeting \`release/*\` branches._"
+          
+          echo "comment<<EOF" >> $GITHUB_OUTPUT
+          echo "$COMMENT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Add PR Comment with results
+        if: steps.filter_nonupgrade.outputs.has_matches == 'true' || steps.detect_picklist.outputs.has_picklist == 'true' || steps.detect_recordtype_picklist.outputs.has_recordtype_picklist == 'true' || steps.detect_deleted_custommetadata.outputs.has_deleted_custommetadata == 'true'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          message: ${{ steps.build_comment.outputs.comment }}

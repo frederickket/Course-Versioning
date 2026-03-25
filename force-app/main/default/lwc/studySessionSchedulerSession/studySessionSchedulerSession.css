@@ -1,0 +1,26 @@
+.component-body {
+    
+}
+
+.studysessionschedulersession-sessionlabel {
+    background-color: var(--session-label-background-color);
+    color: var(--session-label-color);
+    border-radius: 3px;
+}
+
+.studysessionschedulersession-clickable {
+    cursor: pointer;
+}
+
+.studysessionschedulersession-clickable:hover {
+    text-decoration: underline;
+}
+
+.facility-spinner {
+    position: relative;
+    
+}
+
+.faculty-spinner {
+    position: relative;
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>License_Schedule_Job_Frequency__c</fullName>
+    <defaultValue>&apos;0 0 0 ? * SUN&apos;</defaultValue>
+    <deprecated>false</deprecated>
+    <description>Frequency of the license schedule job.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The time to execute the license checking job in Salesforce cron expression, e.g., &apos;0 0 12 ? * TUE&apos; for every Tuesday at 12 PM. By default, the job will run every Sunday at 12 AM.</inlineHelpText>
+    <label>License Schedule Job Frequency</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

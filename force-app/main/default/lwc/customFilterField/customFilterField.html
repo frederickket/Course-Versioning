@@ -1,0 +1,50 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+    
+    <template if:true={isInitSuccess}>
+        <template lwc:if={isTextField}>
+            <lightning-input type="text" label={fieldLabel} value={fieldValue} onchange={handleOnChange}></lightning-input>
+        </template>
+        <template lwc:elseif={isDecimalField}>
+            <lightning-input type="number" label={fieldLabel} value={fieldValue} onchange={handleOnChange} step={inputStep}></lightning-input>
+        </template>
+        <template lwc:elseif={isCurrencyField}>
+            <lightning-input type="number" label={fieldLabel} value={fieldValue} onchange={handleOnChange} formatter="currency" step={inputStep}></lightning-input>
+        </template>
+        <template lwc:elseif={isPercentField}>
+            <lightning-input type="number" label={fieldLabel} value={fieldValue} onchange={handleOnChange} formatter="percent-fixed" step={inputStep}></lightning-input>
+        </template>
+        <template lwc:elseif={isBooleanField}>
+            <lightning-input type="checkbox" label={fieldLabel} checked={fieldValue} onchange={handleOnChangeCheckbox} variant="label-stacked"></lightning-input>
+        </template>
+        <template lwc:elseif={isPicklistField}>
+            <lightning-combobox
+                name="customFilterPicklist"
+                label={fieldLabel}
+                value={fieldValue}
+                options={picklistOptions}
+                onchange={handlePicklistOnChange} ></lightning-combobox>
+        </template>
+        <template lwc:elseif={isMultiPicklistField}>
+            <lightning-dual-listbox
+                name="customFilterMultiPicklist"
+                label={fieldLabel}
+                value={fieldValue}
+                options={picklistOptions}
+                size="3"
+                onchange={handleMultiPicklistOnChange} ></lightning-dual-listbox>
+        </template>
+        <template lwc:elseif={isDateField}>
+            <lightning-input type="date" label={fieldLabel} value={fieldValue} onchange={handleOnChange} time-zone="UTC"></lightning-input>
+        </template>
+        <template lwc:elseif={isDateTimeField}>
+            <lightning-input type="datetime" label={fieldLabel} value={fieldValue} onchange={handleOnChange} time-zone={timeZone}></lightning-input>
+        </template>
+        <template lwc:elseif={isTimeField}>
+            <lightning-input type="time" label={fieldLabel} value={fieldValue} onchange={handleOnChangeTime} time-zone="UTC"></lightning-input>
+        </template>
+        <template lwc:else>
+            {unsuportedTypeError}
+        </template>
+    </template>
+</template>

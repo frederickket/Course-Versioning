@@ -1,0 +1,15 @@
+<template>
+
+    <lightning-modal-body>
+        <div class="continuingeducarttncmodal-body slds-is-relative">
+            <lightning-flow if:true={flowName}
+                flow-api-name={flowName}
+                flow-input-variables={inputVariables}
+                flow-finish-behavior={flowFinishBehavior}
+                onstatuschange={handleStatusChange}
+            >
+            </lightning-flow>
+        </div>
+    </lightning-modal-body>
+
+</template>

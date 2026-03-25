@@ -1,0 +1,102 @@
+<template>
+
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess}
+        onfail={handleLibLoadFail}></c-js-library-loader>
+
+    <div class="component-body slds-is-relative slds-card">
+        <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv">
+            <lightning-spinner alternative-text={label.LOADING_LABEL}></lightning-spinner>
+        </div>
+
+        <template if:true={isInitSuccess}>
+            <div class="slds-m-around_medium">
+                <div class="continuingeducart-header slds-m-bottom_medium slds-p-bottom_medium slds-border_bottom">
+                    <lightning-layout class="slds-wrap">
+                        <lightning-layout-item size="12" large-device-size="4">
+                            <template if:true={showModalHeader}>
+                                <div class="continuingeducart-title slds-card__header-title">
+                                    <lightning-icon icon-name={modalIconName} size={iconSize} class="slds-m-right_xx-small"></lightning-icon>
+                                    <lightning-formatted-text value={modalTitle}></lightning-formatted-text>
+                                </div>
+                            </template>
+                        </lightning-layout-item>
+                        <lightning-layout-item alignment-bump="left">
+                            <div class="continuingeducart-nav-button-group">
+                                <lightning-button-group>
+                                    <lightning-button-icon title={label.REFRESH_LABEL} icon-name="utility:refresh" value="refresh" onclick={handleRefreshOnclick}></lightning-button-icon>
+                                </lightning-button-group>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+
+                <div class="continuingeducart-body">
+                    <template lwc:if={hasTransactionOrders}>
+                        <template for:each={transactionOrdersResponse} for:item="order">
+                            <div class="slds-m-around_x-large slds-box" key={order.Id}>
+
+                                <c-continuing-edu-cart-order
+                                    tro-record={order}
+                                    
+                                    header-label={headerLabel}
+                                    check-out-button-label={checkOutButtonLabel}
+                                    clear-all-button-label={clearAllButtonLabel}
+                                    
+                                    transaction-line-fields={transactionLineFields}
+                                    delete-icon-name={deleteIconName}
+                                    is-quantity-column-editable={isQuantityColumnEditable}
+                                    quantity-error-message={quantityErrorMessage}
+                                    
+                                    confirmation-box-body={confirmationBoxBody}
+                                    confirmation-header={confirmationHeader}
+                                    confirmation-yes-button-label={confirmationYesButtonLabel}
+                                    confirmation-no-button-label={confirmationNoButtonLabel}
+                                    
+                                    clear-all-transaction-line-toast-message={clearAllTransactionLineToastMessage}
+                                    remove-transaction-line-toast-message={removeTransactionLineToastMessage}
+                                    
+                                    sub-total-price-label={subTotalPriceLabel}
+                                    discount-price-label={discountPriceLabel}
+                                    total-price-label={totalPriceLabel}
+                                    additional-order-fields={additionalOrderFields}
+                                    
+                                    payment-screen-site-page-name={paymentScreenSitePageName}
+                                    
+                                    terms-and-conditions-mode={termsAndConditionsMode}
+                                    terms-and-conditions-url-flow-name={termsAndConditionsUrlFlowName}
+
+                                    table-text-display-mode={tableTextDisplayMode}
+
+                                    enable-debug-mode={enableDebugMode}
+                                    is-community={isCommunity}>
+                                </c-continuing-edu-cart-order>
+                            </div>
+                        </template>
+                    </template>
+                    <template lwc:else>
+                        <div class="continuingeducart-warningcontainer slds-card slds-theme_shade slds-p-around_xx-small">
+                            <div class="slds-card__header slds-grid">
+                                <div class="slds-notify slds-notify_alert slds-alert_info" role="alert">
+                                    <span class="slds-assistive-text">
+                                        <lightning-formatted-rich-text
+                                            value={label.INFO_LABEL}
+                                        ></lightning-formatted-rich-text>
+                                    </span>
+                                    <h2>
+                                        <lightning-formatted-rich-text
+                                            value={noTransactionOrderErrorMessage}
+                                        ></lightning-formatted-rich-text>
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+            </div>
+        </template>
+
+
+    </div>
+
+</template>

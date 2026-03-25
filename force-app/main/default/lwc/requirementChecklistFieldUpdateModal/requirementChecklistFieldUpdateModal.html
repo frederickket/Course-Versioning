@@ -1,0 +1,43 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+
+        <div class="component-body slds-is-relative slds-card">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel} ></lightning-spinner>
+            </div>
+            <template if:true={isInitSuccess}>
+    
+                <lightning-record-edit-form
+                    class="requirementchecklistfieldupdatemodal-editform"
+                    object-api-name={targetObjectName}
+                    record-id={targetRecordId}
+                    onsuccess={handleSaveSuccess} 
+                    onerror={handleSaveError}
+                    onload={handleLoading}
+                >
+
+                <lightning-layout multiple-rows>
+                    <template for:each={objectFieldList} for:item="fieldName">
+
+                        <lightning-layout-item key={fieldName} size="12" large-device-size="6" medium-device-size="12" class="slds-p-around_x-small">
+                            <lightning-input-field field-name={fieldName} variant="standard" class="requirementchecklistfieldupdatemodal-inputfield"></lightning-input-field>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+                  
+                <button type="submit" class="requirementchecklistfieldupdatemodal-hiddensubmitbutton"></button>
+                </lightning-record-edit-form>
+            </template>
+        </div>
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" onclick={handleCloseClick} label={closeLabel} class="slds-p-right_xx-small requirementchecklistfieldupdatemodal-closebutton"></lightning-button>
+        <lightning-button variant="neutral" onclick={handleSaveClick} label={saveLabel} value={buttonSave} class="slds-p-right_xx-small requirementchecklistfieldupdatemodal-savebutton"></lightning-button>
+        <lightning-button variant="brand" onclick={handleSaveClick} label={saveAndMarkAsDoneLabel} value={buttonSaveDone}></lightning-button>
+    </lightning-modal-footer>
+	
+</template>

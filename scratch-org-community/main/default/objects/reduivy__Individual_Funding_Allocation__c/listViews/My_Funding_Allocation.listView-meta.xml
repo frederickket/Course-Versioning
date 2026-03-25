@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>My_Funding_Allocation</fullName>
+    <columns>NAME</columns>
+    <columns>reduivy__Study_Funding__c</columns>
+    <columns>reduivy__Start_Date__c</columns>
+    <columns>reduivy__End_Date__c</columns>
+    <columns>reduivy__Amount__c</columns>
+    <columns>reduivy__Status__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>My Sholarship</label>
+</ListView>

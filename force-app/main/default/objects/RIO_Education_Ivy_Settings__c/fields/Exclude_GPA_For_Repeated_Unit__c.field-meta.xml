@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Exclude_GPA_For_Repeated_Unit__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Exclude the non best attempt repeated individual enrollment from GPA and Credits calculation.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Exclude the non best attempt repeated individual enrollment from GPA and Credits calculation.</inlineHelpText>
+    <label>Exclude GPA/Credits For Repeated Unit</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

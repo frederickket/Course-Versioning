@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Approved_Letter_Grade</fullName>
+    <active>true</active>
+    <description>Approved Letter Grade is required when updating the credit transfer application to an approved status.</description>
+    <errorConditionFormula>AND(
+ISBLANK(TEXT(Approved_Letter_Grade__c )),
+ISPICKVAL(Status__c, &apos;Approved&apos;)
+)</errorConditionFormula>
+    <errorDisplayField>Approved_Letter_Grade__c</errorDisplayField>
+    <errorMessage>Approved Letter Grade is required when updating the credit transfer application to an approved status.</errorMessage>
+</ValidationRule>

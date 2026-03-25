@@ -1,0 +1,314 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess} >
+            <div class="slds-m-around_medium">
+                <div class="ipepathway-header slds-p-bottom_x-small">
+                    <lightning-layout class="slds-wrap">
+                        
+                        <lightning-layout-item size="12" large-device-size="3">
+                            <template if:true={showModalHeader}>
+                                <div class="ipepathway-title slds-card__header-title">
+                                    <lightning-icon icon-name={modalIconName} size="medium" class="slds-m-right_xx-small"></lightning-icon>
+                                    <lightning-formatted-text value={modalTitle}></lightning-formatted-text>
+                                </div>
+                            </template>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="12" large-device-size="6">
+                            <div class="ipepathway-button-group slds-align_absolute-center">
+                                <template if:true={hasPathway}>
+                                    <lightning-layout multiple-rows="true">
+                                        <template for:each={ipwList} for:item="ipw">
+                                            <lightning-layout-item key={ipw.Id}>
+                                                <c-ipe-pathways-individual-pathway-button
+                                                    ipw-record={ipw}
+                                                    current-ipw-id={currentIpwId}
+                                                    ipw-button-label-prefix={ipwButtonLabelPrefix}
+                                                    enable-debug-mode={enableDebugMode}
+                                                    onpathwayselect={handleSelectPathwayEvent}>
+                                                </c-ipe-pathways-individual-pathway-button>
+                                            </lightning-layout-item>
+                                        </template>
+                                    </lightning-layout>
+                                </template>
+                                <template if:false={hasPathway}>
+                                    {pleaseAddPathwayText}
+                                </template>
+                            </div>
+                        </lightning-layout-item>
+                        
+                        <lightning-layout-item alignment-bump="left">
+                            <div class="ipepathway-nav-button-group">
+                                <template if:false={isCurrentPathwayAllowEnrollment}>
+                                    <lightning-icon icon-name="utility:lock" title={label.LOCKED_LABEL} size="x-small" class="slds-p-right_x-small"></lightning-icon>
+                                </template>
+
+                                <lightning-button-group>
+                                    <template if:true={showStudyPathwayButton}>
+                                        <lightning-button-icon title={label.STUDY_PATHWAY_LABEL} variant={studyPathwayBtnVariant} icon-name={studyPathwayButtonIconName} value="studypathway" onclick={handleStudyPathwayClick}></lightning-button-icon>
+                                    </template>
+
+                                    <template if:true={showMyCalendarButton}>
+                                        <lightning-button-icon title={label.MY_CALENDAR_LABEL} variant={myCalendarBtnVariant} icon-name={myCalendarButtonIconName} value="calender" onclick={handleMyCalendarBtnClick}></lightning-button-icon>
+                                    </template>
+
+                                    <template if:true={showChildIpeEnrollmentButton}>
+                                        <lightning-button-icon title={label.MAJOR_MINOR_ENROLLMENT_LABEL} icon-name={childIpeEnrollmentButtonIconName} value="enrollment" onclick={handleEnrollmentClick}></lightning-button-icon>
+                                    </template>
+
+                                    <template if:true={showNewPathwayButton}>
+                                        <lightning-button-icon title={label.ADD_NEW_PATHWAY_LABEL} icon-name={addPathwayButtonIconName} value="addpathway" onclick={handleAddPathwayClick}></lightning-button-icon>
+                                    </template>
+
+                                    <template lwc:if={showFilterPanel}>
+                                        <lightning-button-icon title={label.FILTER_LABEL} icon-name="utility:filterList" onclick={handleToggleFilterPanel} class="slds-float_right" variant="brand"></lightning-button-icon>
+                                    </template>
+                                    <template lwc:else>
+                                        <lightning-button-icon title={label.FILTER_LABEL} icon-name="utility:filterList" onclick={handleToggleFilterPanel} class="slds-float_right" variant="base"></lightning-button-icon>
+                                    </template>
+                                    
+                                    <lightning-button-menu onselect={handleMenuSelect} menu-alignment="auto">
+                                        <template if:true={showWithdrawFromTermButton}>
+                                            <lightning-menu-item value="withdrawfromterm" label={label.WITHDRAW_FROM_TERM_LABEL} prefix-icon-name="utility:cancel_transfer"></lightning-menu-item>
+                                        </template>
+                                        <template if:true={showLockingButton}>
+                                            <template lwc:if={isCurrentPathwayAllowEnrollment}>
+                                                <lightning-menu-item value="updatelock" label={label.LOCK_TERM_LABEL} prefix-icon-name="utility:lock"></lightning-menu-item>
+                                            </template>
+                                            <template lwc:else>
+                                                <lightning-menu-item value="updatelock" label={label.UNLOCK_TERM_LABEL} prefix-icon-name="utility:unlock"></lightning-menu-item>
+                                            </template>
+                                        </template>
+                                        <lightning-menu-item value="refresh" label={label.REFRESH_LABEL} prefix-icon-name="utility:refresh"></lightning-menu-item>
+                                        <lightning-menu-item value="help" label={label.HELP_LABEL} prefix-icon-name="utility:help_center"></lightning-menu-item>
+                                    </lightning-button-menu>
+                                </lightning-button-group>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+                
+                <template if:true={showMyCalendar}>
+                    <div class="slds-m-top_medium slds-m-bottom_medium slds-box">
+                        <c-contact-calendar
+                            record-id={contactId}
+                            modal-title={myCalendarModalTitle}
+                            modal-icon-name={myCalendarModalIconName}
+                            timeline-max-time={myCalendarTimelineMaxTime}
+                            timeline-min-time={myCalendarTimelineMinTime}
+                            study-session-info-fields={myCalendarStudySessionInfoFields}
+                            study-session-time-info-fields={myCalendarStudySessionTimeInfoFields}
+                            study-event-info-fields={myCalendarStudyEventInfoFields}
+                            enrollment-statuses={myCalendarEnrollmentStatuses}
+                            calendar-view={myCalendarView}
+                            calendar-header-button-left={myCalendarHeaderButtonLeft}
+                            calendar-header-button-center={myCalendarHeaderButtonCenter}
+                            calendar-header-button-right={myCalendarHeaderButtonRight}
+                            use-iso-week={myCalendarUseIsoWeek}
+                            enable-debug-mode={enableDebugMode}>
+                        </c-contact-calendar>
+                    </div>
+                </template>
+
+                <lightning-tabset>
+
+                    <lightning-tab if:true={individualEnrollmentTabLabel} label={individualEnrollmentTabLabel}>
+
+                        <div class="ipepathway-individualenrollment-filterpanelcontainer">
+                            <div class={panelClasses}>
+                                <div class="ipepathway-individualenrollment-filterpanelheader slds-p-around_small slds-border_bottom">
+                                    <lightning-layout horizontal-align="spread">
+                                        <lightning-layout-item>
+                                            <lightning-button 
+                                            variant="neutral"
+                                            label={label.CLEAR_LABEL} 
+                                            onclick={handleClearClick}
+                                            ></lightning-button>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item>
+                                            <lightning-button 
+                                            variant="brand"
+                                            label={label.APPLY_LABEL} 
+                                            onclick={handleApplyClick} 
+                                            ></lightning-button>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </div>
+                                <div class="slds-panel__body">
+                                    <div class="slds-grid slds-grid_vertical">
+                                        <template if:true={showStudyUnitQuickSearch}>
+                                            <lightning-input class="slds-col"
+                                                name="studyUnitQuickSearch"
+                                                type="search"
+                                                value={draftStudyUnitQuickSearchValue}
+                                                label={label.QUICK_SEARCH_LABEL}
+                                                onchange={handleStudyUnitQuickSearchChange}
+                                                field-level-help={quickSearchHelpTextLabel}
+                                            ></lightning-input>
+                                        </template>
+                                        <template if:true={showUnitListingOption}>
+                                            <lightning-combobox class="slds-col"
+                                                name="unitlistingmode" 
+                                                label={label.LISTING_MODE_LABEL}
+                                                value={draftSelectedUnitListingMode} 
+                                                options={unitListingModeOptions}
+                                                onchange={handleUnitListingModeChange}
+                                            ></lightning-combobox>
+                                        </template>
+                                        <template if:true={showCampusOptions}>
+                                            <lightning-combobox class="slds-col"
+                                                name="campus" 
+                                                label={label.CAMPUS_LABEL}
+                                                value={draftSelectedCampusId} 
+                                                options={campusOptions}
+                                                onchange={handleCampusChange}
+                                            ></lightning-combobox>
+                                        </template>
+                                        <template if:true={hasActiveCustomFilters}>
+                                            <c-custom-filters class="slds-col"
+                                                message-operation-name="ipePathwayFilterUpdate"
+                                                source-record-id={masterIpeId}
+                                                source-object-type="reduivy__Individual_Program_Enrollment__c"
+                                                target-object-type="reduivy__Study_Offering__c"
+                                                custom-filter-configs={customFilterConfigs}
+                                                include-none-options="true"
+                                                onfiltersupdated={handleFiltersUpdate}
+                                                enable-debug-mode={enableDebugMode}
+                                                large-device-column-size="12"
+                                            ></c-custom-filters>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ipepathway-body slds-m-bottom_medium slds-p-bottom_medium">
+                                <template if:true={individualEnrollmentHelptext}>
+                                    <div class="ipepathway-individualenrollment-helptextcontainer slds-p-bottom_large">
+                                        <lightning-formatted-rich-text value={individualEnrollmentHelptext} ></lightning-formatted-rich-text>
+        
+                                    </div>
+                                </template>
+                                <template if:true={currentIpwId}>
+                                    <c-ipe-pathway-term
+                                        master-ipe-id={masterIpeId}
+                                        individual-pathway-id={currentIpwId}
+                                        individual-pathway-info-fields={individualPathwayInfoFields}
+                                        individual-pathway-info-column-no={individualPathwayInfoColumnNo}
+                                        individual-academic-progress-info-fields={individualAcademicProgressInfoFields}
+                                        individual-academic-progress-info-column-no={individualAcademicProgressInfoColumnNo}
+                                        user-mode={userMode}
+                                        study-unit-quick-search-value={studyUnitQuickSearchValue}
+                                        unit-listing-mode={selectedUnitListingMode}
+                                        campus-id={selectedCampusId}
+                                        accordion-background-color={accordionBackgroundColor}
+                                        accordion-text-color={accordionTextColor}
+                                        
+                                        ipe-title-field={ipeTitleField}
+                                        ips-group-title-field={ipsGroupTitleField}
+                                        show-ips-group-info={showIpsGroupInfo}
+                                        ips-group-info-fields={ipsGroupInfoFields}
+                                        ips-group-info-column-no={ipsGroupInfoColumnNo}
+                                        ips-unit-table-fields={ipsUnitTableFields}
+            
+                                        study-unit-info-fields={studyUnitInfoFields}
+                                        study-offering-info-fields={studyOfferingInfoFields}
+                                        study-plan-structure-unit-info-fields={studyPlanStructureUnitInfoFields}
+                                        
+                                        show-enrollment-buttons={canPerformEnrollment}
+                                        pre-enroll-button-icon-name={preEnrollButtonIconName}
+                                        pre-enroll-button-label={preEnrollButtonLabel}
+                                        pre-enroll-enrollment-status={preEnrollEnrollmentStatus}
+                                        withdraw-pre-enroll-button-icon-name={withdrawPreEnrollButtonIconName}
+                                        withdraw-pre-enroll-button-label={withdrawPreEnrollButtonLabel}
+                                        withdraw-pre-enroll-enrollment-status={withdrawPreEnrollEnrollmentStatus}
+                                        enroll-button-icon-name={enrollButtonIconName}
+                                        enroll-button-label={enrollButtonLabel}
+                                        enroll-enrollment-status={enrollEnrollmentStatus}
+                                        unenroll-button-icon-name={unenrollButtonIconName}
+                                        unenroll-button-label={unenrollButtonLabel}
+                                        unenroll-enrollment-status={unenrollEnrollmentStatus}
+                                        unenroll-request-button-icon-name={unenrollRequestButtonIconName}
+                                        unenroll-request-button-label={unenrollRequestButtonLabel}
+                                        unenroll-request-enrollment-status={unenrollRequestEnrollmentStatus}
+                                        waitlist-button-icon-name={waitlistButtonIconName}
+                                        waitlist-button-label={waitlistButtonLabel}
+                                        waitlist-enrollment-status={waitlistEnrollmentStatus}
+                                        withdraw-waitlist-button-icon-name={withdrawWaitlistButtonIconName}
+                                        withdraw-waitlist-button-label={withdrawWaitlistButtonLabel}
+                                        withdraw-waitlist-enrollment-status={withdrawWaitlistEnrollmentStatus}
+            
+                                        request-attempt-max={requestAttemptMax}
+                                        request-attempt-waiting-time={requestAttemptWaitingTime}
+                                        
+                                        custom-filters={customFilters}
+                                        
+                                        missed-failed-unit-listing-option={missedFailedUnitListingOption}
+                                        
+                                        show-enrollment-finalization-button={showEnrollmentFinalizationButton}
+
+                                        onfinalize={handleFinalizeEnrollment}
+
+                                        enable-debug-mode={enableDebugMode}>
+                                    </c-ipe-pathway-term>
+                                </template>
+                            </div>
+                        </div>
+                    </lightning-tab>
+
+                    <lightning-tab if:true={sessionEnrollmentTabLabel} label={sessionEnrollmentTabLabel}>
+                        <template if:true={sessionEnrollmentHelptext}>
+                            <div class="ipepathway-sessionenrollment-helptextcontainer slds-p-bottom_large">
+                                <lightning-formatted-rich-text value={sessionEnrollmentHelptext} ></lightning-formatted-rich-text>
+                            </div>
+                        </template>
+                        <template if:true={currentIpwId}>
+                            <c-ipe-pathway-study-session-enrollment
+                                master-ipe-id={masterIpeId}
+                                individual-pathway-id={currentIpwId}
+                                user-mode={userMode}
+                                study-offering-accordion-background-color={sessionEnrollmentSofAccordionBackgroundColor}
+                                study-offering-accordion-text-color={sessionEnrollmentSofAccordionTextColor}
+                                study-offering-title-field={sessionEnrollmentSofTitleField}
+                                study-offering-info-fields={sessionEnrollmentSofInfoFields}
+                                study-session-title-field={sessionEnrollmentSseTitleField}
+                                study-session-info-fields={sessionEnrollmentSseInfoFields}
+                                study-session-icon={sessionEnrollmentSseIcon}
+                                study-session-time-title-field={sessionEnrollmentSstTitleField}
+                                study-session-time-info-fields={sessionEnrollmentSstInfoFields}
+                                study-session-time-icon={sessionEnrollmentSstIcon}
+                                show-study-session-time-field-label={sessionEnrollmentShowSstFieldLabel}
+                                enable-debug-mode={enableDebugMode}
+
+                                request-attempt-max={requestAttemptMax}
+                                request-attempt-waiting-time={requestAttemptWaitingTime}
+                                
+                                show-enrollment-buttons={canPerformEnrollment}
+                                pre-enroll-button-icon-name={preEnrollButtonIconName}
+                                pre-enroll-button-label={preEnrollButtonLabel}
+                                withdraw-pre-enroll-button-icon-name={withdrawPreEnrollButtonIconName}
+                                withdraw-pre-enroll-button-label={withdrawPreEnrollButtonLabel}
+                                enroll-button-icon-name={enrollButtonIconName}
+                                enroll-button-label={enrollButtonLabel}
+                                unenroll-button-icon-name={unenrollButtonIconName}
+                                unenroll-button-label={unenrollButtonLabel}
+                                waitlist-button-icon-name={waitlistButtonIconName}
+                                waitlist-button-label={waitlistButtonLabel}
+                                withdraw-waitlist-button-icon-name={withdrawWaitlistButtonIconName}
+                                withdraw-waitlist-button-label={withdrawWaitlistButtonLabel}>
+                            </c-ipe-pathway-study-session-enrollment>
+                        </template>
+                    </lightning-tab>
+                </lightning-tabset>
+
+                
+                
+            </div>
+        </template>
+	</div>
+	
+</template>

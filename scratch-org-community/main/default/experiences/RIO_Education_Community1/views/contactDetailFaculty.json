@@ -1,0 +1,125 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:dynamicLayout",
+  "dataProviders" : [ ],
+  "id" : "6fa789eb-c2b4-4c86-9ea0-fd9a3524bd64",
+  "label" : "Contact Detail (Faculty)",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "164aa0f1-75f4-4c6a-915f-da8e899f1623",
+          "columns" : [ {
+            "UUID" : "fb13f434-c9bb-4622-b9bc-794ce645c9d3",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "9",
+            "seedComponents" : [ ]
+          }, {
+            "UUID" : "fc204c43-c040-4777-b431-4398580156cc",
+            "columnKey" : "09d80",
+            "columnName" : "Column 2",
+            "columnWidth" : "3",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "164aa0f1-75f4-4c6a-915f-da8e899f1623",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "tabsetConfig" : {
+              "UUID" : "78003551-456e-49ec-a970-b91e0c0c3309",
+              "activeTab" : "",
+              "tabs" : [ {
+                "UUID" : "15a0695d-f601-42b6-b132-e6df34293348",
+                "allowGuestUser" : false,
+                "locked" : false,
+                "seedComponents" : [ ],
+                "tabKey" : "1",
+                "tabName" : "My Details"
+              } ],
+              "useOverflowMenu" : true
+            }
+          },
+          "componentName" : "forceCommunity:tabLayout",
+          "id" : "78003551-456e-49ec-a970-b91e0c0c3309",
+          "regions" : [ {
+            "components" : [ {
+              "componentAttributes" : {
+                "recordId" : "{!recordId}"
+              },
+              "componentName" : "forceCommunity:recordDetail",
+              "id" : "53d42a21-f76a-421d-b6c2-70d685892909",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            } ],
+            "id" : "15a0695d-f601-42b6-b132-e6df34293348",
+            "regionLabel" : "My Details",
+            "regionName" : "1",
+            "renditionMap" : { },
+            "type" : "region"
+          } ],
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "fb13f434-c9bb-4622-b9bc-794ce645c9d3",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      }, {
+        "components" : [ {
+          "componentAttributes" : {
+            "allowedFileTypes" : ".jpg,.png,.jpeg",
+            "enableDebugMode" : false,
+            "fileCategory" : "Profile Picture",
+            "noImageMessage" : "Upload a profile picture",
+            "recordId" : "{!recordId}"
+          },
+          "componentName" : "reduivy:contactProfilePanel",
+          "id" : "3b4d9428-97b2-44ce-97e8-dd4572eeecfe",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "fc204c43-c040-4777-b431-4398580156cc",
+        "regionLabel" : "Column 2",
+        "regionName" : "09d80",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "0e0ac7df-95b3-41c8-b73c-3350695f638a",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "{!Record._Object}: {!Record._Title}"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "5df56683-c13f-4c39-bdd3-cc78cd9c48b0",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "16068556-33a6-43d3-932d-b69d3f605d7b",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "detail-003"
+}

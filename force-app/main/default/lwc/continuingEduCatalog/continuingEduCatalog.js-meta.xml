@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <description>Continuing Education study offering catalog.</description>
+    <isExposed>true</isExposed>
+	<masterLabel>REDU Continuing Edu - Offering Catalog</masterLabel>
+	<targets>
+		<target>lightning__AppPage</target>
+		<target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+	</targets>
+		<targetConfigs>
+			<targetConfig targets="lightning__AppPage, lightningCommunity__Default">
+                <property name="objectApiName" type="String" label="Object Name" description="Enter an object name"/>
+                
+                <!--Filtering component-->
+                <property name="backgroundImageUrl" type="String" label="Background Image URL (Filtering)" description="Add the public URL to display background image here."/>
+                <property name="headerLabel" type="String" label="Header Label (Filtering)" description="Enter a value to define the header of the component i.e. Continuing Education Catalog."/>
+                <property name="clearAllFilterLabel" label="Clear All Button Label (Filtering)" type="String"  description="Enter the label of the clear all button"/>
+                <property name="searchButtonLabel" label="Search Button Label (Filtering)" type="String"  description="Enter the label of the search button"/>
+                <property name="globalSearchFieldApiName" type="String" label="Global Search Field Name (Filtering)" description="Enter the API name of the global search field."/>
+                <property name="globalSearchBoxLabel" label="Global Search Box Label (Filtering)" type="String"  description="Enter the label of the global search box"/>
+    
+                <property name="customFilter1Active" label="Custom Filter 1 - Active (Filtering)" type="Boolean" default="false" description="Activate custom filter 1"/>
+                <property name="customFilter1Label" label="Custom Filter 1 - Label (Filtering)" type="String" default="" description="Label for custom filter 1"/>
+                <property name="customField1ApiName" label="Custom Field 1 - Name (Filtering)" type="String" default="" description="The API name of the custom filter 1" />
+    
+                <property name="customFilter2Active" label="Custom Filter 2 - Active (Filtering)" type="Boolean" default="false" description="Activate custom filter 2"/>
+                <property name="customFilter2Label" label="Custom Filter 2 - Label (Filtering)" type="String" default="" description="Label for custom filter 2"/>
+                <property name="customField2ApiName" label="Custom Field 2 - Name (Filtering)" type="String" default="" description="The API name of the custom filter 2" />
+    
+                <property name="customFilter3Active" label="Custom Filter 3 - Active (Filtering)" type="Boolean" default="false" description="Activate custom filter 3"/>
+                <property name="customFilter3Label" label="Custom Filter 3 - Label (Filtering)" type="String" default="" description="Label for custom filter 3"/>
+                <property name="customField3ApiName" label="Custom Field 3 - Name (Filtering)" type="String" default="" description="The API name of the custom filter 3" />
+    
+                <property name="customFilter4Active" label="Custom Filter 4 - Active (Filtering)" type="Boolean" default="false" description="Activate custom filter 4"/>
+                <property name="customFilter4Label" label="Custom Filter 4 - Label (Filtering)" type="String" default="" description="Label for custom filter 4"/>
+                <property name="customField4ApiName" label="Custom Field 4 - Name (Filtering)" type="String" default="" description="The API name of the custom filter 4" />
+    
+                <!--Listing component-->
+                <property name="predefinedFilters" type="String" label="Object Filter Criteria (Listing)" description="Enter criteria to define the default records to be shown on the continuing education wizard e.g. (reduivy__field__c = 'Test' AND reduivy__field__c = 'A' ) OR (reduivy__test__c = true)."/>
+                <property name="noOfRecordsPerPage" type="Integer" label="Number of Records to Display (Listing)" description="Enter a value to show how many number of record card to be visible in a single view i.e. on “show more” the same number will be added."/>
+                <property name="imageFieldApiName" type="String" label="Image Field Name (Listing)" description="Api name of the image field to display,Add image of resolution 1500 x 300 pixels."/>
+                
+                <property name="field1ApiName" type="String" label="Field 1 Name (Listing)" description="To display record related details enter the API name of the field e.g. StartDate__c or Description__c."/>
+                <property name="field2ApiName" type="String" label="Field 2 Name (Listing)" description="To display record related details enter the API name of the field e.g. StartDate__c or Description__c."/>
+                <property name="field3ApiName" type="String" label="Field 3 Name (Listing)" description="To display record related details enter the API name of the field e.g. StartDate__c or Description__c."/>
+                <property name="field4ApiName" type="String" label="Field 4 Name (Listing)" description="To display record related details enter the API name of the field e.g. StartDate__c or Description__c."/>
+                
+                <property name="sortByField1ApiName" type="String" label="Sort By Field 1 Name (Listing)" description="The API name of the first sort by field."/>
+                <property name="sortByField2ApiName" type="String" label="Sort By Field 2 Name (Listing)" description="The API name of the second sort by field."/>
+                <property name="sortByFieldLabel" type="String" label="Sorting Picklist Label (Listing)" description="Enter the name which will be visible as label on the sorting combobox."/>
+                <property name="showMoreButtonLabel" type="String" label="Show More Button Label (Listing)" description="Enter the name which will be visible as label on the show more button."/>
+                <property name="filteredResultFoundHeading" type="String" label="Filter Result Label (Listing)" description="Enter the value which will be displayed as heading of filtered result."/>
+                
+                <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+            </targetConfig>
+		</targetConfigs>
+</LightningComponentBundle>

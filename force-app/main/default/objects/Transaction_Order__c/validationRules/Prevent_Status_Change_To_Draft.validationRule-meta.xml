@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prevent_Status_Change_To_Draft</fullName>
+    <active>true</active>
+    <description>Prevents changing the status to Draft or Void when the total paid amount is not zero.</description>
+    <errorConditionFormula>AND(
+    ISCHANGED(Status__c),
+    OR(
+        ISPICKVAL(Status__c, &apos;Draft&apos;),
+        ISPICKVAL(Status__c, &apos;Void&apos;)
+    ),
+    Total_Paid_Amount__c != 0
+)</errorConditionFormula>
+    <errorDisplayField>Status__c</errorDisplayField>
+    <errorMessage>You cannot update the status because there is a payment applied to it.</errorMessage>
+</ValidationRule>

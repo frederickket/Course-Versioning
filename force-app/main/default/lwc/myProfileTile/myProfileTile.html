@@ -1,0 +1,11 @@
+<template>
+    <div class="my-tile" onclick={handleClick}>
+        <div class="tile" onclick={handleClick}>
+            <lightning-icon icon-name={iconName} size={iconSize} alternative-text="Tile Icon"></lightning-icon>
+            <div class="tile-content">
+                <h2 class="tile-title">{tileName}</h2>
+                <p class="tile-description">{description}</p>
+            </div>
+        </div>
+    </div>
+</template>

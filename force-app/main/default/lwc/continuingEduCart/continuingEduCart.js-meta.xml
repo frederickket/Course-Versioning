@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <description>Continuing Education shopping cart.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>REDU Continuing Edu - Shopping Cart</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__Tab</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__HomePage, lightning__RecordPage, lightningCommunity__Default">
+            <property name="modalTitle" type="String" label="Modal Title" description="Component modal title." required="true" default="Summary"/>
+            <!-- icon properties -->
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:webcart" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="iconSize" type="String" label="Icon Size" description="Enter the size of icon e.g small , medium and large." default="medium" datasource="large,medium,small"/>
+            
+            <!-- record id properties -->
+            <property name="paramOrderId" label="Order id" type="String" description="In case of portal enter the transaction order id paramater to fetch from URL, Eg {!orderId} or {!recordId}. In case of internal salesforce then left blank it will fetch the order id from lightning page. Else it will fetch all the draft order."/>           
+            
+            <!-- header & footer properties -->
+            <property name="headerLabel" type="String" label="Transaction Order Header Label" description="Enter the name which will be displayed as prefix for transaction order" required="true" default="Order #"/>
+
+            <property name="checkOutButtonLabel" type="String" label="Checkout Button Label" description="Enter the checkout button label." default="Make payment"/>
+            <property name="clearAllButtonLabel" type="String" label="Clear All Button Label" description="Enter the name which will be displayed as label on the clear button label."/>
+            <property name="clearAllTransactionLineToastMessage" type="String" label="Clear All Toast Message" description="Enter the message which will be displayed when user click on clear all button." required="true" default="All items for the transaction order were deleted successfully."/>
+            
+            <!-- table properties -->
+			<property name="transactionLineFields" type="String" label="Transaction Line Item Fields" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c." required="true" default="reduivy__Item_Name__c;reduivy__Quantity__c;reduivy__Unit_Price__c;reduivy__Subtotal__c"/>
+            <property name="deleteIconName" type="String" label="Delete Button Icon Name" description="For displaying delete button icon enter the icon name e.g. action:delete." default="action:delete"/>
+            <property name="isQuantityColumnEditable" type="Boolean" label="Quantity Editable" description="This attribute will enable or disable editing quantity field." default="true"/>
+            <property name="quantityErrorMessage" type="String" label="Quantity Error Toast Message" description="Enter the message which will be displayed when quantity will be negative or in decimal." required="true" default="Kindly enter appropriate quantity!"/>
+            
+            <property name="tableTextDisplayMode" label="Table Text Display Mode" type="String" default="Clip Text" description="Supported options are: Wrap Text, Clip Text." datasource="Wrap Text,Clip Text"/>
+            
+            <!-- no transaction line item div properties -->
+            <property name="noTransactionOrderErrorMessage" type="String" label="No Transaction Order Error Message" description="Enter the message which will be displayed as error when no transaction order will be there." default="No transaction order available or it has been submitted." required="true"/>
+            
+            <!-- delete modal properties -->
+            <property name="confirmationHeader" type="String" label="Remove Transaction Line Item Confirmation Title" description="Enter the confirmation title." required="true" default="Remove Item"/>
+            <property name="confirmationBoxBody" type="String" label="Remove Transaction Line Item Confirmation Message" description="Enter the confirmation message." required="true" default="Are you sure you want to delete the item(s) from the order?"/>
+            <property name="confirmationYesButtonLabel" type="String" label="Confirmation Yes Button Label" description="Text will be visible on the delete popup button." required="true" default="Confirm"/>
+            <property name="confirmationNoButtonLabel" type="String" label="Confirmation No Button Label" description="Text will be visible on the delete popup button." required="true" default="Cancel"/>
+            <property name="removeTransactionLineToastMessage" type="String" label="Remove Transaction Line Item Toast Message" description="Enter the message which will be displayed in toast body, when transaction line item is deleted" required="true" default="The item was deleted successfully."/>
+            
+            <!-- pricing summary properties -->
+            <property name="subTotalPriceLabel" type="String" label="Subtotal Price Label" description="Enter the subtotal price label. Leave it empty to hide the field." default="Subtotal"/>
+            <property name="discountPriceLabel" type="String" label="Discount Price Label" description="Enter the discount price label. Leave it empty to hide the field." default="Discount"/>
+            <property name="totalPriceLabel" type="String" label="Total Price Label" description="Enter the total price label. Leave it empty to hide the field." default="Total Price"/>
+            <property name="additionalOrderFields" type="String" label="Additional Transaction Order Fields Name" description="Additional Transaction Order Fields to display on the summary section in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            
+            <!-- redirection properties -->
+            <property name="paymentScreenSitePageName" type="String" label="Payment Screen Site Page Name" description="Enter the name of the redirection site page / full URL which you want to redirect to. Add {orderId} parameter which will be replaced with the related order id." required="true" default="paymentScreen?orderId={orderId}"/>
+
+            <!--tnc properties-->
+            <property name="termsAndConditionsMode" type="String" label="Terms and Conditions Mode" description="The mode to show the Terms and Conditions." datasource="None,Checkbox with Url,Custom Screen Flow Mode" default="None"/>
+            <property name="termsAndConditionsUrlFlowName" type="String" label="Terms and Conditions URL/Flow Name" description="The full URL of the Terms and Conditions, or the flow name of the Terms and Conditions."/>
+
+            <!-- custom order properties -->
+            <property name="orderCustomCriteria" type="String" label="Order Custom Criteria" description="The custom criteria for listing transaction order e.g., reduivy__Status__c = 'Draft'." />
+
+            <!-- debug properties -->
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode in component."/>
+            
+            <!-- obsolete -->
+            <property name="basePath" type="String" label="Reserved For Internal Use 1" description="Enter the base path. Required if the component is in community page."/>
+            <property name="totalContainerStyling" type="String" label="Reserved For Internal Use 2" description="To define the styling of the container enter styling attributes here e.g. font-weight: 600;font-size: 14px;."/>
+            <property name="headerContainerStyling" type="String" label="Reserved For Internal Use 3" description="To define the styling of header container enter styling attributes here"/>
+            <property name="footerContainerStyling" type="String" label="Reserved For Internal Use 4" description="To define the styling of header container enter styling attributes here"/>
+            <property name="transactionLineTableLastColumnHeading" type="String" label="Reserved For Internal Use 5" description="Enter the name which will be displayed as heading of last column in the transaction line item table."/>
+            <property name="headerLabelCss" type="String" label="Reserved For Internal Use 6" description="To define the styling of the displaying heading enter styling attributes here e.g. font-weight: 600;font-size: 14px;."/>
+            <property name="saveErrorMessage" type="String" label="Reserved For Internal Use 7" description="Enter the message which will be displayed when error occured during checkout."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Required_UnitPrice</fullName>
+    <active>true</active>
+    <description>To ensure the unit price is set.</description>
+    <errorConditionFormula>AND(
+ISBLANK(Unit_Price__c),
+NOT(ISPICKVAL(Transaction_Type__c, &apos;Non Transactional Entry&apos;))
+)</errorConditionFormula>
+    <errorDisplayField>Unit_Price__c</errorDisplayField>
+    <errorMessage>Please enter the unit price.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,140 @@
+<!--
+	@author      WDCi (XW)
+	@date        May 2024
+	@group       Aura
+	@group-content 
+	@description The container of the chatbot in utility bar
+	@changehistory
+	ISS-001916 20-05-2024 XW - chatbotUtilityBar
+	ISS-001916 20-05-2024 XW - Pathway Visualizers
+	ISS-002125 16-10-2024 XW - force it to not for community
+	ISS-002189 16-12-2024 XW - added show study unit quick search
+ 	ISS-002375 02-05-2025 xW - added configurable attributes
+
+-->
+<aura:component implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:hasSObjectName" access="global"
+	controller="REDU_ChatbotUtilityBar_LCTRL">
+
+	<!-- configurable attributes -->
+	<aura:attribute name="modalTitle" type="String" access="global"/>
+	<aura:attribute name="modalIconName" access="global" type="String" />
+	<aura:attribute name="enableDebugMode" type="Boolean" access="global" default="false" />
+	<aura:attribute name="sObjectName" type="String" />
+	<aura:attribute name="accordionBackgroundColor" type="String" access="global" />
+	<aura:attribute name="accordionTextColor" access="global" type="String" />
+	<aura:attribute name="forCommunity" type="Boolean" access="global" default="false" />
+
+	<!-- Program Completion Visualizer -->
+	<aura:attribute name="programCompletionVisualizerModalTitle" type="String" access="global" />
+	<aura:attribute name="programCompletionVisualizerModalIconName" access="global" type="String" />
+	<aura:attribute name="showIpsGroupInfo" type="Boolean" access="global"/>
+
+	<aura:attribute name="ipsGroupTitleField" type="String" access="global" />
+	<aura:attribute name="ipsGroupTitleFormat" type="String" access="global" /> 
+	<aura:attribute name="ipeInfoFields" type="String" access="global" />
+	<aura:attribute name="ipeInfoColumnNo" type="Integer" access="global" />
+	<aura:attribute name="ipsInfoFields" type="String" access="global" />
+	<aura:attribute name="ipsInfoFieldsUnit" type="String" access="global" /> 
+	<aura:attribute name="ipsInfoColumnNo" type="Integer" access="global" />
+	<aura:attribute name="ipsUnitFields" type="String" access="global" />
+
+	<aura:attribute name="idvEnrollmentFields" type="String" access="global"/>
+
+	<aura:attribute name="enableClickableRefField" type="Boolean" access="global" />
+	<aura:attribute name="enableSetPrimaryIps" type="Boolean" access="global" />
+	<aura:attribute name="enableViewEnrollmentHistory" type="Boolean" access="global" />
+	<aura:attribute name="hrefTargetType" type="String" access="global" />
+	<aura:attribute name="summaryInfoField" type="String" access="global" /> 
+	
+	<aura:attribute name="progressRingColor" type="String" access="global" /> 
+	<aura:attribute name="progressRingPercentageField" type="String" access="global" /> 
+
+
+	<!-- Pathway Visualizer -->
+	<aura:attribute name="pathwayVisualizerModalTitle" type="String" access="global" />
+	<aura:attribute name="pathwayVisualizerModalIconName" access="global" type="String" />
+
+
+	<aura:attribute name="studyPathwayInfoFields" access="global" type="String" /> 
+	<aura:attribute name="studyPathwayTermTitlePrefix" access="global" type="String" />
+	<aura:attribute name="studyPathwayTermInfoFields" access="global" type="String" />
+	<aura:attribute name="studyPathwayUnitTitleField" access="global" type="String" />
+	<aura:attribute name="studyPathwayUnitInfoFields" access="global" type="String" />
+	<aura:attribute name="studyPathwayUnitIcon" access="global" type="String" />
+	<aura:attribute name="studyPathwayGroupTitleField" access="global" type="String" />
+	<aura:attribute name="studyPathwayGroupInfoFields" access="global" type="String" />
+	<aura:attribute name="studyPathwayGroupIcon" access="global" type="String" />
+
+	<aura:attribute name="comboboxLabel" access="global" type="String" />
+	<aura:attribute name="showStudyUnitQuickSearch" access="global" type="Boolean" default="false" />
+	<aura:attribute name="showStudyPlanOptions" access="global" type="Boolean" />
+
+	<!-- internal attribute -->
+	<aura:attribute name="recordIdInitialized" type="Boolean" />
+
+	<!-- spinner -->
+	<aura:attribute name="loadingCount" type="Integer" default="0" />
+
+	<!-- handlers-->
+	<aura:handler name="change" value="{!v.recordId}" action="{!c.doInit}" />
+	<!-- <aura:handler name="change" value="{!v.recordId}"-->
+
+	<div class="component-body slds-is-relative slds-card">
+		<div class="spinnerholder">
+			<aura:if isTrue="{!v.loadingCount >= 1}">
+				<div id="spinnerdiv">
+					<lightning:spinner aura:id="mySpinner" alternativeText="{!$Label.c.Loading}" />
+				</div>
+			</aura:if>
+				<!--ISS-002125-->
+				<c:chatbot 
+				recordId="{!v.recordId}" 
+				objectApiName="{!v.sObjectName}"
+				accordionBackgroundColor="{!v.accordionBackgroundColor}"
+				accordionTextColor="{!v.accordionTextColor}"
+
+				programCompletionVisualizerModalTitle="{!v.programCompletionVisualizerModalTitle}"
+				programCompletionVisualizerModalIconName="{!v.programCompletionVisualizerModalIconName}"
+				showIpsGroupInfo="{!v.showIpsGroupInfo}"
+				ipsGroupTitleField="{!v.ipsGroupTitleField}"
+				ipsGroupTitleFormat="{!v.ipsGroupTitleFormat}"
+				ipeInfoFields="{!v.ipeInfoFields}"
+				ipeInfoColumnNo="{!v.ipeInfoColumnNo}" 
+				ipsInfoFields="{!v.ipsInfoFields}"
+				ipsInfoFieldsUnit="{!v.ipsInfoFields}"
+				ipsInfoColumnNo="{!v.ipsInfoColumnNo}" 
+				ipsUnitFields="{!v.ipsUnitFields}"
+				idvEnrollmentFields="{!v.idvEnrollmentFields}" 
+				enableClickableRefField="{!v.enableClickableRefField}"
+				enableSetPrimaryIps="{!v.enableSetPrimaryIps}"
+				enableViewEnrollmentHistory="{!v.enableViewEnrollmentHistory}" hrefTargetType="{!v.hrefTargetType}"
+				summaryInfoField="{!v.summaryInfoField}"
+				progressRingColor="{!v.progressRingColor}"
+				progressRingPercentageField="{!v.progressRingPercentageField}"
+				
+				pathwayVisualizerModalTitle="{!v.pathwayVisualizerModalTitle}"
+				pathwayVisualizerModalIconName="{!v.pathwayVisualizerModalIconName}"
+				studyPathwayInfoFields="{!v.studyPathwayInfoFields}"
+				studyPathwayTermTitlePrefix="{!v.studyPathwayTermTitlePrefix}"
+				studyPathwayTermInfoFields="{!v.studyPathwayTermInfoFields}"
+				studyPathwayUnitTitleField="{!v.studyPathwayUnitTitleField}"
+				studyPathwayUnitInfoFields="{!v.studyPathwayUnitInfoFields}"
+				studyPathwayUnitIcon="{!v.studyPathwayUnitIcon}"
+				studyPathwayGroupTitleField="{!v.studyPathwayGroupTitleField}"
+				studyPathwayGroupInfoFields="{!v.studyPathwayGroupInfoFields}"
+				studyPathwayGroupIcon="{!v.studyPathwayGroupIcon}" 
+				showStudyUnitQuickSearch="{!v.showStudyUnitQuickSearch}"
+				showStudyPlanOptions="{!v.showStudyPlanOptions}"
+				comboboxLabel="{!v.comboboxLabel}"
+				
+				enableDebugMode="{!v.enableDebugMode}"
+				isCommunity="false"
+				></c:chatbot>
+				
+			</div>
+		</div>
+
+
+
+
+</aura:component>

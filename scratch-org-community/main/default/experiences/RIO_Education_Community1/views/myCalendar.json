@@ -1,0 +1,84 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:dynamicLayout",
+  "dataProviders" : [ ],
+  "id" : "d4b94600-2c36-42e5-83a3-100386c244d3",
+  "label" : "My Calendar",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "28f67c4b-bb9e-4bbc-bbe3-d93bc2018e7c",
+          "columns" : [ {
+            "UUID" : "57b4486a-9e3a-4796-98d6-e453b12d1a81",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "28f67c4b-bb9e-4bbc-bbe3-d93bc2018e7c",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "calendarHeaderButtonCenter" : "title",
+            "calendarHeaderButtonLeft" : "timeGridDay,timeGridWeek,dayGridMonth,listWeek",
+            "calendarHeaderButtonRight" : "today prev,next",
+            "calendarView" : "listWeek",
+            "enableDebugMode" : false,
+            "enrollmentStatuses" : "Enrolled;Completed",
+            "modalIconName" : "standard:event",
+            "modalTitle" : "Calendar",
+            "recordId" : "",
+            "studyEventInfoFields" : "reduivy__Start_Date_Non_TZ__c;reduivy__Start_Time_Non_TZ__c;reduivy__End_Time_Non_TZ__c",
+            "studySessionInfoFields" : "Name;reduivy__Primary_Faculty__c",
+            "studySessionTimeInfoFields" : "reduivy__Recurrence__c",
+            "timelineMaxTime" : "17:00",
+            "timelineMinTime" : "09:00",
+            "useIsoWeek" : false
+          },
+          "componentName" : "reduivy:contactCalendar",
+          "id" : "5a9587fd-1bbe-4118-91fe-927122aca69b",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "57b4486a-9e3a-4796-98d6-e453b12d1a81",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "eb040e14-8e6c-4f15-9f14-c89a24363c88",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "My Calendar"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "aede578c-5872-4213-90d4-a83d809d65fe",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "75139774-54ba-486a-95c2-4a13755cef0c",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "custom-my-calendar"
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Apply_Non_Repayable_FA__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>Indicator to apply Non Repayable Financial Aid transaction payments on transaction orders.</description>
+    <inlineHelpText>Indicator to apply Non Repayable Financial Aid transaction payments on transaction orders.</inlineHelpText>
+    <label>Apply Non Repayable FA</label>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

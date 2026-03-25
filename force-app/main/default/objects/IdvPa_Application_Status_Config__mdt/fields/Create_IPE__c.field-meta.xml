@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Create_IPE__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Determine whether the individual program enrollment should be created based on the selected individual program application status.</description>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Determine whether the individual program enrollment should be created based on the selected individual program application status.</inlineHelpText>
+    <label>Create IPE</label>
+    <type>Checkbox</type>
+</CustomField>

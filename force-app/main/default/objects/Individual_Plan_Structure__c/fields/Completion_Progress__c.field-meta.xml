@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Completion_Progress__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>IF(Completion_Percentage__c * 100 &lt; 100, 
+IMAGE(IF($Permission.REDU_Admin, &apos;&apos;, &apos;/sfsites/c&apos;) + &apos;/resource/reduivy__redu_resource/images/ProgressBar_Progressing.png&apos;, &apos; &apos;, 10, (Completion_Percentage__c * 100)) &amp;
+IMAGE(IF($Permission.REDU_Admin, &apos;&apos;, &apos;/sfsites/c&apos;) + &apos;/resource/reduivy__redu_resource/images/ProgressBar_NoProgressBlank.png&apos;, &apos; &apos;, 10, (100 - (Completion_Percentage__c * 100))) &amp;
+&apos; &apos; &amp; TEXT(ROUND(Completion_Percentage__c * 100, 0)) &amp; &apos;%&apos;,
+IMAGE(IF($Permission.REDU_Admin, &apos;&apos;, &apos;/sfsites/c&apos;) + &apos;/resource/reduivy__redu_resource/images/ProgressBar_Progressing.png&apos;, &apos; &apos;, 10, 100) &amp; &apos; &apos; &amp; TEXT(ROUND(Completion_Percentage__c * 100, 0)) &amp; &apos;%&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Completion Progress</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

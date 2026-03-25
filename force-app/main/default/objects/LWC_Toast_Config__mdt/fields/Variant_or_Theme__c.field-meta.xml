@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Variant_or_Theme__c</fullName>
+    <description>The variant (info, error, success, warning) for the toast or theme for the alert (default, shade, inverse, alt-inverse, success, info, warning, error, offline).</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>The variant (info, error, success, warning) for the toast or theme for the alert (default, shade, inverse, alt-inverse, success, info, warning, error, offline).</inlineHelpText>
+    <label>Variant or Theme</label>
+    <length>11</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

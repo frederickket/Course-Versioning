@@ -1,0 +1,22 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+            <div class="slds-progress-ring customprogressring-container">
+                <div class="slds-progress-ring__progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow={progress}>
+                    <svg viewBox="-1 -1 2 2">
+                        <path class="slds-progress-ring__path customprogressring-path" d={pathD}></path>
+                    </svg>
+                </div>
+                
+                <div class="slds-progress-ring__content customprogressring-content">
+                    <slot></slot>
+                </div>
+            </div>
+	</div>
+	
+</template>

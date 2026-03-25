@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Academic - Student</label>
+    <protected>false</protected>
+    <values>
+        <field>reduivy__Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>reduivy__Additional_Info_Field_Set__c</field>
+        <value xsi:type="xsd:string">reduivy__Student_Achievement_Details_Fields</value>
+    </values>
+    <values>
+        <field>reduivy__Composite_Key_Value__c</field>
+        <value xsi:type="xsd:string">Academic</value>
+    </values>
+    <values>
+        <field>reduivy__Composite_Key__c</field>
+        <value xsi:type="xsd:string">{reduivy__Type__c}</value>
+    </values>
+    <values>
+        <field>reduivy__Department_Fallback_Field__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>reduivy__Department_Label__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>reduivy__Department_Required__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>reduivy__Agreement_Fallback_Field__c</field>
+        <value xsi:type="xsd:string">reduivy__Educational_Institution_Name__c</value>
+    </values>
+    <values>
+        <field>reduivy__Agreement_Required__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>reduivy__Agreement_Label__c</field>
+        <value xsi:type="xsd:string">{!$Label.reduivy__Student_Achievement_External_Educational_Institution}</value>
+    </values>
+    <values>
+        <field>reduivy__Notes__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>reduivy__Agreement_Recognition_Fallback_Field__c</field>
+        <value xsi:type="xsd:string">reduivy__Recognition_Name__c</value>
+    </values>
+    <values>
+        <field>reduivy__Agreement_Recognition_Label__c</field>
+        <value xsi:type="xsd:string">{!$Label.reduivy__Student_Achievement_Program}</value>
+    </values>
+    <values>
+        <field>reduivy__Agreement_Recognition_Required__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>reduivy__Show_Department__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>reduivy__Show_Agreement__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>reduivy__Show_Agreement_Recognition__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>reduivy__Show_Unit_Code_Field__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>reduivy__Show_Unit_Name_Field__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>reduivy__Unit_Additional_Info_Field_Set__c</field>
+        <value xsi:type="xsd:string">reduivy__Student_Achievement_Details_Fields</value>
+    </values>
+    <values>
+        <field>reduivy__Unit_Code_Fallback_Field__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>reduivy__Unit_Name_Fallback_Field__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>reduivy__Unit_Required__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>reduivy__Wizard_Config__c</field>
+        <value xsi:type="xsd:string">IdvAc_Wizard_Form_Config_Student</value>
+    </values>
+</CustomMetadata>

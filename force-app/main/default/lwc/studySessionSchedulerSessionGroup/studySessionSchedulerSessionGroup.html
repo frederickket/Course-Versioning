@@ -1,0 +1,134 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card slds-m-bottom_x-small">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="studysessionschedulersessiongroup-parentdiv slds-grid slds-wrap">
+                <div>
+                    <lightning-button-icon 
+                        label="icon"
+                        icon-name={expansionIconName} 
+                        variant="bare" 
+                        value={groupUniqueName}
+                        onclick={handleExpansionButtonClick}
+                    >
+                    </lightning-button-icon>
+                </div>
+                <div class="studysessionschedulersessiongroup-checkboxdiv">
+                    <lightning-input variant="label-hidden" type="checkbox" checked={isVisible} onchange={handleVisibilityCheckboxChange} ></lightning-input>
+                </div>
+                <div class="studysessionschedulersessiongroup-groupinfodiv slds-size_9-of-12">
+                    <div class="slds-has-flexi-truncate">
+                        <div class="slds-truncate">
+                            {groupLabel}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class={expansionChildDivCss}>
+                <template lwc:if={hasChildGroups}>
+                    <div class="studysessionschedulersessiongroup-childgroups-div">
+                        <template for:each={childGroups} for:item="childGroupObj">
+                            <c-study-session-scheduler-session-group 
+                                key={childGroupObj.uniquename}
+                                group-obj={childGroupObj}
+                                hidden-groups-and-study-sessions={stringifiedHiddenGroupsAndStudySessions}
+                                parent-ids={stringifiedParentIds}
+                                allow-edit-session={allowEditSession}
+                                allow-delete-session={allowDeleteSession}
+                                allow-facility-assignment={allowFacilityAssignment}
+                                allow-faculty-contact-assignment={allowFacultyContactAssignment}
+                                allow-preview-session={allowPreviewSession}
+                                allow-send-announcement={allowSendAnnouncement}
+                                allow-custom-action={allowCustomAction}
+                                
+                                neutralized-current-calendar-start-date={neutralizedCurrentCalendarStartDate}
+                                neutralized-current-calendar-end-date={neutralizedCurrentCalendarEndDate}
+
+                                custom-action-label={customActionLabel}
+                                custom-action-flow-name={customActionFlowName}
+                                custom-action-flow-finish-behavior={customActionFlowFinishBehavior}
+                                custom-action-show-close-button={customActionShowCloseButton}
+                                edit-form-study-session-field-set-name={editFormStudySessionFieldSetName}
+                                edit-form-study-session-time-field-set-name={editFormStudySessionTimeFieldSetName}
+                                edit-form-sse-column-no={editFormSseColumnNo}
+                                edit-form-sst-column-no={editFormSstColumnNo}
+                                accordion-background-color={accordionBackgroundColor}
+                                accordion-text-color={accordionTextColor}
+                                accordion-button-variant={accordionButtonVariant}
+
+                                study-session-name-format={studySessionNameFormat}
+                                facility-default-criteria={facilityDefaultCriteria}
+                                allow-cross-campus-facility-allocation={allowCrossCampusFacilityAllocation}
+
+                                timeline-min-time={timelineMinTime}
+                                timeline-max-time={timelineMaxTime}
+
+                                onvisibilityupdated={handleVisibilityUpdated}
+                                onstudysessiondeleted={handleStudySessionDeleted}
+                                onpreviewclicked={handlePreviewClicked}
+                                
+                                enable-debug-mode={enableDebugMode}
+                            >
+                            </c-study-session-scheduler-session-group>
+                        </template>
+                    </div>
+                </template>
+                <template lwc:else>
+                    <div class="studysessionschedulersessiongroup-childsessions-div">
+                        <template for:each={childStudySessions} for:item="sseObj">
+                            <template lwc:if={sseObj.display}>
+                                <c-study-session-scheduler-session
+                                    key={sseObj.Id}
+                                    sse-obj={sseObj}
+                                    hidden-groups-and-study-sessions={stringifiedHiddenGroupsAndStudySessions}
+                                    parent-ids={stringifiedParentIds}
+                                    allow-edit-session={allowEditSession}
+                                    allow-delete-session={allowDeleteSession}
+                                    allow-facility-assignment={allowFacilityAssignment}
+                                    allow-faculty-contact-assignment={allowFacultyContactAssignment}
+                                    allow-preview-session={allowPreviewSession}
+                                    allow-send-announcement={allowSendAnnouncement}
+                                    allow-custom-action={allowCustomAction}
+                                    
+                                    neutralized-current-calendar-start-date={neutralizedCurrentCalendarStartDate}
+                                    neutralized-current-calendar-end-date={neutralizedCurrentCalendarEndDate}
+                                    
+                                    custom-action-label={customActionLabel}
+                                    custom-action-flow-name={customActionFlowName}
+                                    custom-action-flow-finish-behavior={customActionFlowFinishBehavior}
+                                    custom-action-show-close-button={customActionShowCloseButton}
+                                    edit-form-study-session-field-set-name={editFormStudySessionFieldSetName}
+                                    edit-form-study-session-time-field-set-name={editFormStudySessionTimeFieldSetName}
+                                    edit-form-sse-column-no={editFormSseColumnNo}
+                                    edit-form-sst-column-no={editFormSstColumnNo}
+                                    accordion-background-color={accordionBackgroundColor}
+                                    accordion-text-color={accordionTextColor}
+                                    accordion-button-variant={accordionButtonVariant}
+                                    
+                                    study-session-name-format={studySessionNameFormat}
+                                    facility-default-criteria={facilityDefaultCriteria}
+                                    allow-cross-campus-facility-allocation={allowCrossCampusFacilityAllocation}
+                                    
+                                    timeline-min-time={timelineMinTime}
+                                    timeline-max-time={timelineMaxTime}
+                                    
+                                    onvisibilityupdated={handleVisibilityUpdated}
+                                    onstudysessiondeleted={handleStudySessionDeleted}
+                                    onpreviewclicked={handlePreviewClicked}
+
+                                    enable-debug-mode={enableDebugMode}
+                                ></c-study-session-scheduler-session>
+                            </template>
+                        </template>
+                    </div>
+                </template>
+            </div>
+        </template>
+	</div>
+	
+</template>

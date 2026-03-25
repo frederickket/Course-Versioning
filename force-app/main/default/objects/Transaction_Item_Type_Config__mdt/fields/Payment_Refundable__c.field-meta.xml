@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Payment_Refundable__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>The refundable checkbox to be set on transaction payment’s refundable when the new prepayment is created.</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>The refundable checkbox to be set on transaction payment’s refundable when the new prepayment is created.</inlineHelpText>
+    <label>Payment Refundable</label>
+    <type>Checkbox</type>
+</CustomField>

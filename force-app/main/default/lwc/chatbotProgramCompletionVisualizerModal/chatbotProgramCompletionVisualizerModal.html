@@ -1,0 +1,153 @@
+<template>
+    <div class="chatbotProgramCompletionVisualizerModal-header">
+        <lightning-modal-header label={modalTitle}></lightning-modal-header>
+    </div>
+
+    <div class="chatbotProgramCompletionVisualizerModal-body component-body">
+
+        <lightning-modal-body class="slds-is-relative slds-card">
+            <template if:true={showModalHeader}>
+                <div class="chatbotProgramCompletionVisualizerModal-cardheader slds-m-bottom_medium slds-p-bottom_medium slds-border_bottom">
+                    <lightning-layout class="slds-wrap">
+                        <lightning-layout-item size="12" large-device-size="4">
+                            <div class="chatbotProgramCompletionVisualizerModal-cardtitle slds-card__header-title">
+                                <lightning-icon icon-name={modalIconName} size="medium" class="slds-m-right_xx-small"></lightning-icon>
+                                <lightning-formatted-text value={modalTitle}></lightning-formatted-text>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+            </template>
+
+            <template if:true={showCompareIpe}>
+                <div class="chatbotProgramCompletionVisualizerModal-compareIpe">
+                    <lightning-layout horizontal-align="center" vertical-align="center" class="slds-p-around_medium" multiple-rows="true">
+                        <template lwc:if={showIpeToCompare}>
+                    <lightning-layout-item size="4" large-device-size="4" small-device-size="12">
+                            <div class="chatbotProgramCompletionVisualizerModal-ipeToCompareCombobox">
+
+                                <c-searchable-combobox
+                                    field-label="Select Individual Program Enrollment to Compare"
+                                    field-name="ipeBeforeCombobox"
+                                    default-value={ipeIdSelectedToCompare}
+                                    options={ipeIdsBefore}
+                                    onchange={handleIpeToCompare}
+                                    enable-debug-mode={enableDebugMode}
+                                    ></c-searchable-combobox>
+                            </div>
+                        </lightning-layout-item>
+                    </template>
+
+                    <lightning-layout-item size="12" large-device-size={ipeLargeSize} medium-device-size="5" small-device-size="12">
+                        
+                        <div class="chatbotProgramCompletionVisualizerModal-ipeBefore">
+
+                            <lightning-layout class="slds-wrap">
+                                <lightning-layout-item class="slds-text-align_center" size="12">
+
+                                    <c-record-view-form record-id={ipeIdBefore}
+                                        object-api-name="reduivy__Individual_Program_Enrollment__c"
+                                        fields={summaryInfoFieldList}
+                                        enable-debug-mode={enableDebugMode}>
+
+                                        <lightning-layout class="slds-wrap">
+                                            <template for:each={summaryInfoFieldList} for:item="field">
+                                                <lightning-layout-item key={field} size="12" large-device-size={infoFieldSize}>
+                                                    <c-output-field field-name={field}></c-output-field>
+                                                </lightning-layout-item>
+                                            </template>
+                                        </lightning-layout>
+
+                                    </c-record-view-form>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+
+                    </lightning-layout-item>
+
+                    <lightning-layout-item>
+                        <div class="chatbotProgramCompletionVisualizerModal-arrow">
+
+                            <lightning-icon 
+                                icon-name="utility:forward" 
+                                alternative-text="To" 
+                                size="large" 
+                            ></lightning-icon>
+                        </div>
+                    </lightning-layout-item>
+                        
+                    <lightning-layout-item  size="12"  large-device-size={ipeLargeSize} medium-device-size="5" small-device-size="12">
+                        <div class="chatbotProgramCompletionVisualizerModal-ipeAfter">
+
+                        
+                            <lightning-layout class="slds-wrap">
+                                <lightning-layout-item class="slds-text-align_center" size="12">
+                                    <c-record-view-form record-id={ipeIdAfter}
+                                        object-api-name="reduivy__Individual_Program_Enrollment__c"
+                                        fields={summaryInfoFieldList} enable-debug-mode={enableDebugMode}>
+                                        <div if:true={ipeAfterIsLoading} id="spinnerDiv" data-id="spinnerDiv" class="slds-is-relative">
+                                            <lightning-spinner alternative-text={label.LOADING_LABEL}></lightning-spinner>
+                                        </div>
+                                        <lightning-layout class="slds-wrap">
+                                            <template for:each={summaryInfoFieldList} for:item="field">
+                                                <lightning-layout-item key={field} size="12" large-device-size={infoFieldSize}>
+                                                    <c-output-field field-name={field}></c-output-field>
+                                                </lightning-layout-item>
+                                            </template>
+                                        </lightning-layout>
+
+                                    </c-record-view-form>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+                </div>
+            </template>
+
+            <div class="chatbotProgramCompletionVisualizerModal-ipeAccordion">
+                <lightning-accordion class="chatbotProgramCompletionVisualizerModal-previewIpe" allow-multiple-sections-open>
+                    <lightning-accordion-section name="previewIpe" label="Click here for details">
+                        <div class="chatbotProgramCompletionVisualizerModal-ipeDetail">
+
+                            <c-program-completion-visualizer 
+                                contact-id={contactId} 
+                                study-program-id={studyProgramId}
+                                study-plan-id={studyPlanId} 
+                                ipe-id={previewIpeId} 
+                                ips-group-title-field={ipsGroupTitleField} 
+                                ips-group-title-format = {ipsGroupTitleFormat}
+                                show-ips-group-info={showIpsGroupInfo}
+                                ipe-info-fields={ipeInfoFields} 
+                                ipe-info-column-no={ipeInfoColumnNo} 
+                                ips-info-fields={ipsInfoFields}
+                                ips-info-fields-unit={ipsInfoFieldsUnit}
+                                ips-info-column-no={ipsInfoColumnNo} 
+                                ips-unit-fields={ipsUnitFields}
+                                idv-enrollment-fields={idvEnrollmentFields} 
+                                accordion-background-color={accordionBackgroundColor}
+                                accordion-text-color={accordionTextColor} 
+                                enable-clickable-ref-field={enableClickableRefField}
+                                enable-set-primary-ips={enableSetPrimaryIps}
+                                enable-view-enrollment-history={enableViewEnrollmentHistory} 
+                                progress-ring-color = {progressRingColor}
+                                progress-ring-percentage-field = {progressRingPercentageField}
+                                href-target-type={hrefTargetType}
+                                is-community={isCommunity} 
+                                enable-debug-mode={enableDebugMode} 
+
+                                onipegenerated={handleIpeAfter} 
+                                ></c-program-completion-visualizer>
+                        </div>
+                    </lightning-accordion-section>
+                </lightning-accordion>
+            </div>
+        </lightning-modal-body>
+    </div>
+
+    <div class="chatbotProgramCompletionVisualizerModal-footer">
+        <lightning-modal-footer>
+            <lightning-button label="Close" onclick={handleClose}></lightning-button>
+        </lightning-modal-footer>
+    </div>
+</template>

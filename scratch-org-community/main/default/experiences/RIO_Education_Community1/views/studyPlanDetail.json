@@ -1,0 +1,135 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:sldsOneColLayout",
+  "dataProviders" : [ ],
+  "id" : "f102bd8d-c17b-4721-933b-c11ffe0698f7",
+  "label" : "Study Plan Detail",
+  "regions" : [ {
+    "id" : "6869a3b6-d6e5-4553-8fe0-c91720cb3597",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "tabsetConfig" : {
+          "UUID" : "abe48c61-79cd-4ed1-b7fb-0fc1fd8d943f",
+          "activeTab" : "",
+          "tabs" : [ {
+            "UUID" : "eec8706d-5ca2-4390-bb1b-7655d18c919d",
+            "allowGuestUser" : false,
+            "locked" : false,
+            "seedComponents" : [ ],
+            "tabKey" : "1",
+            "tabName" : "Study Plan"
+          }, {
+            "UUID" : "3449a4cd-bc02-4afe-ad56-67e02d6c248d",
+            "allowGuestUser" : false,
+            "locked" : false,
+            "seedComponents" : [ ],
+            "tabKey" : "2",
+            "tabName" : "Recommended Pathway"
+          } ],
+          "useOverflowMenu" : true
+        }
+      },
+      "componentName" : "forceCommunity:tabLayout",
+      "id" : "abe48c61-79cd-4ed1-b7fb-0fc1fd8d943f",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "accordionBackgroundColor" : "#cccccc",
+            "accordionTextColor" : "#000000",
+            "enableClickableRefField" : true,
+            "enableDebugMode" : false,
+            "forCommunity" : false,
+            "groupFieldSetName" : "reduivy__StudyPlanStructure_Group_EditForm",
+            "hrefTargetType" : "_self",
+            "modalIconName" : "standard:hierarchy",
+            "modalTitle" : "Study Plan Hierarchy",
+            "mode" : "View",
+            "recordId" : "{!recordId}",
+            "showSplInfo" : true,
+            "showSpsGroupInfo" : true,
+            "splInfoColumnNo" : 4,
+            "splInfoFields" : "reduivy__Study_Program__c;reduivy__Type__c;reduivy__Status__c;reduivy__Version__c",
+            "spsGroupInfoColumnNo" : 4,
+            "spsGroupInfoFields" : "reduivy__Category__c;reduivy__Credits__c;reduivy__Sequence__c",
+            "spsGroupTitleField" : "Name",
+            "spsUnitTableFields" : "Name;reduivy__Category__c;reduivy__Study_Unit__c;reduivy__Credits__c;reduivy__Requirement_Description__c",
+            "unitFieldSetName" : "reduivy__StudyPlanStructure_Unit_EditForm"
+          },
+          "componentName" : "reduivy:studyPlanHierarchy",
+          "id" : "fb8749fe-5deb-4a36-9af3-fecdc7f16ef8",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "eec8706d-5ca2-4390-bb1b-7655d18c919d",
+        "regionLabel" : "Study Plan",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      }, {
+        "components" : [ {
+          "componentAttributes" : {
+            "accordionBackgroundColor" : "#cccccc",
+            "accordionTextColor" : "#000000",
+            "comboboxLabel" : "Preview with major/minor",
+            "enableDebugMode" : false,
+            "modalIconName" : "standard:sales_path",
+            "modalTitle" : "Pathway Visualizer",
+            "recordId" : "{!recordId}",
+            "showStudyPlanOptions" : true,
+            "showStudyUnitQuickSearch" : true,
+            "studyPathwayGroupIcon" : "standard:all",
+            "studyPathwayGroupInfoFields" : "Name",
+            "studyPathwayGroupTitleField" : "Name",
+            "studyPathwayInfoFields" : "reduivy__Study_Mode__c",
+            "studyPathwayTermTitlePrefix" : "Term",
+            "studyPathwayUnitIcon" : "standard:catalog",
+            "studyPathwayUnitInfoFields" : "Name",
+            "studyPathwayUnitTitleField" : "Name"
+          },
+          "componentName" : "reduivy:studyPathway",
+          "id" : "b38343f6-1bc4-4276-9486-2e6c0f99d988",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "3449a4cd-bc02-4afe-ad56-67e02d6c248d",
+        "regionLabel" : "Recommended Pathway",
+        "regionName" : "2",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "79afca5a-442b-47b8-8c6d-cb2c58223896",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "id" : "0f12b437-b28e-494b-865a-28ccb6032c52",
+    "regionName" : "footer",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "{!Record._Object}: {!Record._Title}"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "bcd51192-71c5-45a3-b0f8-99f57fa39712",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "a12b0289-e6af-4a94-ad23-aa08d19d4302",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "detail-a11"
+}

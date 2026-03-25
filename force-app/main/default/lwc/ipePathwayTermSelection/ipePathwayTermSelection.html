@@ -1,0 +1,29 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+        <div class="component-body slds-is-relative">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel} ></lightning-spinner>
+            </div>
+            <div class="ipepathwaytermselection-body slds-grid">
+                <div class="term-combobox slds-size_4-of-12">
+                    <lightning-combobox
+                        name="termcombo"
+                        label={termComboLabel}
+                        required="true"
+                        value={selectedTermId}
+                        placeholder={termComboPlaceholder}
+                        options={termComboOptions}
+                        onchange={handleTermComboOnchange} >
+                    </lightning-combobox>
+                </div>
+            </div>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" onclick={handleCloseClick} label={cancelButtonLabel} class="slds-p-right_xx-small"></lightning-button>
+        <lightning-button variant="brand" onclick={handleConfirmClick} label={confirmButtonLabel}></lightning-button>
+    </lightning-modal-footer>	
+</template>

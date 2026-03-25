@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Usage_Count</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT(ISBLANK(Usage_Count__c)),
+    NOT(ISBLANK(Usage_Limit__c)),
+    Usage_Count__c &gt; Usage_Limit__c
+)</errorConditionFormula>
+    <errorDisplayField>Usage_Count__c</errorDisplayField>
+    <errorMessage>The study voucher has exceeded its usage limit.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,58 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+    
+    <template if:true={isInitSuccess}>
+        <template lwc:if={isTextField}>
+            <lightning-input type="text" variant={inputVariant} label={fieldLabel} value={fieldValue} onchange={handleOnChange} disabled={isFieldDisabled}></lightning-input>
+        </template>
+        <template lwc:elseif={isTextAreaField}>
+            <lightning-textarea variant={inputVariant} label={fieldLabel} value={fieldValue} onchange={handleOnChange} disabled={isFieldDisabled}></lightning-textarea>
+        </template>
+        <template lwc:elseif={isDecimalField}>
+            <lightning-input type="number" variant={inputVariant} label={fieldLabel} value={fieldValue} onchange={handleOnChange} step={inputStep} disabled={isFieldDisabled}></lightning-input>
+        </template>
+        <template lwc:elseif={isCurrencyField}>
+            <lightning-input type="number" variant={inputVariant} label={fieldLabel} value={fieldValue} onchange={handleOnChange} formatter="currency" step={inputStep} disabled={isFieldDisabled}></lightning-input>
+        </template>
+        <template lwc:elseif={isPercentField}>
+            <lightning-input type="number" variant={inputVariant} label={fieldLabel} value={fieldValue} onchange={handleOnChange} formatter="percent-fixed" step={inputStep} disabled={isFieldDisabled}></lightning-input>
+        </template>
+        <template lwc:elseif={isBooleanField}>
+            <lightning-input type="checkbox" variant={inputVariant} label={fieldLabel} checked={fieldValue} onchange={handleOnChangeCheckbox} disabled={isFieldDisabled}></lightning-input>
+        </template>
+        <template lwc:elseif={isPicklistField}>
+            <lightning-combobox
+                variant={inputVariant} 
+                name="customFilterPicklist"
+                label={fieldLabel}
+                value={fieldValue}
+                options={picklistOptions}
+                dropdown-alignment="auto"
+                onchange={handlePicklistOnChange}
+                disabled={isFieldDisabled} ></lightning-combobox>
+        </template>
+        <template lwc:elseif={isMultiPicklistField}>
+            <lightning-dual-listbox
+                variant={inputVariant} 
+                name="customFilterMultiPicklist"
+                label={fieldLabel}
+                value={fieldValue}
+                options={picklistOptions}
+                size="3"
+                onchange={handleMultiPicklistOnChange}
+                disabled={isFieldDisabled} ></lightning-dual-listbox>
+        </template>
+        <template lwc:elseif={isDateField}>
+            <lightning-input type="date" variant={inputVariant} label={fieldLabel} value={fieldValue} onchange={handleOnChange} time-zone="UTC" disabled={isFieldDisabled}></lightning-input>
+        </template>
+        <template lwc:elseif={isDateTimeField}>
+            <lightning-input type="datetime" variant={inputVariant} label={fieldLabel} value={fieldValue} onchange={handleOnChange} time-zone={timeZone} disabled={isFieldDisabled}></lightning-input>
+        </template>
+        <template lwc:elseif={isTimeField}>
+            <lightning-input type="time" variant={inputVariant} label={fieldLabel} value={fieldValue} onchange={handleOnChangeTime} time-zone="UTC" disabled={isFieldDisabled}></lightning-input>
+        </template>
+        <template lwc:else>
+            {unsuportedTypeError}
+        </template>
+    </template>
+</template>

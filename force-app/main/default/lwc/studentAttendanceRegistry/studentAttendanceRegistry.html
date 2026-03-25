@@ -1,0 +1,138 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="slds-m-around_medium">
+                <div class="studentattendanceregistry-header slds-m-bottom_medium slds-p-bottom_medium slds-border_bottom">
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item size="12" large-device-size="4">
+                            <template if:true={showModalHeader}>
+                                <div class="studentattendanceregistry-title slds-card__header-title">
+                                    <lightning-icon icon-name={modalIconName} size="medium" class="slds-m-right_xx-small"></lightning-icon>
+                                    <lightning-formatted-text value={modalTitle}></lightning-formatted-text>
+                                </div>
+                            </template>
+                        </lightning-layout-item>
+                        <lightning-layout-item alignment-bump="left">
+                            <lightning-layout multiple-rows="true">
+                                <lightning-layout-item>
+                                    <lightning-formatted-text value={massActionLabel} class="slds-form-element__legend slds-form-element__label"></lightning-formatted-text> 
+                                    <lightning-helptext content={massActionHelptext}></lightning-helptext>
+                                </lightning-layout-item>
+                                <lightning-layout-item class="slds-p-right_small">
+                                    <lightning-combobox
+                                        name="massaction" 
+                                        label={massActionLabel} 
+                                        variant="label-hidden" 
+                                        type="button"
+                                        options={attendanceStatusOptions}
+                                        onchange={handleMassActionClick}
+                                    ></lightning-combobox>
+                                </lightning-layout-item>
+                                <lightning-layout-item alignment-bump="left">
+                                    <div class="studentattendanceregistry-nav-button-group">
+                                        <ul class="slds-button-group-row">
+                                            <template lwc:if={hasUnsavedChanges}>
+                                                <li class="slds-button-group-item">
+                                                    <lightning-button value="save" icon-name="utility:warning" title={label.NOT_SAVED_LABEL} label={label.SAVE_LABEL} variant="brand" onclick={handleSaveClick}></lightning-button>
+                                                </li>
+                                            </template>
+                                            <template lwc:else>
+                                                <li class="slds-button-group-item">
+                                                    <lightning-button value="save" label={label.SAVE_LABEL} variant="brand" disabled="true"></lightning-button>
+                                                </li>
+                                            </template>
+                                            <li class="slds-button-group-item">
+                                                <lightning-button value="close" label={label.CLOSE_LABEL} onclick={handleCloseClick} ></lightning-button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-layout-item>
+                        
+                    </lightning-layout>
+                </div>
+                <div class="studentattendanceregistry-content slds-p-around_small">
+                    <div class="studentattendanceregistry-title slds-text-heading_small slds-p-bottom_small">{takingAttendanceText}</div>
+                    <div class="studentattendanceregistry-infosection slds-p-bottom_small">
+                        <c-record-view-form 
+                            record-id={recordId}
+                            object-api-name="reduivy__Study_Event__c"
+                            fields={infoFields}
+                            enable-debug-mode={enableDebugMode}
+                        >
+                            <lightning-layout multiple-rows="true">
+                                <template for:each={infoFields} for:item="field">
+                                    <lightning-layout-item size="6" medium-device-size="2" key={field} >
+                                        <c-output-field field-name={field} ></c-output-field>
+                                    </lightning-layout-item>
+                                </template>
+                            </lightning-layout>
+                        </c-record-view-form>
+                    </div>
+                    <div class="studentattendanceregistry-studentlist slds-p-bottom_small">
+                        <template if:true={isDataReady}>
+                            <lightning-layout multiple-rows="true" class="slds-p-bottom_small slds-p-left_xx-small" >
+                                <lightning-layout-item size="6" medium-device-size="2" >
+                                    <lightning-input label="Total" type="number" value={studentCountTotal} read-only="true" ></lightning-input>
+                                </lightning-layout-item>
+                                <template for:each={studentsCountByAttendanceStatus} for:item="attendanceStat">
+                                    <lightning-layout-item key={attendanceStat.label} size="6" medium-device-size="2" >
+                                        <lightning-input label={attendanceStat.label} type="number" value={attendanceStat.count} read-only="true" ></lightning-input>
+                                    </lightning-layout-item>
+                                </template>
+                                <lightning-layout-item alignment-bump="left">
+                                    <lightning-layout>
+                                        <lightning-layout-item >
+                                            <lightning-input type="search" variant="label-hidden" placeholder={quickSearchPlaceholderText} value={studentSearchValue} oncommit={handleStudentSearchCommit}></lightning-input>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item >
+                                            <lightning-button-menu icon-name="utility:sort" menu-alignment="auto" onselect={handleSortingSelect}>
+                                                <template for:each={studentSortOptions} for:item="sortingOption">
+                                                    <lightning-menu-item key={sortingOption.value} value={sortingOption.value} label={sortingOption.label} icon-name={sortingOption.iconName}></lightning-menu-item>
+                                                </template>
+                                            </lightning-button-menu>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </lightning-layout-item>
+                                
+                            </lightning-layout>
+                            <lightning-layout multiple-rows="true" class="slds-p-bottom_small">
+                                <template for:each={studentAttendances} for:item="attendance">
+                                    <lightning-layout-item size="12" key={attendance.key} class={attendance.cssClass}>
+                                        <c-student-attendance-registry-entry
+                                            
+                                            ser-obj={attendance.serObj}
+                                            draft-ser-obj={attendance.draftSerObj}
+                                            study-event-relation-edit-field-set-name={studyEventRelationEditFieldSetName}
+                                            attendance-status-options={attendanceStatusOptions}
+                                            contact-tile-info-fields={contactTileInfoFields}
+                                            contact-image-file-name={contactImageFileName}
+                                            contact-image-url-field-name={contactImageUrlFieldName}
+                                            contact-tile-click-action={contactTileClickAction}
+                                            info-modal-fields-for-contact={infoModalFieldsForContact}
+                                            info-modal-section-name-for-contact={infoModalSectionNameForContact}
+                                            info-modal-fields-for-individual-session-enrollment={infoModalFieldsForIndividualSessionEnrollment}
+                                            info-modal-section-name-for-individual-session-enrollment={infoModalSectionNameForIndividualSessionEnrollment}
+
+                                            onattendancerecordchange={handleAttendanceRecordChange}
+
+                                            enable-debug-mode={enableDebugMode}
+                                        ></c-student-attendance-registry-entry>
+                                    </lightning-layout-item>
+                                </template>
+                            </lightning-layout>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </template>
+	</div>
+	
+</template>

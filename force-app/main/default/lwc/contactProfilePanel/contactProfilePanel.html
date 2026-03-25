@@ -1,0 +1,58 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+        
+        <template if:true={isInitSuccess}>
+            <div class="slds-m-around_medium">
+                <template if:true={buttonsVisible}>
+                    <div class="contactprofilepanel-header slds-m-bottom_medium slds-border_bottom">
+                        <lightning-layout multiple-rows="true" class="contactprofilepanel-buttoncontainer slds-grid_reverse">
+                            <lightning-layout-item if:true={imageUrl} class="contactprofilepanel-removebutton slds-p-left_x-small slds-p-top_large">
+                                <lightning-button-menu onselect={handleButtonMenuAction} menu-alignment="auto">
+                                    <lightning-menu-item prefix-icon-name="utility:delete" label={label.DELETE_LABEL} value="remove"></lightning-menu-item>
+                                    <lightning-menu-item prefix-icon-name="utility:close" label={label.CLOSE_LABEL} value="close"></lightning-menu-item>
+                                </lightning-button-menu>
+                            </lightning-layout-item>
+                            <lightning-layout-item>
+                                <lightning-file-upload
+                                    name="profilePictureUploader"
+                                    accept={allowedFileTypes}
+                                    record-id={recordId}
+                                    onuploadfinished={handleUploadFinished}
+                                    multiple="false"
+                                    class="contactprofilepanel-file-uploader slds-m-right_small"
+                                ></lightning-file-upload>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                </template>
+                
+                <div class="contactprofilepanel-content">
+                    <template if:true={imageUrl}>
+                        <div onclick={showHideButtons} class="contactprofilepanel-img-container">
+                            <div>
+                                <img src={imageUrl} class="contactprofilepanel-img slds-align_absolute-center">
+                            </div>
+                            <div class="contactprofilepanel-img-desc">
+                                <div class="contactprofilepanel-img-desc-text slds-p-around_small">
+                                    <lightning-formatted-rich-text value={clickToUploadNewProfileMsg}></lightning-formatted-rich-text>
+                                    <lightning-icon icon-name="utility:upload" size="x-small" class="slds-p-left_xx-small"></lightning-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <template if:false={imageUrl}>
+                        <p class="slds-align_absolute-center">
+                            <lightning-formatted-rich-text value={noImageMessage}></lightning-formatted-rich-text>
+                        </p>
+                    </template>
+                </div>
+            </div>
+        </template>
+    </div>
+	
+</template>

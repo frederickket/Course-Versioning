@@ -1,0 +1,59 @@
+<template>
+    <lightning-modal-header label={confirmationTitle}></lightning-modal-header>
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+        <div class="component-body slds-is-relative slds-card">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text="Loading"></lightning-spinner>
+            </div>
+            
+            <template if:true={isInitSuccess}>
+                <div class="slds-m-around_medium ipepathwaywithdrawfromtermmodal-content">
+                    <template lwc:if={showRecordsFound}>
+                        <lightning-formatted-rich-text 
+                            value={withdrawFromTermConfirmation}
+                            class="ipepathwaywithdrawfromtermmodal-confirmationmessage">
+                        </lightning-formatted-rich-text>
+                        
+                        <div class="ipepathwaywithdrawfromtermmodal-ienlist slds-m-top_x-large">
+
+                            <template for:each={ienList} for:item='ien' >
+                                <div key={ien}>
+                                    {ien}<br/>
+                                </div>
+                            </template>
+                        </div>
+
+                        <div class="ipepathwaywithdrawfromtermmodal-enrollmentstatus slds-m-top_x-large">
+                            <lightning-layout>
+                                <lightning-layout-item size="4">
+                                    <lightning-combobox 
+                                        label={enrollmentStatusLabel}
+                                        value={selectedEnrollmentStatus}
+                                        options={enrollmentStatusOptions}
+                                        onchange={handleEnrollmentStatusChange}
+                                    ></lightning-combobox>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                    </template>
+                        
+                    <template lwc:elseif={showRecordsNotFound}>
+                        <lightning-formatted-rich-text 
+                            value={noIenFoundLabel} 
+                            class="ipepathwaywithdrawfromtermmodal-norecordsfoundmessage">
+                        </lightning-formatted-rich-text>
+                    </template>
+                        
+                </div>
+            </template>
+        </div>
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" label={cancelLabel} onclick={handleCancelClick} class="slds-p-right_xx-small" disabled={isLoading}></lightning-button>
+        <lightning-button variant="brand" label={confirmLabel} onclick={handleConfirmClick} disabled={isLoading} if:true={showRecordsFound}></lightning-button>
+    </lightning-modal-footer>	
+	
+	
+</template>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Study_Intake__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <label>Study Intake</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>$Source.Study_Program__c</field>
+            <operation>equals</operation>
+            <valueField>Study_Intake__c.Study_Program__c</valueField>
+        </filterItems>
+        <infoMessage>Please select a study intake for the related study program.</infoMessage>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>Study_Intake__c</referenceTo>
+    <relationshipLabel>Individual Program Enrollments</relationshipLabel>
+    <relationshipName>Individual_Program_Enrollments</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

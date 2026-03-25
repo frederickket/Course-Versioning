@@ -1,0 +1,97 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+    <div class="component-body slds-is-relative slds-card">
+
+        <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={loadingLabel}></lightning-spinner>
+        </div>
+
+        <template if:true={isInitSuccess}>
+            <div class="slds-m-around_medium">
+                <div class="termgraderelease-header slds-m-bottom_medium slds-p-bottom_medium slds-border_bottom">
+                    <lightning-layout class="slds-wrap">
+
+                        <lightning-layout-item size="12" large-device-size="4">
+                            <template if:true={showModalHeader}>
+                                <div class="termgraderelease-title slds-card__header-title">
+                                    <lightning-icon icon-name={modalIconName} size="medium" class="slds-m-right_xx-small"></lightning-icon>
+                                    <lightning-formatted-text value={modalTitle}></lightning-formatted-text>
+                                </div>
+                            </template>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+
+                <div class="termgraderelease-body">
+                    <div class="termgraderelease-description1-div slds-p-bottom_medium">
+                        <div>
+                            <lightning-formatted-rich-text
+                                value={termGradeReleaseWizardText1}
+                            ></lightning-formatted-rich-text>
+                        </div>
+                        <div>
+                            <lightning-formatted-rich-text
+                                value={termGradeReleaseWizardText2}
+                            ></lightning-formatted-rich-text>
+                        </div>
+                    </div>
+                    <div class="termgraderelease-description2-div slds-p-bottom_medium">
+                        <lightning-layout class="slds-wrap">
+                            <lightning-layout-item size="8" medium-device-size="10">
+                                <div>
+                                    <lightning-formatted-rich-text
+                                        value={termGradeReleaseWizardText3}
+                                    ></lightning-formatted-rich-text>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item alignment-bump="left">
+                                <div>
+                                    <lightning-button-group >
+                                        <lightning-button label={newLabel} title={newLabel} onclick={handleNewClick}></lightning-button>
+                                        <lightning-button-menu alternative-text={showMenuLabel} menu-alignment="auto" onselect={handleMenuSelect}>
+                                            <lightning-menu-item value={DROP_DOWN_EVENT_CANCEL_JOB} label={cancelJobLabel}></lightning-menu-item>
+                                            <lightning-menu-item value={DROP_DOWN_EVENT_RETRY_JOB} label={retryJobLabel}></lightning-menu-item>
+                                            <lightning-menu-item value={DROP_DOWN_EVENT_REFRESH} label={refreshLabel}></lightning-menu-item>
+                                            <lightning-menu-item value={DROP_DOWN_EVENT_CLEAR_ALL_JOBS} label={clearAllJobsLabel}></lightning-menu-item>
+                                            <lightning-menu-item value={DROP_DOWN_EVENT_HELP} label={helpLabel} prefix-icon-name="utility:help_center"></lightning-menu-item>
+                                        </lightning-button-menu>
+                                    </lightning-button-group>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                        <lightning-layout class="termgraderelease-jobs-table slds-wrap slds-p-top_small">
+                            <lightning-layout-item size="12">
+                                <c-custom-single-related-list
+                                    record-id={recordId}
+                                    modal-title={jqhObjectLabel}
+                                    target-record-id-field=""
+                                    parent-object-ref-field=""
+                                    child-object-api-name="reduivy__Job_Queue_Group__c"
+                                    child-object-fields={jobQueueFields}
+                                    enable-clickable-ref-field="true"
+                                    enable-row-selection="true"
+                                    enable-quick-search="true"
+                                    max-height={jobQueueTableMaxHeight}
+                                    view-mode="Related List"
+                                    no-record-found-message={noRecordToDisplayLabel}
+
+                                    selected-rows-id={selectedJobQueueIds}
+
+                                    use-source-collection-records="true"
+                                    source-collection={jobQueueGroupRecords}
+
+                                    table-text-display-mode={tableTextDisplayMode}
+
+                                    enable-debug-mode={enableDebugMode}
+
+                                    onrowselection={handleJobQueueRowSelect}
+                                ></c-custom-single-related-list>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,38 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+        
+        <div class="component-body slds-is-relative slds-card">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel} ></lightning-spinner>
+            </div>
+            
+            <template if:true={isInitSuccess}>
+                <div class="ipepathwaylockingmodal-body">
+                    <div class="ipepathwaylockingmodal-confirmation-div slds-p-bottom_small">
+                        <lightning-formatted-rich-text
+                            value={confirmationText}
+                            linkify
+                        ></lightning-formatted-rich-text>
+                    </div>
+                    <lightning-record-edit-form 
+                        record-id={individualAcademicProgressId}
+                        object-api-name="reduivy__Individual_Academic_Progress__c"
+                    >   
+                        <lightning-layout>
+                            <lightning-layout-item size="4">
+                                <lightning-input-field field-name="reduivy__Enrollment_Action_Status__c" onchange={handleFieldChange}></lightning-input-field>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-record-edit-form>
+                </div>
+            </template>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" disabled={isLoading} onclick={handleCloseClick} label={closeButtonLabel} class="slds-p-right_xx-small" ></lightning-button>
+        <lightning-button variant="brand" disabled={isLoading} onclick={handleConfirmClick} label={confirmButtonLabel}></lightning-button>
+    </lightning-modal-footer>
+	
+</template>

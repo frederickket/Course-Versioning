@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hide_in_Enrollment__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Hide the group or unit in the enrollment wizard.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Hide the group or unit in the enrollment wizard.</inlineHelpText>
+    <label>Hide in Enrollment</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,37 @@
+.component-body {
+    
+}
+
+/** for workpad **/
+.freezepanellabel {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+    background-color:#eee;
+}
+
+.freezepanelbody {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+    background-color:rgb(238, 238, 238, 0.5);
+}
+
+.doublebooked_event {
+    border-left: 6px solid rgb(194, 57, 52) !important;
+}
+
+
+.fc-hidden-event{
+    background-color:var(--fc-hidden-event-bg-color)!important;
+    z-index: 99 !important;
+}
+
+/*Resource Availability bg color */
+.fc-resources-availability-event{
+    background-color: var(--fc-resources-availability-bg-color) !important;
+}
+
+.studySessionSchedulerTimeline-calendar {
+    max-height: 73vh;
+}

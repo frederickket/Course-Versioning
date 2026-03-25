@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Day_of_Week_Label__c</fullName>
+    <deprecated>false</deprecated>
+    <description>The label for day of week.</description>
+    <externalId>false</externalId>
+    <formula>CASE( Day_of_Week__c, &apos;Sunday&apos;, $Label.reduivy__Day_of_Week_Sunday, &apos;Monday&apos;, $Label.reduivy__Day_of_Week_Monday, &apos;Tuesday&apos;, $Label.reduivy__Day_of_Week_Tuesday, &apos;Wednesday&apos;, $Label.reduivy__Day_of_Week_Wednesday, &apos;Thursday&apos;, $Label.reduivy__Day_of_Week_Thursday, &apos;Friday&apos;, $Label.reduivy__Day_of_Week_Friday, &apos;Saturday&apos;, $Label.reduivy__Day_of_Week_Saturday, &apos;&apos;)</formula>
+    <label>Day of Week</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

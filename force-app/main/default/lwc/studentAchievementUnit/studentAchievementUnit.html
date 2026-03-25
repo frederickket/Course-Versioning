@@ -1,0 +1,77 @@
+<template>
+
+    <template lwc:if={showUnitCodeField}>
+        <td scope="row">
+            
+            <div title={unitCodeDisplayValue}>
+                <lightning-formatted-text value={unitCodeDisplayValue} linkify></lightning-formatted-text>
+            </div>
+
+            <!--uploaded files-->
+ 
+            <template lwc:if={haveExistingFiles}>
+                
+                <template lwc:if={showFilesValue}>
+                    <lightning-button variant='base' label={hideUploadedFilesLabel} title={hideUploadedFilesLabel} onclick={handleToggleShowFiles}></lightning-button>
+
+                    <template for:each={contentDocumentList} for:item='cd'>
+                        <div class="slds-truncate slds-m-around_xx-small" key={cd.Id}>
+                            <lightning-formatted-text value={cd.displayName} linkify></lightning-formatted-text>
+                            <lightning-button-group class="slds-m-left_x-small">
+                                <lightning-button-icon icon-name="utility:document_preview" alternative-text={label.PREVIEW_LABEL} data-documentid={cd.Id} onclick={handleFilePreview} size="small" if:false={isCommunity} class="requirementchecklistitem-previewicon"></lightning-button-icon>
+                                <lightning-button-icon icon-name="utility:download" alternative-text={label.DOWNLOAD_LABEL} data-cvs-id={cd.LatestPublishedVersionId} onclick={handleFileDownload} size="small" class="requirementchecklistitem-downloadicon"></lightning-button-icon>
+                                <lightning-button-icon if:false={cd.fileDeleteDisabled} icon-name="utility:delete" alternative-text={label.DELETE_LABEL} data-documentid={cd.Id} data-filetitle={cd.Title} data-fileextension={cd.FileExtension} onclick={handleFileDelete} size="small" class="requirementchecklistitem-deleteicon"></lightning-button-icon>
+                            </lightning-button-group>
+                        </div>
+                    </template>
+                </template>
+                <template lwc:else>
+                    <lightning-button variant='base' label={showUploadedFilesLabel} title={showUploadedFilesLabel} onclick={handleToggleShowFiles}></lightning-button>
+                </template>
+
+            </template>
+        </td>
+    </template>
+
+    <template lwc:if={showUnitNameField}>
+        <td scope="row">
+            <lightning-formatted-text value={unitNameDisplayValue} linkify></lightning-formatted-text>
+        </td>
+    </template>
+
+    <!--additional fields-->
+    <template for:each={additionalFields} for:item="field">
+        <td key={field.fieldName} scope="row">
+            <div class="slds-truncate" title={field.value}>
+
+                <template lwc:if={field.isVerificationStatus}>
+                    <template lwc:if={field.value}>
+                        <lightning-badge label={field.value} class={field.badgeClass} icon-alternative-text={field.value}></lightning-badge>
+                    </template>
+                </template>
+
+                <template lwc:else>
+                    <c-output-field
+                        display-type={field.displayType}
+                        field-display-value={field.value}
+                        fraction-digits={field.fractionDigits}
+                        variant="label-hidden"
+                        enable-debug-mode={enableDebugMode}
+                    ></c-output-field>
+                </template>
+            </div>
+        </td>
+    </template>
+
+    <td scope="row">
+        <!--Link/New button group-->
+        <lightning-button-group>
+            <lightning-button-icon icon-name="utility:edit" alternative-text={label.EDIT_LABEL} disabled={preventEditingIndividualAchievementUnit} size="medium" title={label.EDIT_LABEL} tooltip={label.EDIT_LABEL} type="button" variant="border" onclick={handleEditButtonIcon}></lightning-button-icon>
+            <lightning-button-icon icon-name="utility:delete" alternative-text={label.DELETE_LABEL} disabled={preventEditingIndividualAchievementUnit} size="medium" title={label.DELETE_LABEL} tooltip={label.DELETE_LABEL} type="button" variant="border" onclick={handleDeleteButtonIcon}></lightning-button-icon>
+        </lightning-button-group>
+        <template if:false={isRequirementCompleted}>
+            <lightning-helptext icon-name='utility:warning' content={completeAllRequirementsLabel} class="slds-m-left_x-small" icon-variant="warning"></lightning-helptext>
+        </template>
+    </td>
+	
+</template>

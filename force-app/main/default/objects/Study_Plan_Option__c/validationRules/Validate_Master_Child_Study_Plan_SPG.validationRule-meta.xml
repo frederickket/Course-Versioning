@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Master_Child_Study_Plan_SPG</fullName>
+    <active>true</active>
+    <errorConditionFormula>Master_Study_Plan__r.Study_Program__c !=  Child_Study_Plan__r.Study_Program__c</errorConditionFormula>
+    <errorMessage>The Master and Child Study Plan must belong to the same Study Program.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,147 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess}
+        onfail={handleLibLoadFail}></c-js-library-loader>
+
+    <div class="component-body slds-is-relative slds-card">
+        <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv">
+            <lightning-spinner alternative-text={label.LOADING_LABEL}></lightning-spinner>
+        </div>
+
+        <template if:true={isInitSuccess}>
+            <div class="slds-m-around_medium">
+                <template if:true={showModalHeader}>
+                    <div class="pathway-visualiser-header slds-m-bottom_medium slds-p-bottom_medium slds-border_bottom">
+                        <lightning-layout class="slds-wrap">
+                            <lightning-layout-item size="12" large-device-size="4">
+                                <div class="pathway-visualiser-title slds-card__header-title">
+                                    <lightning-icon icon-name={modalIconName} size="medium" class="slds-m-right_xx-small"></lightning-icon>
+                                    <lightning-formatted-text value={modalTitle}></lightning-formatted-text>
+                                </div>
+                            </lightning-layout-item>
+                            <template if:true={showFilterButton}>
+                                <lightning-layout-item alignment-bump="left">
+                                    <template if:true={showFilterPanel}>
+                                        <lightning-button-icon icon-name="utility:filterList" title={label.FILTER_LABEL} tooltip={label.FILTER_LABEL} type="button" onclick={handleToggleFilterPanel} variant="brand"></lightning-button-icon>
+                                    </template>
+                                    <template if:false={showFilterPanel}>
+                                        <lightning-button-icon icon-name="utility:filterList" title={label.FILTER_LABEL} tooltip={label.FILTER_LABEL} type="button" onclick={handleToggleFilterPanel} variant="border"></lightning-button-icon>
+                                    </template>
+                                </lightning-layout-item>
+                            </template>
+                        </lightning-layout>
+                    </div>
+                </template>
+
+                <template if:false={showModalHeader}>
+                    <template if:true={showFilterButton}>
+                        <div class="pathway-visualiser-filterbuttonwithoutheader slds-p-bottom_x-small slds-border_bottom">
+                            <lightning-layout horizontal-align="end">
+                                <template if:true={showFilterPanel}>
+                                        <lightning-button-icon icon-name="utility:filterList" title={label.FILTER_LABEL} tooltip={label.FILTER_LABEL} type="button" onclick={handleToggleFilterPanel} variant="brand"></lightning-button-icon>
+                                    </template>
+                                    <template if:false={showFilterPanel}>
+                                        <lightning-button-icon icon-name="utility:filterList" title={label.FILTER_LABEL} tooltip={label.FILTER_LABEL} type="button" onclick={handleToggleFilterPanel} variant="border"></lightning-button-icon>
+                                    </template>
+                            </lightning-layout>
+                        </div>
+                    </template>
+                </template>
+                        
+                <template lwc:if={studyPathwayId}>
+                    <div class="pathway-visualiser-body">
+                        <div class={panelClasses}>
+                            <div class="slds-p-around_small slds-border_bottom">
+                                <lightning-layout horizontal-align="spread">
+                                    <lightning-layout-item>
+                                        <lightning-button 
+                                        variant="neutral"
+                                        label={clearButtonLabel} 
+                                        onclick={handleClearClick}
+                                        ></lightning-button> 
+                                    </lightning-layout-item>
+                                    <lightning-layout-item>
+                                        <lightning-button 
+                                        variant="brand"
+                                        label={applyButtonLabel} 
+                                        onclick={handleApplyClick} 
+                                        ></lightning-button>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </div>
+                            <div class="slds-panel__body">
+
+                                <template if:true={showStudyUnitQuickSearch}>
+                                    <!--Show Study Unit Quick Search-->
+                                    <lightning-input type="search" value={draftStudyUnitSearchString} label={showStudyUnitQuickSearchLabel} onchange={handleShowStudyUnitQuickSearch}></lightning-input>
+                                </template>
+                                
+                                <template if:true={showStudyPlanOptions}>
+                                    <!--Major/Minor Filter-->
+                                    <lightning-combobox data-name="spocombobox" label={comboboxLabel} options={studyPlanOptions} onchange={handleSpoChange}></lightning-combobox>
+                                    <div class="pillcontainer">
+                                        <lightning-pill-container items={selectedSpoPills} onitemremove={handleRemoveSelectedSpo}></lightning-pill-container>
+                                    </div>
+                                        
+                                </template>
+                            </div>
+                        </div>
+
+                        <div class="pathway-visualiser-content slds-m-around_x-small">
+                            <div class="pathway-visualiser-info slds-m-bottom_medium">
+                                <c-record-view-form record-id={studyPathwayId}
+                                    object-api-name="reduivy__Study_Pathway__c"
+                                    fields={spwInfoFields}
+                                    enable-debug-mode={enableDebugMode}>
+                                    <lightning-layout class="slds-wrap">
+                                        <template for:each={spwInfoFields} for:item="field">
+                                            <lightning-layout-item key={field} size="12"
+                                                large-device-size={spwInfoFieldSize}>
+                                                <c-output-field field-name={field}></c-output-field>
+                                            </lightning-layout-item>
+                                        </template>
+                                    </lightning-layout>
+                                </c-record-view-form>
+                            </div>
+
+                            <template if:true={studyPathwayTermIdsRecord}>
+                                    <template for:each={studyPathwayTermIdsRecord} for:item="spt">
+                                        <c-study-pathway-term
+                                        key={spt.Id}
+                                        enable-debug-mode={enableDebugMode}
+                                        study-pathway-term-id={spt.Id}
+                                        selected-spo={selectedSpo}
+                                        study-pathway-id={studyPathwayId}
+                                        href-target-type={hrefTargetType}
+
+                                        accordion-background-color={accordionBackgroundColor}
+                                        accordion-text-color={accordionTextColor}
+
+                                        study-pathway-term-title-prefix={studyPathwayTermTitlePrefix}
+                                        study-pathway-term-info-fields={studyPathwayTermInfoFields}
+                                        
+                                        study-plan-id={studyPlanId}
+                                        study-pathway-unit-title-field={studyPathwayUnitTitleField}
+                                        study-pathway-unit-info-fields={studyPathwayUnitInfoFields}
+                                        study-pathway-unit-icon={studyPathwayUnitIcon}
+                                        study-pathway-group-title-field={studyPathwayGroupTitleField}
+                                        study-pathway-group-info-fields={studyPathwayGroupInfoFields}
+                                        study-pathway-group-icon={studyPathwayGroupIcon}
+                                        
+                                        current-term-number={currentTermNumber}
+                                        study-unit-search-string={studyUnitSearchString}
+                                        >
+                                        </c-study-pathway-term>
+                                    </template>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+                <template lwc:else>
+                    <div>
+                        <lightning-formatted-rich-text value={noPathwayFoundLabel} linkify></lightning-formatted-rich-text>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>

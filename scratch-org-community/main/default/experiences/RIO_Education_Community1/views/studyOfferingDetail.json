@@ -1,0 +1,247 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:dynamicLayout",
+  "dataProviders" : [ ],
+  "id" : "bca651b8-aa90-4d44-a704-0156ebb7b2d2",
+  "label" : "Study Offering Detail",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0) url(/sfsites/c/file-asset/reduivy__Short_Courses_Catalog_Banner?v=1) center center /cover",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "fca9e0cd-1573-4e17-b15f-2a9cc494e2c1",
+          "columns" : [ {
+            "UUID" : "759e5a3c-83b1-4bcb-b1cc-e011741dcf08",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 200
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "fca9e0cd-1573-4e17-b15f-2a9cc494e2c1",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p><br></p><p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><span style=\"color: rgb(255, 255, 255); font-size: 48px;\">Short Course Catalog</span></p><p style=\"text-align: center;\"><span style=\"font-size: 16px; color: rgb(255, 255, 255);\">Explore our catalog of short courses designed to enhance your skills and knowledge. Find the right course to enhance your learning journey</span></p><p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><br></p><p>&nbsp;</p>"
+          },
+          "componentName" : "forceCommunity:richTextInline",
+          "id" : "9ba94888-e7fd-4ca5-a5c7-4392f1199051",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "759e5a3c-83b1-4bcb-b1cc-e011741dcf08",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "b5d5d926-abe1-4422-8dcf-5fbd33830163",
+          "columns" : [ {
+            "UUID" : "d5163129-71ca-4914-90a1-a8404afc5437",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "b5d5d926-abe1-4422-8dcf-5fbd33830163",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p><img class=\"sfdcCbImage\" src=\"{!contentAsset.Line.1}\" alt=\"\"></p>"
+          },
+          "componentName" : "forceCommunity:richTextInline",
+          "id" : "85106a8b-e22f-481d-b1d3-54219dd75378",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        }, {
+          "componentAttributes" : {
+            "allowGuestRegistrationFieldApiName" : "reduivy__Enable_Guest_Registrations__c",
+            "backButtonLabel" : "Back to Catalog",
+            "backButtonSitePageName" : "short-course-catalog",
+            "detailFieldNames" : "Name;reduivy__About__c;reduivy__Entry_Requirements__c",
+            "detailIconName" : "utility:info",
+            "detailShowFieldLabel" : true,
+            "detailShowIcon" : true,
+            "detailShowTitle" : true,
+            "detailTitle" : "Course Detail",
+            "enableDebugMode" : false,
+            "guestRegistrationButtonLabel" : "Register as guest",
+            "guestRegistrationText" : "Are you new to RIO Education? Complete the form to join our On Campus and Online Courses.",
+            "imageFieldApiName" : "reduivy__Banner_Image_URL__c",
+            "nonGuestRegistrationButtonLabel" : "I'm a current/returning customer",
+            "nonGuestRegistrationText" : "Log in to register",
+            "objectApiName" : "reduivy__Study_Offering__c",
+            "recordId" : "{!recordId}",
+            "registerButtonLabel" : "Register Now",
+            "registrationUrl" : "study-offering-registration",
+            "titleFieldApiName" : "Name"
+          },
+          "componentName" : "reduivy:continuingEduHeader",
+          "id" : "d66ab3b9-ada3-43d5-832d-b9050799f1ce",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "d5163129-71ca-4914-90a1-a8404afc5437",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "db6ba187-5462-4115-8dd3-e93aa173ae47",
+          "columns" : [ {
+            "UUID" : "e23bbf1e-f821-4a11-a0da-19e92c720440",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "4",
+            "seedComponents" : [ ]
+          }, {
+            "UUID" : "a540400c-8fc8-4c21-b071-2ccf8102913c",
+            "columnKey" : "2fe25",
+            "columnName" : "Column 2",
+            "columnWidth" : "4",
+            "seedComponents" : [ ]
+          }, {
+            "UUID" : "3289439b-fd19-4f42-8a02-32662c7b0d62",
+            "columnKey" : "2c613",
+            "columnName" : "Column 3",
+            "columnWidth" : "4",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "db6ba187-5462-4115-8dd3-e93aa173ae47",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "enableDebugMode" : false,
+            "fieldNames" : "reduivy__Field_of_Study__c;reduivy__Capacity__c;reduivy__Available_Places__c",
+            "iconName" : "action:info",
+            "objectApiName" : "reduivy__Study_Offering__c",
+            "recordId" : "{!recordId}",
+            "showBackgroundBorder" : true,
+            "showFieldLabel" : true,
+            "showIcon" : true,
+            "showTitle" : true,
+            "title" : "Offering Details"
+          },
+          "componentName" : "reduivy:continuingEduDetail",
+          "id" : "fab4effe-d813-4a09-908d-eb52f8899bb6",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "e23bbf1e-f821-4a11-a0da-19e92c720440",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      }, {
+        "components" : [ {
+          "componentAttributes" : {
+            "enableDebugMode" : false,
+            "fieldNames" : "reduivy__Start_Date__c",
+            "iconName" : "action:log_event",
+            "objectApiName" : "reduivy__Study_Offering__c",
+            "recordId" : "{!recordId}",
+            "showBackgroundBorder" : true,
+            "showFieldLabel" : true,
+            "showIcon" : true,
+            "showTitle" : true,
+            "title" : "Dates"
+          },
+          "componentName" : "reduivy:continuingEduDetail",
+          "id" : "6dec3a0c-7801-4439-bc2a-d20a79d6b535",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "a540400c-8fc8-4c21-b071-2ccf8102913c",
+        "regionLabel" : "Column 2",
+        "regionName" : "2fe25",
+        "renditionMap" : { },
+        "type" : "region"
+      }, {
+        "components" : [ {
+          "componentAttributes" : {
+            "enableDebugMode" : false,
+            "fieldNames" : "reduivy__Fee_Amount__c",
+            "iconName" : "action:update",
+            "objectApiName" : "reduivy__Study_Offering__c",
+            "recordId" : "{!recordId}",
+            "showBackgroundBorder" : true,
+            "showFieldLabel" : true,
+            "showIcon" : true,
+            "showTitle" : true,
+            "title" : "Pricing"
+          },
+          "componentName" : "reduivy:continuingEduDetail",
+          "id" : "6526e8f3-e7c6-45cb-81d4-0011213473e7",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "3289439b-fd19-4f42-8a02-32662c7b0d62",
+        "regionLabel" : "Column 3",
+        "regionName" : "2c613",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "cf3d4437-50a8-4ae3-8780-d8c07f593ae3",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "{!Record._Object}: {!Record._Title}"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "2b96c618-b595-4956-b76b-570740c7a065",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "14637bc9-18c2-4290-885d-4463786fd89b",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "detail-a0u"
+}

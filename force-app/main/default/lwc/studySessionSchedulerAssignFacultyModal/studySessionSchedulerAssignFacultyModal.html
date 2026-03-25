@@ -1,0 +1,22 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+    <lightning-modal-body>
+
+        
+        <div class="component-body slds-is-relative slds-card">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+            </div>
+            
+            <div class="studySessionSchedulerAssignFacultyModal-content">
+                <c-study-session-scheduler-faculty-assignment record-id={sseObj.Id} object-api-name="reduivy__Study_Session__c"
+                onfacultyassigned={handleFacultyAssigned} show-header={showHeader}></c-study-session-scheduler-faculty-assignment>
+            </div>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" disabled={isLoading} onclick={handleClose} label={closeButtonLabel}></lightning-button>
+        <lightning-button variant="brand" disabled={isLoading} onclick={handleSave} label={saveButtonLabel} class="slds-var-m-left_x-small"></lightning-button>
+    </lightning-modal-footer>
+	
+</template>

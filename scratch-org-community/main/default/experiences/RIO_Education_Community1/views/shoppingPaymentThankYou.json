@@ -1,0 +1,109 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:dynamicLayout",
+  "dataProviders" : [ ],
+  "id" : "a48ab83a-fec8-4947-9db3-f6b4a3ed0997",
+  "label" : "Shopping Payment Thank You",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0) url(/sfsites/c/file-asset/reduivy__Short_Courses_Catalog_Banner?v=1) center center /cover",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "879794a7-4c72-4208-828b-f84e45bad760",
+          "columns" : [ {
+            "UUID" : "3c3ffd03-765e-4741-9808-126df32201cf",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "879794a7-4c72-4208-828b-f84e45bad760",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p style=\"text-align: center;\"><span style=\"font-size: 48px; color: rgb(255, 255, 255);\">Thank You</span></p>"
+          },
+          "componentName" : "forceCommunity:richTextInline",
+          "id" : "f0b683ff-53f3-4402-9d75-d7b227f7124a",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "3c3ffd03-765e-4741-9808-126df32201cf",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "c23752ee-2515-486a-9da9-a6bdde0ae62d",
+          "columns" : [ {
+            "UUID" : "55cbeb11-a5d3-4d91-a448-a69992e0f522",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "c23752ee-2515-486a-9da9-a6bdde0ae62d",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p>Our account executive will contact your person in charge for the billing soon.</p>"
+          },
+          "componentName" : "forceCommunity:richTextInline",
+          "id" : "1cab3d33-ec64-493d-a16e-4e6f9604ba72",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "55cbeb11-a5d3-4d91-a448-a69992e0f522",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "bdc0429b-cc8b-4a23-91a4-1669a3f45f95",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "Shopping Payment Thank You"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "5bcc7672-2a63-4fcc-8e30-fe1cb5ff2a7b",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "199b3a40-3c22-49af-aa8c-994d9198d39c",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "custom-shopping-payment-thank-you"
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Order_Generation_Action__c</fullName>
+    <deprecated>false</deprecated>
+    <description>This is used to determine if only the new transaction order should be created or create/update the existing transaction order with the related transaction line item.</description>
+    <inlineHelpText>This is used to determine if only the new transaction order should be created or create/update the existing transaction order with the related transaction line item.</inlineHelpText>
+    <label>Order Generation Action</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>New Order Only</fullName>
+                <default>true</default>
+                <label>New Order Only</label>
+            </value>
+            <value>
+                <fullName>Regeneration</fullName>
+                <default>false</default>
+                <label>Regeneration</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

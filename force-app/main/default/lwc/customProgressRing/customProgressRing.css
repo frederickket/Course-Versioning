@@ -1,0 +1,18 @@
+
+.customprogressring-container {
+    border-radius: 50%;
+    width: var(--customprogressring-width);
+    height: var(--customprogressring-height);
+}
+
+.customprogressring-path {
+    fill: var(--customprogressring-pathColor);
+}
+
+.customprogressring-content {
+    border-radius: 50%;
+    top: var(--customprogressring-pathThickness);
+    bottom: var(--customprogressring-pathThickness);
+    left: var(--customprogressring-pathThickness);
+    right: var(--customprogressring-pathThickness);
+}

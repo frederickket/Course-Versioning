@@ -1,0 +1,132 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+        <template lwc:if={isInitSuccess}>
+            <div class="slds-m-around_medium">
+                <div class="studentgradingregistry-header slds-m-bottom_medium slds-p-bottom_medium slds-border_bottom">
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item size="12" large-device-size="4">
+                            <template if:true={showModalHeader}>
+                                <div class="studentgradingregistry-title slds-card__header-title">
+                                    <lightning-icon icon-name={modalIconName} size="medium" class="slds-m-right_xx-small"></lightning-icon>
+                                    <lightning-formatted-text value={modalTitle}></lightning-formatted-text>
+                                </div>
+                            </template>
+                        </lightning-layout-item>
+                        <lightning-layout-item alignment-bump="left">
+                            <lightning-combobox data-id="sgppicklist" name="sgpPicklist" variant="label-hidden" value={selectedSgp} options={sgpOptions} onchange={handleSgpOnChange} class="slds-p-right_small"></lightning-combobox>
+                        </lightning-layout-item>
+                        <lightning-layout-item >
+                            <div class="studentgradingregistry-buttons">
+                                <ul class="slds-button-group-row">
+                                    <template lwc:if={showSaveButton}>
+                                        <li class="slds-button-group-item">
+                                            <lightning-button variant="brand" icon-name={unsavedChangesIcon} label={label.SAVE_LABEL} title={label.SAVE_LABEL} onclick={handleSaveClick} disabled={unsavedChangesButtonState} ></lightning-button>
+                                        </li>
+                                    </template>
+                                    <template lwc:if={showSaveAndSubmitButtonCalculated}>
+                                        <li class="slds-button-group-item">
+                                            <lightning-button variant="brand" icon-name={unsavedChangesIcon} label={label.SAVE_AND_SUBMIT_LABEL} title={label.SAVE_AND_SUBMIT_LABEL} onclick={handleSaveAndSubmitClick} disabled={unsavedChangesButtonState} ></lightning-button>
+                                        </li>
+                                    </template>
+                                    <template lwc:if={showCloseButton}>
+                                        <li class="slds-button-group-item">    
+                                            <lightning-button label={label.CLOSE_LABEL} title={label.CLOSE_LABEL} onclick={handleCloseClick} ></lightning-button>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+                <div class="studentgradingregistry-content">
+                    <lightning-layout multiple-rows="true" class="slds-p-bottom_small">
+                        <lightning-layout-item alignment-bump="left">
+                            <lightning-input name="searchStudents" placeholder={quickSearchPlaceholderText} variant="label-hidden" type="search" oncommit={handleSearch}></lightning-input>
+                        </lightning-layout-item>
+                        <lightning-layout-item>
+                            <lightning-button-menu name="sortbybuttonmenu" icon-name="utility:sort" menu-alignment="auto" onselect={handleSortByOnChange}>
+                                <template for:each={studentSortOptions} for:item="sortingOption">
+                                    <lightning-menu-item key={sortingOption.value} value={sortingOption.value} label={sortingOption.label} icon-name={sortingOption.iconName}></lightning-menu-item>
+                                </template>
+                            </lightning-button-menu>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                    <template lwc:if={hasDataWrapper}>
+                        <div class="slds-border_left slds-border_right">
+                            <table class="slds-table slds-table_bordered slds-table_col-bordered">
+                                <thead>
+                                    <tr class="slds-line-height_reset">
+                                        <!-- Column for Students -->
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title={label.STUDENT_LABEL}>{label.STUDENT_LABEL}</div>
+                                        </th>
+                                        <!-- For each study grade item-->
+                                        <template for:each={dataWrapper.tableColumnSgiList} for:item="sgiWrapper">
+                                            <template lwc:if={sgiWrapper.isShown}>
+                                                <th key={sgiWrapper.sgi.Id} class="" scope="col">
+                                                    <div class="slds-truncate" title={sgiWrapper.sgi.Name}>
+                                                        <div>
+                                                            {sgiWrapper.sgi.Name}
+                                                        </div>
+                                                        <div>
+                                                            {sgiWrapper.weight}
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                            </template>
+                                        </template>
+                                        <!-- For each custom Individual Enrollment Grade field-->
+                                        <template for:each={dataWrapper.igdCustomFields} for:item="igdCustomField">
+                                            <th key={igdCustomField.fieldName} class="" scope="col">
+                                                <div class="slds-truncate" title={igdCustomField.label}>{igdCustomField.label}</div>
+                                            </th>
+                                        </template>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- For each student-->
+                                    <template for:each={studentWrappers} for:item="sw">
+                                        <!-- inner component?-->
+                                         <c-student-grading-registry-entry
+                                            key={sw.ien.Id} 
+                                            class="slds-line-height_reset"
+                                            
+                                            user-mode={userMode}
+
+                                            contact-tile-info-fields={contactTileInfoFields}
+                                            contact-image-file-name={contactImageFileName}
+                                            contact-image-url-field-name={contactImageUrlFieldName}
+                                            contact-tile-click-action={contactTileClickAction}
+                                            info-modal-fields-for-contact={infoModalFieldsForContact}
+                                            info-modal-section-name-for-contact={infoModalSectionNameForContact}
+                                            
+                                            locked-igd-status={saveAndSubmitButtonIgdStatus}
+                                            individual-grade-item-notes-field-set-name={individualGradeItemNotesFieldSetName}
+
+                                            sw={sw}
+                                            grading-config-data-wrapper={dataWrapper}
+                                            student-search-key={studentSearchKey}
+
+                                            enable-debug-mode={enableDebugMode}
+
+                                            ongradeentryupdate={handleGradeEntryUpdate}
+                                         ></c-student-grading-registry-entry>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </template>
+                    <template lwc:else>
+                        {label.NO_RECORD_LABEL}
+                    </template>
+                </div>
+            </div>
+        </template>
+	</div>
+	
+</template>

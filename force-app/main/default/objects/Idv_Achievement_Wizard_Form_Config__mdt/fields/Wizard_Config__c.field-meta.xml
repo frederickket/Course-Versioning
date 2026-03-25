@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Wizard_Config__c</fullName>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <label>Wizard Config</label>
+    <referenceTo>Wizard_Config__mdt</referenceTo>
+    <relationshipLabel>Idv Achievement Wizard Form Configs</relationshipLabel>
+    <relationshipName>Idv_Achievement_Wizard_Form_Configs</relationshipName>
+    <required>false</required>
+    <type>MetadataRelationship</type>
+    <unique>false</unique>
+</CustomField>

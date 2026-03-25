@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Required_Object</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISBLANK(Object__c)</errorConditionFormula>
+    <errorDisplayField>Object__c</errorDisplayField>
+    <errorMessage>Please provide the parent object of the Study Requirement Set.</errorMessage>
+</ValidationRule>

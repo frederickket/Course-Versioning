@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <description>Study plan structure wizard.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>REDU - Study Plan Structure</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="mode" label="Mode" type="String" datasource="View, Edit" default="View"/>
+            <property name="modalTitle" label="Modal Title" type="String" default="Study Plan Hierarchy" description="Component modal title."/>
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:hierarchy" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            
+            <property name="showSplInfo" label="Show Study Plan Panel" type="Boolean" default="true" description="Show Study plan record info panel."/>
+            <property name="splInfoFields" label="Study Plan Panel Fields" type="String" default="reduivy__Study_Program__c;reduivy__Type__c;reduivy__Status__c;reduivy__Version__c" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="splInfoColumnNo" label="Study Plan Panel Column Number" type="Integer" default="4" description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12."/>
+            
+            <property name="showSpsGroupInfo" label="Show Study Plan Structure Group Panel" type="Boolean" default="true" description="Show Study plan structure group record info panel."/>
+            <property name="spsGroupTitleField" label="Study Plan Structure Group Title Field" type="String" default="Name" description="The Study Plan Structure field API name to be displayed as the title for group e.g., Field_A__c."/>
+            <property name="spsGroupInfoFields" label="Study Plan Structure Group Panel Fields" type="String" default="reduivy__Category__c;reduivy__Credits__c;reduivy__Sequence__c" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="spsGroupInfoColumnNo" label="Study Plan Structure Group Panel Column Number" type="Integer" default="4" description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12."/>
+            <property name="accordionBackgroundColor" label="Group Accordion Background Color" type="String" default="#cccccc" description="The Study plan structure group accordion backgound color in hex code. e.g., #cccccc."/>
+            <property name="accordionTextColor" label="Group Accordion Text Color" type="String" default="#000000" description="The Study plan structure group accordion text color in hex code. e.g., #000000."/>
+
+            <property name="spsUnitTableFields" label="Study Plan Structure Unit Table Fields" type="String" default="Name;reduivy__Category__c;reduivy__Study_Unit__c;reduivy__Credits__c;reduivy__Requirement_Description__c" description="The fields to be displayed in the unit tables in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="enableClickableRefField" label="Enable Clickable Ref Field" type="Boolean" default="true" description="Enable reference e.g., Lookup and Master Detail field as clicklable in the datatable."/>
+            <property name="hrefTargetType" label="Url/Reference Field Target Type" type="String" default="_self" datasource="_blank,_self,_parent,_top" description="The target attributes specifies whether to open the url/reference field in the same window or a new window."/>
+            
+            <property name="groupFieldSetName" label="Group Field Set API Name" type="String" default="reduivy__StudyPlanStructure_Group_EditForm" description="Study Plan Structure field set API name for new/edit group." />
+            <property name="unitFieldSetName" label="Unit Field Set API Name" type="String" default="reduivy__StudyPlanStructure_Unit_EditForm" description="Study Plan Structure field set API name for new/edit unit." />
+            
+            <property name="tableTextDisplayMode" label="Table Text Display Mode" type="String" default="Clip Text" description="Supported options are: Wrap Text, Clip Text." datasource="Wrap Text,Clip Text"/>
+
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+
+            <property name="forCommunity" label="(Obsolete) For Community?" type="Boolean" default="false" description="Check this if the component is used in Community page."/>
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="recordId" type="String" label="Record Id" default="{!recordId}" description="ID of the salesforce record for which the record details are to be displayed e.g. {!recordId}"/>
+            <property name="mode" label="Mode" type="String" datasource="View, Edit" default="View"/>
+            <property name="modalTitle" label="Modal Title" type="String" default="Study Plan Hierarchy" description="Component modal title."/>
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:hierarchy" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            
+            <property name="showSplInfo" label="Show Study Plan Panel" type="Boolean" default="true" description="Show Study plan record info panel."/>
+            <property name="splInfoFields" label="Study Plan Panel Fields" type="String" default="reduivy__Study_Program__c;reduivy__Type__c;reduivy__Status__c;reduivy__Version__c" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="splInfoColumnNo" label="Study Plan Panel Column Number" type="Integer" default="4" description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12."/>
+            
+            <property name="showSpsGroupInfo" label="Show Study Plan Structure Group Panel" type="Boolean" default="true" description="Show Study plan structure group record info panel."/>
+            <property name="spsGroupTitleField" label="Study Plan Structure Group Title Field" type="String" default="Name" description="The Study Plan Structure field API name to be displayed as the title for group e.g., Field_A__c."/>
+            <property name="spsGroupInfoFields" label="Study Plan Structure Group Panel Fields" type="String" default="reduivy__Category__c;reduivy__Credits__c;reduivy__Sequence__c" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="spsGroupInfoColumnNo" label="Study Plan Structure Group Panel Column Number" type="Integer" default="4" description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12."/>
+            <property name="accordionBackgroundColor" label="Group Accordion Background Color" type="String" default="#cccccc" description="The Study plan structure group accordion backgound color in hex code. e.g., #cccccc."/>
+            <property name="accordionTextColor" label="Group Accordion Text Color" type="String" default="#000000" description="The Study plan structure group accordion text color in hex code. e.g., #000000."/>
+
+            <property name="spsUnitTableFields" label="Study Plan Structure Unit Table Fields" type="String" default="Name;reduivy__Category__c;reduivy__Study_Unit__c;reduivy__Credits__c;reduivy__Requirement_Description__c" description="The fields to be displayed in the unit tables in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="enableClickableRefField" label="Enable Clickable Ref Field" type="Boolean" default="true" description="Enable reference e.g., Lookup and Master Detail field as clicklable in the datatable."/>
+            <property name="hrefTargetType" label="Url/Reference Field Target Type" type="String" default="_self" datasource="_blank,_self,_parent,_top" description="The target attributes specifies whether to open the url/reference field in the same window or a new window."/>
+            
+            <property name="groupFieldSetName" label="Group Field Set API Name" type="String" default="reduivy__StudyPlanStructure_Group_EditForm" description="Study Plan Structure field set API name for new/edit group." />
+            <property name="unitFieldSetName" label="Unit Field Set API Name" type="String" default="reduivy__StudyPlanStructure_Unit_EditForm" description="Study Plan Structure field set API name for new/edit unit." />
+
+            <property name="tableTextDisplayMode" label="Table Text Display Mode" type="String" default="Clip Text" description="Supported options are: Wrap Text, Clip Text." datasource="Wrap Text,Clip Text"/>
+
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+
+            <property name="forCommunity" label="(Obsolete) For Community?" type="Boolean" default="false" description="Check this if the component is used in Community page."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

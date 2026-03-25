@@ -1,0 +1,36 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+        
+        <div class="component-body slds-is-relative slds-card">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel} ></lightning-spinner>
+            </div>
+
+            <div class="studyplanhierarchymodal-body">
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning-record-edit-form 
+                        object-api-name="reduivy__Study_Plan_Structure__c"
+                        record-id={spsId}
+                        record-type-id={spsType}
+                        onsuccess={handleSuccess}>
+                        <template for:each={recordFormColumns} for:item="col">
+                            <lightning-input-field key={col.fieldName} 
+                                field-name={col.fieldName} 
+                                required={col.isRequired} 
+                                data-save-required={col.isRequired} 
+                                data-displaytype={col.displayType}
+                                onchange={handleFormFieldChange} 
+                            ></lightning-input-field>
+                        </template>
+                    </lightning-record-edit-form>
+                </div>
+            </div>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" disabled={isLoading} onclick={handleCancelClick} label={cancelLabel} class="slds-p-right_xx-small"></lightning-button>
+        <lightning-button variant="brand" disabled={isLoading} onclick={handleSaveClick} label={saveLabel} class="slds-p-right_xx-small"></lightning-button>
+    </lightning-modal-footer>
+</template>

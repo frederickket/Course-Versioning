@@ -1,0 +1,9 @@
+.component-body {
+    
+}
+
+.studentgradingregistry-content {
+	/* Make sure action menu doesn't get clipped when uncommenting this
+	overflow-x: auto;*/
+	max-width: 100%;
+}

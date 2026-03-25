@@ -1,0 +1,64 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:sldsOneColLayout",
+  "dataProviders" : [ ],
+  "id" : "61325632-2bb0-4f44-b18e-7006907da37d",
+  "label" : "Study Pathway Detail",
+  "regions" : [ {
+    "id" : "d2afd640-52ed-4c8c-8008-922a047949c5",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "accordionBackgroundColor" : "#cccccc",
+        "accordionTextColor" : "#000000",
+        "comboboxLabel" : "Preview with major/minor",
+        "enableDebugMode" : false,
+        "modalIconName" : "standard:sales_path",
+        "modalTitle" : "Pathway Visualizer",
+        "recordId" : "{!recordId}",
+        "showStudyPlanOptions" : false,
+        "showStudyUnitQuickSearch" : true,
+        "studyPathwayGroupIcon" : "standard:all",
+        "studyPathwayGroupInfoFields" : "Name",
+        "studyPathwayGroupTitleField" : "Name",
+        "studyPathwayInfoFields" : "reduivy__Study_Mode__c",
+        "studyPathwayTermTitlePrefix" : "Term",
+        "studyPathwayUnitIcon" : "standard:catalog",
+        "studyPathwayUnitInfoFields" : "Name",
+        "studyPathwayUnitTitleField" : "Name"
+      },
+      "componentName" : "reduivy:studyPathway",
+      "id" : "3ea9b246-a992-41cd-98bf-84589fea9fa1",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "b8e38690-b5a6-4b9a-bc7e-8a4152fb1aa2",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "id" : "74b275f7-5c8d-4ebe-9f2c-cc86a73ebc22",
+    "regionName" : "footer",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "{!Record._Object}: {!Record._Title}"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "5784dd2e-88a2-44cf-b0f6-7f5153d3eccd",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "94062abe-e087-40d1-8915-7cdd17100a40",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "detail-a0x"
+}

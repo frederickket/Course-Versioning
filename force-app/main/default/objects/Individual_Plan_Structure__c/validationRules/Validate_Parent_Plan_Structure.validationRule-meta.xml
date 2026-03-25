@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Parent_Plan_Structure</fullName>
+    <active>true</active>
+    <description>To ensure that the parent plan structure is a group individual plan structure from the same individual program enrollment.</description>
+    <errorConditionFormula>NOT(ISBLANK(Parent_Plan_Structure__c )) &amp;&amp; 
+(
+Parent_Plan_Structure__r.RecordType.DeveloperName != &apos;Group&apos; ||
+Individual_Program_Enrollment__c != Parent_Plan_Structure__r.Individual_Program_Enrollment__c
+)</errorConditionFormula>
+    <errorDisplayField>Parent_Plan_Structure__c</errorDisplayField>
+    <errorMessage>Please select a group plan structure from the same individual program enrollment.</errorMessage>
+</ValidationRule>

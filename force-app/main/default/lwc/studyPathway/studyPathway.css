@@ -1,0 +1,19 @@
+.component-body {
+    
+}
+
+.pathway-visualiser-body {
+    display: flex;
+    flex-direction: row-reverse
+    
+}
+
+.pathway-visualiser-content {
+    width: 100%;
+    overflow: auto;
+}
+
+.pathway-visualiser-panel {
+    overflow: inherit;
+    height: inherit;
+}

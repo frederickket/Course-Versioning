@@ -1,0 +1,11 @@
+{
+    "FirstName": "Test",
+    "LastName": "Faculty",
+    "TimeZoneSidKey": "Australia/Sydney",
+    "LocaleSidKey": "en_US",
+    "EmailEncodingKey": "UTF-8",
+    "LanguageLocaleKey": "en_US",
+    "profileName": "REDU - Faculty",
+    "permsets": ["REDU_Faculty"],
+    "generatePassword": true
+}

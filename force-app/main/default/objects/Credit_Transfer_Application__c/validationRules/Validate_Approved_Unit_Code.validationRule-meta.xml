@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Approved_Unit_Code</fullName>
+    <active>true</active>
+    <description>Approved Unit Code is required unless the Agreement Unit Equivalent is type of manual assignment.</description>
+    <errorConditionFormula>AND(
+ISBLANK(TEXT(Approved_Letter_Grade__c)),
+NOT(ISBLANK(TEXT(Agreement_Unit_Equivalent__r.Type__c))),
+NOT(ISPICKVAL(Agreement_Unit_Equivalent__r.Type__c, &apos;Manual Assignment&apos;)),
+ISPICKVAL(Status__c, &apos;Approved&apos;) 
+)</errorConditionFormula>
+    <errorDisplayField>Approved_Unit_Codes__c</errorDisplayField>
+    <errorMessage>Approved Unit Code is required unless the Agreement Unit Equivalent is type of manual assignment.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <description>Contact profile picture wizard.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>REDU - Contact Profile Panel</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="fileCategory" type="String" label="File Category" description="File Category." default="Profile Picture"/>
+            <property name="allowedFileTypes" type="String" label="Allowed File Types" description="Permitted file types to upload." default=".jpg,.png,.jpeg"/>
+            <property name="noImageMessage" type="String" label="No Image Message" description="Text to be displayed when no image has been uploaded." default="Upload a profile picture"/>
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="recordId" type="String" label="Record Id" default="{!recordId}" description="ID of the salesforce record for which the file to be uploaded e.g. {!recordId}"/>
+            <property name="fileCategory" type="String" label="File Category" description="File Category." default="Profile Picture"/>
+            <property name="allowedFileTypes" type="String" label="Allowed File Types" description="Permitted file types to upload." default=".jpg,.png,.jpeg"/>
+            <property name="noImageMessage" type="String" label="No Image Message" description="Text to be displayed when no image has been uploaded." default="Upload a profile picture"/>
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,63 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="slds-m-around_medium studentachievementitem-content">
+                <lightning-layout horizontal-align="spread" vertical-align="start">
+                    <lightning-layout-item>
+                        <lightning-layout class="slds-wrap" multiple-rows="true">
+                            <lightning-layout-item size="12">
+                                <div class="slds-text-heading_medium">
+                                    <lightning-formatted-text value={titleLabel}></lightning-formatted-text>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                        <lightning-layout class="slds-wrap" multiple-rows="true">
+                            <lightning-layout-item size="12">
+                                <lightning-badge lwc:if={showVerificationIndicator} class={badgeClasses} label={badgeLabel}></lightning-badge>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                    <lightning-layout-item alignment-bump="left">
+                        <lightning-helptext lwc:if={showWarningIcon} class="slds-m-right_small" icon-name="utility:warning" icon-variant="warning" content={completeRequirementsBeforeSubmitLabel}></lightning-helptext>
+                        <lightning-button-group>
+                            <lightning-button lwc:if={showViewButton} variant="neutral" label={label.VIEW_LABEL} onclick={handleViewClick}></lightning-button>
+                            <lightning-button-menu lwc:if={showButtonMenu} variant="border" onselect={handleActionMenuSelected}>
+                                <lightning-menu-item lwc:if={showDeleteButton} label={label.DELETE_LABEL} value="delete" disabled={disableActionButton}></lightning-menu-item>
+                            </lightning-button-menu>
+                        </lightning-button-group>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-formatted-text value={subtitleLabel} linkify></lightning-formatted-text>
+
+                <c-record-view-form 
+                    record-id={individualAchievement.Id}
+                    object-api-name="reduivy__Individual_Achievement__c"
+                    fields={individualAchievementInfoList}
+                    enable-debug-mode={enableDebugMode}
+                >
+                    <ul lwc:if={individualAchievementInfo1IsSet} class="slds-list_horizontal slds-has-dividers_right slds-m-top_medium">
+                        <template for:each={individualAchievementInfo1List} for:item="field">
+                            <li key={field} class="slds-item">
+                                <c-output-field variant="label-hidden" field-name={field} hide-for-blank-value="true"></c-output-field>
+                            </li>
+                        </template>
+                    </ul>
+
+                    <template lwc:if={individualAchievementInfo2IsSet} for:each={individualAchievementInfo2List} for:item="field">
+                        <div key={field} class="slds-m-top_medium">
+                            <c-output-field field-name={field} hide-for-blank-value="true"></c-output-field>
+                        </div>
+                    </template>
+                    
+                </c-record-view-form>                
+            </div>
+        </template>
+	</div>
+	
+</template>

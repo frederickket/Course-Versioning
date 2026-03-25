@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Student_Enrollments_Program</fullName>
+    <columns>NAME</columns>
+    <columns>Contact__c</columns>
+    <columns>Enrollment_Status__c</columns>
+    <columns>Study_Offering__c</columns>
+    <columns>Enrollment_Date__c</columns>
+    <columns>Attempt_Number__c</columns>
+    <columns>Bypass_Requirement_Met__c</columns>
+    <columns>Individual_Academic_Progress__c</columns>
+    <columns>Auto_Enrollment__c</columns>
+    <columns>Grade_Result__c</columns>
+    <columns>Best_Attempt__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Individual_Enrollment__c.Student</value>
+    </filters>
+    <filters>
+        <field>Enrollment_Type__c</field>
+        <operation>equals</operation>
+        <value>Program</value>
+    </filters>
+    <label>All Student Enrollments (Program)</label>
+</ListView>

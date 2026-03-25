@@ -1,0 +1,191 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+    <div class="studysessionschedulerfiltermodal component-body">
+
+        <div class="studysessionschedulerfiltermodal-header slds-p-around_small slds-border_bottom">
+            <lightning-layout horizontal-align="spread">
+                <lightning-layout-item>
+                    <lightning-button 
+                    variant="neutral"
+                    label={clearButtonLabel} 
+                    onclick={handleClearClick}
+                    ></lightning-button>
+                </lightning-layout-item>
+                <lightning-layout-item>
+                    <lightning-button 
+                    variant="brand"
+                    label={applyButtonLabel} 
+                    onclick={handleApplyClick} 
+                    ></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+            
+            
+        </div>
+        <div class="slds-panel__body studysessionschedulerfiltermodal-body">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel} ></lightning-spinner>
+            </div>
+            <div>
+                <lightning-layout multiple-rows="true">
+                    <lightning-layout-item lwc:if={educationalInstitutionResponse} size="12">
+                        <c-searchable-combobox
+                            field-label={educationalInstitutionLabel}
+                            field-name="educationalInstitutionId"
+                            icon-name="standard:account"
+                            default-value={educationalInstitutionId}
+                            options={educationalInstitutionOptions}
+                            onchange={handleComboboxChange}
+                            enable-debug-mode={enableDebugMode}
+                        ></c-searchable-combobox>
+                    </lightning-layout-item>
+                    <lightning-layout-item lwc:if={campusResponse} size="12">
+                        <c-searchable-combobox
+                            field-label={campusLabel}
+                            field-name="campusId"
+                            icon-name="standard:account"
+                            default-value={campusId}
+                            options={campusOptions}
+                            onchange={handleComboboxChange}
+                            enable-debug-mode={enableDebugMode}
+                        ></c-searchable-combobox>
+                    </lightning-layout-item>
+                    <lightning-layout-item lwc:if={studyUnitResponse} size="12">
+                        <c-searchable-combobox
+                            field-label={sunLabel}
+                            field-name="studyUnitId"
+                            icon-name="custom:custom55"
+                            default-value={studyUnitId}
+                            options={studyUnitOptions}
+                            onchange={handleComboboxChange}
+                            enable-debug-mode={enableDebugMode}
+                        ></c-searchable-combobox>
+                    </lightning-layout-item>
+                    <lightning-layout-item lwc:if={academicTermResponse} size="12">
+                        <c-searchable-combobox
+                            field-label={academicTermLabel}
+                            field-name="academicTermId"
+                            icon-name="custom:custom55"
+                            default-value={academicTermId}
+                            options={academicTermOptions}
+                            onchange={handleComboboxChange}
+                            enable-debug-mode={enableDebugMode}
+                        ></c-searchable-combobox>
+                    </lightning-layout-item>
+                    <lightning-layout-item lwc:if={studyOfferingResponse} size="12">
+                        <c-searchable-combobox
+                            field-label={sofLabel}
+                            field-name="studyOfferingId"
+                            icon-name="custom:custom55"
+                            default-value={studyOfferingId}
+                            options={studyOfferingOptions}
+                            onchange={handleComboboxChange}
+                            enable-debug-mode={enableDebugMode}
+                        ></c-searchable-combobox>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout multiple-rows="true">
+                    <div class="slds-p-top_large slds-text-heading_small">
+                        {sseLabel}
+                    </div>
+                    <lightning-layout-item lwc:if={studySessionFilterFields} size="12">
+                        <template if:true={studySessionCustomFilterConfigs}>
+                            <c-custom-filters 
+                                message-operation-name="studySessionFilterUpdate"
+                                source-record-id=""
+                                source-object-type="reduivy__Study_Session__c"
+                                target-object-type="reduivy__Study_Session__c"
+                                custom-filter-configs={studySessionCustomFilterConfigs}
+                                default-column-size="12"
+                                large-device-column-size="12"
+                                show-picklist-as-multi-select="true"
+                                include-none-options="false"
+                                onfiltersupdated={handleFiltersUpdateForStudySession}
+                                enable-debug-mode={enableDebugMode}
+                            ></c-custom-filters>
+                        </template>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout multiple-rows="true">
+                    <div class="slds-p-top_large slds-text-heading_small">
+                        {contactLabel}
+                    </div>
+                    <lightning-layout-item lwc:if={contactFilterFields} size="12">
+                        <template if:true={contactCustomFilterConfigs}>
+                            <c-custom-filters 
+                                message-operation-name="contactFilterUpdate"
+                                source-record-id=""
+                                source-object-type="Contact"
+                                target-object-type="Contact"
+                                custom-filter-configs={contactCustomFilterConfigs}
+                                default-column-size="12"
+                                large-device-column-size="12"
+                                show-picklist-as-multi-select="true"
+                                include-none-options="false"
+                                onfiltersupdated={handleFiltersUpdateForContact}
+                                enable-debug-mode={enableDebugMode}
+                            ></c-custom-filters>
+                        </template>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout multiple-rows="true">
+                    <div class="slds-p-top_large slds-text-heading_small">
+                        {facilityLabel}
+                    </div>
+                    <lightning-layout-item lwc:if={facilityFilterFields} size="12">
+                        <template if:true={facilityCustomFilterConfigs}>
+                            <c-custom-filters 
+                                message-operation-name="facilityFilterUpdate"
+                                source-record-id=""
+                                source-object-type="reduivy__Facility__c"
+                                target-object-type="reduivy__Facility__c"
+                                custom-filter-configs={facilityCustomFilterConfigs}
+                                default-column-size="12"
+                                large-device-column-size="12"
+                                show-picklist-as-multi-select="true"
+                                include-none-options="false"
+                                onfiltersupdated={handleFiltersUpdateForFacility}
+                                enable-debug-mode={enableDebugMode}
+                            ></c-custom-filters>
+                        </template>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout multiple-rows="true">
+                    <div class="slds-p-top_large slds-text-heading_small">
+                        {groupByLabel}
+                    </div>
+                    <lightning-layout-item lwc:if={groupByFieldOptions} size="12">
+                        <c-searchable-combobox
+                            field-label={groupByField1Label}
+                            field-name="groupByField1"
+                            default-value={groupByField1}
+                            options={groupByFieldOptions}
+                            onchange={handleGroupByComboChange}
+                            enable-debug-mode={enableDebugMode}
+                        ></c-searchable-combobox>
+                    </lightning-layout-item>
+                    <lightning-layout-item lwc:if={groupByFieldOptions} size="12">
+                        <c-searchable-combobox
+                            field-label={groupByField2Label}
+                            field-name="groupByField2"
+                            default-value={groupByField2}
+                            options={groupByFieldOptions}
+                            onchange={handleGroupByComboChange}
+                            enable-debug-mode={enableDebugMode}
+                        ></c-searchable-combobox>
+                    </lightning-layout-item>
+                    <lightning-layout-item lwc:if={groupByFieldOptions} size="12">
+                        <c-searchable-combobox
+                            field-label={groupByField3Label}
+                            field-name="groupByField3"
+                            default-value={groupByField3}
+                            options={groupByFieldOptions}
+                            onchange={handleGroupByComboChange}
+                            enable-debug-mode={enableDebugMode}
+                        ></c-searchable-combobox>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </div>
+    </div>
+</template>

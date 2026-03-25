@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Respect_Resource_Availability__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>To auto allocate the facility/faculty contact to the study events based on their availabilities.</description>
+    <inlineHelpText>To auto allocate the facility/faculty contact to the study events based on their availabilities.</inlineHelpText>
+    <label>Respect Resource Availability</label>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,12 @@
+{
+  "activeViewId" : "5182c475-be84-401d-9636-7359a5b98796",
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "configurationTags" : [ ],
+  "devName" : "Study_Offering_Registration__c",
+  "id" : "1970bfb9-75a6-4001-a5f6-30372ee3f807",
+  "label" : "Study Offering Registration",
+  "pageAccess" : "UseParent",
+  "routeType" : "custom-study-offering-registration",
+  "type" : "route",
+  "urlPrefix" : "study-offering-registration"
+}

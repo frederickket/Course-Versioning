@@ -1,0 +1,12 @@
+{
+  "activeViewId" : "9355e063-26c6-4056-b6d2-ab764eea8127",
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "configurationTags" : [ ],
+  "devName" : "Shopping_Cart_Payment_Selection__c",
+  "id" : "aa0854bb-ac3c-4484-b0c5-a9b7560a60e0",
+  "label" : "Shopping Cart Payment Selection",
+  "pageAccess" : "UseParent",
+  "routeType" : "custom-shopping-cart-payment-selection",
+  "type" : "route",
+  "urlPrefix" : "shopping-cart-payment-selection"
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Todays_Jobs</fullName>
+    <columns>NAME</columns>
+    <columns>Job_Operation__c</columns>
+    <columns>Job_Handler_Class_Name__c</columns>
+    <columns>Status__c</columns>
+    <columns>Start_Datetime__c</columns>
+    <columns>End_Datetime__c</columns>
+    <columns>Number_of_Attempts__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Start_Datetime__c</field>
+        <operation>equals</operation>
+        <value>TODAY</value>
+    </filters>
+    <label>Today&apos;s Jobs</label>
+</ListView>

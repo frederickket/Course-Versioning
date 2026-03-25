@@ -1,0 +1,43 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+
+    <div class="component-body slds-is-relative">
+        <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+        
+        <template if:true={isInitSuccess}>
+            <div data-id="divblock" class={divBlockCss}>
+                <template if:true={showIcon}>
+                    <div class="slds-col continuingedudetail-iconspace">
+                        <lightning-icon icon-name={iconName} alternative-text="Utility checkin" title="Image">
+                        </lightning-icon>
+                    </div>
+                </template>
+                <div class="slds-col">
+                    <c-record-view-form record-id={recordId} object-api-name={objectApiName} fields={infoFields} enable-debug-mode={enableDebugMode}>
+                        <template if:true={showTitle}>
+                            <p class="slds-p-bottom_xx-small continuingedudetail-titlefield" >{title}</p>
+                        </template>
+                        <template for:each={fieldsArray} for:item="eachField">
+                            <div key={eachField} class="slds-grid slds-wrap ">
+                                <template if:true={showFieldLabel}>
+                                    <div class="slds-p-right_xx-small continuingedudetail-detailfield">
+                                        <strong>{eachField.label}:</strong>
+                                    </div>
+                                </template>
+                                <template if:true={eachField.fieldName}>
+                                    <div class="continuingedudetail-detailfield">
+                                        <c-output-field field-name={eachField.fieldName}
+                                            variant="label-hidden" >
+                                        </c-output-field>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+                    </c-record-view-form>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

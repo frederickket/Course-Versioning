@@ -1,0 +1,553 @@
+Insert reduivy__Study_Intake__c:
+  sf_object: reduivy__Study_Intake__c
+  table: reduivy__Study_Intake__c
+Insert Account:
+  sf_object: Account
+  table: Account
+  fields:
+  - AccountNumber
+  - AccountSource
+  - BillingCity
+  - BillingCountry
+  - BillingGeocodeAccuracy
+  - BillingLatitude
+  - BillingLongitude
+  - BillingPostalCode
+  - BillingState
+  - BillingStreet
+  - Description
+  - Fax
+  - Industry
+  - Name
+  - NumberOfEmployees
+  - Ownership
+  - Phone
+  - ShippingCity
+  - ShippingCountry
+  - ShippingGeocodeAccuracy
+  - ShippingLatitude
+  - ShippingLongitude
+  - ShippingPostalCode
+  - ShippingState
+  - ShippingStreet
+  - Type
+  - Website
+  - reduivy__Code__c
+  - reduivy__External_Id__c
+  - reduivy__Sample_Record_Code__c
+  - reduivy__Timezone__c
+  - RecordTypeId
+  lookups:
+    ParentId:
+      table: Account
+      key_field: ParentId
+      after: Insert Account
+Insert Contact:
+  sf_object: Contact
+  table: Contact
+  fields:
+  - AssistantName
+  - AssistantPhone
+  - Birthdate
+  - Department
+  - Description
+  - Email
+  - EmailBouncedDate
+  - EmailBouncedReason
+  - Fax
+  - FirstName
+  - HomePhone
+  - LastName
+  - LeadSource
+  - MailingCity
+  - MailingCountry
+  - MailingGeocodeAccuracy
+  - MailingLatitude
+  - MailingLongitude
+  - MailingPostalCode
+  - MailingState
+  - MailingStreet
+  - MobilePhone
+  - OtherCity
+  - OtherCountry
+  - OtherGeocodeAccuracy
+  - OtherLatitude
+  - OtherLongitude
+  - OtherPhone
+  - OtherPostalCode
+  - OtherState
+  - OtherStreet
+  - Phone
+  - Salutation
+  - Title
+  - reduivy__Active__c
+  - reduivy__External_Id__c
+  - reduivy__Sample_Record_Code__c
+  - reduivy__Student_ID__c
+  lookups:
+    AccountId:
+      table: Account
+      key_field: AccountId
+    ReportsToId:
+      table: Contact
+      key_field: ReportsToId
+      after: Insert Contact
+Insert reduivy__Facility__c:
+  sf_object: reduivy__Facility__c
+  table: reduivy__Facility__c
+  fields:
+  - Name
+  - reduivy__Active__c
+  - reduivy__Capacity__c
+  - reduivy__Description__c
+  - reduivy__External_Id__c
+  - reduivy__Facility_Type__c
+  - reduivy__Sample_Record_Code__c
+  lookups:
+    reduivy__Campus__c:
+      table: Account
+      key_field: reduivy__Campus__c
+    reduivy__Parent_Facility__c:
+      table: reduivy__Facility__c
+      key_field: reduivy__Parent_Facility__c
+      after: Insert reduivy__Facility__c
+Insert reduivy__Study_Program__c:
+  sf_object: reduivy__Study_Program__c
+  table: reduivy__Study_Program__c
+  fields:
+  - Name
+  - reduivy__Academic_Level__c
+  - reduivy__External_Id__c
+  - reduivy__Program_Code__c
+  - reduivy__Program_Entry_Criteria__c
+  - reduivy__Sample_Record_Code__c
+  lookups:
+    reduivy__Educational_Institution__c:
+      table: Account
+      key_field: reduivy__Educational_Institution__c
+Insert reduivy__Study_Term__c:
+  sf_object: reduivy__Study_Term__c
+  table: reduivy__Study_Term__c
+  fields:
+  - Name
+  - reduivy__Alternate_Name__c
+  - reduivy__Census_Date__c
+  - reduivy__Enable_Cohort_Enrollment__c
+  - reduivy__End_Date__c
+  - reduivy__Enrollment_Close_Date__c
+  - reduivy__Enrollment_Open_Date__c
+  - reduivy__External_Id__c
+  - reduivy__For_Internal_Only__c
+  - reduivy__Pre_enrollment_Open_Date__c
+  - reduivy__Sample_Record_Code__c
+  - reduivy__Start_Date__c
+  - reduivy__Type__c
+  - RecordTypeId
+  lookups:
+    reduivy__Academic_Year__c:
+      table: reduivy__Study_Term__c
+      key_field: reduivy__Academic_Year__c
+      after: Insert reduivy__Study_Term__c
+    reduivy__Educational_Institution__c:
+      table: Account
+      key_field: reduivy__Educational_Institution__c
+Insert reduivy__Study_Unit__c:
+  sf_object: reduivy__Study_Unit__c
+  table: reduivy__Study_Unit__c
+  fields:
+  - Name
+  - reduivy__Credits__c
+  - reduivy__Default_EFTSL__c
+  - reduivy__Description__c
+  - reduivy__External_Id__c
+  - reduivy__Field_of_Study__c
+  - reduivy__Requirement_Description__c
+  - reduivy__Requirement_Logic__c
+  - reduivy__Sample_Record_Code__c
+  - reduivy__Unit_Code__c
+  - reduivy__Unit_Level__c
+  lookups:
+    reduivy__Educational_Institution__c:
+      table: Account
+      key_field: reduivy__Educational_Institution__c
+Insert reduivy__Study_Cohort_Enrollment__c:
+  sf_object: reduivy__Study_Cohort_Enrollment__c
+  table: reduivy__Study_Cohort_Enrollment__c
+  fields:
+  - Name
+  - reduivy__Class_Standing__c
+  - reduivy__Class_Year__c
+  - reduivy__Cohort_ID__c
+  - reduivy__Enrollment_Close_Date__c
+  - reduivy__Enrollment_Open_Date__c
+  - reduivy__External_Id__c
+  - reduivy__Pre_enrollment_Open_Date__c
+  - reduivy__Sample_Record_Code__c
+  lookups:
+    reduivy__Academic_Term__c:
+      table: reduivy__Study_Term__c
+      key_field: reduivy__Academic_Term__c
+Insert reduivy__Study_Offering__c:
+  sf_object: reduivy__Study_Offering__c
+  table: reduivy__Study_Offering__c
+  fields:
+  - Name
+  - reduivy__About__c
+  - reduivy__Banner_Image_URL__c
+  - reduivy__Booked_Places__c
+  - reduivy__Capacity__c
+  - reduivy__Census_Date__c
+  - reduivy__Code__c
+  - reduivy__Credit_Expiry_Dates__c
+  - reduivy__Delivery_Method__c
+  - reduivy__Description__c
+  - reduivy__Discountable__c
+  - reduivy__Enable_Guest_Registrations__c
+  - reduivy__Enable_Self_Enrollment__c
+  - reduivy__Enable_Waitlist__c
+  - reduivy__End_Date__c
+  - reduivy__Enrollment_Close_Date__c
+  - reduivy__Enrollment_Open_Date__c
+  - reduivy__Entry_Requirements__c
+  - reduivy__External_Id__c
+  - reduivy__Fee_Amount__c
+  - reduivy__Field_of_Study__c
+  - reduivy__Listing_Image_URL__c
+  - reduivy__Listing_Status__c
+  - reduivy__Number_of_Credits__c
+  - reduivy__Offering_Type__c
+  - reduivy__Pre_enrollment_Open_Date__c
+  - reduivy__Sample_Record_Code__c
+  - reduivy__Scheduled_Duration_Unit__c
+  - reduivy__Scheduled_Duration__c
+  - reduivy__Start_Date__c
+  - reduivy__Status_Override__c
+  - reduivy__Unlimited_Places__c
+  - reduivy__Waitlist_Places__c
+  lookups:
+    reduivy__Academic_Term__c:
+      table: reduivy__Study_Term__c
+      key_field: reduivy__Academic_Term__c
+    reduivy__Campus__c:
+      table: Account
+      key_field: reduivy__Campus__c
+    reduivy__Primary_Faculty__c:
+      table: Contact
+      key_field: reduivy__Primary_Faculty__c
+    reduivy__Study_Unit__c:
+      table: reduivy__Study_Unit__c
+      key_field: reduivy__Study_Unit__c
+Insert reduivy__Study_Plan__c:
+  sf_object: reduivy__Study_Plan__c
+  table: reduivy__Study_Plan__c
+  fields:
+  - Name
+  - reduivy__Clone_From_Id__c
+  - reduivy__Default__c
+  - reduivy__Description__c
+  - reduivy__External_Id__c
+  - reduivy__Fee_Method__c
+  - reduivy__Pay_Upfront__c
+  - reduivy__Sample_Record_Code__c
+  - reduivy__Status__c
+  - reduivy__Total_Required_Credits__c
+  - reduivy__Type__c
+  - reduivy__Valid_From__c
+  - reduivy__Valid_To__c
+  - reduivy__Version__c
+  lookups:
+    reduivy__Study_Program__c:
+      table: reduivy__Study_Program__c
+      key_field: reduivy__Study_Program__c
+Insert reduivy__Study_Unit_Requirement__c:
+  sf_object: reduivy__Study_Unit_Requirement__c
+  table: reduivy__Study_Unit_Requirement__c
+  fields:
+  - Name
+  - reduivy__Credits__c
+  - reduivy__External_Id__c
+  - reduivy__Other__c
+  - reduivy__Requirement_ID__c
+  - reduivy__Requirement_Type__c
+  - reduivy__Sample_Record_Code__c
+  lookups:
+    reduivy__Required_Study_Unit__c:
+      table: reduivy__Study_Unit__c
+      key_field: reduivy__Required_Study_Unit__c
+    reduivy__Study_Unit__c:
+      table: reduivy__Study_Unit__c
+      key_field: reduivy__Study_Unit__c
+Insert reduivy__Individual_Enrollment__c:
+  sf_object: reduivy__Individual_Enrollment__c
+  table: reduivy__Individual_Enrollment__c
+  fields:
+  - reduivy__Attempt_Number__c
+  - reduivy__Census_Date__c
+  - reduivy__Credit_Transfer_Notes__c
+  - reduivy__Credit_Transfer_Received__c
+  - reduivy__Credits_Attempted__c
+  - reduivy__Credits_Earned__c
+  - reduivy__Credits_Offered__c
+  - reduivy__Due_Date__c
+  - reduivy__EFTSL__c
+  - reduivy__End_Date__c
+  - reduivy__Enrollment_Date__c
+  - reduivy__Enrollment_Status__c
+  - reduivy__Exclude_Credits_Earned__c
+  - reduivy__Exclude_GPA_Calculation__c
+  - reduivy__External_Id__c
+  - reduivy__Grade_Points__c
+  - reduivy__Grade_Release_Status__c
+  - reduivy__Grade_Result__c
+  - reduivy__Grade_Setting_Type__c
+  - reduivy__Historical_Term__c
+  - reduivy__Historical_Unit_Code__c
+  - reduivy__Historical_Unit_Name__c
+  - reduivy__Letter_Grade__c
+  - reduivy__Notes__c
+  - reduivy__Numerical_Grade__c
+  - reduivy__Sample_Record_Code__c
+  - reduivy__Start_Date__c
+  - reduivy__Waitlist_Date__c
+  - reduivy__Withdrawal_Date__c
+  - RecordTypeId
+  lookups:
+    reduivy__Contact__c:
+      table: Contact
+      key_field: reduivy__Contact__c
+    reduivy__Study_Offering__c:
+      table: reduivy__Study_Offering__c
+      key_field: reduivy__Study_Offering__c
+Insert reduivy__Study_Pathway__c:
+  sf_object: reduivy__Study_Pathway__c
+  table: reduivy__Study_Pathway__c
+  fields:
+  - Name
+  - reduivy__Clone_From_Id__c
+  - reduivy__Default__c
+  - reduivy__External_Id__c
+  - reduivy__Sample_Record_Code__c
+  - reduivy__Status__c
+  - reduivy__Study_Mode__c
+  lookups:
+    reduivy__Study_Plan__c:
+      table: reduivy__Study_Plan__c
+      key_field: reduivy__Study_Plan__c
+Insert reduivy__Study_Plan_Structure__c:
+  sf_object: reduivy__Study_Plan_Structure__c
+  table: reduivy__Study_Plan_Structure__c
+  fields:
+  - Name
+  - reduivy__Allow_Pre_Enrollment__c
+  - reduivy__Category__c
+  - reduivy__Clone_From_Id__c
+  - reduivy__Credits__c
+  - reduivy__Credits_equivalent_per_Unit__c
+  - reduivy__Description__c
+  - reduivy__EFTSL_Override__c
+  - reduivy__External_Id__c
+  - reduivy__Hide_in_Enrollment__c
+  - reduivy__Max_Credits__c
+  - reduivy__Requirement_Description__c
+  - reduivy__Requirement_Logic__c
+  - reduivy__Sample_Record_Code__c
+  - reduivy__Sequence__c
+  - reduivy__Units_Required__c
+  - RecordTypeId
+  lookups:
+    reduivy__Parent_Study_Plan_Structure__c:
+      table: reduivy__Study_Plan_Structure__c
+      key_field: reduivy__Parent_Study_Plan_Structure__c
+      after: Insert reduivy__Study_Plan_Structure__c
+    reduivy__Study_Plan__c:
+      table: reduivy__Study_Plan__c
+      key_field: reduivy__Study_Plan__c
+    reduivy__Study_Unit__c:
+      table: reduivy__Study_Unit__c
+      key_field: reduivy__Study_Unit__c
+Insert reduivy__Individual_Program_Enrollment__c:
+  sf_object: reduivy__Individual_Program_Enrollment__c
+  table: reduivy__Individual_Program_Enrollment__c
+  fields:
+  - reduivy__Admission_Date__c
+  - reduivy__Class_Standing__c
+  - reduivy__Class_Year__c
+  - reduivy__Cohort_ID__c
+  - reduivy__Completion_Percentage__c
+  - reduivy__Credits_Attempted__c
+  - reduivy__Credits_Earned__c
+  - reduivy__Eligible_To_Enroll__c
+  - reduivy__End_Date__c
+  - reduivy__Enrollment_Status__c
+  - reduivy__External_Id__c
+  - reduivy__Fee_Method__c
+  - reduivy__GPA__c
+  - reduivy__Grade_Points__c
+  - reduivy__Last_Payment_Date__c
+  - reduivy__Outstanding_Amount__c
+  - reduivy__Paid_Amount__c
+  - reduivy__Parchment_No__c
+  - reduivy__Pay_Upfront__c
+  - reduivy__Qualification_Issue_Date__c
+  - reduivy__Sample_Record_Code__c
+  - reduivy__Start_Date__c
+  - reduivy__Study_Mode__c
+  - reduivy__Study_Pathway_Mode__c
+  - reduivy__Study_Plan_Option_Type__c
+  - reduivy__Withdrawal_Date__c
+  - reduivy__Withdrawal_Reason__c
+  - RecordTypeId
+  lookups:
+    reduivy__Contact__c:
+      table: Contact
+      key_field: reduivy__Contact__c
+    reduivy__Default_Campus__c:
+      table: Account
+      key_field: reduivy__Default_Campus__c
+    reduivy__Master_Enrollment__c:
+      table: reduivy__Individual_Program_Enrollment__c
+      key_field: reduivy__Master_Enrollment__c
+      after: Insert reduivy__Individual_Program_Enrollment__c
+    reduivy__Starting_Term__c:
+      table: reduivy__Study_Term__c
+      key_field: reduivy__Starting_Term__c
+    reduivy__Study_Intake__c:
+      table: reduivy__Study_Intake__c
+      key_field: reduivy__Study_Intake__c
+    reduivy__Study_Pathway__c:
+      table: reduivy__Study_Pathway__c
+      key_field: reduivy__Study_Pathway__c
+    reduivy__Study_Plan__c:
+      table: reduivy__Study_Plan__c
+      key_field: reduivy__Study_Plan__c
+    reduivy__Study_Program__c:
+      table: reduivy__Study_Program__c
+      key_field: reduivy__Study_Program__c
+Insert reduivy__Study_Pathway_Term__c:
+  sf_object: reduivy__Study_Pathway_Term__c
+  table: reduivy__Study_Pathway_Term__c
+  fields:
+  - reduivy__Clone_From_Id__c
+  - reduivy__Description__c
+  - reduivy__Enrollment_Method__c
+  - reduivy__External_Id__c
+  - reduivy__Max_Credits__c
+  - reduivy__Recommended_Credits__c
+  - reduivy__Sample_Record_Code__c
+  - reduivy__Term_Number__c
+  lookups:
+    reduivy__Study_Pathway__c:
+      table: reduivy__Study_Pathway__c
+      key_field: reduivy__Study_Pathway__c
+Insert reduivy__Individual_Pathway__c:
+  sf_object: reduivy__Individual_Pathway__c
+  table: reduivy__Individual_Pathway__c
+  fields:
+  - reduivy__All_Units_Completed__c
+  - reduivy__All_Units_Passed__c
+  - reduivy__Completed_Units__c
+  - reduivy__Credits_Attempted__c
+  - reduivy__Credits_Earned__c
+  - reduivy__Credits_Enrolled__c
+  - reduivy__Description__c
+  - reduivy__Enrolled_Units__c
+  - reduivy__Enrollment_Method__c
+  - reduivy__External_Id__c
+  - reduivy__GPA__c
+  - reduivy__Grade_Points__c
+  - reduivy__Max_Credits__c
+  - reduivy__Recommended_Credits__c
+  - reduivy__Sample_Record_Code__c
+  - reduivy__Term_Number__c
+  lookups:
+    reduivy__Academic_Term__c:
+      table: reduivy__Study_Term__c
+      key_field: reduivy__Academic_Term__c
+    reduivy__Individual_Program_Enrollment__c:
+      table: reduivy__Individual_Program_Enrollment__c
+      key_field: reduivy__Individual_Program_Enrollment__c
+Insert reduivy__Study_Pathway_Unit__c:
+  sf_object: reduivy__Study_Pathway_Unit__c
+  table: reduivy__Study_Pathway_Unit__c
+  fields:
+  - reduivy__Clone_From_Id__c
+  - reduivy__External_Id__c
+  - reduivy__Number_of_Units_from_Group__c
+  - reduivy__Sample_Record_Code__c
+  lookups:
+    reduivy__Applicable_Study_Plan__c:
+      table: reduivy__Study_Plan__c
+      key_field: reduivy__Applicable_Study_Plan__c
+    reduivy__Study_Pathway_Term__c:
+      table: reduivy__Study_Pathway_Term__c
+      key_field: reduivy__Study_Pathway_Term__c
+    reduivy__Study_Plan_Group__c:
+      table: reduivy__Study_Plan_Structure__c
+      key_field: reduivy__Study_Plan_Group__c
+    reduivy__Study_Unit__c:
+      table: reduivy__Study_Unit__c
+      key_field: reduivy__Study_Unit__c
+Insert reduivy__Individual_Plan_Structure__c:
+  sf_object: reduivy__Individual_Plan_Structure__c
+  table: reduivy__Individual_Plan_Structure__c
+  fields:
+  - reduivy__Allow_Pre_Enrollment__c
+  - reduivy__Category__c
+  - reduivy__Completion_Percentage__c
+  - reduivy__Credits_Attempted__c
+  - reduivy__Credits_Earned__c
+  - reduivy__Credits__c
+  - reduivy__Credits_equivalent_per_Unit__c
+  - reduivy__Description__c
+  - reduivy__External_Id__c
+  - reduivy__Grade_Points__c
+  - reduivy__Hide_in_Enrollment__c
+  - reduivy__Max_Credits__c
+  - reduivy__Primary__c
+  - reduivy__Requirement_Met__c
+  - reduivy__Revalidate_Completion__c
+  - reduivy__Sample_Record_Code__c
+  - reduivy__Sequence__c
+  - reduivy__Status__c
+  - reduivy__Units_Passed__c
+  - reduivy__Units_Required__c
+  - RecordTypeId
+  lookups:
+    reduivy__Alternate_Study_Unit__c:
+      table: reduivy__Study_Unit__c
+      key_field: reduivy__Alternate_Study_Unit__c
+    reduivy__Individual_Enrollment__c:
+      table: reduivy__Individual_Enrollment__c
+      key_field: reduivy__Individual_Enrollment__c
+    reduivy__Individual_Pathway__c:
+      table: reduivy__Individual_Pathway__c
+      key_field: reduivy__Individual_Pathway__c
+    reduivy__Individual_Program_Enrollment__c:
+      table: reduivy__Individual_Program_Enrollment__c
+      key_field: reduivy__Individual_Program_Enrollment__c
+    reduivy__Parent_Plan_Structure__c:
+      table: reduivy__Individual_Plan_Structure__c
+      key_field: reduivy__Parent_Plan_Structure__c
+      after: Insert reduivy__Individual_Plan_Structure__c
+    reduivy__Study_Plan_Structure__c:
+      table: reduivy__Study_Plan_Structure__c
+      key_field: reduivy__Study_Plan_Structure__c
+Insert reduivy__Individual_Plan_Unit_Requirement__c:
+  sf_object: reduivy__Individual_Plan_Unit_Requirement__c
+  table: reduivy__Individual_Plan_Unit_Requirement__c
+  fields:
+  - Name
+  - reduivy__Credits__c
+  - reduivy__External_Id__c
+  - reduivy__Other__c
+  - reduivy__Requirement_ID__c
+  - reduivy__Requirement_Met__c
+  - reduivy__Requirement_Type__c
+  - reduivy__Sample_Record_Code__c
+  lookups:
+    reduivy__Individual_Plan_Unit__c:
+      table: reduivy__Individual_Plan_Structure__c
+      key_field: reduivy__Individual_Plan_Unit__c
+    reduivy__Required_Study_Unit__c:
+      table: reduivy__Study_Unit__c
+      key_field: reduivy__Required_Study_Unit__c

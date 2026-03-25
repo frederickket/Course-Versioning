@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>REDU - My Profile Tile</masterLabel>
+    <description>Redirects community users to their Contact/User page within the digital experience.</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="iconName" label="Icon" type="String" description="Icon of tile"/>
+            <property name="iconSize" label="Size of Icon" type="String" description="Size of icon" datasource="large,medium,small" />
+            <property name="tileName" label="Tile Name" type="String" description="Name of tile"/>
+            <property name="description" label="Description" type="String" description="Description of tile"/>
+            <property name="autoRedirection" label="Auto Redirection" type="Boolean" default="false" description="Redirect to contact/user page automatically."/>
+            <property name="objectType" label="Object Type" type="String" default="Contact" description="The target object" datasource="Contact,User"/>
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

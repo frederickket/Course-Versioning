@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Individual_Plan_Structure</fullName>
+    <active>true</active>
+    <description>Individual Plan Structure is required for Agreement Unit Equivalents of the manual assignment type.</description>
+    <errorConditionFormula>AND(
+ISBLANK(Individual_Plan_Structure__c),
+NOT(ISBLANK(TEXT(Agreement_Unit_Equivalent__r.Type__c))),
+ISPICKVAL(Agreement_Unit_Equivalent__r.Type__c, &apos;Manual Assignment&apos;),
+ISPICKVAL(Status__c, &apos;Approved&apos;)
+)</errorConditionFormula>
+    <errorDisplayField>Individual_Plan_Structure__c</errorDisplayField>
+    <errorMessage>Individual Plan Structure is required for Agreement Unit Equivalents of the manual assignment type.</errorMessage>
+</ValidationRule>

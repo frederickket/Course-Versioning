@@ -1,0 +1,33 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+
+        <div class="component-body slds-is-relative slds-card">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel}></lightning-spinner>
+            </div>
+
+            <lightning-layout class="slds-wrap">
+                <template for:each={spoDisplayArray} for:item="spo">
+                    <lightning-layout-item size="12" large-device-size="12" padding="around-small" key={spo.Id}>
+                        <lightning-layout-item size="12" large-device-size="12" padding="around-small">
+                            <template lwc:if={spo.isEnrolled}>
+                                <lightning-button-icon title={modalTitle} icon-name="utility:check" variant="brand" value={spo.Id} onclick={handleEnrollBtn}></lightning-button-icon>
+                            </template>
+                            <template lwc:else>
+                                <lightning-button-icon title={modalTitle} icon-name="utility:add" variant="neutral" value={spo.Id} onclick={handleEnrollBtn}></lightning-button-icon>
+                            </template>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" large-device-size="12">{spo.name}</lightning-layout-item>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button if:true={showCancelButton} variant="neutral" disabled={isLoading} onclick={handleCancelClick} label={cancelButtonLabel} class="slds-p-right_xx-small"></lightning-button>
+        <lightning-button if:true={showApplyButton} variant="brand" disabled={isEnableApplyBtn} onclick={handleApplyClick} label={applyButtonLabel}></lightning-button>
+    </lightning-modal-footer>
+</template>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+	<description>Continuing Education study offering details.</description>
+    <isExposed>true</isExposed>
+	<masterLabel>REDU Continuing Edu - Offering Record Details Card</masterLabel>
+	<targets>
+		<target>lightning__RecordPage</target>
+		<target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+	</targets>
+		<targetConfigs>
+			<targetConfig targets="lightning__RecordPage">
+				<property name="showTitle" label="Show Title" type="Boolean" default="false" description="Show title."/>
+				<property name="title" label="Title" type="String" description="Enter a value to display as Title to define course related information e.g. Registration details, registration detail values from the record will be shown below this."/>
+				<property name="showIcon" label="Show Icon" type="Boolean" default="false" description="Show icon."/>
+				<property name="iconName" label="Icon Name" type="String" description="To display an icon for the details displayed enter the salesforce utlity icon name e.g. utility:weeklyview"/>
+				<property name="fieldNames" label="Field Names" type="String" description="Enter the API name of the fields seperated by semicolons to display details related to a Study Offerings e.g. reduivy__Start_Date__c;reduivy__End_Date__c;reduivy__Delivery_Method__c"/>
+				<property name="showFieldLabel" label="Show Field Label" type="Boolean" default="false" description="To show the field labels of the details displayed on the header, check the checkbox True."/>
+				<property name="showBackgroundBorder" label="Show Background Border" type="Boolean" default="false" description="Check true to show card border."/>
+				<property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+			</targetConfig>
+			<targetConfig targets="lightningCommunity__Default">
+				<property name="objectApiName" type="String" label="Object Name" description="Automatically bind the page's object name to the component variable" default="{!objectApiName}"/>
+				<property name="recordId" type="String" label="Record Id" default="{!recordId}" description="ID of the salesforce record for which the record details are to be displayed e.g. {!recordId}"/>
+				<property name="showTitle" label="Show Title" type="Boolean" default="false" description="Show title."/>
+				<property name="title" label="Title" type="String" description="Enter a value to display as Title to define course related information e.g. Registration details, registration detail values from the record will be shown below this."/>
+				<property name="showIcon" label="Show Icon" type="Boolean" default="false" description="Show icon."/>
+				<property name="iconName" label="Icon Name" type="String" description="To display an icon for the details displayed enter the salesforce utlity icon name e.g. utility:weeklyview"/>
+				<property name="fieldNames" label="Field Names" type="String" description="Enter the API name of the fields seperated by semicolons to display details related to a Study Offerings e.g. reduivy__Start_Date__c;reduivy__End_Date__c;reduivy__Delivery_Method__c"/>
+				<property name="showFieldLabel" label="Show Field Label" type="Boolean" default="false" description="To show the field labels of the details displayed on the header, check the checkbox True."/>
+				<property name="showBackgroundBorder" label="Show Background Border" type="Boolean" default="false" description="Check true to show card border."/>
+				<property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+			</targetConfig>
+		</targetConfigs>
+</LightningComponentBundle>

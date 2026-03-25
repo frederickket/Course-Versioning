@@ -1,0 +1,68 @@
+name: Salesforce Apex Unit Test
+
+on: 
+  workflow_dispatch:
+    inputs:
+      orgrelease:
+        description: 'The scratch org release: preview or ga'
+        required: true
+        default: 'ga'
+
+env:
+  ORG_RELEASE: ${{ github.event.inputs.orgrelease || 'ga' }}
+
+jobs:
+  apex-unit-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '>=20.9.0'
+
+      - name: Ensure java v11 or greater
+        uses: actions/setup-java@v4
+        with:
+          java-version: '>=11'
+          distribution: 'zulu'
+      
+      - name: Ensure python v3.10 or greater
+        uses: actions/setup-python@v5
+        with:
+          python-version: '>=3.10'
+      
+      - name: Install Salesforce CLI
+        run: npm install -g @salesforce/cli@latest
+
+      - name: Authenticate Dev Hub (for test run)
+        env:
+          SFDX_AUTH_URL: ${{ secrets.SFDX_AUTH_URL }}
+        run: |
+          echo $SFDX_AUTH_URL > authfile.txt
+          sf org login sfdx-url --sfdx-url-file authfile.txt --set-default --alias ci-dev-hub
+
+      - name: Create Scratch Org
+        run: |
+          sf org create scratch -v ci-dev-hub -f config/${{ env.ORG_RELEASE }}-release-serial-test-scratch-def.json -d -a ci-scratch-org -y 1 -w 10
+
+      - name: Push Standard Objects to Scratch Org
+        run: sf project deploy start -o ci-scratch-org -c -d unit-test-metadata/main/default/objects/Account unit-test-metadata/main/default/objects/User
+
+      - name: Push Source to Scratch Org
+        run: sf project deploy start -o ci-scratch-org --concise -c -d force-app unit-test-metadata scratch-org-metadata
+
+      - name: Init Org default
+        run: sf apex run -o ci-scratch-org --file scripts/apex/scratch-org/scratch-org-default.apex
+
+      - name: Run Apex Tests
+        run: |
+          sf apex test run -o ci-scratch-org --result-format junit --code-coverage --wait 180 -d test-results
+
+      - name: Delete Scratch Org
+        if: always()
+        run: sf org delete scratch -o ci-scratch-org --no-prompt
+

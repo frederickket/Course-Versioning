@@ -1,0 +1,56 @@
+<template>
+    <!-- we use host css to hide or show the row without rerendering -->
+    <!-- Student Info -->
+    <td class="studentgradingregistryentry-record-info-col" scope="col">
+        <c-record-info-tile
+            record-id={sw.ien.reduivy__Contact__c}
+            object-api-name="Contact"
+            record-title-field-name="Name"
+            record-info-fields={contactTileInfoFields}
+            record-image-file-name={contactImageFileName}
+            record-image-url-field-name={contactImageUrlFieldName}
+            record-title-click-action={contactTileClickAction}
+            record-info-modal-record1-info-fields={infoModalFieldsForContact}
+            record-info-modal-section1-name={infoModalSectionNameForContact}
+            enable-debug-mode={enableDebugMode}
+        ></c-record-info-tile>  
+    </td>
+    <!-- For each Study Grade Item-->
+    <template for:each={sgiWrapperList} for:item="sgiWrapper">
+        <template lwc:if={sgiWrapper.isShown}>
+            <td key={sgiWrapper.key} class="studentgradingregistryentry-igi-col" scope="col">
+                <c-student-grading-registry-entry-cell
+                    user-mode={userMode}
+                    cell-type={IGI_TYPE}
+                    student-wrapper={sw}
+                    sgi-record={sgiWrapper.sgi}
+                    study-grading-scheme-list={gradingConfigDataWrapper.studyGradingSchemeList}
+                    igi-status-list={gradingConfigDataWrapper.igiStatusList}
+                    is-sgp-locked={isSgpLocked}
+                    locked-igd-status={lockedIgdStatus}
+                    grade-item-status-colour-map={gradingConfigDataWrapper.gradeItemStatusColourMap}
+                    individual-grade-item-notes-field-set-name={individualGradeItemNotesFieldSetName}
+                    enable-debug-mode={enableDebugMode}
+
+                    ongradeentrycellupdate={handleGradeEntryCellUpdate}
+                ></c-student-grading-registry-entry-cell>
+            </td>
+        </template>
+    </template>
+    <!-- For each custom Individual Enrollment Grade field-->
+    <template for:each={igdCustomFieldList} for:item="igdCustomField">
+        <td key={igdCustomField.key} class="studentgradingregistryentry-igd-col" scope="col">
+            <c-student-grading-registry-entry-cell
+                user-mode={userMode}
+                cell-type={IGD_TYPE}
+                student-wrapper={sw}
+                custom-field={igdCustomField}
+                is-sgp-locked={isSgpLocked}
+                locked-igd-status={lockedIgdStatus}
+                enable-debug-mode={enableDebugMode}
+
+                ongradeentrycellupdate={handleGradeEntryCellUpdate}
+            ></c-student-grading-registry-entry-cell>
+        </td>
+    </template>
+</template>

@@ -1,0 +1,56 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="studysessionschedulersessiontimeedit-content slds-m-bottom_small">
+                <lightning-accordion allow-multiple-sections-open="true" active-section-name="sst" class="slds-border_bottom">
+                    <lightning-accordion-section name="sst" class="studysessionschedulersessiontimeedit-accordion-section" label={accordionSectionLabel}>
+                        <div slot="actions">
+                            <lightning-button-icon icon-name="utility:delete" size="small" variant={accordionButtonVariant} onclick={handleDeleteStudySessionTimeClick} ></lightning-button-icon>
+                        </div>
+                        <lightning-record-edit-form
+                            record-id={targetRecordId}
+                            object-api-name="reduivy__Study_Session_Time__c"
+                            class="studysessionschedulersessiontimeedit-sessiontimeform"
+                        >
+                            <lightning-layout class="slds-wrap" multiple-rows="true">
+                                <template for:each={sstFieldsData} for:item="field">
+                                    <lightning-layout-item key={field.fieldName} size="12" large-device-size={sstColumnSize} >
+                                        <div class="studysessionschedulersessiontimeedit-sessiontimeform-col">
+                                            <c-searchable-combobox
+                                                class="slds-form-element slds-form-element_stacked"
+                                                lwc:if={field.isDefaultFacility}
+                                                field-label={field.label}
+                                                field-name={field.fieldName}
+                                                icon-name="custom:custom24"
+                                                required={field.isRequired}
+                                                default-value={field.value}
+                                                options={facilityOptions}
+                                                onchange={handleCustomSessionTimeFieldChange}
+                                                enable-debug-mode={enableDebugMode}
+                                            ></c-searchable-combobox>
+                                            <template lwc:elseif={field.isSystemTimeField}>
+                                                <lightning-input type="time" label={field.label} lwc:if={field.value} field-name={field.fieldName} value={field.value} required={field.isRequired} data-save-required={field.isRequired} data-displaytype={field.displayType} onchange={handleSessionTimeFieldChange} min={earliestSelectableTime} max={latestSelectableTime} class="slds-m-around_xx-small"></lightning-input>
+                                                <lightning-input type="time" label={field.label} lwc:else field-name={field.fieldName} required={field.isRequired} data-save-required={field.isRequired} data-displaytype={field.displayType} onchange={handleSessionTimeFieldChange}  min={earliestSelectableTime} max={latestSelectableTime} class="slds-m-around_xx-small"></lightning-input>
+                                            </template>
+                                            <template lwc:else>
+                                                <lightning-input-field lwc:if={field.value} field-name={field.fieldName} value={field.value} required={field.isRequired} data-save-required={field.isRequired} data-displaytype={field.displayType} onchange={handleSessionTimeFieldChange} ></lightning-input-field>
+                                                <lightning-input-field lwc:else field-name={field.fieldName} required={field.isRequired} data-save-required={field.isRequired} data-displaytype={field.displayType} onchange={handleSessionTimeFieldChange} ></lightning-input-field>
+                                            </template>
+                                        </div>
+                                    </lightning-layout-item>
+                                </template>
+                            </lightning-layout>
+                        </lightning-record-edit-form>
+                    </lightning-accordion-section>
+                </lightning-accordion>
+            </div>
+        </template>
+	</div>
+	
+</template>

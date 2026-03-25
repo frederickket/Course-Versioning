@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unit_Enrollment_Setting__c</fullName>
+    <deprecated>false</deprecated>
+    <inlineHelpText>The setting for enrollment units. e.g., &quot;Allow Enrolled Pre-requisite Units&quot; allow student to enroll pre-requisite unit before receive the result of their current unit in the next term.</inlineHelpText>
+    <label>Unit Enrollment Setting</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Default</fullName>
+                <default>true</default>
+                <label>Default</label>
+            </value>
+            <value>
+                <fullName>Allow Enrolled Pre-requisite Units</fullName>
+                <default>false</default>
+                <label>Allow Enrolled Pre-requisite Units</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

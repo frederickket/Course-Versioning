@@ -1,0 +1,33 @@
+.square-button .slds-button{
+	border-radius:var(--c-btnradius);
+	height:40px;
+	font-size:16px;
+	min-width:130px;
+}
+
+.mobfullwidth.square-button .slds-button{
+	width:100%;
+}
+
+@media(max-width:48em){
+	.mobfullwidth{
+		width:100%;
+	}
+}
+
+.cstmlistingbox,
+.cstmlistingbox .slds-card{
+	box-shadow: #999 0px 5px 16px -10px;
+	border-color: #eee;
+	height:100%;
+}
+.cstmlistingbox .slds-card .slds-card__header {
+	display: none;
+}
+.cstmlistingbox .slds-card .slds-card__body {
+	margin: 0px;
+}
+.cstmlistingbox .slds-card:hover {
+	cursor: pointer;
+	box-shadow: var(--lwc-shadowActive);
+}

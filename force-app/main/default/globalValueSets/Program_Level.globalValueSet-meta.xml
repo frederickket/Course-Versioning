@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Higher Doctorate</fullName>
+        <default>false</default>
+        <label>Higher Doctorate</label>
+    </customValue>
+    <customValue>
+        <fullName>Masters</fullName>
+        <default>false</default>
+        <label>Masters</label>
+    </customValue>
+    <customValue>
+        <fullName>Bachelors Honours</fullName>
+        <default>false</default>
+        <label>Bachelors Honours</label>
+    </customValue>
+    <customValue>
+        <fullName>Graduate Certificate</fullName>
+        <default>false</default>
+        <label>Graduate Certificate</label>
+    </customValue>
+    <customValue>
+        <fullName>Associate degree</fullName>
+        <default>false</default>
+        <label>Associate degree</label>
+    </customValue>
+    <customValue>
+        <fullName>Advanced Diploma</fullName>
+        <default>false</default>
+        <label>Advanced Diploma</label>
+    </customValue>
+    <customValue>
+        <fullName>Diploma</fullName>
+        <default>false</default>
+        <label>Diploma</label>
+    </customValue>
+    <description>Study program level</description>
+    <masterLabel>Program Level</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

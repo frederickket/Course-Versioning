@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Starting_Term__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>The first academic term that the student starts the program.</description>
+    <label>Starting Term</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Study_Term__c.RecordType.DeveloperName</field>
+            <operation>equals</operation>
+            <value>Academic_Term</value>
+        </filterItems>
+        <infoMessage>Please select an academic term.</infoMessage>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>Study_Term__c</referenceTo>
+    <relationshipLabel>Individual Program Enrollments</relationshipLabel>
+    <relationshipName>Individual_Program_Enrollments</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

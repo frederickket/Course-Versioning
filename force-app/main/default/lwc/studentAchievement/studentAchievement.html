@@ -1,0 +1,88 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="slds-m-around_medium">
+                <div class="studentachievement-header slds-m-bottom_medium slds-p-bottom_medium slds-border_bottom">
+                    <lightning-layout class="slds-wrap">
+                        <lightning-layout-item size="12" large-device-size="4">
+                            <div class="studentachievement-title slds-card__header-title">
+                                <lightning-icon icon-name={modalIconName} size="medium" class="slds-m-right_xx-small"></lightning-icon>
+                                <lightning-formatted-text value={modalTitle}></lightning-formatted-text>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item alignment-bump="left" lwc:if={showNewButton}>
+                            <div class="studentachievement-nav-button-group">
+                                <lightning-button 
+                                  variant="neutral"
+                                  label={label.NEW_LABEL}
+                                  onclick={handleNewAchievement} 
+                                ></lightning-button>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+                <div class="studentachievement-content">
+                    <lightning-input lwc:if={showQuickSearch} type="search" label={label.QUICK_SEARCH_LABEL} onchange={handleQuickSearchChange} value={quickSearchValue}></lightning-input>
+                    <template for:each={groupedIndividualAchievementList} for:item='group'>
+
+                        <template lwc:if={individualAchievementGroupByField}>
+                            <lightning-accordion active-section-name={group.label} allow-multiple-sections-open key={group.label}>
+                                <lightning-accordion-section name={group.label} label={group.label}>
+                                    <template for:each={group.individualAchievementList} for:item="individualAchievement">
+                                        <c-student-achievement-item 
+                                            individual-achievement={individualAchievement.stringifyIndividualAchievement} 
+                                            key={individualAchievement.Id}
+                                            user-mode={userMode}
+                                            individual-achievement-title-format={individualAchievementTitleFormat}
+                                            individual-achievement-subtitle-format={individualAchievementSubtitleFormat}
+                                            individual-achievement-info-fields1={individualAchievementInfoFields1}
+                                            individual-achievement-info-fields2={individualAchievementInfoFields2}
+
+                                            show-verification-indicator={showVerificationIndicator}
+                                            show-view-button={showViewButton}
+                                            show-delete-button={showDeleteButton}
+
+                                            target-contact-id={targetContactId}
+                                            translation-info={translationInfo}
+
+                                            enable-debug-mode={enableDebugMode}
+                                        ></c-student-achievement-item>
+                                    </template>
+                                </lightning-accordion-section>
+                            </lightning-accordion>
+                        </template>
+                        <template lwc:else>
+                            <template for:each={group.individualAchievementList} for:item="individualAchievement">
+                                <c-student-achievement-item 
+                                    individual-achievement={individualAchievement.stringifyIndividualAchievement} 
+                                    key={individualAchievement.Id}
+                                    user-mode={userMode}
+                                    individual-achievement-title-format={individualAchievementTitleFormat}
+                                    individual-achievement-subtitle-format={individualAchievementSubtitleFormat}
+                                    individual-achievement-info-fields1={individualAchievementInfoFields1}
+                                    individual-achievement-info-fields2={individualAchievementInfoFields2}
+
+                                    show-verification-indicator={showVerificationIndicator}
+                                    show-view-button={showViewButton}
+                                    show-delete-button={showDeleteButton}
+
+                                    target-contact-id={targetContactId}
+                                    translation-info={translationInfo}
+
+                                    enable-debug-mode={enableDebugMode}
+                                ></c-student-achievement-item>
+                            </template>
+                        </template>
+                    </template>
+                </div>
+            </div>
+        </template>
+	</div>
+	
+</template>

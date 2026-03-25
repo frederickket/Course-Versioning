@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Criteria</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+     ISPICKVAL(Requirement_Generation_Mode__c, "Auto"),
+     ISBLANK(Criteria__c)
+)</errorConditionFormula>
+    <errorDisplayField>Criteria__c</errorDisplayField>
+    <errorMessage>Criteria is required if the Requirement Generation Mode is Auto.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,39 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:sldsOneColLayout",
+  "dataProviders" : [ ],
+  "id" : "c934bd2e-4f54-46da-b95d-5a4acfcfa306",
+  "label" : "Study Plan Related List",
+  "regions" : [ {
+    "id" : "f797d0b9-1ca0-4e6f-94c4-81734f095b44",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customTitle" : "",
+        "parentRecordId" : "{!recordId}",
+        "relatedListName" : "{!relationshipApiName}",
+        "showBreadCrumbs" : true,
+        "showCustomTitle" : false,
+        "showManualRefreshButton" : true,
+        "showRowNumbers" : true
+      },
+      "componentName" : "forceCommunity:relatedList",
+      "id" : "b2d290b4-ecb8-442f-b427-8dc131be267a",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "d7bf0b71-fea1-4c50-8ffa-b7dc094ac626",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "id" : "3618404d-7627-4218-887e-3fb5e1c25e2b",
+    "regionName" : "footer",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "relatedlist-a11"
+}

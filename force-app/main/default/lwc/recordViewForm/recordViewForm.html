@@ -1,0 +1,19 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="recordviewform-content">
+                <template if:true={enableRefreshSlot}></template>
+                <template if:false={enableRefreshSlot}>
+                    <slot onslotchange={handleOutputFieldChanged}></slot>
+                </template>
+            </div>
+        </template>
+	</div>
+	
+</template>

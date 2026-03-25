@@ -1,0 +1,26 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+
+        <div class="component-body slds-is-relative slds-card">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel} ></lightning-spinner>
+            </div>
+            <template if:true={isInitSuccess}>
+                <div class="requirementchecklistfilemodal-numberoffileslabel">{numberOfFilesLabel}</div>
+                <div class="requirementchecklistfilemodal-uploadedfileslabel">{uploadedFilesLabel}</div>
+
+                <lightning-file-upload name="fileUploader" accept={irq.reduivy__File_Format__c} record-id={irq.Id} onuploadfinished={handleUploadFinished} class="requirementchecklistfilemodal-fileupload" multiple></lightning-file-upload>
+            </template>
+        </div>
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" onclick={handleCloseClick} label={closeLabel} class="slds-p-right_xx-small requirementchecklistfilemodal-closebutton"></lightning-button>
+        <lightning-button variant="neutral" onclick={handleSaveClick} label={saveLabel} class="slds-p-right_xx-small requirementchecklistfilemodal-savebutton"></lightning-button>
+        <lightning-button variant="brand" onclick={handleSaveAndDoneClick} label={saveAndMarkAsDoneLabel} disabled={disableMarkAsDone}  class="requirementchecklistfilemodal-savedonebutton"></lightning-button>
+    </lightning-modal-footer>
+	
+</template>

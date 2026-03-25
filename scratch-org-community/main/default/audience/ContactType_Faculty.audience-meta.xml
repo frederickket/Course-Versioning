@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Audience xmlns="http://soap.sforce.com/2006/04/metadata">
+    <audienceName>ContactType_Faculty</audienceName>
+    <container>RIO Education Community</container>
+    <criteria>
+        <criterion>
+            <criteriaNumber>1</criteriaNumber>
+            <criterionValue>
+                <entityField>$Contact.reduivy__Contact_Type__c</entityField>
+                <entityType>Contact</entityType>
+                <fieldValue>Faculty</fieldValue>
+            </criterionValue>
+            <operator>Equal</operator>
+            <type>FieldBased</type>
+        </criterion>
+    </criteria>
+    <formulaFilterType>AllCriteriaMatch</formulaFilterType>
+    <isDefaultAudience>false</isDefaultAudience>
+    <targets>
+        <target>
+            <groupName>ac03acc9-af70-4540-b73f-a3b2c0e076d8</groupName>
+            <priority>2</priority>
+            <targetType>ExperienceVariation</targetType>
+            <targetValue>Contact_Detail_Contact_Faculty_Page</targetValue>
+        </target>
+    </targets>
+</Audience>

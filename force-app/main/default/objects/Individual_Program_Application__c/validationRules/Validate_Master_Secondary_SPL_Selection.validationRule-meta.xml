@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Master_Secondary_SPL_Selection</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+  NOT(ISBLANK(Master_Study_Plan__c)),
+  NOT(ISBLANK(Secondary_Study_Plan__c)),
+  Master_Study_Plan__c = Secondary_Study_Plan__c
+)</errorConditionFormula>
+    <errorMessage>Master Study Plan and Secondary Study Plan cannot be the same.</errorMessage>
+</ValidationRule>

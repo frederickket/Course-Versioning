@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <description>Continuing Education shopping cart payment selection.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>REDU Continuing Edu - Shopping Cart Payment</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+		<target>lightning__AppPage</target>
+		<target>lightning__HomePage</target>
+		<target>lightning__Tab</target>
+		<target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+		<targetConfig targets="lightning__HomePage,lightning__RecordPage,lightning__AppPage,lightningCommunity__Default">
+            <!-- record id properties -->
+            <property name="paramOrderId" label="Order Id" type="String" description="In case of portal enter the order id paramater to fetch from URL, Eg {!orderId} or {!recordId}. Else it will fetch the latest draft order."/>
+
+            <!-- icon properties -->
+            <property name="modalIconName" type="String" label="Icon Name" description="For displaying header icon enter the icon name e.g. standard:webcart." default="standard:webcart"/> 
+            <property name="iconSize" type="String" label="Icon Size" description="Enter the size of icon e.g small , medium and large." default="medium" datasource="large,medium,small"/>
+            
+            <!-- header & footer properties -->
+            <property name="titleLabel" type="String" label="Title Label" description="Enter the name which will be displayed as heading" default="Payment" />
+            
+            <!-- description properties -->
+            <property name="descriptionText" type="String" label="Description Text" description="Enter the description text which will be displayed above the card." default="Select Payment Type"/>
+            
+            <!-- credit card properties -->
+            <property name="creditCardLabel" type="String" label="Credit Card Label" description="Enter the credit card label." default="Credit"/>
+            <property name="creditCardDescription" type="String" label="Credit Card Description" description="Enter the credit card description." default="Self Pay"/>
+			
+            <!-- company properties -->
+            <property name="companyLabel" type="String" label="Company Label" description="Enter the company card label." default="Company"/>
+            <property name="companyDescription" type="String" label="Company Description" description="Enter the company card description." default="Bill to your company"/>
+            
+            <!-- pay button properties -->
+            <property name="payButtonLabel" type="String" label="Pay Button Label" description="Enter the pay button label." default="Pay"/>
+			
+            <!-- cancel button properties -->
+            <property name="cancelButtonLabel" type="String" label="Cancel Button Label" description="Enter the cancel button label." default="Cancel"/>
+            
+            <!-- redirection properties -->
+            <property name="creditCardPaymentRedirectionPage" type="String" label="Credit card Payment Redirection Path" description="Enter credit card redirection path either fully or partially. Add {orderId} parameter which will replace with the related order id." required="true" default="creditcardlandingpage" />
+            <property name="companyOrderPaymentRedirectionPage" type="String" label="Company Order Payment Redirection Path" description="Enter company order redirection path for button click either fully or partially or leave.Add {orderId} parameter which will replace with the related order id." required="true" default="companyorderlandingpage" />
+            <property name="cancelRedirectionPageName" type="String" label="Cancel Redirection Path" description="Enter cancel redirection path either fully or partially.Add {orderId} parameter which will replace with the related order id." />
+            
+            <!-- custom label properties -->
+            <property name="rioOrderUpdatedSuccessMessage" label="RIO Order Updated Success Message" type="String" description="Enter the message which will be displayed when rio order updated successfully." default="RIO Order updated successfully."/>
+            <property name="paymentErrorMessage" label="Payment Error Message" type="String" description="Enter the message which will be displayed user did not select anything and click on pay button." default="Please select payment type."/>
+
+            <!-- debug properties -->
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+
+            <!-- obsolete -->
+            <property name="headerCssClass" type="String" label="Reserved For Internal Use 1" description="To define the styling of the displaying heading enter styling attributes here e.g. font-weight: 600;font-size: 14px;."/>
+            <property name="headerBackgroundColour" type="String" label="Reserved For Internal Use 2" description="To define the header container styling enter styling attributes here"/>
+            <property name="footerBackgroundColour" type="String" label="Reserved For Internal Use 3" description="To define the footer container styling enter styling attributes here"/>
+            <property name="cardCssClass" type="String" label="Reserved For Internal Use 4" description="To define the styling of the card enter styling attributes here e.g. font-weight: 600;font-size: 14px;."/>
+            
+		</targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

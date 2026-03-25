@@ -1,0 +1,98 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:dynamicLayout",
+  "dataProviders" : [ ],
+  "id" : "7e2830f5-34a0-4181-8c35-626c0dbfed52",
+  "label" : "Student Grading",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "8aeb911d-c900-41fa-91a0-d0b9fe1b038f",
+          "columns" : [ {
+            "UUID" : "581e304b-cda4-40ee-8120-8547b7cd8e9c",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "8aeb911d-c900-41fa-91a0-d0b9fe1b038f",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "contactImageFileName" : "Profile",
+            "contactImageUrlFieldName" : "",
+            "contactTileClickAction" : "View Info",
+            "contactTileInfoFields" : "reduivy__Student_ID__c;Email",
+            "enableDebugMode" : false,
+            "individualGradeItemNotesFieldSetName" : "reduivy__GradingWizard_Notes",
+            "infoModalFieldsForContact" : "reduivy__Student_ID__c;Email",
+            "infoModalSectionNameForContact" : "Contact",
+            "listingIconName" : "action:record",
+            "modalIconName" : "standard:record",
+            "modalTitle" : "Gradebook",
+            "noGradeWarningIcon" : "utility:warning",
+            "noGradeWarningIconVariant" : "warning",
+            "noGradeWarningText" : "No grades marked.",
+            "saveAndSubmitButtonIgdStatus" : "Submitted",
+            "saveButtonIgdStatus" : "Draft",
+            "showNoGradeWarning" : true,
+            "showRecordsBasedOnAllocation" : false,
+            "showSaveAndSubmitButton" : true,
+            "showSaveButton" : true,
+            "sofListingInfoFields" : "reduivy__Description__c",
+            "sofListingNameField" : "Name",
+            "sseListingInfoFields" : "reduivy__Description__c",
+            "sseListingNameField" : "Name",
+            "userMode" : "Faculty",
+            "validFacultyIenStatus" : "Enrolled",
+            "validFacultyIsnStatus" : "Enrolled",
+            "validStudentIenStatus" : "Enrolled",
+            "validStudentIsnStatus" : "Enrolled"
+          },
+          "componentName" : "reduivy:studentGrading",
+          "id" : "de509921-aa1e-471c-a855-17d933006441",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "581e304b-cda4-40ee-8120-8547b7cd8e9c",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "4e8c5a91-395b-4f1e-841f-e867642ec7a0",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "Student Grading"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "79312223-1ad1-46be-b9cc-ff749cbe31ec",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "d3680d35-25c3-4bca-b1bf-6cd996142b3d",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "custom-student-grading"
+}

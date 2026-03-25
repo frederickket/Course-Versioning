@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed> 
+    <description>Individual Achievement Unit Table wizard.</description>
+    <masterLabel>REDU - Student Achievement Unit Table</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="userMode" label="User Mode" type="String" default="Admin" description="Supported options are: Admin, Student." datasource="Admin,Student" required="true"/>
+            
+            <property name="individualAchievementFormConfigurationName" label="Individual Achievement Form Configuration Name" type="String" description="The wizard config record Name. This is used to determine the fields to be rendered in the unit table." datasource="apex://REDU_IdvAcFormConfiguration_VEDP"/>
+            <property name="modalTitle" type="String" default="Unit Table" label="Title" description="Title." />
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:contact_list" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            
+            <property name="agreementRecognitionUnitCreationFieldSetName" label="Agreement Recognition Unit Creation Field Set Name" type="String" description="The field set to use when creating a new Agreement Recognition Unit."/>
+            <property name="verificationDetailsFieldSetName" label="Verification Details Field Set Name" type="String" default="reduivy__Student_Achievement_Verification_Details" description="The field set to display in the verification details section."/>
+            <property name="downloadUrl" type="String" label="File Download URL" default="/sfc/servlet.shepherd/version/download/{0}?operationContext=S1" description="The url to download the Individual Achievement Unit file. {0} will be replaced by the record id." />
+
+            <property name="showNewButton" label="Show Add Individual Achievement Unit Button" type="Boolean" description="Show add Individual Achievement Unit Button on the table."/>
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+
+        </targetConfig>
+
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="recordId" type="String" label="Record Id" default="{!recordId}" description="ID of the salesforce record for which the record details are to be displayed e.g. {!recordId}" required="true"/>
+            <property name="userMode" label="User Mode" type="String" default="Student" description="Supported options are: Admin, Student." datasource="Admin,Student" required="true"/>
+            
+            <property name="individualAchievementFormConfigurationName" label="Individual Achievement Form Configuration Name" type="String" description="The wizard config record Name. This is used to determine the fields to be rendered in the unit table." datasource="apex://REDU_IdvAcFormConfiguration_VEDP"/>
+            <property name="modalTitle" type="String" default="Unit Table" label="Title" description="Title."/>
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:contact_list" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+
+            <property name="agreementRecognitionUnitCreationFieldSetName" label="Agreement Recognition Unit Creation Field Set Name" type="String" description="The field set to use when creating a new Agreement Recognition Unit."/>
+            <property name="verificationDetailsFieldSetName" label="Verification Details Field Set Name" type="String" default="reduivy__Student_Achievement_Verification_Details" description="The field set to display in the verification details section."/>
+            <property name="downloadUrl" type="String" label="File Download URL" default="/sfc/servlet.shepherd/version/download/{0}?operationContext=S1" description="The url to download the Individual Achievement Unit file. {0} will be replaced by the record id." />
+
+            <property name="showNewButton" label="Show Add Individual Achievement Unit Button" type="Boolean" description="Show add Individual Achievement Unit Button on the table."/>
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+            
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

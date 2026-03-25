@@ -1,0 +1,32 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess}
+        onfail={handleLibLoadFail}></c-js-library-loader>
+
+
+        
+    <template if:true={isInitSuccess}>
+
+        <div class="chatbot-content">
+            <div class="chatbot-questions-qna">
+                <template for:each={questionSets} for:item="set">
+                    <c-chatbot-qna question-set={set} key={set.key} onresponse={handleAddNewQna}
+                        input-is-enabled={inputIsEnabled} is-return-to-menu="false" data-id={set.key}
+                        class="chatbot-single-qna">
+                    </c-chatbot-qna>
+                </template>
+            </div>
+            <!--Only appears if is valid page == false-->
+
+            <template if:false={inputIsEnabled}>
+                <div class="chatbot-return-to-menu-qna">
+                    <c-chatbot-qna question-set={returnToMenuSet} onresponse={handleReturnToMenu} input-is-enabled="true"
+                        is-return-to-menu="true">
+                    </c-chatbot-qna>
+                </div>
+            </template>
+
+            <div lwc:ref="bottomdiv" class="chatbot-bottomdiv"></div>
+        </div> 
+    </template>
+
+</template>

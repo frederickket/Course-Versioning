@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Required_Study_Voucher</fullName>
+    <active>true</active>
+    <description>To ensure that the study voucher is populated.</description>
+    <errorConditionFormula>ISBLANK( Study_Voucher__c )</errorConditionFormula>
+    <errorDisplayField>Study_Voucher__c</errorDisplayField>
+    <errorMessage>The study voucher is required.</errorMessage>
+</ValidationRule>

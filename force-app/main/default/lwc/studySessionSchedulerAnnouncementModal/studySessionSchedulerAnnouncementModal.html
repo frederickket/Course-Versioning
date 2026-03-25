@@ -1,0 +1,79 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+        
+        <div class="slds-is-relative">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner ></lightning-spinner>
+            </div>
+
+            <div class="studysessionschedulerannouncementmodal-body">
+                <lightning-accordion class="customAccordion" allow-multiple-sections-open active-section-name={activeSections}>
+                    <lightning-accordion-section name="announcementDetails" label={announcementDetailsLabel}>
+                        <div class="announcement-content">
+                            <lightning-record-edit-form object-api-name={announcementObject}>
+                                <lightning-input-field field-name={announcementSummaryField} onchange={handleSummaryChange}> </lightning-input-field>
+                                <lightning-input-field field-name={announcementDetailsField} onchange={handleDetailsChange}> </lightning-input-field>
+                            </lightning-record-edit-form>
+                        </div>
+                    </lightning-accordion-section>
+
+                    <lightning-accordion-section name="notificationSettings" label={notificationSettingsLabel}>
+                        <div class="notification-type slds-p-bottom_small">
+                            <h2 class="slds-text-heading_small">{notificationChannelLabel}</h2>
+                            <template if:true={channelTypesPicklist}>
+                                <template for:each={channelTypesPicklist} for:item="opt">
+                                    <div key={opt.value} class="slds-grid slds-gutters slds-m-top_xx-small">
+                                        <div class="slds-col slds-size_1-of-12">
+                                            <lightning-input key={opt.value} type="checkbox-button" label={opt.label} value={opt.value} checked={opt.isDefault} onchange={handleChannelTypeChange}></lightning-input>
+                                        </div>
+                                        <div class="slds-col slds-size_11-of-12">
+                                            {opt.label}
+                                        </div>
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+
+                        <div class="notification-audience slds-p-bottom_small">
+                            <h2 class="slds-text-heading_small">{notificationAudienceLabel}</h2>
+                            <div class="slds-grid slds-gutters slds-m-top_xx-small">
+                                <div class="slds-col slds-size_1-of-12">
+                                    <lightning-input type="checkbox-button" onchange={handleNotifyStudentsChange}></lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_11-of-12">
+                                    {includeStudentsLabel}
+                                </div>
+                            </div>
+                            <div class="slds-grid slds-gutters slds-m-top_xx-small">
+                                <div class="slds-col slds-size_1-of-12">
+                                    <lightning-input type="checkbox-button" onchange={handleNotifyFacultiesChange}></lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_11-of-12">
+                                    {includeFacultiesLabel}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notification-adv-setting slds-p-bottom_small">
+                            <h2 class="slds-text-heading_small slds-m-bottom_medium">{notificationAdvancedSettingsLabel}</h2>
+                            <p>{announcementFormSelectDatesLabel}</p>
+                            <div class="slds-grid slds-gutters">
+                                <div class="slds-col slds-size_3-of-12">
+                                    <lightning-input type="date" name="startDate" label={startDateLabel} onchange={handleStartDateChange}></lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_3-of-12">
+                                    <lightning-input type="date" name="endDate" label={endDateLabel} onchange={handleEndDateChange}></lightning-input>
+                                </div>
+                            </div>
+                        </div>
+                    </lightning-accordion-section>
+                </lightning-accordion>
+            </div>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" disabled={isLoading} onclick={handleCancel} label={cancelButtonLabel} class="slds-p-right_xx-small"></lightning-button>
+        <lightning-button variant="brand" disabled={isLoading} onclick={handleSend} label={sendButtonLabel}></lightning-button>
+    </lightning-modal-footer>
+</template>

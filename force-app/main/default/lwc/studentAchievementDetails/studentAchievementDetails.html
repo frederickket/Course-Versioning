@@ -1,0 +1,299 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="studentachievementdetails">
+                
+                <div class="studentachievementdetails-content">
+                    <!-- the system sections -->
+                    <lightning-accordion active-section-name={activeAccordionList} allow-multiple-sections-open>
+                        <template for:each={systemSectionWrapperList} for:item='config'>
+                            <lightning-accordion-section key={config.label} name={config.systemSection} label={config.label}>
+                                
+                                <!--admin - link individualAchievement system fields or create new record for system field-->
+                                <template lwc:if={isAdminMode}>
+                                    <lightning-layout multiple-rows horizontal-align="start" vertical-align="start">
+                                        <lightning-layout-item size="6" large-device-size="6" medium-device-size="12" padding="horizontal-small">
+                                            <!--fallback field (disabled) / linked record name -->
+                                            <template lwc:if={displayModeIsViewing}>
+                                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-hint-parent">
+                                                    <span class="slds-form-element__label">{config.label}</span>
+                                                    <div class="slds-form-element__control">
+                                                        <div class="slds-form-element__static" ondblclick={handleEditClick}>{config.fallbackValue}</div>
+
+                                                        <lightning-button-icon icon-name="utility:edit" variant="bare" class="slds-button slds-button_icon" onclick={handleEditClick}></lightning-button-icon>
+                                                            
+                                                    </div>
+                                                </div>
+                                            </template>
+                                            <template lwc:elseif={displayModeIsEditing}>
+                                                <lightning-input type="text" label={config.label} disabled="true" value={config.fallbackValue}></lightning-input>
+                                            </template>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="6" large-device-size="6" medium-device-size="12" padding="horizontal-small" class={adminSystemSectionsClass}>
+                                            <!--Link/New button group-->
+                                            
+                                    
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label">{optionsLabel}</label>
+                                                <div class="slds-form-element__control">
+                                                    <lightning-button-group>
+                                                        <lightning-button label={config.linkButtonLabel} variant="neutral" data-name={config.systemSection} data-fallback-value={config.fallbackValue} disabled={config.buttonDisabled} onclick={handleLinkButton}></lightning-button>
+                                                        <lightning-button label={newLabel} variant="neutral" disabled={config.buttonDisabled} onclick={handleSystemSectionNewButton} data-fallback-value={config.fallbackValue} data-system-section={config.systemSection}></lightning-button>
+                                                    </lightning-button-group>
+                                                </div>
+                                            </div>
+
+                                            <!--Record to link-->
+                                            <c-custom-lookup-field
+                                                required={config.required}
+                                                root-object-name="reduivy__Individual_Achievement__c"
+                                                lookup-field-name={config.lookupFieldName}
+                                                title-format={config.recordTitle}
+                                                subtitle-format={config.recordSubtitle}
+                                                onlookupchange={handleSystemSectionLookupChange}
+                                                search-field-placeholder={config.fallbackFieldPlaceholder}
+                                                search-fields={config.searchFields}
+                                                custom-filter={config.searchFilter}
+                                                custom-filter-bind-map={config.searchFilterBindMap}
+                                                custom-label={config.label}
+                                                preselected-record-id={config.lookupFieldValue}
+                                                disabled={config.disableRecordSelection}
+                                                lookup-field-data={config.lookupFieldData}
+                                                data-required={config.required}
+                                                read-only={displayModeIsViewing}
+                                                data-name={config.systemSection}
+                                                data-type="systemSection"
+                                                ondblclick={handleEditClick}
+                                                
+                                            ></c-custom-lookup-field>
+                                        </lightning-layout-item>
+                                    </lightning-layout> 
+                                </template>
+
+                                <!--student - link individualAchievement system fields or enter fallback value-->
+                                <template lwc:else>
+                                    <!--lookup field input box-->
+                                    <lightning-layout>
+                                        <lightning-layout-item size={config.studentCustomLookupFieldSize}>
+                                            
+                                            <div class={studentSystemSectionsViewClass}>
+                                                <div class="slds-p-around_small">
+
+                                                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-hint-parent">
+                                                        <span class="slds-form-element__label">{config.label}</span>
+                                                        <div class="slds-form-element__control">
+                                                            <div class="slds-form-element__static" ondblclick={handleEditClick}>{config.fallbackValue}</div>
+                                                            
+                                                            <lightning-button-icon icon-name="utility:edit" variant="bare" class="slds-button slds-button_icon" onclick={handleEditClick}></lightning-button-icon>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class={studentSystemSectionsEditClass}>
+
+                                                <c-custom-lookup-field
+                                                    root-object-name="reduivy__Individual_Achievement__c"
+                                                    lookup-field-name={config.lookupFieldName}
+                                                    title-format={config.recordTitle}
+                                                    subtitle-format={config.recordSubtitle}
+                                                    onlookupchange={handleSystemSectionLookupChange}
+                                                    required={config.required}
+                                                    search-field-placeholder={config.fallbackFieldPlaceholder}
+                                                    custom-label={config.label}
+                                                    custom-filter={config.searchFilter}
+                                                    custom-filter-bind-map={config.searchFilterBindMap}
+                                                    lookup-field-data={config.lookupFieldData}
+                                                    
+                                                    data-required={config.required}
+                                                    data-name={config.systemSection}
+                                                    enable-fallback={config.fallbackField}
+                                                    is-not-listed={config.isNotListed}
+                                                    default-search-keyword={config.fallbackValue}
+                                                    data-type="systemSection"
+                                                    ondblclick={handleEditClick}
+
+                                                ></c-custom-lookup-field>
+                                            </div>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </template>
+                            </lightning-accordion-section>
+                        </template>
+
+                        <c-record-view-form record-id={recordId}
+                            object-api-name="reduivy__Individual_Achievement__c"
+                            fields={recordFormFields}
+                            class={recordViewFormClass}
+                            enable-debug-mode={enableDebugMode}
+                            lwc:ref="recordViewForm">
+
+                            <!--salesforce will not render the top border of the first child accordion section, add this hidden section to make sure that all the shown section has a border above it-->
+                            <lightning-accordion-section class="slds-hide"></lightning-accordion-section>
+
+                            <!--additional fields-->
+                            <template lwc:if={hasAdditionalInfo}>
+                                
+                                <lightning-accordion-section name="detailsview" label={detailsLabel}>
+                                    <lightning-layout multiple-rows>
+                                        <template for:each={additionalInfoFieldSetWrapperList} for:item='field'>
+                                            <lightning-layout-item key={field.fieldName} size="6" large-device-size="6" medium-device-size="12" padding="horizontal-small">
+                                                <c-output-field field-name={field.fieldName} ondblclick={handleEditClick} variant={additionalInfoCOutputFieldVarient} onedit={handleEditClick}></c-output-field>
+                                            </lightning-layout-item>
+                                        </template>
+                                    </lightning-layout>
+                                </lightning-accordion-section>
+                            </template>
+
+                            <template lwc:if={hasVerificationDetails}>
+                                
+                                <lightning-accordion-section name="verificationview" label={verificationDetailsLabel}>
+                                    
+                                    <lightning-layout multiple-rows>
+                                        <template for:each={verificationDetailsFields} for:item='field'>
+                                            <lightning-layout-item key={field.fieldName} size="6" large-device-size="6" medium-device-size="12" padding="horizontal-small">
+                                                <c-output-field field-name={field.fieldName} ondblclick={handleEditClick} variant={additionalInfoCOutputFieldVarient} onedit={handleEditClick}></c-output-field>
+                                            </lightning-layout-item>
+                                        </template>
+                                    </lightning-layout>
+                                </lightning-accordion-section>
+                            </template>
+
+                        </c-record-view-form>
+                        
+                        <lightning-record-edit-form
+                        lwc:ref="recordEditForm"
+                        object-api-name="reduivy__Individual_Achievement__c"
+                        record-type-id={individualAchievementRecordTypeId}
+                        onload={handleRecordEditFormLoad}
+                        record-id={recordId}
+                        onsubmit={handleSaveRecordEditForm}
+                        onsuccess={handleRecordEditFormSuccess}
+                        onerror={handleRecordEditFormFail}
+                        class={recordEditFormClass}>
+
+                            <!--salesforce will not render the top border of the first child accordion section, add this hidden section to make sure that all the shown section has a border above it-->
+                            <lightning-accordion-section class="slds-hide"></lightning-accordion-section>
+
+                            <!--additional fields-->
+                            <template lwc:if={hasAdditionalInfo}>
+                                
+                                <lightning-accordion-section name="detailsedit" label={detailsLabel}>
+                                    <lightning-layout multiple-rows>
+                                        <template for:each={additionalInfoFieldSetWrapperList} for:item='field'>
+                                            <lightning-layout-item key={field.fieldName} size="6" large-device-size="6" medium-device-size="12">
+                                                <template lwc:if={field.isReference}>
+                                                    <c-custom-lookup-field 
+                                                        root-object-name={field.objectName}
+                                                        lookup-field-name={field.fieldName}
+                                                        title-format="\{Name}"
+                                                        subtitle-format="\{Name}"
+                                                        search-fields="Id;Name"
+                                                        enable-new-record-creation={isAdminMode}
+                                                        enable-debug-mode={enableDebugMode}
+                                                        data-required={field.isRequired}
+                                                        required={field.isRequired}
+                                                        onlookupchange={handleAdditionalDetailsLookupChange}
+                                                        read-only={displayModeIsViewing}
+                                                        help-text={field.helpText}
+
+                                                        data-type="additionalInfo"
+                                                    ></c-custom-lookup-field>
+                                                </template>
+                                                <template lwc:else>
+                                                    <lightning-input-field 
+                                                        field-name={field.fieldName} 
+                                                        data-display-type={field.displayType} 
+                                                        value={field.value} 
+                                                        required={field.isRequired}
+                                                        data-type="additionalInfo"
+                                                        data-field-name={field.fieldName} 
+                                                        data-required={field.isRequired}
+                                                        onchange={handleFormFieldChange}
+                                                    ></lightning-input-field>
+                                                </template>
+                                            </lightning-layout-item>
+                                        </template>
+                                    </lightning-layout>
+                                </lightning-accordion-section>
+                            </template>
+
+
+                            <!--verification details-->
+                            <template lwc:if={hasVerificationDetails}>
+                                
+                            
+                                <lightning-accordion-section name="verificationedit" label={verificationDetailsLabel}>
+                                    
+                                    <lightning-layout multiple-rows>
+                                        <template for:each={verificationDetailsFields} for:item='field'>
+                                            <lightning-layout-item key={field.fieldName} size="6" large-device-size="6" medium-device-size="12">
+                                                <template lwc:if={field.isReference}>
+                                                    <c-custom-lookup-field 
+                                                        root-object-name={field.objectName}
+                                                        lookup-field-name={field.fieldName}
+                                                        title-format="\{Name}"
+                                                        subtitle-format="\{Name}"
+                                                        search-fields="Id;Name"
+                                                        enable-new-record-creation={isAdminMode}
+                                                        enable-debug-mode={enableDebugMode}
+                                                        data-required={field.isRequired}
+                                                        required={field.isRequired}
+                                                        onlookupchange={handleAdditionalDetailsLookupChange}
+                                                        read-only={displayModeIsViewing}
+                                                        ondblclick={handleEditClick}
+                                                        help-text={field.helpText}
+
+                                                        data-type="additionalInfo"
+                                                    ></c-custom-lookup-field>
+                                                </template>
+                                                <template lwc:else>
+                                                    <lightning-input-field 
+                                                        field-name={field.fieldName} 
+                                                        data-display-type={field.displayType} 
+                                                        value={field.value} 
+                                                        required={field.isRequired}
+                                                        ondblclick={handleEditClick}
+                                                        data-type="additionalInfo"
+                                                        data-field-name={field.fieldName} 
+                                                        data-required={field.isRequired}
+                                                        onchange={handleFormFieldChange}
+                                                    ></lightning-input-field>
+                                                </template>
+                                            </lightning-layout-item>
+                                        </template>
+                                    </lightning-layout>
+                                </lightning-accordion-section>
+                                
+                            </template>
+                            
+                            <button type="submit" class="slds-hide" lwc:ref="editFormButton"></button>
+                        </lightning-record-edit-form>
+
+
+                    </lightning-accordion>
+                </div>
+                <template lwc:if={displayModeIsEditing}>
+                    <div class="studentachievementdetails-buttons slds-docked-form-footer stickyFooter">
+                        <div>
+                            <lightning-layout horizontal-align="center" pull-to-boundary="small" vertical-align="center" >
+                                <lightning-layout-item>
+                                    <lightning-button variant="neutral" label={label.CANCEL_LABEL} onclick={handleCancelClick} class="slds-m-right_xx-small"></lightning-button>
+                                </lightning-layout-item>
+                                <lightning-layout-item>
+                                    <lightning-button variant="brand" label={label.SAVE_LABEL} onclick={handleSaveClick} class="slds-m-left_xx-small"></lightning-button>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+	</div>
+	
+</template>

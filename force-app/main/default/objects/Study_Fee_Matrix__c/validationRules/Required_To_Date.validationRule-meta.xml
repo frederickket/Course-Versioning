@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Required_To_Date</fullName>
+    <active>true</active>
+    <description>To ensure the to date is populated.</description>
+    <errorConditionFormula>ISBLANK(To_Date__c)</errorConditionFormula>
+    <errorDisplayField>To_Date__c</errorDisplayField>
+    <errorMessage>The To Date is required.</errorMessage>
+</ValidationRule>

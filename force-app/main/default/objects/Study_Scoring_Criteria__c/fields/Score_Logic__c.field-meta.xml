@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Score_Logic__c</fullName>
+    <description>Formula to determine score e.g., IF(Field__c &lt; 10, ‘A’, IF (Field__c &lt; 20, ‘B’, ‘C’))</description>
+    <label>Score Logic</label>
+    <length>32768</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

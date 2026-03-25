@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Child_Enrollment_Study_Program</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+RecordType.DeveloperName = &quot;Child_Enrollment&quot;,
+NOT(ISBLANK(Study_Program__c)),
+NOT(ISBLANK(Master_Enrollment__c)),
+Study_Program__c != Master_Enrollment__r.Study_Program__c
+)</errorConditionFormula>
+    <errorDisplayField>Study_Program__c</errorDisplayField>
+    <errorMessage>Study Program must match the Study Program of the Master Enrollment.</errorMessage>
+</ValidationRule>

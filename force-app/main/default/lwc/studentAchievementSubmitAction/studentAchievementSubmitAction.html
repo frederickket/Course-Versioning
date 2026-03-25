@@ -1,0 +1,64 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <lightning-quick-action-panel header={modalTitle}>
+                <template lwc:if={individualRequirementSetsResponse}>
+                    <template lwc:if={showSubmittedScreen}>
+                        <lightning-formatted-rich-text value={individualAchievementIsAlreadySubmittedLabel}></lightning-formatted-rich-text>
+                    </template>
+                    
+                    <template lwc:else>
+                        <template lwc:if={showNoWizardConfigNameFound}>
+                            <lightning-formatted-rich-text value={noWizardConfigNameFoundLabel}></lightning-formatted-rich-text>
+                        </template>
+                        <template lwc:elseif={showConfirmationScreen}>
+                            <lightning-formatted-rich-text value={submitForVerificationConfirmationLabel}></lightning-formatted-rich-text>
+                        </template>
+                        <template lwc:elseif={showPreventSubmitScreen}>
+                            <lightning-formatted-rich-text value={completeRequirementsBeforeSubmitLabel}></lightning-formatted-rich-text>
+                            <ul class="slds-list_dotted">
+                                <template lwc:if={requiredSystemFieldsNotPopulated}>
+                                    <template for:each={requiredSystemFieldsLabels} for:item='requiredSystemFieldsLabel'>
+                                        <li key={requiredSystemFieldsLabel}>
+                                            <lightning-formatted-rich-text value={requiredSystemFieldsLabel}></lightning-formatted-rich-text>
+                                        </li>
+                                    </template>
+                                </template>
+                                <template lwc:if={requiredUnitNotPopulated}>
+                                    <li>
+                                        <lightning-formatted-rich-text value={unitIsRequiredLabel}></lightning-formatted-rich-text>
+                                    </li>
+                                </template>
+                                <template lwc:if={requirementsNotCompleted}>
+                                    <li>
+                                        <lightning-formatted-rich-text value={individualRequirementMustBeSubmittedLabel}></lightning-formatted-rich-text>
+                                    </li>
+                                </template>
+                            </ul>
+                        </template>
+                    </template>
+                </template>
+                
+                <div slot="footer">
+                    
+                    <template lwc:if={showConfirmationScreen}>
+                        <template lwc:if={individualRequirementSetsResponse}>
+                            <lightning-button variant="neutral" label={label.CANCEL_LABEL} onclick={handleCancelClick} class="slds-p-right_xx-small" disabled={isLoading}></lightning-button>
+                            <lightning-button variant="brand" label={label.CONFIRM_LABEL} onclick={handleConfirmClick} disabled={isLoading}></lightning-button>
+                        </template>
+                    </template>
+                    <template lwc:else>
+                        <lightning-button variant="neutral" label={label.CLOSE_LABEL} onclick={handleCloseClick} disabled={isLoading}></lightning-button>
+                    </template>
+                </div>
+            </lightning-quick-action-panel>
+        </template>
+	</div>
+	
+</template>

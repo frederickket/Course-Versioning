@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Master_Study_Plan_Study_Program</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT(ISBLANK(Master_Study_Plan__c)) &amp;&amp;
+Master_Study_Plan__r.Study_Program__c != Study_Program__c</errorConditionFormula>
+    <errorDisplayField>Master_Study_Plan__c</errorDisplayField>
+    <errorMessage>The Master Study Plan must belong to the selected Study Program.</errorMessage>
+</ValidationRule>

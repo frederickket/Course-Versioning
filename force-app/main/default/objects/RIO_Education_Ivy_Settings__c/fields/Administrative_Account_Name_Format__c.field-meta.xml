@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Administrative_Account_Name_Format__c</fullName>
+    <defaultValue>&apos;{LastName} Administrative Account&apos;</defaultValue>
+    <description>The default naming format for administrative account record.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The default naming format for administrative account record.</inlineHelpText>
+    <label>Administrative Account Name Format</label>
+    <length>80</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

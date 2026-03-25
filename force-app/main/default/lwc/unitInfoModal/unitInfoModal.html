@@ -1,0 +1,63 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+        
+        <div class="component-body slds-is-relative slds-card">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel} ></lightning-spinner>
+            </div>
+            
+            <div class="unitinfomodal-body">
+                <template if:true={showStudyUnitInfo} >
+                    <c-record-view-form 
+                        object-api-name="reduivy__Study_Unit__c"
+                        record-id={sunId}
+                        class="unitinfomodal-form"
+                        fields={sunFields}
+                        enable-debug-mode={enableDebugMode}
+                    >
+                        <template for:each={sunFields} for:item="field">
+                            <div key={field} class="unitinfomodal-field">
+                                <c-output-field field-name={field}></c-output-field>
+                            </div>
+                        </template>
+                    </c-record-view-form>
+                </template>
+                <template if:true={showStudyOfferingInfo} >
+                    <c-record-view-form 
+                        object-api-name="reduivy__Study_Offering__c"
+                        record-id={sofId}
+                        class="unitinfomodal-form"
+                        fields={sofFields}
+                        enable-debug-mode={enableDebugMode}
+                    >
+                        <template for:each={sofFields} for:item="field">
+                            <div key={field} class="unitinfomodal-field">
+                                <c-output-field field-name={field}></c-output-field>
+                            </div>
+                        </template>
+                    </c-record-view-form>
+                </template>
+                <template if:true={showStudyPlanStructureUnitInfo} >
+                    <c-record-view-form 
+                        object-api-name="reduivy__Study_Plan_Structure__c"
+                        record-id={spsUnitId}
+                        class="unitinfomodal-form"
+                        fields={spsUnitFields}
+                        enable-debug-mode={enableDebugMode}
+                    >
+                        <template for:each={spsUnitFields} for:item="field">
+                            <div key={field} class="unitinfomodal-field">
+                                <c-output-field field-name={field}></c-output-field>
+                            </div>
+                        </template>
+                    </c-record-view-form>
+                </template>
+            </div>
+        </div>
+    </lightning-modal-body>
+	<lightning-modal-footer>
+        <lightning-button variant="neutral" disabled={isLoading} onclick={handleCloseClick} label={closeButtonLabel}></lightning-button>
+    </lightning-modal-footer>
+</template>

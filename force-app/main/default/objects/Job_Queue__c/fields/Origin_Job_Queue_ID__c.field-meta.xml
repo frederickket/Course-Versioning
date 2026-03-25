@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Origin_Job_Queue_ID__c</fullName>
+    <description>Track the original job queue ID for retry so that we can track back for monitoring purposes.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Track the original job queue ID for retry so that we can track back for monitoring purposes.</inlineHelpText>
+    <label>Origin Job Queue ID</label>
+    <length>255</length>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

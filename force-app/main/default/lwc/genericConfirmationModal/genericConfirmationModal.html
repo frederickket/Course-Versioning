@@ -1,0 +1,35 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+        
+        <div class="component-body slds-is-relative slds-card">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel} ></lightning-spinner>
+            </div>
+            
+            <div class="genericconfirmationmodal-body">
+                <template if:true={confirmationText1}>
+                    <div class="slds-p-top_medium">
+                        <lightning-formatted-rich-text value={confirmationText1} linkify></lightning-formatted-rich-text>
+                    </div>
+                </template>
+                <template if:true={confirmationText2}>
+                    <div class="slds-p-top_medium">
+                        <lightning-formatted-rich-text value={confirmationText2} linkify></lightning-formatted-rich-text>
+                    </div>
+                </template>
+                <template if:true={confirmationText3}>
+                    <div class="slds-p-top_medium">
+                        <lightning-formatted-rich-text value={confirmationText3} linkify></lightning-formatted-rich-text>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button if:true={showCancelButton} variant="neutral" disabled={isLoading} onclick={handleCancelClick} label={cancelButtonLabel} class="slds-p-right_xx-small"></lightning-button>
+        <lightning-button if:true={showSubmitButton} variant="brand" disabled={isLoading} onclick={handleSubmitClick} label={submitButtonLabel}></lightning-button>
+    </lightning-modal-footer>
+	
+</template>

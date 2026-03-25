@@ -1,0 +1,88 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL}></lightning-spinner>
+        </div>
+
+        <template if:true={recordId}>
+            <div class="ipeaudit-groupaccordion slds-var-m-bottom_medium">
+
+                <lightning-accordion class="customAccordion" 
+                    allow-multiple-sections-open="true"
+                    onsectiontoggle={handleSectionToggle}>
+
+                    <lightning-accordion-section name={recordId} label={ipsLabel} class="customParent">
+
+                        <div class="ipeaudit-groupinfo">
+                            <template if:true={showIpsGroupInfo}>
+                                <c-record-view-form 
+                                    record-id={recordId}
+                                    object-api-name="reduivy__Individual_Plan_Structure__c"
+                                    fields={ipsInfoFieldsList}
+                                    enable-debug-mode={enableDebugMode}>
+                                    
+                                    <lightning-layout class="slds-wrap">
+                                        <template for:each={ipsInfoFieldsList} for:item="field">
+                                            <lightning-layout-item key={field} size="12" large-device-size={infoFieldSize} >
+                                                <c-output-field field-name={field} ></c-output-field>
+                                            </lightning-layout-item>
+                                        </template>
+                                    </lightning-layout>
+                                </c-record-view-form>
+                            </template>
+                        </div>
+                        <div class="ipeaudit-unitdatatable">
+                            <template if:true={ipsUnitList}>
+                                <c-custom-type-datatable class="slds-table_header-fixed_container slds-scrollable_x slds-border_top slds-max-medium-table_stacked-horizontal"
+                                    hide-checkbox-column
+                                    key-field="Id"
+                                    columns={tableColumns}
+                                    data={ipsUnitList}
+                                    sorted-by={sortBy}
+                                    sorted-direction={sortDirection}
+                                    wrap-table-header={tableHeaderDisplayMode}
+                                    onsort={doSorting}
+                                    onrowaction={handleRowAction}
+                                ></c-custom-type-datatable>
+                            </template>
+                        </div>
+                    
+                        <div class="ipeaudit-subgroup">
+
+                            <template if:true={ipsGroupList}>
+                                <template for:each={ipsGroupList} for:item="currentIPSGroup">
+
+                                    <!--ISS-002190-->
+                                    <c-ipe-audit-individual-plan-structure 
+                                        key={currentIPSGroup.Id}
+                                        record-id = {currentIPSGroup.Id}
+                                        ips-group-title-field = {ipsGroupTitleField}
+                                        ips-group-title-format= {ipsGroupTitleFormat}
+                                        show-ips-group-info = {showIpsGroupInfo} 
+                                        ips-info-fields = {ipsInfoFields}
+                                        ips-info-fields-unit = {ipsInfoFieldsUnit}
+                                        ips-info-column-no = {ipsInfoColumnNo}
+                                        ips-unit-fields = {ipsUnitFields}
+                                        idv-enrollment-fields = {idvEnrollmentFields}
+                                        accordion-background-color = {shadedHexColor}
+                                        accordion-text-color = {accordionTextColor}
+                                        enable-clickable-ref-field = {enableClickableRefField}
+                                        enable-set-primary-ips = {enableSetPrimaryIps}
+                                        enable-view-enrollment-history = {enableViewEnrollmentHistory}
+                                        href-target-type = {hrefTargetType}
+                                        table-text-display-mode = {tableTextDisplayMode}
+                                        is-community = {isCommunity}
+                                        enable-debug-mode = {enableDebugMode}
+                                    >
+                                    </c-ipe-audit-individual-plan-structure>
+                                </template>
+                            </template>
+                        </div>
+                    </lightning-accordion-section>
+                </lightning-accordion>
+            </div>
+        </template>  
+	</div>
+</template>

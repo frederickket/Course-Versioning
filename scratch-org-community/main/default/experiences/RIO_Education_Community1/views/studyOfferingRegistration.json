@@ -1,0 +1,110 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:dynamicLayout",
+  "dataProviders" : [ ],
+  "id" : "5182c475-be84-401d-9636-7359a5b98796",
+  "label" : "Study Offering Registration",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0) url(/sfsites/c/file-asset/reduivy__Short_Courses_Catalog_Banner?v=1) center center /cover",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "a6e74a96-7137-474a-b8f5-dc982cf2aaad",
+          "columns" : [ {
+            "UUID" : "0acbe5c3-e0f6-4564-98ca-e38d48618e15",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "a6e74a96-7137-474a-b8f5-dc982cf2aaad",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p style=\"text-align: center;\"><span style=\"font-size: 48px; color: rgb(255, 255, 255);\">Registration</span></p>"
+          },
+          "componentName" : "forceCommunity:richTextInline",
+          "id" : "52f4621d-d32a-4753-a303-b11dce4f8e5e",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "0acbe5c3-e0f6-4564-98ca-e38d48618e15",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "70e921d6-e48c-4dbe-bdac-a4ce582f5c82",
+          "columns" : [ {
+            "UUID" : "8992d39f-496b-4b2f-9cd4-d85bffa10e1d",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "70e921d6-e48c-4dbe-bdac-a4ce582f5c82",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "flowArguments" : "[{\"label\":\"studyOfferingId\",\"dataType\":\"String\",\"supportsRecordId\":false,\"value\":\"{!studyOfferingId}\"}]",
+            "flowName" : "Study_Offering_Registration"
+          },
+          "componentName" : "forceCommunity:flowCommunity",
+          "id" : "ffe1d003-5d79-4e5c-8f54-9e0eb1ea4cb6",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "8992d39f-496b-4b2f-9cd4-d85bffa10e1d",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "5072cc76-176f-4ff4-8117-f4bd199b47e6",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "Study Offering Registration"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "425c76a9-14f6-40ec-8237-dafeb4fc2a1f",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "09e3518d-0011-4a4d-8a55-93c16c076b22",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "custom-study-offering-registration"
+}

@@ -1,0 +1,33 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="studyplanunittable-content slds-m-top_small slds-m-bottom_small">
+                <template lwc:if={hasSpsUnits}>
+                    <c-custom-type-datatable class="slds-table_header-fixed_container slds-scrollable_x slds-border_top slds-max-medium-table_stacked-horizontal"
+                        hide-checkbox-column
+                        key-field="Id"
+                        columns={tableColumns}
+                        data={spsUnits}
+                        sorted-by={sortBy}
+                        sorted-direction={sortDirection}
+                        onsort={doSorting}
+                        wrap-table-header={tableHeaderDisplayMode}
+                        onrowaction={handleRowAction}
+                    ></c-custom-type-datatable>
+                </template>
+                <template lwc:else>
+                    <div>
+                        {label.NO_GROUP_UNIT_FOUND_LABEL}
+                    </div>
+                </template>
+            </div>
+        </template>
+	</div>
+	
+</template>

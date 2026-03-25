@@ -1,0 +1,12 @@
+{
+  "activeViewId" : "2fd5290a-57a6-42a6-946c-fb79b77680fc",
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "configurationTags" : [ ],
+  "devName" : "Short_Course_Catalog__c",
+  "id" : "697e87a5-8adb-4e56-8285-183b728aca8a",
+  "label" : "Short Course Catalog",
+  "pageAccess" : "UseParent",
+  "routeType" : "custom-short-course-catalog",
+  "type" : "route",
+  "urlPrefix" : "short-course-catalog"
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Units_Required__c</fullName>
+    <description>Use this instead of Credits to track completion of this group based on number of units completed.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Use this instead of Credits to track completion of this group based on number of units completed.</inlineHelpText>
+    <label># of Units Required</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

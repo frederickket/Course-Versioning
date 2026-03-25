@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Study_Pathway__c</fullName>
+    <externalId>false</externalId>
+    <label>Study Pathway</label>
+    <referenceTo>Study_Pathway__c</referenceTo>
+    <relationshipLabel>Study Pathway Terms</relationshipLabel>
+    <relationshipName>Study_Pathway_Terms</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>true</reparentableMasterDetail>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

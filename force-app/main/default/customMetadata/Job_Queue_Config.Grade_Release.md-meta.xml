@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Term_Grade_Release</label>
+    <protected>false</protected>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Job_Generator_Batch_Size__c</field>
+        <value xsi:type="xsd:double">20.0</value>
+    </values>
+    <values>
+        <field>Job_Generator_Class_Name__c</field>
+        <value xsi:type="xsd:string">JQH_TermReleaseGrades_GENERATOR</value>
+    </values>
+    <values>
+        <field>Job_Handler_Batch_Size__c</field>
+        <value xsi:type="xsd:double">100.0</value>
+    </values>
+    <values>
+        <field>Job_Handler_Class_Name__c</field>
+        <value xsi:type="xsd:string">JQH_TermReleaseGrades_HANDLER</value>
+    </values>
+    <values>
+        <field>Job_Handler_System_Params__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Job_Operation__c</field>
+        <value xsi:type="xsd:string">Term_Grade_Release</value>
+    </values>
+</CustomMetadata>

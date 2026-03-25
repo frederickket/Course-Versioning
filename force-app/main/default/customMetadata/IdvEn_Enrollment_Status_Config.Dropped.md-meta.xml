@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Dropped</label>
+    <protected>false</protected>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Enrollment_Status__c</field>
+        <value xsi:type="xsd:string">Dropped</value>
+    </values>
+    <values>
+        <field>Grade_Result__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>IPS_Assignment_Priority__c</field>
+        <value xsi:type="xsd:double">4.0</value>
+    </values>
+    <values>
+        <field>Include_In_Rollup__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Increase_Attempt_Number__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Individual_Plan_Structure_Unit_Status__c</field>
+        <value xsi:type="xsd:string">Dropped</value>
+    </values>
+    <values>
+        <field>Individual_Session_Enrollment_Status__c</field>
+        <value xsi:type="xsd:string">Dropped</value>
+    </values>
+    <values>
+        <field>Rollup_Field_API_Name__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Type__c</field>
+        <value xsi:type="xsd:string">Dropped</value>
+    </values>
+</CustomMetadata>

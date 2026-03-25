@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Letter_Grade_Scoring_Range__c</fullName>
+    <deprecated>false</deprecated>
+    <description>The value from numerical grade range to be used when grading by letter value.</description>
+    <externalId>false</externalId>
+    <label>Letter Grade Scoring Range</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Higher Range</fullName>
+                <default>true</default>
+                <label>Higher Range</label>
+            </value>
+            <value>
+                <fullName>Lower Range</fullName>
+                <default>false</default>
+                <label>Lower Range</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

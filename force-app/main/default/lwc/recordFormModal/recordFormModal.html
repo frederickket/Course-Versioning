@@ -1,0 +1,47 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+        <div class="component-body slds-is-relative slds-card">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel} ></lightning-spinner>
+            </div>
+            
+            <template if:true={isInitSuccess}>
+                <div class="slds-m-around_medium recordformmodal-content">
+                    <template if:true={showRecordTypeSelection}>
+                        <div>
+                            <lightning-radio-group 
+                                name="selectRecordType"
+                                variant="label-hidden"
+                                options={recordTypeOptions}
+                                value={selectedRecordTypeId}
+                                onchange={handleRecordTypeChange}
+                            ></lightning-radio-group>
+                        </div>
+                    </template>
+                    <template if:false={showRecordTypeSelection}>
+                        <div class="recordformmodal-layout">
+                            <lightning-record-form
+                                columns={columns}
+                                layout-type={layoutType}
+                                object-api-name={objectApiName}
+                                record-id={recordId}
+                                record-type-id={targetRecordTypeId}
+                                fields={fields}
+                                onsuccess={handleSuccess}
+                                oncancel={handleCancel}
+                            ></lightning-record-form>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </lightning-modal-body>
+    <template if:true={showRecordTypeSelection}>
+        <lightning-modal-footer>
+            <lightning-button variant="neutral" disabled={isLoading} onclick={handleCancel} label={cancelButtonLabel} class="slds-p-right_xx-small"></lightning-button>
+            <lightning-button variant="brand" disabled={disableButtons} onclick={handleNext} label={nextLabel}></lightning-button>
+        </lightning-modal-footer>
+    </template>
+</template>

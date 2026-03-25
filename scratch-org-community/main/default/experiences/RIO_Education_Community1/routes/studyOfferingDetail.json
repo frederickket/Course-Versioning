@@ -1,0 +1,12 @@
+{
+  "activeViewId" : "bca651b8-aa90-4d44-a704-0156ebb7b2d2",
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "configurationTags" : [ ],
+  "devName" : "Study_Offering_Detail__c",
+  "id" : "be15134b-b4d2-4f06-9acd-74a636b1d1aa",
+  "label" : "Study Offering Detail",
+  "objectApiName" : "reduivy__Study_Offering__c",
+  "routeType" : "detail-a0u",
+  "type" : "route",
+  "urlPrefix" : "study-offering"
+}

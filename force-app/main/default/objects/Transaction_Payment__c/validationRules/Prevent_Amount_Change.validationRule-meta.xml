@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prevent_Amount_Change</fullName>
+    <active>true</active>
+    <description>You cannot update the amount because it is applied to a transaction fee line.</description>
+    <errorConditionFormula>AND(
+    NOT(ISPICKVAL(Status__c, &apos;Draft&apos;)),
+    ISCHANGED(Amount__c),
+    Applied_Amount__c != 0
+)</errorConditionFormula>
+    <errorDisplayField>Applied_Amount__c</errorDisplayField>
+    <errorMessage>You cannot update the amount because it is applied to a transaction fee line.</errorMessage>
+</ValidationRule>

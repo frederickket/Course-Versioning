@@ -1,0 +1,55 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="continuingeduheader-content">
+                <template if:true={backButtonSitePageName}>
+                    <section class="slds-grid slds-p-vertical_large slds-grid_vertical-align-center">
+                        <div class="slds-col continuingeduheader-iconspace">
+                            <lightning-icon icon-name="utility:chevronleft" alternative-text="Utility chevronleft" title="Image"
+                                size="x-small">
+                            </lightning-icon>
+                        </div>
+                        <div class="slds-col">
+                            <lightning-button label={backButtonLabel} variant="base" value="back" onclick={handleBackButtonClick} class="continuingeduheader-backbutton"></lightning-button>
+                        </div>
+                    </section>
+                </template>
+                <section class="slds-grid slds-gutters slds-wrap slds-m-around_xxx-small continuingeduheader-section">
+                    <article class=" slds-size_1-of-1">
+                        <template if:true={ceRecordTitle}>
+                            <h2 class="slds-size_1-of-1 slds-col slds-p-around_large continuingeduheader-titlefield">{ceRecordTitle}</h2>
+                        </template>
+                        <div class="slds-size_1-of-1">
+                            <template if:true={ceRecordImageUrl}>
+                                <img src={ceRecordImageUrl} alt="User Image" width="100%" height="300" />
+                            </template>
+                        </div>
+                    </article>
+                    <div class="continuingeduheader-details slds-size_1-of-1 slds-p-around_large">
+                        <div class="slds-size_1-of-1 slds-grid slds-grid_vertical-align-center slds-wrap">
+                            <div class="slds-large-size_1-of-3 slds-large-size_1-of-1 slds-col">
+                                <div class="dateicon">
+                                    <c-continuing-edu-detail object-api-name={objectApiName} title={detailTitle}
+                                        icon-name={detailIconName} record-id={recordId} field-names={detailFieldNames}
+                                        show-field-label={detailShowFieldLabel} show-title={detailShowTitle} show-icon={detailShowIcon} enable-debug-mode={enableDebugMode}>
+                                    </c-continuing-edu-detail>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-grid slds-grid_align-end">
+                                <lightning-button variant="brand" label={registerButtonLabel} title={registerButtonLabel}
+                                    class="square-button mobfullwidth" onclick={handleRegister} disabled={ceRecordDisableRegisterButton}></lightning-button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </template>
+	</div>
+	
+</template>

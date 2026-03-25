@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Required_Individual_Program_Enrollment</fullName>
+    <active>true</active>
+    <description>To ensure that all individual plan structure is linked to a individual program enrollment.</description>
+    <errorConditionFormula>ISBLANK(Individual_Program_Enrollment__c)</errorConditionFormula>
+    <errorDisplayField>Individual_Program_Enrollment__c</errorDisplayField>
+    <errorMessage>The individual program enrollment is required.</errorMessage>
+</ValidationRule>

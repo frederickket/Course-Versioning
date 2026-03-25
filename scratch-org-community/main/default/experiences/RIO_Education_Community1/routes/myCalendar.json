@@ -1,0 +1,12 @@
+{
+  "activeViewId" : "d4b94600-2c36-42e5-83a3-100386c244d3",
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "configurationTags" : [ ],
+  "devName" : "My_Calendar__c",
+  "id" : "25b8c5f4-91de-444a-8d1a-479392f29b4e",
+  "label" : "My Calendar",
+  "pageAccess" : "UseParent",
+  "routeType" : "custom-my-calendar",
+  "type" : "route",
+  "urlPrefix" : "my-calendar"
+}

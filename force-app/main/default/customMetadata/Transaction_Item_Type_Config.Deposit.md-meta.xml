@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Deposit</label>
+    <protected>false</protected>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Item_Type__c</field>
+        <value xsi:type="xsd:string">Deposit</value>
+    </values>
+    <values>
+        <field>Payment_Applicable_Item_Type__c</field>
+        <value xsi:type="xsd:string">Tuition;Residential</value>
+    </values>
+    <values>
+        <field>Payment_Refundable__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Payment_Status__c</field>
+        <value xsi:type="xsd:string">Active</value>
+    </values>
+    <values>
+        <field>Payment_Transaction_Type__c</field>
+        <value xsi:type="xsd:string">Prepayment</value>
+    </values>
+    <values>
+        <field>Support_Prepayment_Conversion__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+</CustomMetadata>

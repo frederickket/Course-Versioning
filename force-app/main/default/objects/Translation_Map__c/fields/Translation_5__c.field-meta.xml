@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Translation_5__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Translation Value of Field 5.</description>
+    <inlineHelpText>Translation Value of Field 5.</inlineHelpText>
+    <label>Translation 5</label>
+    <referenceTo>Translation__c</referenceTo>
+    <relationshipLabel>Translation Maps 5</relationshipLabel>
+    <relationshipName>Translation_Maps_5</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

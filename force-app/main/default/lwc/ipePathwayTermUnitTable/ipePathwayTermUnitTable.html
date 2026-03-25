@@ -1,0 +1,185 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} class={spinnerCssClass}></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess} >
+            <div class="ipepathwaytermunittable-body slds-m-bottom_medium">
+                <template lwc:if={hasDataRows}>
+                    <div class="slds-m-top_small slds-m-bottom_small">
+                        <table class="ipepathwaytermunittable-table slds-table slds-table_bordered slds-table_fixed-layout slds-max-medium-table_stacked">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th class="ipepathwaytermunittable-th-info">
+                                    </th>
+                                    <template for:each={unitTableColumns} for:item="tableCol">
+                                        <th key={tableCol.fieldName} scope="col" class="ipepathwaytermunittable-th">
+                                            <a class="ipepathwaytermunittable-th-anchor slds-text-link_reset">
+                                                <span class="slds-assistive-text">{tableCol.label}</span>
+                                                <div class="ipepathwaytermunittable-th-body slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                    <span class="slds-truncate" title={tableCol.label}>{tableCol.label}</span>
+                                                </div>
+                                            </a>
+                                        </th>
+                                    </template>
+                                    <th class="ipepathwaytermunittable-th ipepathwaytermunittable-th-status">
+                                        <a class="ipepathwaytermunittable-th-anchor slds-text-link_reset">
+                                            <span class="slds-assistive-text">{label.STATUS_COL_LABEL}</span>
+                                            <div class="ipepathwaytermunittable-th-status slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                <span class="slds-truncate" title={label.STATUS_COL_LABEL}>{label.STATUS_COL_LABEL}</span>
+                                            </div>
+                                        </a>
+                                    </th>
+                                    <template if:true={showActionColumn}>
+                                        <th class="ipepathwaytermunittable-th ipepathwaytermunittable-th-action">
+                                            <a class="ipepathwaytermunittable-th-anchor slds-text-link_reset">
+                                                <span class="slds-assistive-text">{label.ACTION_LABEL}</span>
+                                                <div class="ipepathwaytermunittable-th-action slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                    <span class="slds-truncate" title={label.ACTION_LABEL}>{label.ACTION_LABEL}</span>
+                                                </div>
+                                            </a>
+                                        </th>
+                                    </template>
+                                    <template if:true={showIndicatorColumn}>
+                                        <th class="ipepathwaytermunittable-th ipepathwaytermunittable-th-indicator">
+                                            
+                                        </th>
+                                    </template>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={filteredIpsUnitList} for:item="ipsUnitRow">
+                                    <c-ipe-pathway-term-unit 
+                                        key={ipsUnitRow.seq}
+                                        individual-pathway-id={individualPathwayId}
+                                        ips-record={ipsUnitRow}
+                                        unit-table-columns={unitTableColumns}
+                                        sof-statuses={sofStatuses}
+                                        internal-grade-released-statuses={internalGradeReleasedStatuses}
+                                        final-grade-released-statuses={finalGradeReleasedStatuses}
+                                        ien-grade-result-picklist-values={ienGradeResultPicklistValues}
+                                        ips-unit-statuses={ipsUnitStatuses}
+                                        ien-enrollment-statuses={ienEnrollmentStatuses}
+                                        user-mode={userMode}
+                                        is-eligible-to-enroll={isEligibleToEnroll}
+                                        sce-setting={sceSetting}
+
+                                        sof-name-translation-field={sofNameTranslationField}
+                                        stm-name-translation-field={stmNameTranslationField}
+                                        sun-name-translation-field={sunNameTranslationField}
+                                        translation-info={translationInfo}
+                                        
+                                        study-unit-info-fields={studyUnitInfoFields}
+                                        study-offering-info-fields={studyOfferingInfoFields}
+                                        study-plan-structure-unit-info-fields={studyPlanStructureUnitInfoFields}
+
+                                        show-enrollment-buttons={showEnrollmentButtons}
+                                        pre-enroll-button-icon-name={preEnrollButtonIconName}
+                                        pre-enroll-button-label={preEnrollButtonLabel}
+                                        pre-enroll-enrollment-status={preEnrollEnrollmentStatus}
+                                        withdraw-pre-enroll-button-icon-name={withdrawPreEnrollButtonIconName}
+                                        withdraw-pre-enroll-button-label={withdrawPreEnrollButtonLabel}
+                                        withdraw-pre-enroll-enrollment-status={withdrawPreEnrollEnrollmentStatus}
+                                        enroll-button-icon-name={enrollButtonIconName}
+                                        enroll-button-label={enrollButtonLabel}
+                                        enroll-enrollment-status={enrollEnrollmentStatus}
+                                        unenroll-button-icon-name={unenrollButtonIconName}
+                                        unenroll-button-label={unenrollButtonLabel}
+                                        unenroll-enrollment-status={unenrollEnrollmentStatus}
+                                        unenroll-request-button-icon-name={unenrollRequestButtonIconName}
+                                        unenroll-request-button-label={unenrollRequestButtonLabel}
+                                        unenroll-request-enrollment-status={unenrollRequestEnrollmentStatus}
+                                        waitlist-button-icon-name={waitlistButtonIconName}
+                                        waitlist-button-label={waitlistButtonLabel}
+                                        waitlist-enrollment-status={waitlistEnrollmentStatus}
+                                        withdraw-waitlist-button-icon-name={withdrawWaitlistButtonIconName}
+                                        withdraw-waitlist-button-label={withdrawWaitlistButtonLabel}
+                                        withdraw-waitlist-enrollment-status={withdrawWaitlistEnrollmentStatus}
+
+                                        request-attempt-max={requestAttemptMax}
+                                        request-attempt-waiting-time={requestAttemptWaitingTime}
+                                        ipw-record={ipwRecord}
+                                        
+                                        show-action-column={showActionColumn}
+                                        show-indicator-column={showIndicatorColumn}
+
+                                        enable-debug-mode={enableDebugMode}
+                                        lwc-reactor={ipsUnitRow.lwcReactor}
+                                        
+                                        onoptionclick={handleOptionClick}
+                                        onenrollmentaction={handleUpsertEnrollment}
+                                    ></c-ipe-pathway-term-unit>
+                                    <template if:true={ipsUnitRow.isOptionsExpanded}>
+                                        <template for:each={ipsUnitRow.options} for:item="ipsUnitRowOpt">
+                                            <c-ipe-pathway-term-unit 
+                                                key={ipsUnitRowOpt.seq}
+                                                individual-pathway-id={individualPathwayId}
+                                                ips-record={ipsUnitRowOpt}
+                                                unit-table-columns={unitTableColumns}
+                                                sof-statuses={sofStatuses}
+                                                internal-grade-released-statuses={internalGradeReleasedStatuses}
+                                                final-grade-released-statuses={finalGradeReleasedStatuses}
+                                                ien-grade-result-picklist-values={ienGradeResultPicklistValues}
+                                                ips-unit-statuses={ipsUnitStatuses}
+                                                ien-enrollment-statuses={ienEnrollmentStatuses}
+                                                is-option="true"
+                                                user-mode={userMode}
+                                                is-eligible-to-enroll={isEligibleToEnroll}
+                                                sce-setting={sceSetting}
+                                                
+                                                sof-name-translation-field={sofNameTranslationField}
+                                                stm-name-translation-field={stmNameTranslationField}
+                                                sun-name-translation-field={sunNameTranslationField}
+                                                
+                                                study-unit-info-fields={studyUnitInfoFields}
+                                                study-offering-info-fields={studyOfferingInfoFields}
+                                                study-plan-structure-unit-info-fields={studyPlanStructureUnitInfoFields}
+
+                                                show-enrollment-buttons={showEnrollmentButtons}
+                                                pre-enroll-button-icon-name={preEnrollButtonIconName}
+                                                pre-enroll-button-label={preEnrollButtonLabel}
+                                                withdraw-pre-enroll-button-icon-name={withdrawPreEnrollButtonIconName}
+                                                withdraw-pre-enroll-button-label={withdrawPreEnrollButtonLabel}
+                                                enroll-button-icon-name={enrollButtonIconName}
+                                                enroll-button-label={enrollButtonLabel}
+                                                unenroll-button-icon-name={unenrollButtonIconName}
+                                                unenroll-button-label={unenrollButtonLabel}
+                                                unenroll-request-button-icon-name={unenrollRequestButtonIconName}
+                                                unenroll-request-button-label={unenrollRequestButtonLabel}
+                                                waitlist-button-icon-name={waitlistButtonIconName}
+                                                waitlist-button-label={waitlistButtonLabel}
+                                                withdraw-waitlist-button-icon-name={withdrawWaitlistButtonIconName}
+                                                withdraw-waitlist-button-label={withdrawWaitlistButtonLabel}
+                                                
+                                                request-attempt-max={requestAttemptMax}
+                                                request-attempt-waiting-time={requestAttemptWaitingTime}
+                                                ipw-record={ipwRecord}
+                                                
+                                                show-action-column={showActionColumn}
+                                                show-indicator-column={showIndicatorColumn}
+                                                
+                                                enable-debug-mode={enableDebugMode}
+                                                lwc-reactor={ipsUnitRowOpt.lwcReactor}
+
+                                                onenrollmentaction={handleUpsertEnrollment}
+                                            ></c-ipe-pathway-term-unit>
+                                        </template>
+                                    </template>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </template>
+                <template lwc:else>
+                    <div class="slds-m-around_small">
+                        {noStudyOfferingAvailableText}
+                    </div>
+                </template>
+            </div>
+        </template>
+	</div>
+	
+</template>

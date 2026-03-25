@@ -1,0 +1,15 @@
+.align-to-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.fit-content {
+    display: inline-block;
+}
+
+.answer-bubble {
+    background-color: var(--lwc-colorBackground);
+    border-radius: 2rem;
+    padding: 0.5rem;
+}
+

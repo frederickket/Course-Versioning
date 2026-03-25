@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_Label__c</fullName>
+    <deprecated>false</deprecated>
+    <description>The label for status. We do not refer to the reduivy__Status__c field here due to formula size restriction.</description>
+    <externalId>false</externalId>
+    <formula>IF( ISBLANK( TEXT( Status_Override__c ) ),
+	IF( TODAY() &gt; End_Date__c,
+		$Label.reduivy__Offering_Status_Completed,
+		IF( TODAY() &gt;=  Start_Date__c,
+			IF( NOW() &gt;=  Enrollment_Open_Date_Calculated__c &amp;&amp; (ISNULL( Enrollment_Close_Date_Calculated__c) || NOW() &lt;=  Enrollment_Close_Date_Calculated__c),
+				$Label.reduivy__Offering_Status_Running_Enrollment_Opened,
+				$Label.reduivy__Offering_Status_Running
+			),
+			IF( NOW() &gt;  Enrollment_Close_Date_Calculated__c,
+				$Label.reduivy__Offering_Status_Enrollment_Closed,
+				IF( NOW() &gt;=  Enrollment_Open_Date_Calculated__c,
+					$Label.reduivy__Offering_Status_Enrollment_Opened,
+					IF( NOT(ISNULL( Pre_enrollment_Open_Date_Calculated__c)) &amp;&amp; NOW() &gt;=  Pre_enrollment_Open_Date_Calculated__c,
+						$Label.reduivy__Offering_Status_Pre_enrollment_Opened,
+						$Label.reduivy__Offering_Status_Not_Started
+					)
+				)
+			)
+		)
+	),
+	CASE( TEXT(  Status_Override__c ), 
+          &apos;Draft&apos;, $Label.reduivy__Offering_Status_Draft, 
+          &apos;Not Started&apos;, $Label.reduivy__Offering_Status_Not_Started, 
+          &apos;Pre-enrollment Opened&apos;, $Label.reduivy__Offering_Status_Pre_enrollment_Opened, 
+          &apos;Enrollment Opened&apos;, $Label.reduivy__Offering_Status_Enrollment_Opened, 
+          &apos;Enrollment Closed&apos;, $Label.reduivy__Offering_Status_Enrollment_Closed, 
+          &apos;Running (Enrollment Opened)&apos;, $Label.reduivy__Offering_Status_Running_Enrollment_Opened, 
+          &apos;Running&apos;, $Label.reduivy__Offering_Status_Running, 
+          &apos;Completed&apos;, $Label.reduivy__Offering_Status_Completed, 
+          &apos;Cancelled&apos;, $Label.reduivy__Offering_Status_Cancelled, &apos;&apos;
+        )
+)</formula>
+    <inlineHelpText>Status based on date fields in study session and study offering.</inlineHelpText>
+    <label>Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Require_Target_Unit_Codes</fullName>
+    <active>true</active>
+    <description>To ensure the require target unit codes is set for non manual type.</description>
+    <errorConditionFormula>NOT(ISPICKVAL(Type__c, &apos;Manual Assignment&apos;)) &amp;&amp; ISBLANK(Target_Unit_Codes__c)</errorConditionFormula>
+    <errorDisplayField>Target_Unit_Codes__c</errorDisplayField>
+    <errorMessage>Please provide the unit codes.</errorMessage>
+</ValidationRule>

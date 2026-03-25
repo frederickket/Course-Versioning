@@ -1,0 +1,11 @@
+{
+  "cmsSettings" : { },
+  "currentThemeId" : "1e79aa65-e166-40cb-9ef4-3b2796d31466",
+  "headMarkup" : "<!--reCaptcha v3-->\n<script>\n    document.addEventListener('grecaptchaSiteKey', (event) => {\n    \n        let script = document.createElement('script');\n        script.addEventListener('load', () => {\n            document.dispatchEvent(new CustomEvent('grecaptchaJsLoaded'));\n        });\n        \n        script.src = 'https://www.google.com/recaptcha/api.js?render=' + event.detail.siteKey;\n        \n        let s = document.getElementsByTagName('script')[0];\n        s.parentNode.insertBefore(script, s);\n    });\n    \n    document.addEventListener('grecaptchaExecute', (event) => {\n        grecaptcha.ready(function() {\n          grecaptcha.execute(event.detail.siteKey, {action: event.detail.action}).then(function(token) {\n              document.dispatchEvent(new CustomEvent('grecaptchaVerified', {detail: {response: token, action: event.detail.action}}));\n          });\n        });\n    });\n    \n    document.addEventListener('grecaptchaReset', function() {\n        grecaptcha.reset();\n    }); \n</script>\n<meta name=\"recaptcha-site-key\" content=\"6LcHmGsqAAAAAJcytf4kuK239a7MXJqvXVwCWxhR\">",
+  "id" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "isLockerServiceEnabled" : true,
+  "isRelaxedCSPLevel" : true,
+  "label" : "main",
+  "templateName" : "Starter Template",
+  "type" : "appPage"
+}

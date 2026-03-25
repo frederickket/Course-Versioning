@@ -1,0 +1,137 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="slds-m-around_medium">
+                <div class="requirementchecklist-header slds-m-bottom_medium slds-p-bottom_medium slds-border_bottom">
+                    <lightning-layout class="slds-wrap">
+                        <lightning-layout-item size="12" large-device-size="4">
+                            <div class="requirementchecklist-title slds-card__header-title">
+                                <lightning-icon icon-name={modalIconName} size="medium" class="slds-m-right_xx-small"></lightning-icon>
+                                <lightning-formatted-text value={modalTitle}></lightning-formatted-text>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item alignment-bump="left">
+                            <div class="requirementchecklist-nav-button-group">
+                                    <lightning-badge lwc:if={showSubmittedCount} label={submittedBadgeLabel} class={submittedBadgeClassVariant}></lightning-badge>
+                                    <lightning-badge lwc:if={showReviewedCount} label={reviewedBadgeLabel} class={reviewedBadgeClassVariant}></lightning-badge>
+                                <lightning-button-group>
+                                    <lightning-button-icon title={label.REFRESH_LABEL} icon-name="utility:refresh" value="refresh" onclick={handleRefreshOnclick} class="slds-m-left_x-small requirementchecklist-refresh"></lightning-button-icon>
+                                </lightning-button-group>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+                <div class="requirementchecklist-content">
+                    <lightning-accordion allow-multiple-sections-open="true" active-section-name={activeSections}  class="requirementchecklist-accordion">
+                        <template for:each={parentIrsData} for:item='irsWrapper'>
+                            <lightning-accordion-section name={irsWrapper.irs.Id} label={irsWrapper.title} key={irsWrapper.irs.Id}  class="requirementchecklist-accordionsection">
+                                <template for:each={irsWrapper.irqWrapperList} for:item='irqWrapper'>
+                                    <c-requirement-checklist-item 
+                                        class="requirementchecklist-checklistitem"
+
+                                        key={irqWrapper.irq.Id}
+                                        user-mode={userMode}
+                                        parent-id={irsWrapper.parentId}
+                                        irq-wrapper={irqWrapper} 
+                                        requirement-title-field={requirementTitleField}
+                                        requirement-details-fields={requirementDetailsFields} 
+                                        
+                                        open-icon={openIcon}
+                                        submitted-icon={submittedIcon}
+                                        reviewing-icon={reviewingIcon}
+                                        accepted-icon={acceptedIcon}
+                                        rejected-icon={rejectedIcon}
+                                        cancelled-icon={cancelledIcon}
+                                        resubmission-requested-icon={resubmissionRequestedIcon}
+
+                                        show-requirement-row-details-button={showRequirementRowDetailsButton}
+                                        show-requirement-user-action-button={showRequirementUserActionButton}
+                                        show-requirement-approval-action-button={showRequirementApprovalActionButton}
+
+                                        achievement-details-fields={achievementDetailsFields}
+                                        create-achievement-details-field-set={createAchievementDetailsFieldSet}
+                                        
+                                        is-community={isCommunity}
+
+                                        download-url={downloadUrl}
+                                        site-path={sitePath}
+                                        onpublishrefresh={handlePublishRefresh}
+
+                                        prompt-remarks-after-review-status-update={promptRemarksAfterReviewStatusUpdate}
+                                        show-remarks-action={showRemarksAction}
+                                        remarks-field-set-name={remarksFieldSetName}
+
+                                        submission-status={submissionStatus}
+
+                                        default-submitted-status={defaultSubmittedStatus}
+
+                                        enable-debug-mode={enableDebugMode}
+                                        record-id={recordId}
+                                    ></c-requirement-checklist-item>
+                                </template>
+                            </lightning-accordion-section>
+                        </template>
+                        <template lwc:if={hasChildIrsData}>
+                            <template for:each={childIrsData} for:item="childIrsWrapper">
+                                <lightning-accordion-section label={childIrsWrapper.title} name={childIrsWrapper.irs.Id} key={childIrsWrapper.irs.Id}>
+                                    <template for:each={childIrsWrapper.irqWrapperList} for:item='irqWrapper'>
+                                        <c-requirement-checklist-item 
+                                            class="requirementchecklist-checklistitem"
+
+                                            key={irqWrapper.irq.Id}
+                                            user-mode={userMode}
+                                            parent-id={childIrsWrapper.parentId}
+                                            irq-wrapper={irqWrapper} 
+                                            requirement-title-field={requirementTitleField}
+                                            requirement-details-fields={requirementDetailsFields} 
+                                            
+                                            open-icon={openIcon}
+                                            submitted-icon={submittedIcon}
+                                            reviewing-icon={reviewingIcon}
+                                            accepted-icon={acceptedIcon}
+                                            rejected-icon={rejectedIcon}
+                                            cancelled-icon={cancelledIcon}
+                                            resubmission-requested-icon={resubmissionRequestedIcon}
+
+                                            show-requirement-row-details-button={showRequirementRowDetailsButton}
+                                            show-requirement-user-action-button={showRequirementUserActionButton}
+                                            show-requirement-approval-action-button={showRequirementApprovalActionButton}
+
+                                            achievement-details-fields={achievementDetailsFields}
+                                            create-achievement-details-field-set={createAchievementDetailsFieldSet}
+                                            
+                                            is-community={isCommunity}
+
+                                            download-url={downloadUrl}
+                                            site-path={sitePath}
+                                            onpublishrefresh={handlePublishRefresh}
+
+                                            prompt-remarks-after-review-status-update={promptRemarksAfterReviewStatusUpdate}
+                                            show-remarks-action={showRemarksAction}
+                                            remarks-field-set-name={remarksFieldSetName}
+
+                                            submission-status={submissionStatus}
+
+                                            default-submitted-status={defaultSubmittedStatus}
+
+                                            enable-debug-mode={enableDebugMode}
+                                            record-id={recordId}
+                                        ></c-requirement-checklist-item>
+                                    </template>
+                                        
+                                </lightning-accordion-section>
+                            </template>
+                        </template>
+                    </lightning-accordion>
+                </div>
+            </div>
+        </template>
+	</div>
+	
+</template>

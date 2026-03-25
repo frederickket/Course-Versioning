@@ -1,0 +1,7 @@
+:host {
+    display: var(--entry-row-display);
+}
+
+:host(:hover) {
+    background-color: var(--lwc-colorBackgroundRowHover);
+}

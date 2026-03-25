@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Allow_Excess_Disbursement__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indicates that the unused funding is payable to students.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Indicates that the unused funding is payable to students.</inlineHelpText>
+    <label>Allow Excess Disbursement</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

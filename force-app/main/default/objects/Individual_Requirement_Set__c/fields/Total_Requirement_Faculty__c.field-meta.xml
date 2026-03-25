@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Requirement_Faculty__c</fullName>
+    <description>The total number of Individual Requirements with visibility set to Faculty and Student.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The total number of Individual Requirements with visibility set to Faculty and Student.</inlineHelpText>
+    <label>Total Requirement (Faculty)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

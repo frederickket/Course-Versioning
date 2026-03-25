@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Fields</fullName>
+    <columns>MasterLabel</columns>
+    <columns>DeveloperName</columns>
+    <columns>Application_Status__c</columns>
+    <columns>Type__c</columns>
+    <columns>Active__c</columns>
+    <columns>Include_In_Rollup__c</columns>
+    <columns>Rollup_Field_API_Name__c</columns>
+    <columns>Create_IPE__c</columns>
+    <columns>IPE_Enrollment_Status__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All Fields</label>
+</ListView>

@@ -1,0 +1,23 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+
+    <lightning-modal-body>
+    
+        <div class="studysessionschedulerjumptodatemodal-content component-body">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel} ></lightning-spinner>
+            </div>
+            <lightning-layout>
+                <lightning-layout-item size="4">
+                    <lightning-input type="date" name="jumpToDate" label={jumpToDateLabel} onchange={handleJumpToDate} value={jumpToDate} required="true"></lightning-input>
+                </lightning-layout-item>
+            </lightning-layout>
+
+        </div> 
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" disabled={isLoading} onclick={handleCancelClick} label={cancelButtonLabel} ></lightning-button>
+        <lightning-button variant="brand" disabled={isLoading} onclick={handleConfirmClick} label={confirmButtonLabel} class="slds-var-m-left_x-small"></lightning-button>
+    </lightning-modal-footer>
+</template>

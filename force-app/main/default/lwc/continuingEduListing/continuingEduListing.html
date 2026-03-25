@@ -1,0 +1,93 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="slds-m-around_medium">
+                <div class="continuingedulisting-content">
+                    <div class="slds-container_center slds-gutters">
+                        <div class="slds-col">
+                            <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-end slds-m-bottom_small">
+                                <div class="slds-col">
+                                    <span class="slds-p-right_xxx-small"><strong>{totalRecordCount}</strong></span>&nbsp;{filteredResultFoundHeading}
+                                </div>
+                                <template if:true={showShortingDropdown}>
+                                    <div class="slds-col slds-col_bump-left">
+                                        <lightning-combobox name={sortByFieldLabel} label={sortByFieldLabel} options={sortingOptions}
+                                            onchange={handleSortingChange} value={sortByField}>
+                                        </lightning-combobox>
+                                    </div>
+                                </template>
+                            </div>
+                            <section
+                                class="slds-grid slds-wrap slds-grid_vertical-align-center slds-grid_vertical-stretch slds-gutters">
+                                <template for:each={mainData} for:item="eachData">
+                                    <article key={eachData.Id}
+                                        class="slds-col slds-large-size_1-of-4 slds-medium-size_1-of-3 slds-p-bottom_large">
+                                        <a onclick={navigateToDetailPage} data-id={eachData.Id}>
+                                            <lightning-card class="cstmlistingbox">
+                                                <template if:true={eachData.imageValue}>
+                                                    <img src={eachData.imageValue} alt="User Image" width="100%" />
+                                                </template>
+                                                <div class="slds-p-around_medium">
+                                                    <c-record-view-form record-id={eachData.Id}
+                                                        object-api-name={objectApiName}
+                                                        fields={infoFields}
+                                                        enable-debug-mode={enableDebugMode}>
+                                                        <template if:true={eachData.field1Value}>
+                                                            <p class="continuingedulisting-record-field1 slds-p-vertical_xx-small">
+                                                                <c-output-field field-name={eachData.field1Name}
+                                                                    variant="label-hidden" value={eachData.field1Value}
+                                                                    enable-debug-mode={enableDebugMode}>
+                                                                </c-output-field>
+                                                            </p>
+                                                        </template>
+                                                        <template if:true={eachData.field2Value}>
+                                                            <p class="continuingedulisting-record-field2 slds-p-vertical_small">
+                                                                <c-output-field field-name={eachData.field2Name}
+                                                                    variant="label-hidden" value={eachData.field2Value}
+                                                                    enable-debug-mode={enableDebugMode}>
+                                                                </c-output-field>
+                                                            </p>
+                                                        </template>
+                                                        <template if:true={eachData.field3Value}>
+                                                            <p class="continuingedulisting-record-field3 slds-p-vertical_small">
+                                                                <c-output-field field-name={eachData.field3Name}
+                                                                    variant="label-hidden" value={eachData.field3Value}
+                                                                    enable-debug-mode={enableDebugMode}>
+                                                                </c-output-field>
+                                                            </p>
+                                                        </template>
+                                                        <template if:true={eachData.field4Value}>
+                                                            <p class="continuingedulisting-record-field1 slds-p-vertical_small">
+                                                                <c-output-field field-name={eachData.field4Name}
+                                                                    variant="label-hidden" value={eachData.field4Value}
+                                                                    enable-debug-mode={enableDebugMode}>
+                                                                </c-output-field>
+                                                            </p>
+                                                        </template>
+                                                    </c-record-view-form>
+                                                </div>
+                                            </lightning-card>
+                                        </a>
+                                    </article>
+                                </template>
+                            </section>
+                            <div class="slds-text-align_center">
+                                <template if:true={hasMore}>
+                                    <lightning-button label={showMoreButtonLabel} variant={showMoreButtonLabel} onclick={handleShowMore} >
+                                    </lightning-button>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+	</div>
+	
+</template>

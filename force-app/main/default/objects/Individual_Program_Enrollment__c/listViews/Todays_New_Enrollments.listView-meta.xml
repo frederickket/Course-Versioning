@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Todays_New_Enrollments</fullName>
+    <columns>NAME</columns>
+    <columns>Contact__c</columns>
+    <columns>Study_Program__c</columns>
+    <columns>Study_Plan__c</columns>
+    <columns>Enrollment_Status__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Individual_Program_Enrollment__c.Master_Enrollment</value>
+    </filters>
+    <filters>
+        <field>Admission_Date__c</field>
+        <operation>equals</operation>
+        <value>TODAY</value>
+    </filters>
+    <label>Today&apos;s New Enrollments</label>
+</ListView>

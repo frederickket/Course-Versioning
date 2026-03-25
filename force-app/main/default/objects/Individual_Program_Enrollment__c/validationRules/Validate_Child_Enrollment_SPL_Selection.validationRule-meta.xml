@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Child_Enrollment_SPL_Selection</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+  RecordType.DeveloperName = &quot;Child_Enrollment&quot;,
+  NOT(ISBLANK(Study_Plan__c)),
+  Study_Plan__c = Master_Enrollment__r.Study_Plan__c
+)</errorConditionFormula>
+    <errorMessage>The Study Plan should not be the same as the Master Enrollment&apos;s Study Plan.</errorMessage>
+</ValidationRule>

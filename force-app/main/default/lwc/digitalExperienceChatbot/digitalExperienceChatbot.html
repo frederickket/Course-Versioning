@@ -1,0 +1,71 @@
+<template>
+    <div class="digitalExperienceChatbot-floating-icon-container floating-icon-container" onclick={toggleWindow}>
+        <lightning-icon class="floating-icon"
+          icon-name={chatbotIconName} 
+          alternative-text="Chatbot" 
+          size={chatbotIconSize} 
+        ></lightning-icon>
+    </div>
+    <div class="digitalExperienceChatbot-window">
+        <div class={chatWindowClasses}>
+
+            <div class="digitalExperienceChatbot-close-icon">
+
+                <lightning-icon 
+                    icon-name="utility:close" 
+                    alternative-text="Close" 
+                    size="small" 
+                    title="Close"
+                    class="close-icon"
+                    onclick={closeWindow}
+                    ></lightning-icon>
+            </div>
+            <div class="digitalExperienceChatbot-window-content window-content">
+                <!--ISS-002125 force is-community to set to true-->
+                <c-chatbot 
+                    accordion-background-color={accordionBackgroundColor}
+                    accordion-text-color={accordionTextColor}
+                    object-api-name={objectApiName}
+                    enable-debug-mode={enableDebugMode} 
+                    record-id={recordId}
+                    is-community="true" 
+
+                    program-completion-visualizer-modal-title={programCompletionVisualizerModalTitle}
+                    program-completion-visualizer-modal-icon-name={programCompletionVisualizerModalIconName}
+                    show-ips-group-info={showIpsGroupInfo}
+                    ips-group-title-field={ipsGroupTitleField}
+                    ips-group-title-format={ipsGroupTitleFormat}
+                    ipe-info-fields={ipeInfoFields}
+                    ipe-info-column-no={ipeInfoColumnNo}
+                    ips-info-fields={ipsInfoFields}
+                    ips-info-fields-unit={ipsInfoFieldsUnit}
+                    ips-info-column-no={ipsInfoColumnNo}
+                    ips-unit-fields={ipsUnitFields}
+                    idv-enrollment-fields={idvEnrollmentFields}
+                    enable-clickable-ref-field={enableClickableRefField}
+                    enable-set-primary-ips={enableSetPrimaryIps}
+                    enable-view-enrollment-history={enableViewEnrollmentHistory}
+                    href-target-type={hrefTargetType}
+                    summary-info-field={summaryInfoField}
+                    progress-ring-color={progressRingColor}
+                    progress-ring-percentage-field={progressRingPercentageField}
+
+                    pathway-visualizer-modal-title={pathwayVisualizerModalTitle} 
+                    pathway-visualizer-modal-icon-name={pathwayVisualizerModalIconName}
+                    study-pathway-info-fields={studyPathwayInfoFields}
+                    study-pathway-term-title-prefix={studyPathwayTermTitlePrefix}
+                    study-pathway-term-info-fields={studyPathwayTermInfoFields}
+                    study-pathway-unit-info-fields={studyPathwayUnitInfoFields}
+                    study-pathway-unit-title-field={studyPathwayUnitTitleField}
+                    study-pathway-unit-icon={studyPathwayUnitIcon}
+                    study-pathway-group-title-field={studyPathwayGroupTitleField}
+                    study-pathway-group-info-fields={studyPathwayGroupInfoFields}
+                    study-pathway-group-icon={studyPathwayGroupIcon} 
+                    search-for-study-unit={showStudyUnitQuickSearch}
+                    show-study-plan-options={showStudyPlanOptions}
+                    combobox-label={comboboxLabel}></c-chatbot>
+            </div>
+        </div>
+
+    </div>
+</template>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Enable_Record_Value_Translation__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>To enable record value translation which will create and link a new translation map when new records are created.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>To enable record value translation which will create and link a new translation map when new records are created.</inlineHelpText>
+    <label>Enable Record Value Translation</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

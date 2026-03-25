@@ -1,0 +1,10 @@
+.component-body {
+    
+
+}
+
+.stickyFooter {
+    position: sticky;
+    bottom: 0;
+    z-index: 4;
+}

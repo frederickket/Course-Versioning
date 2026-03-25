@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NavigationMenu xmlns="http://soap.sforce.com/2006/04/metadata">
+    <container>RIO Education Community</container>
+    <containerType>Network</containerType>
+    <label>Student Navigation</label>
+    <navigationMenuItem>
+        <label>Short Course Catalog</label>
+        <menuItemBranding>
+            <tileImage>Course_Catalog_Banner_Tile</tileImage>
+        </menuItemBranding>
+        <position>1</position>
+        <publiclyAvailable>true</publiclyAvailable>
+        <target>/short-course-catalog</target>
+        <type>InternalLink</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>My Calendar</label>
+        <menuItemBranding>
+            <tileImage>Course_Catalog_Banner_Tile</tileImage>
+        </menuItemBranding>
+        <position>2</position>
+        <publiclyAvailable>false</publiclyAvailable>
+        <target>/my-calendar</target>
+        <type>InternalLink</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>My Profile</label>
+        <menuItemBranding>
+            <tileImage>My_Profile_Banner_Tile</tileImage>
+        </menuItemBranding>
+        <position>3</position>
+        <publiclyAvailable>false</publiclyAvailable>
+        <target>/my-profile</target>
+        <type>InternalLink</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>My Program</label>
+        <menuItemBranding>
+            <tileImage>My_Enrollments_Banner_Tile</tileImage>
+        </menuItemBranding>
+        <position>4</position>
+        <publiclyAvailable>false</publiclyAvailable>
+        <target>/my-program</target>
+        <type>InternalLink</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>My Carts</label>
+        <menuItemBranding>
+            <tileImage>My_Invoices_Banner_Tile</tileImage>
+        </menuItemBranding>
+        <position>5</position>
+        <publiclyAvailable>false</publiclyAvailable>
+        <target>/shopping-cart</target>
+        <type>InternalLink</type>
+    </navigationMenuItem>
+</NavigationMenu>

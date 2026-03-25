@@ -1,0 +1,59 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="studysessionschedulersession-div slds-grid slds-wrap">
+                <div>
+                    <lightning-input type="checkbox" variant="label-hidden" checked={isVisible} onchange={handleVisibilityCheckboxChange}></lightning-input>
+                </div>
+                <div class="studysessionschedulersession-sessionlabel slds-col_bump-right slds-size_7-of-12">
+                    <div class="slds-has-flexi-truncate">
+                        <div class="slds-truncate studysessionschedulersession-clickable" onclick={handleSessionLabelClick} onmouseover={onSessionLabelMouseOver} onmouseout={onSessionLabelMouseOut} >
+                            {studySessionLabel}
+                        </div>
+                    </div>
+                </div>
+
+                <template if:true={facilityIsLoading}>
+                    <lightning-spinner alternative-text={label.LOADING_LABEL} class="slds-align_absolute-center facility-spinner" size="xx-small"></lightning-spinner>
+                </template>
+                <div>
+                    <lightning-button-icon icon-name="utility:monthlyview" value="edit" size="medium" variant="bare" icon-class={sessionIconClass} onclick={handleSessionEdit}></lightning-button-icon>
+                </div>
+                
+                <template lwc:if={facilityIsDoubleBooked}>
+                    <lightning-button-icon icon-name="utility:store" value="" size="medium" variant="bare" icon-class={facilityIconClass} onclick={handleViewFacilityDoubleBookInfo}></lightning-button-icon>
+                </template>
+                <template lwc:else>
+                    <lightning-button-icon icon-name="utility:store" value="" size="medium" variant="bare" icon-class={facilityIconClass} onclick={handleAssignFacility}></lightning-button-icon>
+                </template>
+
+                <template lwc:if={facultyIsDoubleBooked}>
+                    <lightning-button-icon icon-name="utility:resource_capacity" value="" size="medium" variant="bare" icon-class={facultyIconClass} onclick={handleViewFacultyDoubleBookInfo}></lightning-button-icon>
+                </template>
+                <template lwc:else>
+                    <lightning-button-icon icon-name="utility:resource_capacity" value="" size="medium" variant="bare" icon-class={facultyIconClass} onclick={handleAssignFaculty}></lightning-button-icon>
+                </template>                
+                    
+                <div>
+                    <lightning-button-menu if:true={showMenuItems} menu-alignment="auto" icon-size="x-small" variant="bare" onselect={handleMenuItemSelect}>
+                        <lightning-menu-item if:true={allowEditSession} label={label.EDIT_LABEL} value="edit" ></lightning-menu-item>
+                        <lightning-menu-item if:true={allowFacilityAssignment} label={label.ASSIGN_FACILITY_LABEL} value="assignFacility" ></lightning-menu-item>
+                        <lightning-menu-item if:true={allowFacultyContactAssignment} label={label.ASSIGN_FACULTY_LABEL} value="assignFacultyContact" ></lightning-menu-item>
+                        <lightning-menu-item if:true={allowPreviewSession} label={label.PREVIEW_LABEL} value="preview" ></lightning-menu-item>
+                        <lightning-menu-item if:true={allowSendAnnouncement} label={label.SEND_ANNOUNCEMENT_LABEL} value="announcement" ></lightning-menu-item>
+                        <lightning-menu-item if:true={allowDeleteSession} label={label.DELETE_LABEL} value="delete" ></lightning-menu-item>
+                        <lightning-menu-item if:true={allowCustomAction} label={customActionLabel} value="customAction" ></lightning-menu-item>
+                    </lightning-button-menu>
+                </div>
+
+            </div>
+        </template>
+	</div>
+	
+</template>

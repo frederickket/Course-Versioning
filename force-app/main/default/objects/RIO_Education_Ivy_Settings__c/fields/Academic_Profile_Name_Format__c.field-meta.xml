@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Academic_Profile_Name_Format__c</fullName>
+    <defaultValue>&apos;Academic Profile - {reduivy__Contact_Name__c} ({reduivy__Study_Program_Academic_Level__c})&apos;</defaultValue>
+    <description>The record name format for new individual academic profile.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The record name format for new individual academic profile.</inlineHelpText>
+    <label>Academic Profile Name Format</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

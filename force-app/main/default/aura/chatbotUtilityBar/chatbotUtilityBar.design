@@ -1,0 +1,92 @@
+<design:component label="REDU - Chatbot (Utility Bar)">
+
+	
+
+	<design:attribute name="accordionBackgroundColor" label="Accordion Background Color"
+		description="The individual plan structure group accordion backgound color in hex code." default="#014486" />
+	<design:attribute name="accordionTextColor" label="Accordion Text Color"
+		description="The individual plan structure group accordion text color in hex code." default="#ffffff" />
+
+	<!--Program Completion Visualizer-->
+
+	<design:attribute name="showIpsGroupInfo" label="Show Individual Plan Structure Group Panel" description="Show individual plan structure group record info panel." default="true"/>
+	<design:attribute name="programCompletionVisualizerModalTitle" label="Program Completion Visualizer Modal Title" description="Program Completion Visualizer modal title." default="Program Completion Visualizer" />
+	<design:attribute name="programCompletionVisualizerModalIconName" label="Program Completion Visualizer Modal Icon Name" description="Program Completion Visualizer modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons." default="standard:sales_path" />
+	
+	<design:attribute name="ipsGroupTitleField" label="Individual Plan Structure Group Title Name Field"
+		description="The individual plan structure field API name to be displayed as the title for group e.g., Field_A__c or Field_A__r.Parent_Field__c." default="reduivy__Study_Plan_Structure__r.Name" />
+	<design:attribute name="ipsGroupTitleFormat" label="Individual Plan Structure Group Title Format"
+		description="The individual plan structure format to be displayed as the title for group. {0} and {1} represent the percentage and the Individual Plan Structure Group Title Name field, respectively. e.g., [{0}%] {1}." default="[{0}%] {1}" />
+	<design:attribute name="ipeInfoFields" label="IPE Highlight Fields"
+		description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c." default="reduivy__Enrollment_Status__c;reduivy__Start_Date__c;reduivy__End_Date__c;reduivy__Total_Credits_Required__c;reduivy__Credits_Earned__c" />
+	<design:attribute name="ipeInfoColumnNo" label="IPE Highlight Column Number"
+		description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12." default="6" />
+	<design:attribute name="ipsInfoFields" label="Individual Plan Structure Highlight Fields (Credit)"
+		description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c." 
+		default="reduivy__Category__c;reduivy__Credits__c;reduivy__Credits_Earned__c;reduivy__Completion_Progress__c"/> <!--ISS-002187-->
+	<design:attribute name="ipsInfoFieldsUnit" label="Individual Plan Structure Highlight Fields (Unit)"
+		description="Hightlights panel fields for Individual Plan Stucture Group with # of unit required type. In semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c." default="reduivy__Category__c;reduivy__Units_Required__c;reduivy__Units_Contributed__c;reduivy__Completion_Progress__c" />
+	<design:attribute name="ipsInfoColumnNo" label="Individual Plan Structure Column Number"
+		description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12." default="4" />
+	<design:attribute name="ipsUnitFields" label="Individual Plan Strucuture Fields (Unit)"
+		description="The fields to be displayed in the unit tables in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c." 
+		default="reduivy__Study_Plan_Structure__r.reduivy__Study_Unit__c;reduivy__Individual_Enrollment__r.reduivy__Enrollment_Status__c;reduivy__Individual_Enrollment__r.reduivy__Credits_Earned__c;reduivy__Individual_Enrollment__r.reduivy__Letter_Grade__c;reduivy__Individual_Enrollment__r.reduivy__Grade_Points__c;reduivy__Individual_Enrollment__r.reduivy__Grade_Result__c" /> <!--ISS-002187-->
+	<design:attribute name="idvEnrollmentFields" label="Individual Enrollment Fields"
+		description="The fields to be displayed in the Individual Enrollment History tables in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c." 
+		default="Name;reduivy__Enrollment_Date__c;reduivy__Enrollment_Status__c;reduivy__Letter_Grade__c;reduivy__Grade_Result__c" /> <!--ISS-002187-->
+
+
+	<design:attribute name="enableClickableRefField" label="Enable Clickable Ref Field"
+		description="Enable reference e.g., Lookup and Master Detail field as clicklable in the datatable." default="true" />
+	<design:attribute name="enableSetPrimaryIps" label="Enable Set Primary Individual Plan Structure"
+		description="Enable action to set primary Individual Plan Structure (Unit)." default="false"/> 
+	<design:attribute name="enableViewEnrollmentHistory" label="Enable View Enrollment History"
+		description="Enable action to view Individual Enrollment History." default="true" />
+	<design:attribute name="hrefTargetType" label="Url/Reference Field Target Type"
+		datasource="_blank,_self,_parent,_top"
+		description="The target attributes specifies whether to open the url/reference field in the same window or a new window." default="_self" />
+	<design:attribute name="summaryInfoField" label="Summary Info Field"
+		description="The summary fields for comparing the original individual program enrollment and the designated individual program enrollment in semi-colon separated value e.g., Field_A__c;Field_B__c." 
+		default="Name;reduivy__Credits_Earned__c;reduivy__Completion_Progress__c"/><!--ISS-002187-->
+	<design:attribute name="progressRingColor" label="Progress Ring Color"
+		description="The Progress Ring Color in hex code. e.g., #3f48cc." default="#3f48cc"/>
+	<design:attribute name="progressRingPercentageField" label="Progress Ring Percentage Field"
+		description="The field used to render the progress ring." default="reduivy__Completion_Percentage__c"/>
+
+	<!--Pathway Visualizer-->
+	<design:attribute name="pathwayVisualizerModalTitle" label="Pathway Visualizer Modal Title"
+		description="Pathway Visualizer modal title." default="Pathway Visualizer" />
+	<design:attribute name="pathwayVisualizerModalIconName" label="Pathway Visualizer Modal Icon Name"
+		description="Pathway Visualizer modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons." default="standard:sales_path" />
+
+	<design:attribute name="studyPathwayInfoFields" label="Study Pathway Highlights Panel Fields"
+		description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c." default="Name;reduivy__Study_Mode__c" /> <!--ISS-002187-->
+	<design:attribute name="studyPathwayTermTitlePrefix" label="Study Pathway Term Title Prefix"
+		description="Study pathway term prefix for the accordion title." default="Term " />
+	<design:attribute name="studyPathwayTermInfoFields" label="Study Pathway Term Highlights Panel Fields"
+		description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c." default="reduivy__Recommended_Credits__c;reduivy__Max_Credits__c" />
+	<design:attribute name="studyPathwayUnitInfoFields" label="Study Pathway Unit Highlights Panel Fields"
+		description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c." default="Name"/>
+	<design:attribute name="studyPathwayUnitTitleField" label="Study Pathway Unit Highlights Title Field"
+		description="The Study Unit field API name to be displayed as the title for group e.g., Field_A__c."  default="Name"/>
+	<design:attribute name="studyPathwayUnitIcon" label="Study Pathway Unit Icon Name"
+		description="Component study unit icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons." default="standard:catalog" />
+	<design:attribute name="studyPathwayGroupTitleField" label="Study Pathway Group Highlights Title Field"
+		description="The Study Plan Structure (Group) field API name to be displayed as the title for group e.g., Field_A__c." default="Name" />
+	<design:attribute name="studyPathwayGroupInfoFields" label="Study Pathway Group Highlights Panel Fields"
+		description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c." default="Name" />
+	<design:attribute name="studyPathwayGroupIcon" label="Study Pathway Group Icon Name"
+		description="Component study group icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons." default="standard:all" />
+
+	<design:attribute name="comboboxLabel" label="Combobox Label" description="Component combobox label." default="Preview with major/minor" />
+	<design:attribute name="showStudyUnitQuickSearch" label="Show Study Unit Quick Search"
+		description="Show Study Unit Quick Search" />
+	<design:attribute name="showStudyPlanOptions" label="Show Study Plan Options" description="Show study plan options combobox." default="false" />
+
+	<design:attribute name="enableDebugMode" label="Debug Mode" description="Enable debug mode." /> <!--ISS-002187-->
+	
+	<design:attribute name="modalTitle" label="(Obsolete) Modal Title" description="This is no longer used." />
+	<design:attribute name="modalIconName" label="(Obsolete) Modal Icon Name" description="This is no longer used." /><!--ISS-002187-->
+	<design:attribute name="forCommunity" label="(Obsolete) For Community?" description="This is no longer used." /> <!--ISS-002125-->
+	
+</design:component>

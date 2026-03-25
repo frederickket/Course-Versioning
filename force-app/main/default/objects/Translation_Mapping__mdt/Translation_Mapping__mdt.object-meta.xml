@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>The mapping of the field to be translated and the translation field used in the translation map.</description>
+    <label>Translation Mapping</label>
+    <pluralLabel>Translation Mappings</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <description>Study session scheduler.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>REDU - Session Scheduler</masterLabel>
+    <targets>
+        <target>lightning__AppPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__AppPage">
+            <property name="modalTitle" label="Modal Title" type="String" default="" description="Component modal title." />
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons." />
+            <property name="defaultSchedulingType" label="Default Scheduling Type" type="String" default="Facility" description="Default scheduling type. Should be either Facility or Faculty." required="true" datasource="Facility,Faculty"/>
+            <property name="defaultCalendarView" label="Default Calendar View" type="String" default="resourceTimelineWeek" description="Default view for the calendar. Supported values are: resourceTimelineDay, resourceTimelineWeek, resourceTimelineMonth." required="true"/>
+            <property name="calendarHeaderButtonLeft" label="Calendar Header Button Left" type="String" default="today prev next" description="Calendar buttons name in comma/space separated e.g, button1,button2. Supported values are: today, resourceTimelineDay, resourceTimelineWeek, resourceTimelineMonth, cJumpToDate, prev, next, title." />
+            <property name="calendarHeaderButtonCenter" label="Calendar Header Button Center" type="String" default="title" description="Calendar buttons name in comma/space separated e.g, button1,button2. Supported values are: today, resourceTimelineDay, resourceTimelineWeek, resourceTimelineMonth, cJumpToDate, prev, next, title." />
+            <property name="calendarHeaderButtonRight" label="Calendar Header Button Right" type="String" default="resourceTimelineDay,resourceTimelineWeek,resourceTimelineMonth" description="Calendar buttons name in comma/space separated e.g, button1,button2. Supported values are: today, resourceTimelineDay, resourceTimelineWeek, resourceTimelineMonth, cJumpToDate, prev, next, title." />
+            <property name="slotLabelFormat1" label="Slot Label Format 1" type="String" default="[WK] GGWW" description="Timeline slot label formatting. Please refer to moment.js documentation." />
+            <property name="slotLabelFormat2" label="Slot Label Format 2" type="String" default="ddd D" description="Timeline slot formatting. Please refer to moment.js documentation." />
+            <property name="slotLabelFormat3" label="Slot Label Format 3" type="String" default="ha" description="Timeline slot formatting. Please refer to moment.js documentation." />
+            <property name="timelineMinTime" label="Timeline First Hour" type="String" default="07:00" description="Determines the first hour/time that will be displayed, even when the scrollbars have been scrolled all the way up. e.g., 07:00 = 7AM." required="true"/>
+            <property name="timelineMaxTime" label="Timeline Last Hour" type="String" default="19:00" description="Determines the last hour/time (exclusively) that will be displayed, even when the scrollbars have been scrolled all the way down. e.g., 19:00 = 7PM." required="true"/>
+            <property name="timelineSlotWidth" label="Timeline slot width (pixel)" type="Integer" description="Timeline slot width in pixel." />
+            <property name="resourceAreaWidth" label="Resource panel width (percent)" type="Integer" default="15" description="Resource panel width in percent." />
+            <property name="useIsoWeek" label="Use ISO Week" type="Boolean" default="false" description="Tick to use ISO week number." />
+            <property name="calendarSnapDuration" label="Calendar Snap Duration" type="String" default="00:30" description="The hour:minute value to snap blocks to when dragging. MUST BE IN HH:MM FORMAT e.g. 00:30" />
+            <property name="calendarSlotDuration" label="Calendar Slot Duration" type="String" default="01:00" description="The frequency for displaying time slots. MUST BE IN HH:MM FORMAT e.g. 00:30" />
+
+            <property name="facultyContactNameFormat" label="Faculty Display Name Format" type="String" default="{Name}" description="Faculty display name merge field format, support fields in contact." />
+            <property name="facultyContactDefaultCriteria" label="Faculty Contact Default Criteria" type="String" default="reduivy__Contact_Type__c = 'Faculty'" description="The filter criteria to be considered for faculty (Contact Type = Faculty), e.g, MyFieldA__c = 'A' AND MyFieldB__c = 'B'." />
+            <property name="facilityNameFormat" label="Facility Display Name Format" type="String" default="{Name}" description="Facility display name merge field format, support fields in facility." />
+            <property name="facilityDefaultCriteria" label="Facility Default Criteria" type="String" default="Active__c = true" description="The filter criteria to be considered for facility (Active = true), e.g, MyFieldA__c = 'A' AND MyFieldB__c = 'B'." />
+            <property name="studySessionNameFormat" label="Study Session Display Name Format" type="String" default="{Name}" description="Study Session display name merge field format, support fields in session." />
+            <property name="studySessionDefaultCriteria" label="Study Session Default Criteria" type="String" default="" description="The filter criteria to be considered for Study Session, e.g, MyFieldA__c = 'A' AND MyFieldB__c = 'B'." />
+            <property name="studyEventInfoFields" label="Study Event Info Fields" type="String" default="Name;reduivy__Start_Date_Non_TZ__c;reduivy__Start_Time_Non_TZ__c;reduivy__End_Time_Non_TZ__c" description="The fields of Study Events to be displayed on the Study Event Info in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c." />
+
+            <property name="studySessionFilterFields" label="Study Session Filter Fields" type="String" default="Name;reduivy__Type__c;reduivy__Capacity__c" description="Study Session Fields to filter study sessions in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c." />
+            <property name="studySessionGroupByFields" label="Study Session Group By Fields" type="String" default="Name;reduivy__Type__c;reduivy__Study_Offering__c" description="Study Session Fields to group study sessions in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c." />
+            <property name="facultyContactFilterFields" label="Faculty Contact Filter Fields" type="String" default="FirstName;LastName;Email" description="Contact Fields to filter faculty contacts in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c." />
+            <property name="facilityFilterFields" label="Facility Filter Fields" type="String" default="Name;reduivy__Active__c" description="Facility Fields to filter facilities in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c." />
+
+            <property name="allowCrossCampusFacilityAllocation" label="Allow Cross Campus Facility Allocation" type="Boolean" default="false" description="Allow/prevent users to allocate Study Events to facilities across different campuses." />
+            <property name="respectResourceAvailability" label="Respect Resource Availability" type="Boolean" default="false" description="Tick to highlight resource availability in scheduler."/>
+            <property name="resourceAvailabilityBackgroundColor" label="Resource Availability Background Colour" type="String" default="#8fdf82" description="The background colour to represent the availability of the resources."/>
+            <property name="hiddenEventBackgroundColor" label="Hidden Event Colour" type="String" default="#d2d2d2" description="The colour of the hidden events."/>
+
+            <property name="allowNewSession" label="Allow New Study Session" type="Boolean" default="false" description="Tick to allow new Study Session Creation." />
+            <property name="allowEditSession" label="Allow Edit Study Session" type="Boolean" default="false" description="Tick to allow Study Session Modification." />
+            <property name="editFormStudySessionFieldSetName" label="Study Session Field Set Name (Edit Form)" type="String" default="reduivy__SessionScheduler_Form" description="The study session field set API name for record edit form." />
+            <property name="editFormStudySessionTimeFieldSetName" label="Study Session Time Field Set Name (Edit Form)" type="String" default="reduivy__SessionScheduler_Form" description="The study session time field set API name for record edit form." />
+            <property name="editFormSseColumnNo" label="Study Session Column Number (Edit Form)" type="Integer" default="2" description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12." />
+            <property name="editFormSstColumnNo" label="Study Session Time Column Number (Edit Form)" type="Integer" default="4" description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12." />
+            <property name="accordionBackgroundColor" label="Accordion Background Color" type="String" default="#cccccc" description="Accordion backgound color in hex code. e.g., #cccccc."/>
+            <property name="accordionTextColor" label="Accordion Text Color" type="String" default="#000000" description="Accordion text color in hex code. e.g., #000000."/>
+            <property name="accordionButtonVariant" label="Accordion Button Variant" type="String" default="border-filled" datasource="bare,container,brand,border,border-filled,bare-inverse,border-inverse" description="Accordion button appearance."/>
+
+            <property name="allowDeleteSession" label="Allow Delete Study Session" type="Boolean" default="false" description="Tick to allow Study Session Deletion." />
+            
+            <property name="allowFacilityAssignment" label="Allow Facility Assignment" type="Boolean" default="false" description="Tick to allow facilities assignment to Study Session." />
+            
+            <property name="allowFacultyContactAssignment" label="Allow Faculty Contact Assignment" type="Boolean" default="false" description="Tick to allow faculties assignment to Study Session." />
+            
+            <property name="allowPreviewSession" label="Allow Preview Study Session" type="Boolean" default="false" description="Tick to allow user to preview Study Session." />
+            <property name="enableStickyPreview" label="Sticky Preview Panel" type="Boolean" default="false" description="Make the preview panel sticky to the scheduler header during scrolling. Please note that you won't be able to allocate the Study Event from preview to a resource when the preview panel is in sticky mode."/>
+            
+            <property name="allowSendAnnouncement" label="Allow Send Announcement" type="Boolean" default="false" description="Tick to allow user to send announcement." />
+            
+            <property name="allowCustomAction" label="Allow Custom Action" type="Boolean" default="false" description="Tick to allow user to use custom action." />
+            <property name="customActionLabel" label="Custom Action Label" type="String" default="custom" description="Label for the custom action." />
+            <property name="customActionFlowName" label="Custom Action Flow Name" type="String" default="custom" description="The API name for the screen flow." />
+            <property name="customActionFlowFinishBehavior" label="Custom Action Flow Finish Behavior" type="String" default="NONE" description="The finish behavior for the screen flow. Supported options are: NONE, RESTART." datasource="NONE,RESTART" />
+            <property name="customActionShowCloseButton" label="Custom Action Show Close Button" type="Boolean" default="false" description="Show close button on the custom action modal." />
+
+            <property name="tableTextDisplayMode" label="Table Text Display Mode" type="String" default="Clip Text" description="Supported options are: Wrap Text, Clip Text." datasource="Wrap Text,Clip Text"/>
+
+            <property name="enableDebugMode" label="Enable Debug Mode" type="Boolean" default="false" description="Enable debug mode." />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,58 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+
+        <div class="component-body slds-is-relative slds-card">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel}></lightning-spinner>
+            </div>
+
+            <template if:true={isInitSuccess}>
+                <div class="ipepathwaystudypathwychangemodal-content">
+                    <fieldset class="slds-form-element slds-p-bottom_medium">
+                        <template lwc:if={hasStudyPathways}>
+                            <div class="slds-col slds-size_1-of-1 slds-p-bottom_small">
+                                <h2 class="ipepathwaystudypathwychangemodal-descriptionLabel">
+                                    <p>
+                                        <lightning-formatted-rich-text value={descriptionText}></lightning-formatted-rich-text>
+                                    </p>
+                                </h2>
+                            </div>
+                            <div class="ipepathwaystudypathwychangemodal-visualpicker slds-form-element__control">
+                                <template for:each={studyPathwayOptions} for:item="spwOpt">
+                                    <div key={spwOpt.Id} class="ipepathwaystudypathwychangemodal-visualpicker-item slds-visual-picker slds-visual-picker_vertical">
+                                        <input type="radio" id={spwOpt.Id} value={spwOpt.Id} name="pathway-radio" onchange={handlePathwayOnSelect} class="ipepathwaystudypathwychangemodal-visualpicker-item-radio"></input>
+                                        <label for={spwOpt.Id} class="ipepathwaystudypathwychangemodal-visualpicker-item-label">
+                                            <span class="ipepathwaystudypathwychangemodal-visualpicker-item-content slds-visual-picker__figure slds-visual-picker__text">
+                                                <c-record-info-tile
+                                                    record-id={spwOpt.Id}
+                                                    record-title-field-name={spwNameTranslationField}
+                                                    record-title-heading-size="medium"
+                                                    record-info-fields={studyPathwayInfoFields}
+                                                    object-api-name="reduivy__Study_Pathway__c"
+                                                    show-field-label="true"
+                                                    record-info-column-no="1"
+                                                ></c-record-info-tile>
+                                            </span>
+                                            <span class="slds-icon_container slds-visual-picker__text-check" aria-hidden="true">
+                                                <lightning-icon class="ipepathwaystudypathwychangemodal-checkIcon slds-icon-text-check" icon-name="utility:check" size="x-small" variant="inverse"></lightning-icon>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+                        <template lwc:else>
+                            <lightning-formatted-rich-text value={noAvailableStudyPathwayText}></lightning-formatted-rich-text>
+                        </template>
+                    </fieldset>
+                </div>
+            </template>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" onclick={handleCloseClick} label={cancelButtonLabel} class="slds-p-right_xx-small" disabled={isButtonDisabled}></lightning-button>
+        <lightning-button variant="brand" onclick={handleApplyClick} label={applyButtonLabel} disabled={isApplyDisabled} ></lightning-button>
+    </lightning-modal-footer>
+</template>

@@ -1,0 +1,86 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail}></c-js-library-loader>
+
+    <div class="component-body slds-is-relative slds-card">
+        <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv">
+            <lightning-spinner alternative-text={label.LOADING_LABEL}></lightning-spinner>
+        </div>
+
+        <template if:true={isInitSuccess}>
+            <lightning-quick-action-panel header={modalTitle}>
+                <lightning-layout-item size="12" padding="around-small">
+                    <lightning-record-edit-form object-api-name={objectName}>
+                        <template for:each={studyPlanColumns} for:item="col">
+                            <lightning-input-field key={col.fieldName} 
+                                field-name={col.fieldName} 
+                                value={col.fieldValue}
+                                required={col.isRequired} 
+                                data-displaytype={col.displayType}
+                                data-save-required={col.isRequired}
+                                onchange={handleFormFieldChange}
+                            > </lightning-input-field>
+                        </template>
+                    </lightning-record-edit-form>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="12" padding="around-small">
+                    <lightning-accordion allow-multiple-sections-open active-section-name={activeSections}>
+                        <lightning-accordion-section name="studypathwaysection" label={studyPathwayTitle}>
+                            <template if:true={studyPathwayList}>
+                                <div class="slds-p-top_small slds-p-bottom_small">
+                                    <lightning-formatted-rich-text value={studyPathwayDescription} ></lightning-formatted-rich-text>
+                                </div>
+                                <c-custom-type-datatable key-field="Id" 
+                                    data={studyPathwayList}
+                                    columns={studyPathwayColumns} 
+                                    wrap-table-header={tableHeaderDisplayMode}
+                                    onrowselection={handleStudyPathwayRowSelected}
+                                ></c-custom-type-datatable>
+                            </template>
+                            <template if:false={studyPathwayList}>
+                                <div class="slds-notify slds-notify_alert">
+                                    {studyPathwayError}
+                                </div>
+                            </template>
+                        </lightning-accordion-section>
+
+                        <lightning-accordion-section name="studyplanoptionsection" label={studyPlanOptionTitle}>
+                            <template if:true={studyPlanOptionList}>
+                                <div class="slds-p-top_small slds-p-bottom_small">
+                                    <lightning-formatted-rich-text value={studyPlanOptionDescription} ></lightning-formatted-rich-text>
+                                </div>
+                                <c-custom-type-datatable key-field="Id" 
+                                    data={studyPlanOptionList}
+                                    columns={studyPlanOptionColumns} 
+                                    wrap-table-header={tableHeaderDisplayMode}
+                                    onrowselection={handleStudyPlanOptionRowSelected}
+                                ></c-custom-type-datatable>
+                            </template>
+                            <template if:false={studyPlanOptionList}>
+                                <div class="slds-notify slds-notify_alert">
+                                    {studyPlanOptionError}
+                                </div>
+                            </template>
+                        </lightning-accordion-section>
+                    </lightning-accordion>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="12" padding="around-small">
+                    <template if:true={studyPlanOptionList}>
+                        <lightning-input type="checkbox" label={cloneChildStudyPlansLabel} onchange={handleCloneChildStudyPlansChange}> </lightning-input>
+                    </template>
+                    <lightning-input type="checkbox" label={includeExistingStudyPlanUnitRequirementsLabel} onchange={handleIncludeExistingRequirementsChange}> </lightning-input>
+                </lightning-layout-item>
+        
+                <div slot="footer">
+                    <lightning-button class="slds-p-horizontal_xx-small" variant="neutral" label={cancelButtonLabel}
+                        title={cancelButtonLabel} onclick={closeStudyPlanAction}>
+                    </lightning-button>
+                    <lightning-button class="slds-p-horizontal_xx-small" variant="brand" label={cloneButtonLabel}
+                        title={cloneButtonLabel} onclick={submitHandler}>
+                    </lightning-button>
+                </div>
+            </lightning-quick-action-panel>
+        </template>
+    </div>
+</template>

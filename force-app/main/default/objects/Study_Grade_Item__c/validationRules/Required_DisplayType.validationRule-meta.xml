@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Required_DisplayType</fullName>
+    <active>true</active>
+    <description>To ensure the display type is populated.</description>
+    <errorConditionFormula>ISBLANK(TEXT( Display_Type__c ))</errorConditionFormula>
+    <errorDisplayField>Display_Type__c</errorDisplayField>
+    <errorMessage>The display type is required.</errorMessage>
+</ValidationRule>

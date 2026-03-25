@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Applicable_Item_Type__c</fullName>
+    <deprecated>false</deprecated>
+    <description>The item types that are eligible to be discounted by the voucher.</description>
+    <inlineHelpText>The item types that are eligible to be discounted by the voucher.</inlineHelpText>
+    <label>Applicable Item Types</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Transaction_Item_Type</valueSetName>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

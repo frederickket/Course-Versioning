@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Master_Enrollment__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <label>Master Enrollment</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>$Source.Contact__c</field>
+            <operation>equals</operation>
+            <valueField>Individual_Program_Enrollment__c.Contact__c</valueField>
+        </filterItems>
+        <infoMessage>Please select a master enrollment for the student.</infoMessage>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>Individual_Program_Enrollment__c</referenceTo>
+    <relationshipLabel>Child Individual Program Enrollments</relationshipLabel>
+    <relationshipName>Child_Individual_Program_Enrollments</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

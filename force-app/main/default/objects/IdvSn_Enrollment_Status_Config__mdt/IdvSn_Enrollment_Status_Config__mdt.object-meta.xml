@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Individual session enrollment&apos;s enrollment status configuration</description>
+    <label>IdvSn Enrollment Status Config</label>
+    <pluralLabel>IdvSn Enrollment Status Config</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

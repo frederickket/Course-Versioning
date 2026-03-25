@@ -1,0 +1,64 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="slds-m-around_medium">
+                <div class="continuingedufiltering-content">
+                    <section class="slds-grid slds-gutters slds-wrap">
+                        <template if:true={backgroundImageUrl}>
+                            <div class="slds-size_1-of-1 continuingedufiltering-searchbox-img">
+                                <img src={backgroundImageUrl} alt="Background Image" width="100%" />
+                            </div>
+                        </template>
+                        <div class={searchBoxCss}>
+                            <div class="slds-col slds-size_1-of-1 slds-grid slds-wrap slds-p-bottom_large">
+                                <h1 class="slds-col slds-size_1-of-1 slds-p-vertical_large continuingedufiltering-titlefield" >
+                                    <template lwc:if={headerLabel}>
+                                        {headerLabel}
+                                    </template>
+                                    <template lwc:else>
+                                        &nbsp;
+                                    </template>
+                                </h1>
+                                <div class="continuingedufiltering-searchbox-container slds-grid slds-wrap slds-grid_align-spread">
+                                    <div class="slds-size_1-of-1 slds-col">
+                                        <lightning-input type="search" name={globalSearchFieldApiName} placeholder={globalSearchBoxLabel} class="continuingedufiltering-searchinputbox slds-m-top_large"
+                                            onchange={handleSearchBoxChange} oncommit={sendEvent} variant="label-hidden" value={searchValue}>
+                                        </lightning-input>
+                                    </div>
+                                    <template if:true={hasActiveCustomFilters}>
+                                        <div class="slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_8-of-12 slds-col slds-m-top_small">
+                                            <c-custom-filters 
+                                                message-operation-name="continuingEduFilterUpdate"
+                                                source-record-id=""
+                                                source-object-type={objectApiName}
+                                                target-object-type={objectApiName}
+                                                custom-filter-configs={customFilterConfigs}
+                                                include-none-options="true"
+                                                onfiltersupdated={handleFiltersUpdate}
+                                                enable-debug-mode={enableDebugMode}
+                                            ></c-custom-filters>
+                                        </div>
+                                    </template>
+                                    <div class="slds-align-bottom slds-m-top_small slds-col">
+                                        <lightning-button variant="brand" label={searchButtonLabel} title={searchButtonLabel} icon-name="utility:search"
+                                            class="square-button" onclick={sendEvent}>
+                                        </lightning-button>
+                                        <lightning-button variant="base" title={clearAllFilterLabel} label={clearAllFilterLabel}
+                                            class="slds-m-left_x-small" onclick={unSendEvent}></lightning-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </template>
+	</div>
+	
+</template>

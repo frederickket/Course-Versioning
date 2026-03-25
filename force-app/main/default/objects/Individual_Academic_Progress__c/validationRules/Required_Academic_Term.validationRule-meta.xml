@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Required_Academic_Term</fullName>
+    <active>true</active>
+    <description>Ensure that the academic term is populated.</description>
+    <errorConditionFormula>ISBLANK( Academic_Term__c ) ||  Academic_Term__r.RecordType.DeveloperName != &apos;Academic_Term&apos;</errorConditionFormula>
+    <errorDisplayField>Academic_Term__c</errorDisplayField>
+    <errorMessage>The academic term is required.</errorMessage>
+</ValidationRule>

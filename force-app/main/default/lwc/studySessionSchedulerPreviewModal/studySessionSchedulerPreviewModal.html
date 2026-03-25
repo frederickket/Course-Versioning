@@ -1,0 +1,65 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+
+    <lightning-modal-body>
+    
+        <div class="studySessionSchedulerPreviewModal-content">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+            </div>
+            
+            <div class="studySessionSchedulerPreviewModal-layout">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size='12' medium-device-size='6'>
+                        <div class="studySessionSchedulerPreviewModal-allocatedStatus">
+                            <lightning-radio-group 
+                            name="allocatedStatusRadio"
+                            options={allocatedStatusOptions}
+                            type="radio"
+                            value={allocatedStatusValue}
+                            variant="standard"
+                            onchange={handleAllocatedStatus}
+                            ></lightning-radio-group>
+                        </div>
+                    </lightning-layout-item>
+
+                    
+                    <lightning-layout-item size='12' medium-device-size='6'>
+                        <div class="studySessionSchedulerPreviewModal-previewFrom">
+                            <lightning-radio-group 
+                            name="previewFromRadio"
+                            options={previewFromOptions}
+                            type="radio"
+                            value={previewFromValue}
+                            variant="standard"
+                            onchange={handlePreviewFrom}
+                            ></lightning-radio-group>
+                            
+                            <template lwc:if={isPreviewFromDate}>
+                                <lightning-input 
+                                type="date" 
+                                name="datePreviewFromInput" 
+                                label="Select date"
+                                onchange={handleDatePreviewFrom}
+                                value={datePreviewFromValue}
+                                required
+                                data-save-required="true"
+                                ></lightning-input>
+                            </template>
+                        </div>
+                    </lightning-layout-item>
+
+
+                </lightning-layout>
+            </div>
+            
+            
+            
+        </div> 
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" disabled={isLoading} onclick={handleCancelClick} label={cancelButtonLabel} ></lightning-button>
+        <lightning-button variant="brand" disabled={isLoading} onclick={handleConfirmClick} label={confirmButtonLabel} class="slds-var-m-left_x-small"></lightning-button>
+    </lightning-modal-footer>
+</template>

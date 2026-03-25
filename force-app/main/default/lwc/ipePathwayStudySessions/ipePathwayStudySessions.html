@@ -1,0 +1,50 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+    
+    <div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+
+        <template if:true={isInitSuccess}>
+
+            <template for:each={sortedSseList} for:item="sse">
+                <c-ipe-pathway-study-session
+                    key={sse.Id}
+                    user-mode={userMode}
+                    master-ipe-id={masterIpeId}
+                    individual-pathway-id={individualPathwayId}
+                    study-session-id={sse.Id}
+                    individual-enrollment-id={individualEnrollmentId}
+                    contact-id={contactId}
+                    study-session-title-field={studySessionTitleField}
+                    study-session-info-fields={studySessionInfoFields}
+                    study-session-icon={studySessionIcon}
+                    study-session-time-title-field={studySessionTimeTitleField}
+                    study-session-time-info-fields={studySessionTimeInfoFields}
+                    study-session-time-icon={studySessionTimeIcon}
+                    show-study-session-time-field-label={showStudySessionTimeFieldLabel}
+                    enable-debug-mode={enableDebugMode}
+
+                    request-attempt-max={requestAttemptMax}
+                    request-attempt-waiting-time={requestAttemptWaitingTime}
+                    
+                    show-enrollment-buttons={showEnrollmentButtons}
+                    pre-enroll-button-icon-name={preEnrollButtonIconName}
+                    pre-enroll-button-label={preEnrollButtonLabel}
+                    withdraw-pre-enroll-button-icon-name={withdrawPreEnrollButtonIconName}
+                    withdraw-pre-enroll-button-label={withdrawPreEnrollButtonLabel}
+                    enroll-button-icon-name={enrollButtonIconName}
+                    enroll-button-label={enrollButtonLabel}
+                    unenroll-button-icon-name={unenrollButtonIconName}
+                    unenroll-button-label={unenrollButtonLabel}
+                    waitlist-button-icon-name={waitlistButtonIconName}
+                    waitlist-button-label={waitlistButtonLabel}
+                    withdraw-waitlist-button-icon-name={withdrawWaitlistButtonIconName}
+                    withdraw-waitlist-button-label={withdrawWaitlistButtonLabel}>
+                </c-ipe-pathway-study-session>
+            </template>
+
+        </template>
+    </div>
+</template>

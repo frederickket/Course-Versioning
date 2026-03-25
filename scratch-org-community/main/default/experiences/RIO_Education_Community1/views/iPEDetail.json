@@ -1,0 +1,38 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:sldsOneColLayout",
+  "dataProviders" : [ ],
+  "id" : "89e0603c-dcad-4e7d-b7a7-d93f162ee651",
+  "label" : "IPE Detail",
+  "regions" : [ {
+    "id" : "ee7a8a71-56b3-4a23-b378-1643c8e4b814",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "id" : "01f68c1b-12ea-4988-9de6-f8424e2a6a76",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "id" : "8ae99f62-c632-4196-8005-52900d5e2fb5",
+    "regionName" : "footer",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "{!Record._Object}: {!Record._Title}"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "839cb0fb-c537-42cf-b9d4-b7a61848d251",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "522cf608-480f-4222-9dbf-84a953c123b7",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Tnmg3xEoH6s4JlNccMV3OMgU9ImCsA",
+  "type" : "view",
+  "viewType" : "detail-a0Z"
+}

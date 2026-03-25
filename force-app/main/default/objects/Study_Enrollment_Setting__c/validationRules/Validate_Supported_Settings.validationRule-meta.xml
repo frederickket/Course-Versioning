@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Supported_Settings</fullName>
+    <active>true</active>
+    <description>This is to ensure the settings are configured based on the supported scenario:
+Edu Institution
+Edu Institution + Study Program
+Edu Institution + Study Unit
+Edu Institution + Study Program + Study Unit
+IPE
+IPE + Study Unit</description>
+    <errorConditionFormula>OR( NOT(ISBLANK(Educational_Institution__c)) &amp;&amp; NOT(ISBLANK(Individual_Program_Enrollment__c)),
+    NOT(
+        OR(
+            AND(
+                NOT(ISBLANK(Educational_Institution__c)),
+                ISBLANK(Study_Program__c),
+                ISBLANK(Study_Unit__c)
+            ), 
+            AND(
+                NOT(ISBLANK(Educational_Institution__c)),
+                NOT(ISBLANK(Study_Program__c)),
+                ISBLANK(Study_Unit__c)
+            ),
+            AND(
+                NOT(ISBLANK(Educational_Institution__c)),
+                ISBLANK(Study_Program__c),
+                NOT(ISBLANK(Study_Unit__c))
+            ),
+            AND(
+                NOT(ISBLANK(Educational_Institution__c)),
+                NOT(ISBLANK(Study_Program__c)),
+                NOT(ISBLANK(Study_Unit__c))
+            ),
+            AND(
+                NOT(ISBLANK(Individual_Program_Enrollment__c)),
+                ISBLANK(Study_Unit__c),
+                ISBLANK(Study_Program__c)
+            ),
+            AND(
+                NOT(ISBLANK(Individual_Program_Enrollment__c)),
+                NOT(ISBLANK(Study_Unit__c)),
+                ISBLANK(Study_Program__c)
+            )
+        )
+    )
+)</errorConditionFormula>
+    <errorMessage>Invalid settings. The supported combination are: (1) Edu. Institution, (2) Edu. Institution + Study Program, (3) Edu. Institution + Study Unit, (4) Edu. Institution + Study Program + Study Unit, (5) Program Enrollment, (6) Program Enrollment + Study Unit.</errorMessage>
+</ValidationRule>

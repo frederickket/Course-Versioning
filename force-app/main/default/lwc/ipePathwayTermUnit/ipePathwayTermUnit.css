@@ -1,0 +1,11 @@
+:host {
+    display: table-row;
+}
+
+:host(:hover) {
+    background-color: var(--lwc-colorBackgroundRowHover);
+}
+
+.ipepathwaytermunit-td-status-heading {
+    font-weight: bold;
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <description>SPS Unit Table for study plan structure wizard.</description>
+    <isExposed>false</isExposed>
+    <masterLabel>REDU - Study Plan Structure Wizard SPS Unit Table</masterLabel>
+</LightningComponentBundle>

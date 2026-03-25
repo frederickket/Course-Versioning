@@ -1,0 +1,14 @@
+.continuingeducartpayment-checkIcon{
+    --slds-c-icon-color-foreground-default: white;
+    --slds-c-icon-color-background: transparent;
+
+}
+
+.continuingeducartpayment-descriptionLabel {
+    align-self:center;
+    justify-content:center;
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+}
+

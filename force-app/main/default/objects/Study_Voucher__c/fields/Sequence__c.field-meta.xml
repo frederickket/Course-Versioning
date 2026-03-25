@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sequence__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Indicates the sequence of a voucher that will be allocated to transaction order.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Indicates the sequence of a voucher that will be allocated to transaction order.</inlineHelpText>
+    <label>Sequence</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,125 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:dynamicLayout",
+  "dataProviders" : [ ],
+  "id" : "9355e063-26c6-4056-b6d2-ab764eea8127",
+  "label" : "Shopping Cart Payment Selection",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0) url(/sfsites/c/file-asset/reduivy__Short_Courses_Catalog_Banner?v=1) center center /cover",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "194dcaba-59d8-4b85-951a-13a4bca2fe0e",
+          "columns" : [ {
+            "UUID" : "78916004-3dc4-49b9-bc56-579bfa9bbce0",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "194dcaba-59d8-4b85-951a-13a4bca2fe0e",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p style=\"text-align: center;\"><span style=\"font-size: 48px; color: rgb(255, 255, 255);\">Select Payment</span></p>"
+          },
+          "componentName" : "forceCommunity:richTextInline",
+          "id" : "c4690258-7fe7-4e6d-a3bb-b570cdf1f0d2",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "78916004-3dc4-49b9-bc56-579bfa9bbce0",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "2dd65bf4-e736-444c-8901-89d102aedff9",
+          "columns" : [ {
+            "UUID" : "53ea3772-666e-4be3-b945-1388ec68537b",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "2dd65bf4-e736-444c-8901-89d102aedff9",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "cancelButtonLabel" : "Cancel",
+            "cancelRedirectionPageName" : "shopping-cart",
+            "companyDescription" : "Bill to your company",
+            "companyLabel" : "Company",
+            "companyOrderPaymentRedirectionPage" : "shopping-payment-thank-you",
+            "creditCardDescription" : "Self Pay",
+            "creditCardLabel" : "Credit",
+            "creditCardPaymentRedirectionPage" : "shopping-payment",
+            "descriptionText" : "Select Payment Type",
+            "enableDebugMode" : false,
+            "iconSize" : "medium",
+            "modalIconName" : "standard:webcart",
+            "paramOrderId" : "{!orderId}",
+            "payButtonLabel" : "Pay",
+            "paymentErrorMessage" : "Please select payment type.",
+            "rioOrderUpdatedSuccessMessage" : "RIO Order updated successfully.",
+            "titleLabel" : "Payment"
+          },
+          "componentName" : "reduivy:continuingEduCartPayment",
+          "id" : "59e93bdc-89dc-49a7-9b57-820f0fa11602",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "53ea3772-666e-4be3-b945-1388ec68537b",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "71779833-6214-4539-9bed-2fb40f4056f0",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "Shopping Cart Payment Selection"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "433f0d34-e220-42bd-b9e7-76a71701a407",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "64847755-68fb-4f5b-b48a-589a0389475e",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "custom-shopping-cart-payment-selection"
+}

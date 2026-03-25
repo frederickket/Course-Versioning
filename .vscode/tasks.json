@@ -1,0 +1,192 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "SFDX - Init new org without namespace",
+            "type": "shell",
+            "command": "scratch-org-setup-commands/create-scratch-org-nonamespace.bat",
+            "args": ["${input:scratchOrgAlias}", "${input:scratchOrgExpiration}"],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "SFDX - Init new org",
+            "type": "shell",
+            "command": "scratch-org-setup-commands/create-scratch-org.bat",
+            "args": ["${input:scratchOrgAlias}", "${input:scratchOrgExpiration}"],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "SFDX - Deploy Object Sharing",
+            "type": "shell",
+            "command": "scratch-org-setup-commands/deploy-objects.bat",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn": ["Create Scratch Org"]
+        },
+        {
+            "label": "SFDX - Deploy Project Sources",
+            "type": "shell",
+            "command": "scratch-org-setup-commands/deploy-project-sources.bat",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn": ["Deploy Object Sharing"]
+        },
+        {
+            "label": "SFDX - Init Org Default",
+            "type": "shell",
+            "command": "scratch-org-setup-commands/init-org-default.bat",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn": ["Deploy Project Sources"]
+        },
+        {
+            "label": "SFDX - Load Sample Data",
+            "type": "shell",
+            "command": "scratch-org-setup-commands/init-org-sample-data.bat",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn": ["Scratch Org Default"]
+        },
+        {
+            "label": "SFDX - Create Sample Community",
+            "type": "shell",
+            "command": "scratch-org-setup-commands/deploy-sample-community.bat",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "SFDX - Org Info",
+            "type": "shell",
+            "command": "sf org display user -o ${input:scratchOrgAlias}",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+			"label": "Init New Scratch Org With Data",
+			"dependsOn": [
+				"SFDX - Init new org",
+                "SFDX - Deploy Object Sharing",
+				"SFDX - Deploy Project Sources",
+				"SFDX - Init Org Default",
+				"SFDX - Load Sample Data",
+                "SFDX - Org Info"
+			],
+			"dependsOrder": "sequence"
+		},
+        {
+            "label": "Packaging - Create Beta",
+            "type": "shell",
+            "command": "packaging-commands/create-beta-version.bat",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Packaging - Create Beta Without Validation",
+            "type": "shell",
+            "command": "packaging-commands/create-beta-version-without-validation.bat",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Packaging - List Create Version Job History",
+            "type": "shell",
+            "command": "packaging-commands/create-version-history.bat",
+            "args": ["${input:createdLastDays}"],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Packaging - View Create Version Report",
+            "type": "shell",
+            "command": "packaging-commands/create-version-report.bat",
+            "args": ["${input:packageCreateRequestId}"],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Packaging - Delete Beta Version",
+            "type": "shell",
+            "command": "packaging-commands/delete-beta-version.bat",
+            "args": ["${input:packageVersionId}"],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Packaging - Display Version Ancestry Tree",
+            "type": "shell",
+            "command": "packaging-commands/display-ancestry.bat",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Packaging - List All Versions",
+            "type": "shell",
+            "command": "packaging-commands/list-versions.bat",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Packaging - Promote Beta Version To Released (WARNING)",
+            "type": "shell",
+            "command": "packaging-commands/promote-beta-version.bat",
+            "args": ["${input:packageVersionId}"],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Packaging - Run Code Analyzer",
+            "type": "shell",
+            "command": "packaging-commands/run-code-analyzer.bat",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+    ],
+    "inputs": [
+        {
+            "id": "scratchOrgAlias",
+            "type": "promptString",
+            "description": "Enter the org alias"
+        },
+        {
+            "id": "scratchOrgExpiration",
+            "type": "promptString",
+            "description": "Enter the number of days until scratch org expiration"
+        },
+        {
+            "id": "createdLastDays",
+            "type": "promptString",
+            "description": "Enter the number of days since the request was created. Use 0 for today."
+        },
+        {
+            "id": "packageCreateRequestId",
+            "type": "promptString",
+            "description": "Enter the package version creation request id starts with 08c"
+        },
+        {
+            "id": "packageVersionId",
+            "type": "promptString",
+            "description": "Enter the package version id starts with 04t."
+        },
+    ]
+}

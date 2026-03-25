@@ -1,0 +1,11 @@
+.component-body {
+    
+}
+
+.studysessionschedulersessiongroup-childsessions-div {
+    margin-left: var(--childsessions-div-padding-left);
+}
+
+.studysessionschedulersessiongroup-parentdiv {
+    margin-left: var(--group-div-padding-left);
+}

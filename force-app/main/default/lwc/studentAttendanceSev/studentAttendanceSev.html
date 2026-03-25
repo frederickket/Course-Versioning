@@ -1,0 +1,39 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative slds-card">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} size="small" ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="slds-m-top_small slds-m-bottom_small">
+                <div class="studentAttendancesev-content">
+                    <lightning-layout multiple-rows="true" horizontal-align="spread">
+                        <lightning-layout-item >
+                            <c-record-info-tile
+                                record-id={sevObj.Id}
+                                record-title-field-name="Name"
+                                record-info-fields={sevTileInfoFields}
+                                object-api-name="reduivy__Study_Event__c"
+                                record-icon-name={attendanceTileIcon}
+                                record-color={tileHighlightColour} 
+                                record-title-click-action={studyEventTileClickAction}
+                                record-info-modal-record-1-info-fields={infoModalFieldsForStudyEvent}
+                                record-info-modal-section-1-name={infoModalSectionNameForStudyEvent}
+                                enable-debug-mode={enableDebugMode}
+                            ></c-record-info-tile>
+                        </lightning-layout-item>
+                        <lightning-layout-item >
+                            <template if:false={hasAttendanceMarked}>
+                                <lightning-icon size="x-small" variant={noAttendanceWarningIconVariant} icon-name={noAttendanceWarningIcon} title={noAttendanceWarningText} class="slds-p-right_x-small"></lightning-icon>
+                            </template>
+                            <lightning-button label={attendanceButtonLabel} title={attendanceButtonLabel} variant="brand" onclick={handleAttendanceRegistryClick} ></lightning-button>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+            </div>
+        </template>
+	</div>
+	
+</template>

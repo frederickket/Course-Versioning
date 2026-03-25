@@ -1,0 +1,7 @@
+.fixed-position .floating-icon-container {
+    position: fixed;
+}
+
+.fixed-position .floating-window-visible {
+    position: fixed;
+}

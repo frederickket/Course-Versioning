@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prevent_Deletion_With_Payment_Applied</fullName>
+    <active>true</active>
+    <description>This validation rule prevents the deletion of records when a payment has been applied to them.</description>
+    <errorConditionFormula>AND(
+    ISCHANGED( Total_Amount__c ) ,
+    Offset_Amount__c != 0
+)</errorConditionFormula>
+    <errorDisplayField>Total_Amount__c</errorDisplayField>
+    <errorMessage>You are not allowed to change the Quantity, Unit Price, or Discount if payment is applied.</errorMessage>
+</ValidationRule>

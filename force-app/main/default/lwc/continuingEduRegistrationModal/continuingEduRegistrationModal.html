@@ -1,0 +1,24 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+    <lightning-modal-body>
+        <div class="component-body slds-is-relative slds-card">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel} ></lightning-spinner>
+            </div>
+            
+            <div class="continuingeduregistrationmodal-body slds-p-around_medium">
+                <template lwc:if={allowGuestRegistrations}>
+                    <p class="slds-align_absolute-center">{guestRegistrationText}</p>
+                </template>
+                <template lwc:else>
+                    <p class="slds-align_absolute-center">{nonGuestRegistrationText}</p>
+                </template>
+            </div>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button variant="brand" disabled={isLoading} onclick={handleLogin} label={nonGuestRegistrationButtonLabel} class="slds-p-right_xx-small"></lightning-button>
+        <lightning-button if:true={allowGuestRegistrations} variant="brand" disabled={isLoading} onclick={handleRegisterEvent} label={guestRegistrationButtonLabel} class="slds-p-right_xx-small"></lightning-button>
+    </lightning-modal-footer>
+	
+</template>

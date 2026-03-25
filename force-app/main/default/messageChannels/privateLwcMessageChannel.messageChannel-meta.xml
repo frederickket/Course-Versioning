@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Private message channel to pass info between components in a lightning page. Do not change isExposed to true.</description>
+    <isExposed>false</isExposed>
+    <lightningMessageFields>
+        <description>This is the field to pass data</description>
+        <fieldName>operationData</fieldName>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <description>This is the field to identify operation</description>
+        <fieldName>operationName</fieldName>
+    </lightningMessageFields>
+    <masterLabel>privateLwcMessageChannel</masterLabel>
+</LightningMessageChannel>

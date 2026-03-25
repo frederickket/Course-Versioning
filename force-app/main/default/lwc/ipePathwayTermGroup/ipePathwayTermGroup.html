@@ -1,0 +1,156 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess} >
+            <div class="ipepathwaytermgroup-body slds-m-top_small slds-m-bottom_medium">
+                <lightning-accordion class="ipepathwaytermgroup-accordion" allow-multiple-sections-open="true" active-section-name={activeSectionName}>
+                    <lightning-accordion-section class="ipepathwaytermgroup-accordion-section" label={title} name={accordionSectionName}>
+                        <div>
+                            <template if:true={showIpsGroupInfo}>
+                                <c-record-view-form 
+                                    record-id={individualPlanStructureGroupId}
+                                    object-api-name="reduivy__Individual_Plan_Structure__c"
+                                    fields={infoFields}
+                                    enable-debug-mode={enableDebugMode}
+                                >
+                                    <lightning-layout class="slds-wrap">
+                                        <template for:each={infoFields} for:item="field">
+                                            <lightning-layout-item key={field} size="12" large-device-size={infoFieldSize} >
+                                                <c-output-field field-name={field} ></c-output-field>
+                                            </lightning-layout-item>
+                                        </template>
+                                    </lightning-layout>
+                                </c-record-view-form>
+                            </template>
+                        </div>
+                        <template lwc:if={hasChildGroups}>
+                            <template for:each={childGroups} for:item="groupIps">
+                                <div key={groupIps.Id}>
+                                    <c-ipe-pathway-term-group
+                                        master-individual-pe-id={masterIndividualPeId}
+                                        individual-pe-id={individualPeId}
+                                        individual-plan-structure-group-id={groupIps.Id}
+                                        individual-pathway-id={individualPathwayId}
+                                        ipw-academic-term-id={ipwAcademicTermId}
+
+                                        user-mode={userMode}
+                                        study-unit-quick-search-value={studyUnitQuickSearchValue}
+                                        unit-listing-mode={unitListingMode}
+                                        campus-id={campusId}
+                                        restricted-to-units={restrictedToUnits}
+                                        accordion-background-color={accordionBackgroundColorShaded}
+                                        accordion-text-color={accordionTextColor}
+                                        
+                                        ips-group-title-field={ipsGroupTitleField}
+                                        show-ips-group-info={showIpsGroupInfo}
+                                        ips-group-info-fields={ipsGroupInfoFields}
+                                        ips-group-info-column-no={ipsGroupInfoColumnNo}
+                                        ips-unit-table-fields={ipsUnitTableFields}
+
+                                        study-unit-info-fields={studyUnitInfoFields}
+                                        study-offering-info-fields={studyOfferingInfoFields}
+                                        study-plan-structure-unit-info-fields={studyPlanStructureUnitInfoFields}
+
+                                        show-enrollment-buttons={showEnrollmentButtons}
+                                        pre-enroll-button-icon-name={preEnrollButtonIconName}
+                                        pre-enroll-button-label={preEnrollButtonLabel}
+                                        pre-enroll-enrollment-status={preEnrollEnrollmentStatus}
+                                        withdraw-pre-enroll-button-icon-name={withdrawPreEnrollButtonIconName}
+                                        withdraw-pre-enroll-button-label={withdrawPreEnrollButtonLabel}
+                                        withdraw-pre-enroll-enrollment-status={withdrawPreEnrollEnrollmentStatus}
+                                        enroll-button-icon-name={enrollButtonIconName}
+                                        enroll-button-label={enrollButtonLabel}
+                                        enroll-enrollment-status={enrollEnrollmentStatus}
+                                        unenroll-button-icon-name={unenrollButtonIconName}
+                                        unenroll-button-label={unenrollButtonLabel}
+                                        unenroll-enrollment-status={unenrollEnrollmentStatus}
+                                        unenroll-request-button-icon-name={unenrollRequestButtonIconName}
+                                        unenroll-request-button-label={unenrollRequestButtonLabel}
+                                        unenroll-request-enrollment-status={unenrollRequestEnrollmentStatus}
+                                        waitlist-button-icon-name={waitlistButtonIconName}
+                                        waitlist-button-label={waitlistButtonLabel}
+                                        waitlist-enrollment-status={waitlistEnrollmentStatus}
+                                        withdraw-waitlist-button-icon-name={withdrawWaitlistButtonIconName}
+                                        withdraw-waitlist-button-label={withdrawWaitlistButtonLabel}
+                                        withdraw-waitlist-enrollment-status={withdrawWaitlistEnrollmentStatus}
+
+                                        request-attempt-max={requestAttemptMax}
+                                        request-attempt-waiting-time={requestAttemptWaitingTime}
+
+                                        custom-filters={customFilters}
+
+                                        missed-failed-unit-listing-option={missedFailedUnitListingOption}
+
+                                        enable-debug-mode={enableDebugMode}
+                                    >
+                                    </c-ipe-pathway-term-group>
+                                </div>
+                            </template>
+                        </template>
+                        <template lwc:else>
+                            <template if:true={ipsRecord}>
+                                <c-ipe-pathway-term-unit-table 
+                                    master-individual-pe-id={masterIndividualPeId}
+                                    individual-pe-id={individualPeId}
+                                    individual-plan-structure-group-id={ipsRecord.Id}
+                                    individual-pathway-id={individualPathwayId}
+                                    ipw-academic-term-id={ipwAcademicTermId}
+                                    
+                                    table-fields={ipsUnitTableFields}
+                                    user-mode={userMode}
+                                    study-unit-quick-search-value={studyUnitQuickSearchValue}
+                                    unit-listing-mode={unitListingMode}
+                                    campus-id={campusId}
+                                    restricted-to-units={restrictedToUnits}
+
+                                    study-unit-info-fields={studyUnitInfoFields}
+                                    study-offering-info-fields={studyOfferingInfoFields}
+                                    study-plan-structure-unit-info-fields={studyPlanStructureUnitInfoFields}
+
+                                    show-enrollment-buttons={showEnrollmentButtons}
+                                    pre-enroll-button-icon-name={preEnrollButtonIconName}
+                                    pre-enroll-button-label={preEnrollButtonLabel}
+                                    pre-enroll-enrollment-status={preEnrollEnrollmentStatus}
+                                    withdraw-pre-enroll-button-icon-name={withdrawPreEnrollButtonIconName}
+                                    withdraw-pre-enroll-button-label={withdrawPreEnrollButtonLabel}
+                                    withdraw-pre-enroll-enrollment-status={withdrawPreEnrollEnrollmentStatus}
+                                    enroll-button-icon-name={enrollButtonIconName}
+                                    enroll-button-label={enrollButtonLabel}
+                                    enroll-enrollment-status={enrollEnrollmentStatus}
+                                    unenroll-button-icon-name={unenrollButtonIconName}
+                                    unenroll-button-label={unenrollButtonLabel}
+                                    unenroll-enrollment-status={unenrollEnrollmentStatus}
+                                    unenroll-request-button-icon-name={unenrollRequestButtonIconName}
+                                    unenroll-request-button-label={unenrollRequestButtonLabel}
+                                    unenroll-request-enrollment-status={unenrollRequestEnrollmentStatus}
+                                    waitlist-button-icon-name={waitlistButtonIconName}
+                                    waitlist-button-label={waitlistButtonLabel}
+                                    waitlist-enrollment-status={waitlistEnrollmentStatus}
+                                    withdraw-waitlist-button-icon-name={withdrawWaitlistButtonIconName}
+                                    withdraw-waitlist-button-label={withdrawWaitlistButtonLabel}
+                                    withdraw-waitlist-enrollment-status={withdrawWaitlistEnrollmentStatus}
+                                    
+                                    request-attempt-max={requestAttemptMax}
+                                    request-attempt-waiting-time={requestAttemptWaitingTime}
+
+                                    custom-filters={customFilters}
+                                    
+                                    missed-failed-unit-listing-option={missedFailedUnitListingOption}
+                                    
+                                    enable-debug-mode={enableDebugMode}
+                                >
+                                </c-ipe-pathway-term-unit-table>
+                            </template>
+                        </template>
+                    </lightning-accordion-section>
+                </lightning-accordion>
+            </div>
+        </template>
+	</div>
+	
+</template>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Fields</fullName>
+    <columns>MasterLabel</columns>
+    <columns>DeveloperName</columns>
+    <columns>Job_Operation__c</columns>
+    <columns>Job_Generator_Class_Name__c</columns>
+    <columns>Job_Generator_Batch_Size__c</columns>
+    <columns>Job_Handler_Class_Name__c</columns>
+    <columns>Job_Handler_Batch_Size__c</columns>
+    <columns>Active__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All Fields</label>
+</ListView>

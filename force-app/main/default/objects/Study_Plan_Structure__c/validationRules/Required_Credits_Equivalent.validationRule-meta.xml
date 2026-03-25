@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Required_Credits_Equivalent</fullName>
+    <active>false</active>
+    <description>To ensure that the credits equivalent is entered for group study plan structure that completes by # of Units.</description>
+    <errorConditionFormula>RecordType.DeveloperName == &quot;Group&quot; &amp;&amp; NOT(ISBLANK( Units_Required__c )) &amp;&amp; ISBLANK( Credits_equivalent_per_Unit__c )</errorConditionFormula>
+    <errorDisplayField>Credits_equivalent_per_Unit__c</errorDisplayField>
+    <errorMessage>The &quot;Credits Equivalent per Unit&quot; is required when using &quot;# of Units Required&quot; is defined.</errorMessage>
+</ValidationRule>

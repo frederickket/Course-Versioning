@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Require_Announcement_Receivers</fullName>
+    <active>true</active>
+    <description>At least one receiver is required</description>
+    <errorConditionFormula>INCLUDES(Channel_Type__c, &apos;Notification&apos;) &amp;&amp; ISBLANK( TRIM( Notification_Receivers_Id__c ) )</errorConditionFormula>
+    <errorDisplayField>Notification_Receivers_Id__c</errorDisplayField>
+    <errorMessage>There is no receiver found for the notification.</errorMessage>
+</ValidationRule>

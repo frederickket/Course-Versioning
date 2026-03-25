@@ -1,0 +1,96 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:dynamicLayout",
+  "dataProviders" : [ ],
+  "id" : "bb51c197-b38b-43ec-ae93-a9fe0c809ae5",
+  "label" : "Student Attendance",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "e7f3fa78-1707-45db-b7d1-08f857c3ac84",
+          "columns" : [ {
+            "UUID" : "924ac3a5-e9dc-4b10-85b0-036876617a63",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "e7f3fa78-1707-45db-b7d1-08f857c3ac84",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "attendanceButtonLabel" : "Attendance",
+            "attendanceStatuses" : "Attended;Absent;Late",
+            "attendanceTileIcon" : "standard:product_required",
+            "contactImageFileName" : "Profile",
+            "contactImageUrlFieldName" : "",
+            "contactTileClickAction" : "View Info",
+            "contactTileInfoFields" : "reduivy__Student_ID__c;Email",
+            "enableDebugMode" : false,
+            "infoModalFieldsForContact" : "reduivy__Student_ID__c;Email",
+            "infoModalFieldsForIndividualSessionEnrollment" : "reduivy__Enrollment_Status__c;reduivy__Enrollment_Date__c",
+            "infoModalFieldsForStudyEvent" : "reduivy__Start__c;reduivy__End__c;reduivy__Status__c",
+            "infoModalSectionNameForContact" : "Contact",
+            "infoModalSectionNameForIndividualSessionEnrollment" : "Individual Session Enrollment",
+            "infoModalSectionNameForStudyEvent" : "Study Event",
+            "modalIconName" : "standard:product_required",
+            "modalTitle" : "Attendance",
+            "noAttendanceWarningIcon" : "utility:warning",
+            "noAttendanceWarningIconVariant" : "warning",
+            "noAttendanceWarningText" : "No attendance taken.",
+            "recordId" : "",
+            "sevTileInfoFields" : "reduivy__Start__c;reduivy__End__c;reduivy__Status__c",
+            "showNoAttendanceWarning" : true,
+            "showRecordsBasedOnAllocation" : false,
+            "studyEventRelationEditFieldSetName" : "reduivy__AttendanceWizard_Notes",
+            "studyEventTileClickAction" : "View Info",
+            "userMode" : "Faculty",
+            "validFacultyIsnStatus" : "Enrolled"
+          },
+          "componentName" : "reduivy:studentAttendance",
+          "id" : "48d22417-79e4-47a0-b9b0-e90c7354beb1",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "924ac3a5-e9dc-4b10-85b0-036876617a63",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "6c76a9a6-aed3-417e-895c-91321fc08124",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "Student Attendance"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "e7e93604-688d-4f4c-adc8-aec22ca95e4e",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "dbf1e47d-e183-4fc7-ae76-cce8df36965c",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "custom-student-attendance"
+}

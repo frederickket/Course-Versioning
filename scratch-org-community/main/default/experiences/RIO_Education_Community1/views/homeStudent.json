@@ -1,0 +1,209 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:dynamicLayout",
+  "dataProviders" : [ ],
+  "id" : "ff2192f6-04e2-4f08-a93f-bebd5f5f0922",
+  "label" : "Home (Student)",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "9e92eb02-5fd9-436b-97f5-2c4d627eb3bb",
+          "columns" : [ {
+            "UUID" : "e595d076-3bbc-4e5f-9142-182dff81cd88",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 32
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "9e92eb02-5fd9-436b-97f5-2c4d627eb3bb",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p style=\"text-align:right;color:#444444;\"><b>Logged on as: {!CurrentUser.name} </b></p>"
+          },
+          "componentName" : "forceCommunity:htmlBlock",
+          "id" : "8cb5845d-7705-4374-9fd1-1e9ea5786fb6",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "e595d076-3bbc-4e5f-9142-182dff81cd88",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0) url(/sfsites/c/file-asset/reduivy__reduivy__Home_Banner_User?v=1) center center /cover",
+        "backgroundOverlay" : "rgba(0, 0, 0, 0.4)",
+        "contentAreaWidth" : 73,
+        "sectionConfig" : {
+          "UUID" : "e618a4fb-bd2c-4e93-ba37-1738dc835f55",
+          "columns" : [ {
+            "UUID" : "d85d56ba-37d4-454f-8c72-cba548c2085f",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 250
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "e618a4fb-bd2c-4e93-ba37-1738dc835f55",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><span style=\"font-size: 48px; color: rgb(255, 255, 255);\">Welcome to RIO Education portal!</span></p><p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><br></p>"
+          },
+          "componentName" : "forceCommunity:richTextInline",
+          "id" : "536ef45a-1fdd-4d28-a53a-990c21c64c49",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "d85d56ba-37d4-454f-8c72-cba548c2085f",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "9580109c-0593-447a-9c61-573400a867f8",
+          "columns" : [ {
+            "UUID" : "3a9b9e97-f3ae-4ce2-8a0e-7f10bdf7b15c",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 32
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "9580109c-0593-447a-9c61-573400a867f8",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p style=\"text-align: center;\"><span style=\"font-size: 16px; color: rgb(68, 68, 68); font-family: sans-serif;\">Access your courses, view your grades, manage your schedule, and explore helpful resources—all in one place.</span></p><p style=\"text-align: center;\"><span style=\"font-size: 16px; color: rgb(68, 68, 68); font-family: sans-serif;\">We’re excited to be part of your journey. Let’s make this semester a great one!</span></p>"
+          },
+          "componentName" : "forceCommunity:richTextInline",
+          "id" : "a1ba994e-6582-419a-873f-9061f632e4d6",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        }, {
+          "componentAttributes" : {
+            "richTextValue" : "<p><img class=\"sfdcCbImage\" src=\"{!contentAsset.Line.1}\" alt=\"\">&nbsp;</p>"
+          },
+          "componentName" : "forceCommunity:richTextInline",
+          "id" : "42eb8cab-75ba-4fd5-ab52-e02f88374a38",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        }, {
+          "componentAttributes" : {
+            "bannerBackgroundColor" : "rgba(0, 159, 185, 0)",
+            "bannerPosition" : "bottom",
+            "bannerSizePercent" : 35,
+            "borderRadius" : 20,
+            "boxShadow" : true,
+            "haveBanner" : true,
+            "iconBackgroundColor" : "rgb(255,255,255)",
+            "iconSize" : "medium",
+            "noImageColor" : "rgb(116,116,116)",
+            "overlay" : "rgba(0, 0, 0, 0.4)",
+            "templateType" : "full",
+            "tileMenuEditor" : "Student_Navigation_Home",
+            "titleColor" : "",
+            "titleFontSize" : "large",
+            "titleHorizontalAlign" : "right"
+          },
+          "componentName" : "community_navigation:tileMenu",
+          "id" : "a1ed75b2-466c-4544-99e7-a6d889ad16f5",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "3a9b9e97-f3ae-4ce2-8a0e-7f10bdf7b15c",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "40908bd5-b2fe-480d-919c-d2ce69d4b498",
+          "columns" : [ {
+            "UUID" : "3de57b74-3563-405f-8d66-bf3dbff1d0a9",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "40908bd5-b2fe-480d-919c-d2ce69d4b498",
+      "regions" : [ {
+        "id" : "3de57b74-3563-405f-8d66-bf3dbff1d0a9",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "a90fe9e8-53c5-4564-8a74-d5d0cc82f6a5",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "Home"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "91617ac4-dc43-4b84-bb1b-c8a3fa28dbe5",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "3d16aa87-6af3-4ce7-bc69-7ab37a47ca72",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Tnmg3xEoH6s4JlNccMV3OMgU9ImCsA",
+  "type" : "view",
+  "viewType" : "home"
+}

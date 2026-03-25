@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <description>Individual program enrollment audit wizard.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>REDU - Individual Program Audit Wizard</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+   </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="modalTitle" label="Modal Title" type="String" default="My Program Completion" description="Component modal title."/>
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:sales_path" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="tabVariant" label="Tab Variant" type="String" default="vertical" datasource="default,scoped,vertical" description="The variant changes the appearance of the tabset."/>
+            <property name="ipeTitleField" label="Individual Program Enrollment Title Field" type="String" default="reduivy__Study_Plan__r.Name" description="The individual program enrollment field API name to be displayed as the title e.g., Field_A__c or Field_A__r.Parent_Field__c."/>
+            <property name="ipeInfoFields" label="Individual Program Enrollment Highlight Fields" type="String" default="reduivy__Enrollment_Status__c;reduivy__Start_Date__c;reduivy__End_Date__c;reduivy__Total_Credits_Required__c;reduivy__Credits_Earned__c" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="ipeInfoColumnNo" label="Individual Program Enrollment Highlight Column Number" type="Integer" default="6" description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12."/>
+            <property name="ipfInfoFields" label="Individual Academic Profile Highlight Fields" type="String" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="ipfInfoColumnNo" label="Individual Academic Profile Highlight Column Number" type="Integer" default="6" description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12."/>
+            <property name="showIpsGroupInfo" label="Show Individual Plan Structure Group Panel" type="Boolean" default="true" description="Show individual plan structure group record info panel."/>
+            <property name="ipsGroupTitleField" label="Individual Plan Structure Group Title Name Field" type="String" default="reduivy__Study_Plan_Structure__r.Name" description="The individual plan structure field API name to be displayed as the title for group e.g., Field_A__c or Field_A__r.Parent_Field__c."/>
+            <property name="ipsGroupTitleFormat" label="Individual Plan Structure Group Title Format" type="String" default="[{0}%] {1}" description="The individual plan structure format to be displayed as the title for group. {0} and {1} represent the percentage and the Individual Plan Structure Group Title Name field, respectively. e.g., [{0}%] {1}."/>
+            <property name="ipsInfoFields" label="Individual Plan Structure Highlight Fields (Credit)" type="String" default="reduivy__Category__c;reduivy__Credits__c;reduivy__Credits_Earned__c;reduivy__Completion_Progress__c" description="Hightlights panel fields for Individual Plan Stucture Group with credit required type. In semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="ipsInfoFieldsUnit" label="Individual Plan Structure Highlight Fields (Unit)" type="String" default="reduivy__Category__c;reduivy__Units_Required__c;reduivy__Units_Contributed__c;reduivy__Completion_Progress__c" description="Hightlights panel fields for Individual Plan Stucture Group with # of unit required type. In semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="ipsInfoColumnNo" label="Individual Plan Structure Column Number" type="Integer" default="4" description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12."/>
+            <property name="ipsUnitFields" label="Individual Plan Structure Fields (Unit)" type="String" default="Name;reduivy__Study_Plan_Structure__r.reduivy__Study_Unit__c;reduivy__Status__c;reduivy__Credits__c;reduivy__Individual_Enrollment__r.reduivy__Grade_Result__c" description="The fields to be displayed in the unit tables in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="idvEnrollmentFields" label="Individual Enrollment Fields" type="String" default="Name;reduivy__Enrollment_Date__c;reduivy__Attempt_Number__c;reduivy__Credits_Earned__c;reduivy__Grade_Result__c;reduivy__Grade_Points__c;reduivy__Enrollment_Status__c" description="The fields to be displayed in the Individual Enrollment History tables in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="accordionBackgroundColor" label="Accordion Background Color" type="String" default="#cccccc" description="The individual plan structure group accordion backgound color in hex code. e.g., #cccccc."/>
+            <property name="accordionTextColor" label="Accordion Text Color" type="String" default="#000000" description="The individual plan structure group accordion text color in hex code. e.g., #000000."/>
+            <property name="enableClickableRefField" label="Enable Clickable Ref Field" type="Boolean" default="true" description="Enable reference e.g., Lookup and Master Detail field as clicklable in the datatable."/>
+            <property name="enableSetPrimaryIps" label="Enable Set Primary Individual Plan Structure" type="Boolean" default="true" description="Enable action to set primary Individual Plan Structure (Unit)."/>
+            <property name="enableViewEnrollmentHistory" label="Enable View Enrollment History" type="Boolean" default="true" description="Enable action to view Individual Enrollment History."/>
+            
+            <property name="progressRingColor" label="Progress Ring Color" type="String" default="#3f48cc" description="The Progress Ring Color in hex code. e.g., #3f48cc."/>
+            <property name="progressRingPercentageField" label="Progress Ring Percentage Field" type="String" default="reduivy__Completion_Percentage__c" description="The field used to render the progress ring."/>
+            
+            <property name="tableTextDisplayMode" label="Table Text Display Mode" type="String" default="Clip Text" description="Supported options are: Wrap Text, Clip Text." datasource="Wrap Text,Clip Text"/>
+
+            <property name="hrefTargetType" label="Url/Reference Field Target Type" type="String" default="_self" datasource="_blank,_self,_parent,_top" description="The target attributes specifies whether to open the url/reference field in the same window or a new window."/>
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+            
+            <property name="forCommunity" label="(Obsolete) For Community?" type="Boolean" default="false" description="Check this if the component is used in Community page."/>
+        </targetConfig> 
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="recordId" type="String" label="Record Id" default="{!recordId}" description="ID of the salesforce record for which the record details are to be displayed e.g. {!recordId}"/>
+            <property name="modalTitle" label="Modal Title" type="String" default="My Program Completion" description="Component modal title."/>
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:sales_path" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="tabVariant" label="Tab Variant" type="String" default="vertical" datasource="default,scoped,vertical" description="The variant changes the appearance of the tabset."/>
+            <property name="ipeTitleField" label="Individual Program Enrollment Title Field" type="String" default="reduivy__Study_Plan__r.Name" description="The individual program enrollment field API name to be displayed as the title e.g., Field_A__c or Field_A__r.Parent_Field__c."/>
+            <property name="ipeInfoFields" label="Individual Program Enrollment Highlight Fields" type="String" default="reduivy__Enrollment_Status__c;reduivy__Start_Date__c;reduivy__End_Date__c;reduivy__Total_Credits_Required__c;reduivy__Credits_Earned__c" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="ipeInfoColumnNo" label="Individual Program Enrollment Highlight Column Number" type="Integer" default="6" description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12."/>
+            <property name="ipfInfoFields" label="Individual Academic Profile Highlight Fields" type="String" description="Hightlights panel fields in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="ipfInfoColumnNo" label="Individual Academic Profile Highlight Column Number" type="Integer" default="6" description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12."/>
+            <property name="showIpsGroupInfo" label="Show Individual Plan Structure Group Panel" type="Boolean" default="true" description="Show individual plan structure group record info panel."/>
+            <property name="ipsGroupTitleField" label="Individual Plan Structure Group Title Name Field" type="String" default="reduivy__Study_Plan_Structure__r.Name" description="The individual plan structure field API name to be displayed as the title for group e.g., Field_A__c or Field_A__r.Parent_Field__c."/>
+            <property name="ipsGroupTitleFormat" label="Individual Plan Structure Group Title Format" type="String" default="[{0}%] {1}" description="The individual plan structure format to be displayed as the title for group. {0} and {1} represent the percentage and the Individual Plan Structure Group Title Name field, respectively. e.g., [{0}%] {1}."/>
+            <property name="ipsInfoFields" label="Individual Plan Structure Highlight Fields (Credit)" type="String" default="reduivy__Category__c;reduivy__Credits__c;reduivy__Credits_Earned__c;reduivy__Completion_Progress__c" description="Hightlights panel fields for Individual Plan Stucture Group with credit required type. In semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="ipsInfoFieldsUnit" label="Individual Plan Structure Highlight Fields (Unit)" type="String" default="reduivy__Category__c;reduivy__Units_Required__c;reduivy__Units_Contributed__c;reduivy__Completion_Progress__c" description="Hightlights panel fields for Individual Plan Stucture Group with # of unit required type. In semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="ipsInfoColumnNo" label="Individual Plan Structure Column Number" type="Integer" default="4" description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12."/>
+            <property name="ipsUnitFields" label="Individual Plan Structure Fields (Unit)" type="String" default="Name;reduivy__Study_Plan_Structure__r.reduivy__Study_Unit__c;reduivy__Status__c;reduivy__Credits__c;reduivy__Individual_Enrollment__r.reduivy__Grade_Result__c" description="The fields to be displayed in the unit tables in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="idvEnrollmentFields" label="Individual Enrollment Fields" type="String" default="Name;reduivy__Enrollment_Date__c;reduivy__Attempt_Number__c;reduivy__Credits_Earned__c;reduivy__Grade_Result__c;reduivy__Grade_Points__c;reduivy__Enrollment_Status__c" description="The fields to be displayed in the Individual Enrollment History tables in semi-colon separated value e.g., Field_A__c;Field_B__c;Field_C__c."/>
+            <property name="accordionBackgroundColor" label="Accordion Background Color" type="String" default="#cccccc" description="The individual plan structure group accordion backgound color in hex code. e.g., #cccccc."/>
+            <property name="accordionTextColor" label="Accordion Text Color" type="String" default="#000000" description="The individual plan structure group accordion text color in hex code. e.g., #000000."/>
+            <property name="enableClickableRefField" label="Enable Clickable Ref Field" type="Boolean" default="true" description="Enable reference e.g., Lookup and Master Detail field as clicklable in the datatable."/>
+            <property name="enableSetPrimaryIps" label="Enable Set Primary Individual Plan Structure" type="Boolean" default="true" description="Enable action to set primary Individual Plan Structure (Unit)."/>
+            <property name="enableViewEnrollmentHistory" label="Enable View Enrollment History" type="Boolean" default="true" description="Enable action to view Individual Enrollment History."/>
+            
+            <property name="progressRingColor" label="Progress Ring Color" type="String" default="#3f48cc" description="The Progress Ring Color in hex code. e.g., #3f48cc."/>
+            <property name="progressRingPercentageField" label="Progress Ring Percentage Field" type="String" default="reduivy__Completion_Percentage__c" description="The field used to render the progress ring."/>
+            
+            <property name="tableTextDisplayMode" label="Table Text Display Mode" type="String" default="Clip Text" description="Supported options are: Wrap Text, Clip Text." datasource="Wrap Text,Clip Text"/>
+
+            <property name="hrefTargetType" label="Url/Reference Field Target Type" type="String" default="_self" datasource="_blank,_self,_parent,_top" description="The target attributes specifies whether to open the url/reference field in the same window or a new window."/>
+            <property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+            
+            <property name="forCommunity" label="(Obsolete) For Community?" type="Boolean" default="false" description="Check this if the component is used in Community page."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

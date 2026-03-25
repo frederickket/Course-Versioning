@@ -1,0 +1,1 @@
+sf apex run --file scripts/apex/scratch-org/scratch-org-default.apex

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>REDU - Related List - Single</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__FlowScreen</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="modalTitle" type="String" label="Title" description="Title."/>
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:sales_path" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+
+            <property name="viewMode" type="String" label="View Mode" default="Related List" description="Display as related list or table only. Supported options are: Related List,Datatable." datasource="Related List,Datatable" />
+            <property name="targetRecordIdField" type="String" label="Target Record Id Field" default="Id" required="true" description="The Id field (master-detailed/lookup) API name from the current object to be used in searching related child records based on Parent Object Reference Field." />
+            <property name="parentObjectRefField" type="String" label="Parent Object Reference Field" default="" required="true" description="The Id field (master-detailed/lookup) API name of the parent object used in child object." />
+            <property name="childObjectApiName" type="String" label="Child Object API Name" default="" required="true" description="E.g, OpportunityLineItem or rio_ed__Fee_Line__c" />
+            <property name="childObjectFields" type="String" label="Child Object Fields API Name" default="" required="true" description="Enter the API name of the fields seperated by semicolons to display the list of columns. Please note that Rich Text and Time are not supported." />
+            <property name="childObjectFilterCriteria" type="String" label="Child Record Filter Criteria" description="E.g, RecordTypeId = 'xxxxxx' or Account.Name = 'Acme'." />
+            <property name="sortedBy" type="String" label="Sorted By" default="Name" required="true" description="E.g, Name" />
+            <property name="sortedDirection" type="String" label="Sorted Direction" default="asc" description="E.g, Acsending or Descending. Supported options are: asc,desc." datasource="asc,desc" />
+            
+            <property name="enableNewButton" type="Boolean" label="Show New Button" default="true" description="Show new button for user to create record." />
+            <property name="enableRowViewButton" type="Boolean" label="Show View Button" default="true" description="Show view button for user to view a record." />
+            
+            <property name="enableRowEditButton" type="Boolean" label="Show Edit Button" default="true" description="Show edit button for user to edit a record." />
+            <property name="editFieldSetName" type="String" label="Edit Field Set API Name" description="The Field Set Name used to display on the edit and new record modal."/>
+            <property name="editFormColumnNo" type="Integer" label="Record Edit Form Column Number" default="2" description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12."/>
+            <property name="editFormSize" type="String" label="Record Edit Form Size" default="small" datasource="small,medium,large,full" description="The modal size for record edit form."/>
+            
+            <property name="enableRowDeleteButton" type="Boolean" label="Show Delete Button" default="true" description="Show delete button for user to delete a record." />
+            <property name="enableRowDownloadButton" type="Boolean" label="Show Download Button" default="true" description="Show download button for user to download the file. Only applies when the child object is ContentVersion." />
+            <property name="downloadUrl" type="String" label="Download URL" default="/sfc/servlet.shepherd/version/download/{0}?operationContext=S1" description="The url to download the file. {0} will be replaced by the record id. Only applies when the child object is ContentVersion." />
+            
+            <property name="maxHeight" type="Integer" label="Maximum Height" default="300" description="Maximum height of the component in pixel." />
+            <property name="showRowNumber" type="Boolean" label="Show Row Number" default="true" description="Show sequence number for each row." />
+            <property name="enableInfiniteLoading" type="Boolean" label="Enable Infinite Loading" default="false" description="To enable infinite loading." />
+
+            <property name="rowsToLoad" type="Integer" label="Rows to Load" default="10" description="Rows to Load"/>
+            <property name="noRecordFoundMessage" type="String" label="No Record Found Message" description="Message to show when there is no record found."/>
+
+            <property name="enableClickableRefField" type="Boolean" label="Make reference field clickable" default="true" description="Make master-detail or lookup field clickable to open the record." />
+            <property name="enableRowSelection" type="Boolean" label="Enable multiple row selection" description="Enable checkboxes and allow multiple rows selection." />
+            <property name="enableInlineEditing" type="Boolean" label="Inline Editing" description="Enable inline editing." />
+
+            <property name="refTarget" type="String" label="Reference Target" default="_blank" description="Target for opening reference (lookup) fields. Default is _blank." datasource="_blank,_self,_parent,_top" />
+            <property name="enableRefreshButton" type="Boolean" label="Show Refresh Button" default="true" description="Show refresh button for user to refresh the list." />
+            <property name="enableQuickSearch" type="Boolean" label="Enable Quick Search" description="Enable Quick Search" />
+
+            <property name="tableTextDisplayMode" label="Table Text Display Mode" type="String" default="Clip Text" description="Supported options are: Wrap Text, Clip Text." datasource="Wrap Text,Clip Text"/>
+
+            <property name="enableDebugMode" type="Boolean" label="Debug Mode" description="Enable debug mode." />
+
+
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="modalTitle" type="String" label="Title" description="Title."/>
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:sales_path" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+
+            <property name="viewMode" type="String" label="View Mode" default="Related List" description="Display as related list or table only. Supported options are: Related List,Datatable." datasource="Related List,Datatable" />
+            
+            <property name="targetRecordId" type="String" label="Target Record Id" default="{!recordId}" required="true" description="The current record id." datasource="{!recordId},{USERID},{USERCONTACTID}" />
+            <property name="targetRecordIdField" type="String" label="Target Record Id Field" default="Id" required="true" description="The Id field (master-detailed/lookup) API name from the current object to be used in searching related child records based on Parent Object Reference Field." />
+            <property name="parentObjectRefField" type="String" label="Parent Object Reference Field" default="" required="true" description="The Id field (master-detailed/lookup) API name of the parent object used in child object." />
+            <property name="childObjectApiName" type="String" label="Child Object API Name" default="" required="true" description="E.g, OpportunityLineItem or rio_ed__Fee_Line__c" />
+            <property name="childObjectFields" type="String" label="Child Object Fields API Name" default="" required="true" description="Enter the API name of the fields seperated by semicolons to display the list of columns. Please note that Rich Text and Time are not supported." />
+            <property name="childObjectFilterCriteria" type="String" label="Child Record Filter Criteria" description="E.g, RecordTypeId = 'xxxxxx' or Account.Name = 'Acme'." />
+            <property name="sortedBy" type="String" label="Sorted By" default="Name" required="true" description="E.g, Name" />
+            <property name="sortedDirection" type="String" label="Sorted Direction" default="asc" description="E.g, Acsending or Descending. Supported options are: asc,desc." datasource="asc,desc" />
+            
+            <property name="enableNewButton" type="Boolean" label="Show New Button" default="true" description="Show new button for user to create record." />
+            <property name="enableRowViewButton" type="Boolean" label="Show View Button" default="true" description="Show view button for user to view a record." />
+            
+            <property name="enableRowEditButton" type="Boolean" label="Show Edit Button" default="true" description="Show edit button for user to edit a record." />
+            <property name="editFieldSetName" type="String" label="Edit Field Set API Name" description="The Field Set Name used to display on the edit and new record modal."/>
+            <property name="editFormColumnNo" type="Integer" label="Record Edit Form Column Number" default="2" description="The number of fields to be displayed in a row e.g., 2 will allow two fields to display in a row. Supported options are: 1, 2, 3, 4, 6, and 12."/>
+            <property name="editFormSize" type="String" label="Record Edit Form Size" default="small" datasource="small,medium,large,full" description="The modal size for record edit form."/>
+
+            <property name="enableRowDeleteButton" type="Boolean" label="Show Delete Button" default="true" description="Show delete button for user to delete a record." />
+            <property name="enableRowDownloadButton" type="Boolean" label="Show Download Button" default="true" description="Show download button for user to download the file. Only applies when the child object is ContentVersion." />
+            <property name="downloadUrl" type="String" label="Download URL" default="/sfc/servlet.shepherd/version/download/{0}?operationContext=S1" description="The url to download the file. {0} will be replaced by the record id. Only applies when the child object is ContentVersion." />
+            
+            <property name="maxHeight" type="Integer" label="Maximum Height" default="300" description="Maximum height of the component in pixel." />
+            <property name="showRowNumber" type="Boolean" label="Show Row Number" default="true" description="Show sequence number for each row." />
+            <property name="enableInfiniteLoading" type="Boolean" label="Enable Infinite Loading" default="false" description="To enable infinite loading." />
+
+            <property name="rowsToLoad" type="Integer" label="Rows to Load" default="10" description="Rows to Load"/>
+            <property name="noRecordFoundMessage" type="String" label="No Record Found Message" description="Message to show when there is no record found."/>
+
+            <property name="enableClickableRefField" type="Boolean" label="Make reference field clickable" default="true" description="Make master-detail or lookup field clickable to open the record." />
+            <property name="enableRowSelection" type="Boolean" label="Enable multiple row selection" description="Enable checkboxes and allow multiple rows selection." />
+            <property name="enableInlineEditing" type="Boolean" label="Inline Editing" description="Enable inline editing." />
+
+            <property name="refTarget" type="String" label="Reference Target" default="_blank" description="Target for opening reference (lookup) fields. Default is _blank." datasource="_blank,_self,_parent,_top" />
+            <property name="enableRefreshButton" type="Boolean" label="Show Refresh Button" default="true" description="Show refresh button for user to refresh the list." />
+            <property name="enableQuickSearch" type="Boolean" label="Enable Quick Search" description="Enable Quick Search" />
+
+            <property name="tableTextDisplayMode" label="Table Text Display Mode" type="String" default="Clip Text" description="Supported options are: Wrap Text, Clip Text." datasource="Wrap Text,Clip Text"/>
+
+            <property name="enableDebugMode" type="Boolean" label="Debug Mode" description="Enable debug mode." />
+
+            <property name="recordId" type="String" label="Record Id (Reserved for Internal Use)" default="{!recordId}" required="false" description="Record Id." />
+
+
+        </targetConfig>
+        <targetConfig targets="lightning__FlowScreen" configurationEditor="reduivy-custom-single-related-list-configuration-editor">
+            <!--main-->
+            <property name="useSourceCollectionRecords" type="Boolean" label="Records are from flow?" description="Tick if records to display are from flow."/> <!--flow only-->
+            <property name="modalTitle" type="String" label="Title" description="Title."/>
+            <property name="modalIconName" label="Modal Icon Name" type="String" default="standard:sales_path" description="Component modal icon name. Please refer to https://www.lightningdesignsystem.com/icons/ for the supported icons."/>
+            <property name="recordId" type="String" label="Record Id" description="Record Id or system variable {USERID}, {USERCONTACTID}." />
+            
+            <property name="targetRecordIdField" type="String" label="Target Record Id Field" default="" description="The Id field (master-detailed/lookup) API name from the current object to be used in searching related child records based on Parent Object Reference Field."/>
+            <property name="parentObjectRefField" type="String" label="Parent Object Reference Field" default="" description="The Id field (master-detailed/lookup) API name of the parent object used in child object." />
+            <property name="childObjectApiName" type="String" label="Child Object API Name" default="" description="E.g, OpportunityLineItem or rio_ed__Fee_Line__c" />
+            <property name="childObjectFields" type="String" label="Child Object Fields API Name" default="" description="Enter the API name of the fields seperated by semicolons to display the list of columns. Please note that Rich Text and Time are not supported." />
+            <property name="sourceCollection" type="{T[]}" label="Source Collection" role="inputOnly" /> <!--flow only;input-->
+            <property name="childObjectFilterCriteria" type="String" label="Child Record Filter Criteria" description="E.g, RecordTypeId = 'xxxxxx' or Account.Name = 'Acme'." />
+
+            <!--sort-->
+            <property name="sortedBy" type="String" label="Sorted By" default="" description="E.g, Name" />
+            <property name="sortedDirection" type="String" label="Sorted Direction" description="E.g, Acsending or Descending. Supported options are: asc,desc."/>
+
+            <!--action-->
+            <property name="enableNewButton" type="Boolean" label="Show New Button" description="Show new button for user to create record." />
+            <property name="enableRowViewButton" type="Boolean" label="Show View Button" description="Show view button for user to view a record." />
+            <property name="enableRowEditButton" type="Boolean" label="Show Edit Button" description="Show edit button for user to edit a record." />
+            <property name="editFieldSetName" type="String" label="Field Set Name of fields to edit" description="The Field Set Name that store which field to display on the edit page."/>
+            <property name="enableRowDeleteButton" type="Boolean" label="Show Delete Button" description="Show delete button for user to delete a record." />
+            <property name="enableRowDownloadButton" type="Boolean" label="Show Download Button" description="Show download button for user to download the file. Only applies when the child object is ContentVersion." />
+            <property name="downloadUrl" type="String" label="Download URL" default="/sfc/servlet.shepherd/version/download/{0}?operationContext=S1" description="The url to download the file. {0} will be replaced by the record id. Only applies when the child object is ContentVersion." />
+
+            <!--enable-->
+            <property name="showRowNumber" type="Boolean" label="Show Row Number" description="Show sequence number for each row." />
+            <property name="enableInfiniteLoading" type="Boolean" label="Enable Infinite Loading" description="To enable infinite loading." />
+            <property name="enableClickableRefField" type="Boolean" label="Make reference field clickable" description="Make master-detail or lookup field clickable to open the record." />
+            <property name="enableRowSelection" type="Boolean" label="Enable multiple row selection" description="Enable checkboxes and allow multiple rows selection." />
+            <property name="enableInlineEditing" type="Boolean" label="Inline Editing" description="Enable inline editing." />
+            <property name="enableQuickSearch" type="Boolean" label="Enable Quick Search" description="Enable Quick Search" />
+            <property name="enableDebugMode" type="Boolean" label="Debug Mode" description="Enable debug mode."/>
+
+            <!--others-->
+            <property name="maxHeight" type="Integer" label="Maximum Height" description="Maximum height of the component in pixel." />
+            <property name="rowsToLoad" type="Integer" label="Rows to Load" description="Rows to Load. Default is 10."/>
+            <property name="noRecordFoundMessage" type="String" label="No Record Found Message" description="Message to show when there is no record found."/>
+            <property name="refTarget" type="String" label="Reference Target" description="Target for opening reference (lookup) fields. Default is _blank."/>
+            <property name="viewMode" type="String" label="View Mode" default="Related List" description="Display as related list or table only. Supported options are: Related List,Datatable."/>
+
+            <!--flow only-->
+            <propertyType name="T" extends="SObject" label="Input Type" description="Generic sObject data type used for input sObject properties" />
+
+            <property name="tableTextDisplayMode" label="Table Text Display Mode" type="String" default="Clip Text" description="Supported options are: Wrap Text, Clip Text." datasource="Wrap Text,Clip Text"/>
+
+            <!--output-->
+            <property name="selectedRows" type="{T[]}" label="Selected rows" description="The list of record of the selected rows." />
+
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

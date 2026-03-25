@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <description>Continuing Education study offering filters. This is embeded as part of REDU Continuing Edu - Offering Catalog.</description>
+    <isExposed>false</isExposed>
+	<masterLabel>REDU Continuing Edu - Offering Records Filter</masterLabel>
+</LightningComponentBundle>

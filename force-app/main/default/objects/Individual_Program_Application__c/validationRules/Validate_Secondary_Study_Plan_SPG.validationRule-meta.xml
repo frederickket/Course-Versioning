@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Secondary_Study_Plan_SPG</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT(ISBLANK(Secondary_Study_Plan__c)) &amp;&amp;
+Secondary_Study_Plan__r.Study_Program__c != Study_Program__c</errorConditionFormula>
+    <errorDisplayField>Secondary_Study_Plan__c</errorDisplayField>
+    <errorMessage>The Secondary Study Plan must belong to the selected Study Program.</errorMessage>
+</ValidationRule>

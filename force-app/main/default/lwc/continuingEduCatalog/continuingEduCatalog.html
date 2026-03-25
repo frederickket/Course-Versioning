@@ -1,0 +1,59 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div class="continuingeducatalog-content">
+                <c-continuing-edu-filtering 
+                    object-api-name={objectApiName}
+                    background-image-url={backgroundImageUrl}
+                    header-label={headerLabel}
+                    clear-all-filter-label={clearAllFilterLabel}
+                    search-button-label={searchButtonLabel}
+                    global-search-field-api-name={globalSearchFieldApiName}
+                    global-search-box-label={globalSearchBoxLabel}
+                    custom-filter1-active={customFilter1Active}
+                    custom-filter1-label={customFilter1Label}
+                    custom-field1-api-name={customField1ApiName}
+                    custom-filter2-active={customFilter2Active}
+                    custom-filter2-label={customFilter2Label}
+                    custom-field2-api-name={customField2ApiName}
+                    custom-filter3-active={customFilter3Active}
+                    custom-filter3-label={customFilter3Label}
+                    custom-field3-api-name={customField3ApiName}
+                    custom-filter4-active={customFilter4Active}
+                    custom-filter4-label={customFilter4Label}
+                    custom-field4-api-name={customField4ApiName}
+                    oncefiltersupdated={handleCeFiltersUpdate}
+                    enable-debug-mode={enableDebugMode}
+                ></c-continuing-edu-filtering>
+                <c-continuing-edu-listing
+                    object-api-name={objectApiName}
+                    predefined-filters={predefinedFilters}
+                    no-of-records-per-page={noOfRecordsPerPage}
+                    image-field-api-name={imageFieldApiName}
+                    field1-api-name={field1ApiName}
+                    field2-api-name={field2ApiName}
+                    field3-api-name={field3ApiName}
+                    field4-api-name={field4ApiName}
+                    sort-by-field1-api-name={sortByField1ApiName}
+                    sort-by-field2-api-name={sortByField2ApiName}
+                    sort-by-field-label={sortByFieldLabel}
+                    show-more-button-label={showMoreButtonLabel}
+                    filtered-result-found-heading={filteredResultFoundHeading}
+                    search-field-api-name={searchFieldApiName}
+                    search-value={searchValue}
+                    custom-filter-configs={customFilterConfigs}
+                    refresh-records-flag={refreshRecordsFlag}
+                    onrecordsrefreshed={handleRecordsRefreshed}
+                    enable-debug-mode={enableDebugMode}
+                ></c-continuing-edu-listing>
+            </div>
+        </template>
+	</div>
+	
+</template>

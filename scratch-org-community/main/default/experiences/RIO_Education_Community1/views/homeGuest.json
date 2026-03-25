@@ -1,0 +1,132 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:dynamicLayout",
+  "dataProviders" : [ ],
+  "id" : "0c8d9f23-1911-4a8f-9c40-91b4ac328fc3",
+  "label" : "Home (Guest)",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0) url(/sfsites/c/file-asset/reduivy__reduivy__Home_Banner_Guest?v=1) center center /cover",
+        "backgroundOverlay" : "rgba(0, 0, 0, 0.4)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "663356f8-ba4c-4fe2-a888-65c29358e174",
+          "columns" : [ {
+            "UUID" : "e04ffff4-f652-4a96-b15c-fdac4c3036d7",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 350
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "663356f8-ba4c-4fe2-a888-65c29358e174",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><span style=\"color: rgb(255, 255, 255); font-size: 48px;\">Welcome to RIO Education portal!</span></p><p style=\"text-align: center;\"><span style=\"font-size: 16px; color: rgb(255, 255, 255);\">Here you can register for an account, browse courses, and enrol into them. </span></p><p style=\"text-align: center;\"><span style=\"font-size: 16px; color: rgb(255, 255, 255);\">If you have any questions, visit the RIO Education Centre at any time.</span></p><p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><br></p>"
+          },
+          "componentName" : "forceCommunity:richTextInline",
+          "id" : "10db8513-732e-4198-b26c-8e01c3966bbb",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "e04ffff4-f652-4a96-b15c-fdac4c3036d7",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "8c53957e-b7fd-4fdc-8cf2-20ed7783d946",
+          "columns" : [ {
+            "UUID" : "0d9d4da0-cdb7-4e18-a2e5-f6487b494842",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "8c53957e-b7fd-4fdc-8cf2-20ed7783d946",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p><img class=\"sfdcCbImage\" src=\"{!contentAsset.Line.1}\" alt=\"\"></p>"
+          },
+          "componentName" : "forceCommunity:richTextInline",
+          "id" : "51256869-ab3d-4982-b17e-3164bbfc7e1c",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        }, {
+          "componentAttributes" : {
+            "bannerBackgroundColor" : "rgba(0, 159, 185, 0)",
+            "bannerPosition" : "bottom",
+            "bannerSizePercent" : 35,
+            "borderRadius" : 20,
+            "boxShadow" : true,
+            "haveBanner" : true,
+            "iconBackgroundColor" : "rgb(255,255,255)",
+            "iconSize" : "medium",
+            "noImageColor" : "rgb(116,116,116)",
+            "overlay" : "rgba(0, 0, 0, 0.4)",
+            "templateType" : "full",
+            "tileMenuEditor" : "Guest_Navigation_Home",
+            "titleColor" : "",
+            "titleFontSize" : "large",
+            "titleHorizontalAlign" : "right"
+          },
+          "componentName" : "community_navigation:tileMenu",
+          "id" : "d237a379-3e2c-4dde-aba4-24477a7de897",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "0d9d4da0-cdb7-4e18-a2e5-f6487b494842",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "fe842364-e8f9-4ce5-91a1-7b5e940804bc",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "Home"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "f7057379-b6cf-415e-9a35-6e1918298a5c",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "dc620364-e4da-4a73-b762-5cb9289d1454",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "home"
+}

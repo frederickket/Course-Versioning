@@ -1,0 +1,69 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess}
+        onfail={handleLibLoadFail}></c-js-library-loader>
+
+    <div class="component-body slds-is-relative slds-card">
+        <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv">
+            <lightning-spinner alternative-text={label.LOADING_LABEL}></lightning-spinner>
+        </div>
+
+        <div class="study-pathway-unit-content">
+            <template if:true={showUnitContent}>
+                <div class="slds-m-top_medium slds-m-bottom_x-large">
+                    <div class="slds-p-around_medium lgc-bg">
+                        <lightning-tile type="media">
+                            <lightning-icon slot="media" icon-name={tileIcon}></lightning-icon>
+                            <a href={studyUnitOrGrpUrl} target={hrefTargetType}>{tileName}</a>
+                            <c-record-view-form record-id={studyPathwayUnitId}
+                                object-api-name="reduivy__Study_Pathway_Unit__c"
+                                fields={infoFields}
+                                enable-debug-mode={enableDebugMode}>
+                                <lightning-layout class="slds-wrap">
+                                    <template for:each={infoFields} for:item="field">
+                                        <lightning-layout-item key={field} size="12"
+                                            large-device-size="12">
+                                            <c-output-field field-name={field}></c-output-field>
+                                        </lightning-layout-item>
+                                    </template>
+
+                                    <template lwc:if={isGroup}>
+                                        <template if:true={numOfGroupLabel}>
+                                            <lightning-layout-item size="12" large-device-size="12" class="slds-form-element slds-form-element_horizontal">
+                                                <span class="slds-form-element__label">{numOfGroupLabel}</span>
+                                            </lightning-layout-item>
+                                        </template>
+                                    </template>
+
+                                    <template lwc:else>
+                                        <template if:true={requiredSP}>
+                                            <lightning-layout-item size="12" large-device-size="12" class="slds-form-element slds-form-element_horizontal">
+                                                <span class="slds-form-element__label">{label.REQUIRED_FOR_LABEL}</span>
+                                                <div class="slds-form-element__control">{requiredSP}</div>
+                                            </lightning-layout-item>
+                                        </template>
+
+                                        <template if:true={optionalSP}>
+                                            <lightning-layout-item size="12" large-device-size="12" class="slds-form-element slds-form-element_horizontal">
+                                                <span class="slds-form-element__label">{label.OPTIONAL_FOR_LABEL}</span>
+                                                <div class="slds-form-element__control">{optionalSP}</div>
+                                            </lightning-layout-item>
+                                        </template>
+
+                                        <template if:true={applicableSP}>
+                                            <lightning-layout-item size="12" large-device-size="12" class="slds-form-element slds-form-element_horizontal">
+                                                <span class="slds-form-element__label">{label.APPLICABLE_STUDY_PLAN_LABEL}</span>
+                                                <div class="slds-form-element__control">{applicableSP}</div>
+                                            </lightning-layout-item>
+                                        </template>
+                                    </template>
+
+                                </lightning-layout>
+                            </c-record-view-form>
+                        </lightning-tile> 
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+
+</template>

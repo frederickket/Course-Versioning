@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Individual_Session_Enrollment__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Act as the attendance for the related session enrollment.</description>
+    <inlineHelpText>Act as the attendance for the related session enrollment.</inlineHelpText>
+    <label>Individual Session Enrollment</label>
+    <referenceTo>Individual_Session_Enrollment__c</referenceTo>
+    <relationshipLabel>Study Event Relations</relationshipLabel>
+    <relationshipName>Study_Event_Relations</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

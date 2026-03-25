@@ -1,0 +1,141 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:dynamicLayout",
+  "dataProviders" : [ ],
+  "id" : "fc9bf2c6-a2c8-4229-a23a-e03fbdf3c6a6",
+  "label" : "Shopping Cart",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0) url(/sfsites/c/file-asset/reduivy__Short_Courses_Catalog_Banner?v=1) center center /cover",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "2e4be7a7-3e86-426a-ba7d-1d7489d35f84",
+          "columns" : [ {
+            "UUID" : "a3121084-0af7-475a-ae57-89d378f97d51",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "2e4be7a7-3e86-426a-ba7d-1d7489d35f84",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "Replace this text with content of your own."
+          },
+          "componentName" : "forceCommunity:richTextInline",
+          "id" : "b5e89328-6922-43e1-95e9-8523e3af05a6",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        }, {
+          "componentAttributes" : {
+            "richTextValue" : "<p style=\"text-align: center;\"><span style=\"font-size: 48px; color: rgb(255, 255, 255);\">Shopping Cart</span></p>"
+          },
+          "componentName" : "forceCommunity:richTextInline",
+          "id" : "6d91dda6-3c2d-45b1-9ce2-86570ff1a8dd",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "a3121084-0af7-475a-ae57-89d378f97d51",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "5098dc30-d1e9-4454-97e6-7c40be567b12",
+          "columns" : [ {
+            "UUID" : "ad1cf824-7bc8-4380-ac88-5f547415e88b",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "5098dc30-d1e9-4454-97e6-7c40be567b12",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "checkOutButtonLabel" : "Make payment",
+            "clearAllButtonLabel" : "Clear All",
+            "clearAllTransactionLineToastMessage" : "All items for the transaction order were deleted successfully.",
+            "confirmationBoxBody" : "Are you sure you want to delete item?",
+            "confirmationHeader" : "Remove Item",
+            "confirmationNoButtonLabel" : "Cancel",
+            "confirmationYesButtonLabel" : "Confirm",
+            "deleteIconName" : "action:delete",
+            "discountPriceLabel": "Discount",
+            "enableDebugMode" : false,
+            "headerLabel" : "Order #",
+            "iconSize" : "medium",
+            "isQuantityColumnEditable" : true,
+            "modalIconName" : "standard:webcart",
+            "modalTitle" : "Summary",
+            "noTransactionOrderErrorMessage" : "No transaction order available or it has been submitted.",
+            "paramOrderId" : "",
+            "paymentScreenSitePageName" : "Shopping_Cart_Payment_Selection__c",
+            "quantityErrorMessage" : "Kindly enter appropriate quantity!",
+            "removeTransactionLineToastMessage" : "The item was deleted successfully.",
+            "saveErrorMessage" : "Kindly enter appropriate",
+            "subTotalPriceLabel" : "Subtotal",
+            "totalPriceLabel" : "Total Price",
+            "transactionLineFields" : "reduivy__Item_Name__c;reduivy__Quantity__c;reduivy__Unit_Price__c;reduivy__Subtotal__c"
+          },
+          "componentName" : "reduivy:continuingEduCart",
+          "id" : "95f16d24-5bb0-4eeb-9e21-8552d4212a2f",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "ad1cf824-7bc8-4380-ac88-5f547415e88b",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "01d16526-fc90-4813-b0e7-df2aa9974d35",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "Shopping Cart"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "46431fa4-f775-4a00-a45d-51d01dcd0501",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "42ce89b0-2890-4459-b3d8-21fbe26e602c",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "custom-shopping-cart"
+}

@@ -1,0 +1,177 @@
+{
+  "appPageId" : "b15f5f7e-edef-4706-a53f-ec3bdec98b20",
+  "componentName" : "siteforce:dynamicLayout",
+  "dataProviders" : [ ],
+  "id" : "61ab1f0d-ae08-4bb9-896f-a40e09c15eac",
+  "label" : "Short Course Catalog (Student)",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "a66f81ad-06d5-4d45-9fcc-8cc117914054",
+          "columns" : [ {
+            "UUID" : "d1cd5b54-19e5-4fc5-99d0-ffa32c683ff1",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 32
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "a66f81ad-06d5-4d45-9fcc-8cc117914054",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p style=\"text-align:right;color:#444444;\"><b>Logged on as: {!CurrentUser.name} </b></p>"
+          },
+          "componentName" : "forceCommunity:htmlBlock",
+          "id" : "5caa1266-0cc4-4699-b41d-fc55025332dc",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "d1cd5b54-19e5-4fc5-99d0-ffa32c683ff1",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0) url(/sfsites/c/file-asset/reduivy__Short_Courses_Catalog_Banner?v=1) center center /cover",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "fc178b17-4f31-4e38-b8a5-da99e51eaaf6",
+          "columns" : [ {
+            "UUID" : "1cfdabca-6dae-44e4-b303-08a9c5e8c44d",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 200
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "fc178b17-4f31-4e38-b8a5-da99e51eaaf6",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p><br></p><p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><span style=\"color: rgb(255, 255, 255); font-size: 48px;\">Short Course Catalog</span></p><p style=\"text-align: center;\"><span style=\"font-size: 16px; color: rgb(255, 255, 255);\">Explore our catalog of short courses designed to enhance your skills and knowledge. Find the right course to enhance your learning journey</span></p><p style=\"text-align: center;\"><br></p><p style=\"text-align: center;\"><br></p><p> </p>"
+          },
+          "componentName" : "forceCommunity:richTextInline",
+          "id" : "7115c55b-32d3-4465-affa-c646133635b7",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "1cfdabca-6dae-44e4-b303-08a9c5e8c44d",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "background" : "background: rgba(0,0,0,0)",
+        "backgroundOverlay" : "rgba(0,0,0,0.5)",
+        "contentAreaWidth" : 100,
+        "sectionConfig" : {
+          "UUID" : "fb828b81-5dfe-4bf1-a151-ef0451cebb8d",
+          "columns" : [ {
+            "UUID" : "5fbe6c89-224d-45cf-92d8-e6190ec29c79",
+            "columnKey" : "1",
+            "columnName" : "Column 1",
+            "columnWidth" : "12",
+            "seedComponents" : [ ]
+          } ]
+        },
+        "sectionHeight" : 300
+      },
+      "componentName" : "forceCommunity:section",
+      "id" : "fb828b81-5dfe-4bf1-a151-ef0451cebb8d",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "backgroundImageUrl" : "https://data-drive-9693-dev-ed.scratch.file.force.com/sfc/dist/version/download/?oid=00D9j000003plkj&ids=0689j000004pWQ9&d=%2Fa%2F9j000000PtCb%2F_t5q2KKnYFWZ0OXGMZfj3AH2a_BVrVCV5Mq0M4XUOe4&asPdf=false",
+            "clearAllFilterLabel" : "Clear All",
+            "customField1ApiName" : "reduivy__Delivery_Method__c",
+            "customField2ApiName" : "reduivy__Field_of_Study__c",
+            "customField3ApiName" : "reduivy__Scheduled_Duration_Unit__c",
+            "customField4ApiName" : "",
+            "customFilter1Active" : true,
+            "customFilter1Label" : "Delivery method",
+            "customFilter2Active" : true,
+            "customFilter2Label" : "Field of study",
+            "customFilter3Active" : true,
+            "customFilter3Label" : "Scheduled Duration Unit",
+            "customFilter4Active" : false,
+            "customFilter4Label" : "",
+            "enableDebugMode" : false,
+            "field1ApiName" : "Name",
+            "field2ApiName" : "reduivy__Delivery_Method__c",
+            "field3ApiName" : "reduivy__Field_of_Study__c",
+            "field4ApiName" : "reduivy__Offering_Type__c",
+            "filteredResultFoundHeading" : "Result",
+            "globalSearchBoxLabel" : "Search All",
+            "globalSearchFieldApiName" : "Name,reduivy__Delivery_Method__c,reduivy__Campus__c,reduivy__Academic_Term__c",
+            "imageFieldApiName" : "reduivy__Listing_Image_URL__c",
+            "noOfRecordsPerPage" : 12,
+            "objectApiName" : "reduivy__Study_Offering__c",
+            "searchButtonLabel" : "Search",
+            "showMoreButtonLabel" : "Show More",
+            "sortByField1ApiName" : "Name",
+            "sortByField2ApiName" : "reduivy__Offering_Type__c",
+            "sortByFieldLabel" : "Sort By"
+          },
+          "componentName" : "reduivy:continuingEduCatalog",
+          "id" : "a718bbaf-c1a1-4f03-b771-a22ac7317cf9",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "5fbe6c89-224d-45cf-92d8-e6190ec29c79",
+        "regionLabel" : "Column 1",
+        "regionName" : "1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "4ae516e9-6850-49e7-8eb6-897997907c7d",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "Short Course Catalog"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "73d4ee17-2ec3-4326-ba74-5fed23a6787c",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "bdb75358-b3c0-4137-9307-75c7416ffd05",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Tnmg3xEoH6s4JlNccMV3OMgU9ImCsA",
+  "type" : "view",
+  "viewType" : "custom-short-course-catalog"
+}

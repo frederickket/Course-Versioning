@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Enable_RIO_Education__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Indicates that the app is enabled. This is used to enable/disable trigger controllers.</description>
+    <inlineHelpText>Indicates that the app is enabled. This is used to enable/disable trigger controllers.</inlineHelpText>
+    <label>Enable RIO Education</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

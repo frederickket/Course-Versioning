@@ -1,0 +1,52 @@
+<template>
+        <lightning-layout>
+            <template lwc:if={isIgiType}>
+                <lightning-layout-item size="10">
+                    <template lwc:if={showStatus}>
+                        <div class="slds-p-around_xx-small cell-status">
+                            <lightning-formatted-text value={displayedStatus}></lightning-formatted-text>
+                        </div>
+                    </template>
+                    <template lwc:elseif={isNumericalDisplayType}>
+                        <lightning-input type="number"
+                            variant="label-hidden" value={igiOriginalValue} onchange={handleNumericalValueChange} disabled={isGradeLocked}
+                        ></lightning-input>
+                    </template>
+                    <template lwc:elseif={isLetterDisplayType}>
+                        <lightning-combobox 
+                            name="letterPicklist" variant="label-hidden" value={igiOriginalValue} options={letterOptions} onchange={handleLetterValueChange} disabled={isGradeLocked}
+                        ></lightning-combobox>
+                    </template>
+                </lightning-layout-item>
+                <lightning-layout-item size="2">
+                    <lightning-button-menu class="slds-p-left_xx-small slds-p-top_xx-small" menu-alignment="auto" icon-size="x-small" onselect={handleGradeMenuSelect}>
+                        <!--only show grade item status if in unlocked stage-->
+                        <template if:false={isGradeLocked}>
+                            <lightning-menu-subheader label="Status"></lightning-menu-subheader>
+                            <template lwc:if={showStatus}>
+                                <lightning-menu-item value="" label={label.CLEAR_LABEL} icon-name="utility:close"></lightning-menu-item>
+                            </template>
+                            <template for:each={igiStatusList} for:item="igiStatus">
+                                <lightning-menu-item key={igiStatus.value} value={igiStatus.value} label={igiStatus.label}></lightning-menu-item>
+                            </template>
+                        </template>
+
+                        <lightning-menu-subheader label={label.ACTION_LABEL}></lightning-menu-subheader>
+                        <lightning-menu-item if:true={individualGradeItemNotesFieldSetName} value={ADD_NOTES_BUTTON} label={label.ADD_NOTES_LABEL}></lightning-menu-item>
+                    </lightning-button-menu>
+                </lightning-layout-item>
+            </template>
+            <template lwc:elseif={isIgdType}>
+                <lightning-layout-item size="12">
+                    <c-custom-form-field
+                        field-obj={customField}
+                        sobj-record={studentWrapper.igd}
+                        hide-label={hideCustomFieldLabel}
+                        disabled={isGradeLocked}
+                        enable-debug-mode={enableDebugMode}
+                        onfieldchange={handleIgdValueChange}
+                    ></c-custom-form-field>
+                </lightning-layout-item>
+            </template>
+        </lightning-layout>
+</template>

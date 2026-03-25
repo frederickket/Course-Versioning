@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+	<description>Continuing Education study offering header with register button.</description>
+    <isExposed>true</isExposed>
+	<masterLabel>REDU Continuing Edu - Offering Record Header</masterLabel>
+	<targets>
+		<target>lightning__RecordPage</target>
+		<target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+	</targets>
+	<targetConfigs>
+		<targetConfig targets="lightning__RecordPage">
+			
+			<property name="titleFieldApiName" type="String" label="Title Field Name" description="Enter a Text field API name e.g. Name, this will display the value as title of the Study Offering header."/>
+			<property name="imageFieldApiName" type="String" label="Image Field Name" description="Field api name for the header image, add image of resolution 1880 x 400 pixels."/>
+			
+			<property name="detailShowTitle" label="Show Title" type="Boolean" default="false" description="Show title for the details."/>
+			<property name="detailTitle" type="String" label="Header for Detail" description="Enter a value to display as title to define unit related information e.g. Registration details, registration detail values from the record will be shown below this."/>
+			<property name="detailShowIcon" label="Show Icon" type="Boolean" default="false" description="Show icon for the title."/>
+			<property name="detailIconName" type="String" label="Icon Name" description="To display an icon for the details displayed enter the salesforce utlity icon name e.g. utility:weeklyview"/>
+			<property name="detailFieldNames" type="String" label="Field Names" description="Add semicolon seperated field API name to display details for an object."/>
+			<property name="detailShowFieldLabel" type="Boolean" label="Show Field Label" description="Check box on the component, if true then the field label on the fields to be visible"/>
+			
+			<property name="backButtonLabel" label="Back to Filtering List Button Label" type="String"  description="Enter the value which will be displayed as label of back to list button."/>
+			<property name="backButtonSitePageName" type="String" label="Back To Site Page Name" description="Enter the name of the site page which is used for redirecting back to the origin page."/>
+
+			<property name="allowGuestRegistrationFieldApiName" label="Allow Guest Registrations Field Name" type="String"  description="To enter the Api name of Allow Guest Registrations Checkbox "/>
+			<property name="guestRegistrationText" label="Guest Registration Text" type="String" description="To enter guest registrations text."/>
+			<property name="nonGuestRegistrationText" label="Non-guest Registration Text" type="String"  description="To enter non-guest registrations text"/>
+			<property name="guestRegistrationButtonLabel" label="Guest Registration Button Text" type="String" description="To enter guest registrations button text."/>
+			<property name="nonGuestRegistrationButtonLabel" label="Non Guest Registration Button Text" type="String"  description="To enter non-guest registrations button text"/>
+			<property name="registrationUrl" label="Registration URL" type="String"  description="To enter the redirect url for registration. You can specify the {!recordId} to have the current record id appended to the url e.g, /registration/id={!recordId}."/>
+			<property name="registerButtonLabel" label="Register Now Button Label" type="String"  description="Enter the value which will be displayed as label of register now button"/>
+			<property name="registerButtonConditionFieldApiName" label="Register Button Condition Field Name" type="String"  description="This field will be used to enable or disable registration button. If it is set to true then registration button will be disabled and if false then registration button will be enabled."/>		
+			
+			<property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+		</targetConfig>
+		<targetConfig targets="lightningCommunity__Default">
+			<property name="objectApiName" type="String" label="Object Name" description="Automatically bind the page's object name to the component variable" default="{!objectApiName}" />
+			<property name="recordId" type="String" label="Record Id" default="{!recordId}" description="ID of the salesforce record for which the record details are to be displayed e.g. {!recordId}"/>
+			
+			<property name="titleFieldApiName" type="String" label="Title Field Name" description="Enter a Text field API name e.g. Name, this will display the value as title of the Study Offering header."/>
+			<property name="imageFieldApiName" type="String" label="Image Field Name" description="Field api name for the header image, add image of resolution 1880 x 400 pixels."/>
+			
+			<property name="detailShowTitle" label="Show Title" type="Boolean" default="false" description="Show title for the details."/>
+			<property name="detailTitle" type="String" label="Header for Detail" description="Enter a value to display as title to define unit related information e.g. Registration details, registration detail values from the record will be shown below this."/>
+			<property name="detailShowIcon" label="Show Icon" type="Boolean" default="false" description="Show icon for the title."/>
+			<property name="detailIconName" type="String" label="Icon Name" description="To display an icon for the details displayed enter the salesforce utlity icon name e.g. utility:weeklyview"/>
+			<property name="detailFieldNames" type="String" label="Field Names" description="Add semicolon seperated field API name to display details for an object."/>
+			<property name="detailShowFieldLabel" type="Boolean" label="Show Field Label" description="Check box on the component, if true then the field label on the fields to be visible"/>
+			
+			<property name="backButtonLabel" label="Back to Filtering List Button Label" type="String"  description="Enter the value which will be displayed as label of back to list button."/>
+			<property name="backButtonSitePageName" type="String" label="Back To Site Page Name" description="Enter the name of the site page which is used for redirecting back to the origin page."/>
+			
+			<property name="allowGuestRegistrationFieldApiName" label="Allow Guest Registrations Field Name" type="String"  description="To enter the Api name of Allow Guest Registrations Checkbox "/>
+			<property name="guestRegistrationText" label="Guest Registration Text" type="String" description="To enter guest registrations text."/>
+			<property name="nonGuestRegistrationText" label="Non-guest Registration Text" type="String"  description="To enter non-guest registrations text"/>
+			<property name="guestRegistrationButtonLabel" label="Guest Registration Button Text" type="String" description="To enter guest registrations button text."/>
+			<property name="nonGuestRegistrationButtonLabel" label="Non Guest Registration Button Text" type="String"  description="To enter non-guest registrations button text"/>
+			<property name="registrationUrl" label="Registration URL" type="String"  description="To enter the redirect url for registration. You can specify the {!recordId} to have the current record id appended to the url e.g, /registration/id={!recordId}."/>
+			<property name="registerButtonLabel" label="Register Now Button Label" type="String"  description="Enter the value which will be displayed as label of register now button"/>
+			<property name="registerButtonConditionFieldApiName" label="Register Button Condition Field Name" type="String"  description="This field will be used to enable or disable registration button. If it is set to true then registration button will be disabled and if false then registration button will be enabled."/>		
+			
+			<property name="enableDebugMode" label="Debug Mode" type="Boolean" default="false" description="Enable debug mode."/>
+		</targetConfig> 
+	</targetConfigs>
+</LightningComponentBundle>

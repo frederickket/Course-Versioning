@@ -1,0 +1,12 @@
+.slds-modal__content {
+    overflow: visible;
+    overflow-y: visible;
+}
+
+.submitFormHidden, .submitApproveFormHidden {
+    display: none;
+}
+
+.field-label {
+    font-weight: bold;
+}

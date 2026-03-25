@@ -1,0 +1,89 @@
+<template>
+    <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+	
+	<div class="component-body slds-is-relative">
+		<div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+            <lightning-spinner alternative-text={label.LOADING_LABEL} ></lightning-spinner>
+        </div>
+		
+        <template if:true={isInitSuccess}>
+            <div if:false={hideOutputField} class="outputfield-content">
+                <div class={fieldCssClass}>
+                    <template if:false={hideLabel}>
+                        <span class="slds-form-element__label outputfield-label">{fieldLabel}</span>
+                        <template lwc:if={fieldHelpText}>
+                            <lightning-helptext content={fieldHelpText}></lightning-helptext>
+                        </template>
+                    </template>
+                    
+                    <div class="slds-form-element__control outputfield-value">
+                        
+                        <div class="slds-form-element__static">
+                            <template lwc:if={isBooleanField}>
+                                <lightning-input type="checkbox" name={fieldName} checked={actualDisplayValue} variant="label-hidden" disabled></lightning-input>
+                            </template>
+                            <template lwc:elseif={isDateField}>
+                                <lightning-formatted-date-time 
+                                name={fieldName} value={actualDisplayValue} date-style="short" time-zone="UTC"
+                                ></lightning-formatted-date-time>
+                            </template>
+                            <template lwc:elseif={isDateTimeField}>
+                                <lightning-formatted-date-time
+                                    name={fieldName} value={actualDisplayValue}
+                                    year="numeric" month="numeric" day="numeric" hour="numeric" minute="2-digit" time-zone={timezone}></lightning-formatted-date-time>
+                            </template>
+                            <template lwc:elseif={isTimeField}>
+                                <lightning-formatted-date-time 
+                                    name={fieldName} value={actualDisplayValue}
+                                    hour="numeric" minute="2-digit"
+                                ></lightning-formatted-date-time>
+                            </template>
+                            <template lwc:elseif={isDecimalField}>
+                                <template lwc:if={fractionDigits}>
+                                    <lightning-formatted-number name={fieldName} value={actualDisplayValue} minimum-fraction-digits={fractionDigits} maximum-fraction-digits={fractionDigits}></lightning-formatted-number>
+                                </template>
+                                <template lwc:else>
+                                    <lightning-formatted-number name={fieldName} value={actualDisplayValue}></lightning-formatted-number>
+                                </template>
+                            </template>
+                            <template lwc:elseif={isCurrencyField}>
+                                <template lwc:if={fractionDigits}>
+                                    <lightning-formatted-number name={fieldName} value={actualDisplayValue} format-style="currency" currency-code={currencyCode} minimum-fraction-digits={fractionDigits} maximum-fraction-digits={fractionDigits}></lightning-formatted-number>
+                                </template>
+                                <template lwc:else>
+                                    <lightning-formatted-number name={fieldName} value={actualDisplayValue} format-style="currency" currency-code={currencyCode}></lightning-formatted-number>
+                                </template>
+                            </template>
+                            <template lwc:elseif={isPercentField}>
+                                <template lwc:if={fractionDigits}>
+                                    <lightning-formatted-number name={fieldName} value={actualDisplayValue} format-style="percent" minimum-fraction-digits={fractionDigits} maximum-fraction-digits={fractionDigits}></lightning-formatted-number>
+                                </template>
+                                <template lwc:else>
+                                    <lightning-formatted-number name={fieldName} value={actualDisplayValue} format-style="percent"></lightning-formatted-number>
+                                </template>
+                            </template>
+                            <template lwc:elseif={isEmailField}>
+                                <lightning-formatted-email name={fieldName} value={actualDisplayValue}></lightning-formatted-email>
+                            </template>
+                            <template lwc:elseif={isPhoneField}>
+                                <lightning-formatted-phone name={fieldName} value={actualDisplayValue}></lightning-formatted-phone>
+                            </template>
+                            <template lwc:elseif={isReferenceField}>
+                                <lightning-formatted-url name={fieldName} label={actualDisplayValue} value={fieldValueLink}></lightning-formatted-url>
+                            </template>
+                            <template lwc:else>
+                                <lightning-formatted-rich-text name={fieldName} value={actualDisplayValue}></lightning-formatted-rich-text>
+                            </template>
+                        </div>
+
+                        <!--the button icon (if the output field is displayed as record details)-->
+                        <template lwc:if={showPencilIcon}>
+                            <lightning-button-icon icon-name="utility:edit" variant="bare" class="slds-button slds-button_icon" onclick={handlePencilClick}></lightning-button-icon>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </template>
+	</div>
+	
+</template>

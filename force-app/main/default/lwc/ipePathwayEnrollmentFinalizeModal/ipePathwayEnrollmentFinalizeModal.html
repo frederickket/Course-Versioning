@@ -1,0 +1,29 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+    <lightning-modal-body>
+        <c-js-library-loader modules={modules} enable-debug-mode={enableDebugMode} onsuccess={handleLibLoadSuccess} onfail={handleLibLoadFail} ></c-js-library-loader>
+        
+        <div class="component-body slds-is-relative slds-card">
+            <div if:true={isLoading} id="spinnerDiv" data-id="spinnerDiv" >
+                <lightning-spinner alternative-text={loadingLabel} ></lightning-spinner>
+            </div>
+            
+            <template if:true={isInitSuccess}>
+                <div class="ipepathwayenrollmentfinalizationmodal-body">
+                    <template if:true={canRenderFlow}>
+                        <lightning-flow
+                            flow-api-name={flowName}
+                            flow-input-variables={inputVariables}
+                            flow-finish-behavior={flowFinishBehavior}
+                            onstatuschange={handleStatusChange}
+                        >
+                        </lightning-flow>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer if:true={showCloseButton}>
+        <lightning-button variant="neutral" onclick={handleClose} label={closeButtonLabel}></lightning-button>
+    </lightning-modal-footer>
+</template>

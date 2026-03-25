@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Field_Type__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Describe what kind of data the aggregated field will have (this is to prevent possible fatal error in cases such as when attempting to zero the field and the field is of Date type)</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <label>Field Type</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>DATE</fullName>
+                <default>true</default>
+                <label>DATE</label>
+            </value>
+            <value>
+                <fullName>CURRENCY</fullName>
+                <default>false</default>
+                <label>CURRENCY</label>
+            </value>
+            <value>
+                <fullName>INTEGER</fullName>
+                <default>false</default>
+                <label>INTEGER</label>
+            </value>
+            <value>
+                <fullName>DECIMAL</fullName>
+                <default>false</default>
+                <label>DECIMAL</label>
+            </value>
+            <value>
+                <fullName>NUMERIC</fullName>
+                <default>false</default>
+                <label>(Obsolete) NUMERIC</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

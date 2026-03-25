@@ -1,0 +1,24 @@
+.component-body {
+    
+}
+
+.clickable-title {
+    
+}
+
+.non-clickable-title {
+    cursor: unset;
+    color: unset;
+}
+
+.record-bar-color {
+    background-color: var(--tile-bar-color);
+}
+
+.truncate-button {
+    max-width: 100%;
+}
+
+.truncate-div {
+    max-width: 100%;
+}
