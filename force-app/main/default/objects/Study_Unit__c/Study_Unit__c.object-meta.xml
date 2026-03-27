@@ -130,7 +130,7 @@
         <actionName>View</actionName>
         <comment>Action override created by Lightning App Builder during activation.</comment>
         <content>Study_Unit_Record_Page</content>
-        <formFactor>Large</formFactor>
+        <formFactor>Small</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>Flexipage</type>
     </actionOverrides>
@@ -138,7 +138,7 @@
         <actionName>View</actionName>
         <comment>Action override created by Lightning App Builder during activation.</comment>
         <content>Study_Unit_Record_Page</content>
-        <formFactor>Small</formFactor>
+        <formFactor>Large</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>Flexipage</type>
     </actionOverrides>
@@ -149,6 +149,7 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>Default_Compact_Layout</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
     <description>The unit of study offered in an educational institution.</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
@@ -163,7 +164,6 @@
     <label>Study Unit</label>
     <nameField>
         <label>Study Unit Name</label>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Text</type>
     </nameField>

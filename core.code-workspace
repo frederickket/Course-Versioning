@@ -1,0 +1,19 @@
+{
+  "folders": [
+    {
+      "path": "c:/Users/Frederick Ket/Desktop/RIO-Education-V4-new"
+    }
+  ],
+  "settings": {
+    "eslint.workingDirectories": [
+      "c:/Users/Frederick Ket/Desktop/RIO-Education-V4-new"
+    ],
+    "eslint.validate": [
+      "javascript",
+      "typescript"
+    ],
+    "eslint.options": {
+      "overrideConfigFile": "c:\\Users\\Frederick Ket\\Desktop\\RIO-Education-V4-new\\.eslintrc.json"
+    }
+  }
+}

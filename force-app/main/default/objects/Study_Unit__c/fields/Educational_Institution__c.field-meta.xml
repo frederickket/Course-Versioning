@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Educational_Institution__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
-    <externalId>false</externalId>
+    <deprecated>false</deprecated>
     <label>Educational Institution</label>
     <lookupFilter>
         <active>true</active>
@@ -18,7 +18,6 @@
     <relationshipLabel>Study Units</relationshipLabel>
     <relationshipName>Study_Units</relationshipName>
     <required>false</required>
-    <trackFeedHistory>false</trackFeedHistory>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Lookup</type>

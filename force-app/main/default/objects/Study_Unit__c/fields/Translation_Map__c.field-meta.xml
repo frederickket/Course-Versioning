@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Translation_Map__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
     <description>Stores the translated values for defined fields in multiple languages.</description>
     <inlineHelpText>Stores the translated values for defined fields in multiple languages.</inlineHelpText>
     <label>Translation Map</label>
