@@ -1,0 +1,124 @@
+<template>
+    <lightning-card title="CO-PO Mapping" icon-name="standard:education">
+
+        <!-- Loading spinner -->
+        <template lwc:if={isLoading}>
+            <div class="slds-p-around_large slds-text-align_center">
+                <lightning-spinner alternative-text="Loading CO-PO Mapping..." size="medium"></lightning-spinner>
+            </div>
+        </template>
+
+        <!-- Error state -->
+        <template lwc:if={hasError}>
+            <div class="slds-p-around_medium">
+                <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+                    <span class="slds-assistive-text">Error</span>
+                    <lightning-icon icon-name="utility:error" alternative-text="Error" size="x-small"
+                        class="slds-m-right_x-small"></lightning-icon>
+                    <h2>{errorMessage}</h2>
+                </div>
+            </div>
+        </template>
+
+        <!-- No data state -->
+        <template lwc:if={hasNoData}>
+            <div class="slds-p-around_medium slds-text-align_center slds-text-color_weak">
+                <p>No Course Outcomes or Program Outcomes found.</p>
+            </div>
+        </template>
+
+        <!-- Matrix table -->
+        <template lwc:if={hasData}>
+            <div class="slds-p-around_small">
+
+                <!-- + PO button — placed directly above the table so it is always visible -->
+                <div class="slds-m-bottom_x-small slds-text-align_right">
+                    <lightning-button
+                        label="+ PO"
+                        onclick={handleAddPo}
+                    ></lightning-button>
+                </div>
+
+                <div class="slds-scrollable_x">
+                    <table class="slds-table slds-table_bordered slds-table_col-bordered slds-table_striped co-po-table">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <!-- CO column header -->
+                                <th scope="col" class="slds-text-align_left slds-theme_shade co-col">
+                                    <span class="slds-truncate slds-text-title_bold slds-p-horizontal_x-small">CO</span>
+                                </th>
+                                <!-- BT Level column header -->
+                                <th scope="col" class="slds-text-align_center slds-theme_shade bt-col">
+                                    <span class="slds-truncate slds-text-title_bold">BT Level</span>
+                                </th>
+                                <!-- PO header columns -->
+                                <template for:each={poHeaders} for:item="ph">
+                                    <th key={ph.id} scope="col"
+                                        class="slds-text-align_center slds-theme_inverse po-col"
+                                        title={ph.name}>
+                                        <span class="slds-truncate">{ph.label}</span>
+                                    </th>
+                                </template>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={matrixRows} for:item="row">
+                                <tr key={row.id}>
+                                    <!-- CO row label -->
+                                    <td class="slds-theme_shade" title={row.name}>
+                                        <span class="slds-truncate slds-text-title_bold slds-p-horizontal_x-small">{row.label}</span>
+                                    </td>
+                                    <!-- BT Level -->
+                                    <td class="slds-text-align_center slds-theme_shade">
+                                        <lightning-badge label={row.btLevel}></lightning-badge>
+                                    </td>
+                                    <!-- Weight cells — lightning-input handles LWC reactivity correctly -->
+                                    <template for:each={row.cells} for:item="cell">
+                                        <td key={cell.key} class="slds-text-align_center slds-p-around_xx-small">
+                                            <lightning-input
+                                                type="number"
+                                                variant="label-hidden"
+                                                min="0"
+                                                max="5"
+                                                step="1"
+                                                value={cell.weight}
+                                                data-coid={cell.coId}
+                                                data-poid={cell.poId}
+                                                data-key={cell.key}
+                                                onchange={handleWeightChange}
+                                                class="weight-input"
+                                            ></lightning-input>
+                                        </td>
+                                    </template>
+                                </tr>
+                            </template>
+                        </tbody>
+                        <!-- -PO footer row -->
+                        <tfoot>
+                            <tr>
+                                <td class="slds-theme_shade"></td>
+                                <td class="slds-theme_shade"></td>
+                                <template for:each={poHeaders} for:item="ph">
+                                    <td key={ph.id} class="slds-text-align_center slds-p-around_xx-small">
+                                        <lightning-button
+                                            label="-PO"
+                                            variant="destructive-text"
+                                            data-poid={ph.id}
+                                            onclick={handleRemovePo}
+                                        ></lightning-button>
+                                    </td>
+                                </template>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <!-- Legend -->
+                <div class="slds-m-top_small slds-text-body_small slds-text-color_weak">
+                    Weight values: 0 (no contribution) to 5 (highest contribution). Changes are saved automatically.
+                </div>
+            </div>
+        </template>
+
+    </lightning-card>
+</template>

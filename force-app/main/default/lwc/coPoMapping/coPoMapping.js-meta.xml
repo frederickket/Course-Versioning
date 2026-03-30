@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+    </targets>
+    <targetConfigs>
+        <!--
+            Record page: restrict to Study Unit Version records only.
+            studyUnitVersionId is auto-set from recordId — no manual entry needed.
+            studyProgramVersionId is optional to narrow down which POs are shown.
+        -->
+        <targetConfig targets="lightning__RecordPage">
+            <objects>
+                <object>Study_Unit_Version__c</object>
+            </objects>
+            <property
+                name="studyProgramVersionId"
+                type="String"
+                label="Study Program Version Id (optional)"
+                description="Leave blank to show all Program Outcomes. Set to a Study Program Version Id to filter."
+            />
+        </targetConfig>
+
+        <!--
+            App Page / Home Page: both IDs must be set manually.
+        -->
+        <targetConfig targets="lightning__AppPage,lightning__HomePage">
+            <property
+                name="studyUnitVersionId"
+                type="String"
+                label="Study Unit Version Id"
+                description="Filter Course Outcomes by this Study Unit Version record Id. Leave blank to show all."
+            />
+            <property
+                name="studyProgramVersionId"
+                type="String"
+                label="Study Program Version Id (optional)"
+                description="Leave blank to show all Program Outcomes. Set to a Study Program Version Id to filter."
+            />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

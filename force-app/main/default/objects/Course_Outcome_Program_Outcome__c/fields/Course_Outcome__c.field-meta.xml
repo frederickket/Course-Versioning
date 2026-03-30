@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Course_Outcome__c</fullName>
-    <deleteConstraint>SetNull</deleteConstraint>
+    <deleteConstraint>Restrict</deleteConstraint>
     <label>Course Outcome</label>
     <referenceTo>Course_Outcome__c</referenceTo>
-    <relationshipLabel>Course Outcomes - Program Outcomes</relationshipLabel>
-    <relationshipName>Course_Outcomes_Program_Outcomes</relationshipName>
-    <required>false</required>
+    <relationshipLabel>Course Outcome Program Outcomes</relationshipLabel>
+    <relationshipName>Course_Outcome_Program_Outcomes</relationshipName>
+    <required>true</required>
     <trackTrending>false</trackTrending>
     <type>Lookup</type>
 </CustomField>

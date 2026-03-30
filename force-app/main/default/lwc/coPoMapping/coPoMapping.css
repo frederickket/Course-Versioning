@@ -1,0 +1,16 @@
+/* Prevent column squish on wide matrices — not available as an SLDS utility */
+.co-po-table {
+    min-width: max-content;
+}
+
+/* Minimum column widths */
+.co-col  { min-width: 7rem; }
+.bt-col  { min-width: 6rem; }
+.po-col  { min-width: 4rem; }
+
+/* Compact lightning-input inside table cells */
+.weight-input {
+    width: 4rem;
+    display: block;
+    margin: 0 auto;
+}
