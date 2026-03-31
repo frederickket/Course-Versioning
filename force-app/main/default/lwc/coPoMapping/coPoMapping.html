@@ -31,7 +31,7 @@
         <template lwc:if={hasData}>
             <div class="slds-p-around_small">
 
-                <!-- + PO button — placed directly above the table so it is always visible -->
+                <!-- + PO button above the table -->
                 <div class="slds-m-bottom_x-small slds-text-align_right">
                     <lightning-button
                         label="+ PO"
@@ -40,23 +40,24 @@
                 </div>
 
                 <div class="slds-scrollable_x">
-                    <table class="slds-table slds-table_bordered slds-table_col-bordered slds-table_striped co-po-table">
+                    <table class="slds-table slds-table_bordered slds-table_col-bordered co-po-table">
                         <thead>
                             <tr class="slds-line-height_reset">
-                                <!-- CO column header -->
-                                <th scope="col" class="slds-text-align_left slds-theme_shade co-col">
-                                    <span class="slds-truncate slds-text-title_bold slds-p-horizontal_x-small">CO</span>
-                                </th>
-                                <!-- BT Level column header -->
-                                <th scope="col" class="slds-text-align_center slds-theme_shade bt-col">
-                                    <span class="slds-truncate slds-text-title_bold">BT Level</span>
+                                <!-- CO/PO corner header -->
+                                <th scope="col" class="slds-text-align_left cell-header co-col">
+                                    <span class="slds-truncate slds-text-title_bold slds-p-horizontal_x-small">CO/PO</span>
                                 </th>
                                 <!-- PO header columns -->
                                 <template for:each={poHeaders} for:item="ph">
                                     <th key={ph.id} scope="col"
-                                        class="slds-text-align_center slds-theme_inverse po-col"
+                                        class="slds-text-align_center cell-header po-col"
                                         title={ph.name}>
-                                        <span class="slds-truncate">{ph.label}</span>
+                                        <a class="slds-truncate po-link"
+                                           data-id={ph.id}
+                                           data-type="po"
+                                           onclick={handleRecordNavigate}
+                                           onmouseenter={handleRecordMouseenter}
+                                           onmouseleave={handleRecordMouseleave}>{ph.label}</a>
                                     </th>
                                 </template>
                             </tr>
@@ -64,17 +65,41 @@
                         <tbody>
                             <template for:each={matrixRows} for:item="row">
                                 <tr key={row.id}>
-                                    <!-- CO row label -->
-                                    <td class="slds-theme_shade" title={row.name}>
-                                        <span class="slds-truncate slds-text-title_bold slds-p-horizontal_x-small">{row.label}</span>
+                                    <!-- CO row label (grey) with inline edit/delete -->
+                                    <td class="cell-header" title={row.name}>
+                                        <div class="co-cell-content">
+                                            <a class="slds-text-title_bold co-link"
+                                               data-id={row.id}
+                                               data-type="co"
+                                               onclick={handleRecordNavigate}
+                                               onmouseenter={handleRecordMouseenter}
+                                               onmouseleave={handleRecordMouseleave}>{row.label}</a>
+                                            <div class="co-actions">
+                                                <lightning-button-icon
+                                                    icon-name="utility:edit"
+                                                    variant="bare"
+                                                    size="medium"
+                                                    alternative-text="Edit"
+                                                    title="Edit Course Outcome"
+                                                    data-id={row.id}
+                                                    onclick={handleEditCo}
+                                                ></lightning-button-icon>
+                                                <lightning-button-icon
+                                                    icon-name="utility:delete"
+                                                    variant="bare"
+                                                    size="medium"
+                                                    alternative-text="Delete"
+                                                    title="Delete Course Outcome"
+                                                    data-id={row.id}
+                                                    onclick={handleDeleteCo}
+                                                    class="icon-delete"
+                                                ></lightning-button-icon>
+                                            </div>
+                                        </div>
                                     </td>
-                                    <!-- BT Level -->
-                                    <td class="slds-text-align_center slds-theme_shade">
-                                        <lightning-badge label={row.btLevel}></lightning-badge>
-                                    </td>
-                                    <!-- Weight cells — lightning-input handles LWC reactivity correctly -->
+                                    <!-- Weight cells -->
                                     <template for:each={row.cells} for:item="cell">
-                                        <td key={cell.key} class="slds-text-align_center slds-p-around_xx-small">
+                                        <td key={cell.key} class={cell.cellClass}>
                                             <lightning-input
                                                 type="number"
                                                 variant="label-hidden"
@@ -93,11 +118,15 @@
                                 </tr>
                             </template>
                         </tbody>
-                        <!-- -PO footer row -->
+                        <!-- Footer row: +CO button + -PO buttons + empty actions cell -->
                         <tfoot>
                             <tr>
-                                <td class="slds-theme_shade"></td>
-                                <td class="slds-theme_shade"></td>
+                                <td class="cell-header slds-p-around_xx-small">
+                                    <lightning-button
+                                        label="+ CO"
+                                        onclick={handleAddCo}
+                                    ></lightning-button>
+                                </td>
                                 <template for:each={poHeaders} for:item="ph">
                                     <td key={ph.id} class="slds-text-align_center slds-p-around_xx-small">
                                         <lightning-button
@@ -116,9 +145,22 @@
                 <!-- Legend -->
                 <div class="slds-m-top_small slds-text-body_small slds-text-color_weak">
                     Weight values: 0 (no contribution) to 5 (highest contribution). Changes are saved automatically.
+                    <span class="legend-warning slds-m-left_x-small">&#9632; Unconfigured weight</span>
                 </div>
             </div>
         </template>
 
     </lightning-card>
+
+    <!-- Hover detail popover (fixed-position, positioned via renderedCallback) -->
+    <div class="slds-popover slds-popover_small record-tooltip" role="tooltip">
+        <div class="slds-popover__body">
+            <p class="slds-text-title_bold slds-m-bottom_xx-small">{hoveredCode}</p>
+            <p class="slds-text-body_small slds-m-bottom_xx-small">{hoveredName}</p>
+            <template lwc:if={hoveredIsCo}>
+                <p class="slds-text-body_small slds-text-color_weak">BT Level: {hoveredBtLevel}</p>
+            </template>
+        </div>
+    </div>
+
 </template>

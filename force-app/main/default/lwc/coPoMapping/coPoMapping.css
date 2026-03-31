@@ -1,16 +1,143 @@
-/* Prevent column squish on wide matrices — not available as an SLDS utility */
+/* ─── Table layout ────────────────────────────────────────────────────────── */
+
 .co-po-table {
     min-width: max-content;
 }
 
-/* Minimum column widths */
-.co-col  { min-width: 7rem; }
-.bt-col  { min-width: 6rem; }
-.po-col  { min-width: 4rem; }
+.co-col { min-width: 10rem; }
+.po-col { min-width: 4rem; }
 
-/* Compact lightning-input inside table cells */
+/* ─── All body cells white ───────────────────────────────────────────────── */
+
+.co-po-table th,
+.co-po-table td {
+    background-color: #fff !important;
+}
+
+/* ─── Grey: header row + first column (cell-header) ─────────────────────── */
+/* Must be more specific than the white rule above (.co-po-table th/td = 0,1,1)
+   so we use .co-po-table .cell-header (0,2,0) which wins on class count.     */
+
+.co-po-table .cell-header {
+    background-color: #f3f3f3 !important;
+}
+
+/* ─── Separator line under the header row ───────────────────────────────── */
+
+.co-po-table thead tr th {
+    border-bottom: 2px solid #c9c7c5 !important;
+}
+
+/* ─── Suppress SLDS row-hover box-shadow (blue left border) ──────────────── */
+
+.co-po-table tr:hover > th,
+.co-po-table tr:hover > td {
+    box-shadow: none !important;
+}
+
+/* Body rows: white cells stay white, grey first-cells stay grey on hover */
+.co-po-table tbody tr:hover > td {
+    background-color: #fff !important;
+}
+
+.co-po-table tbody tr:hover > td.cell-header {
+    background-color: #f3f3f3 !important;
+}
+
+/* Warning cells stay orange on row hover */
+.co-po-table tbody tr:hover > td.weight-cell-warning {
+    background-color: #fff3e0 !important;
+}
+
+/* ─── Orange unconfigured weight cells ───────────────────────────────────── */
+
+.weight-cell-warning {
+    position: relative;
+    background-color: #fff3e0 !important;
+    border-left: 2px solid #e65c00;
+}
+
+.weight-cell-warning::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 8px 8px 0;
+    border-color: transparent #e65c00 transparent transparent;
+}
+
+/* ─── Weight input ────────────────────────────────────────────────────────── */
+
 .weight-input {
     width: 4rem;
     display: block;
     margin: 0 auto;
+    --sds-c-input-text-align: center;
+}
+
+/* ─── CO cell: code + inline edit/delete icons ───────────────────────────── */
+
+.co-cell-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0.5rem;
+    gap: 0.25rem;
+}
+
+.co-actions {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity 0.15s;
+}
+
+/* Show icons only when the row is hovered */
+.co-po-table tbody tr:hover .co-actions {
+    opacity: 1;
+}
+
+.icon-delete {
+    color: #ba0517;
+}
+
+/* ─── CO and PO links ────────────────────────────────────────────────────── */
+
+.co-link,
+.po-link {
+    display: block;
+    cursor: pointer;
+    color: #0176d3;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    flex: 1;
+    min-width: 0;
+}
+
+.co-link:hover,
+.po-link:hover,
+.co-link:focus,
+.po-link:focus {
+    text-decoration: underline;
+    outline: none;
+    border: none;
+}
+
+/* ─── Legend ─────────────────────────────────────────────────────────────── */
+
+.legend-warning {
+    color: #e65c00;
+    font-style: italic;
+}
+
+/* ─── Hover detail popover ───────────────────────────────────────────────── */
+
+.record-tooltip {
+    display: none;
+    pointer-events: none;
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Study_Program_Version__c</fullName>
+    <fullName>Study_Plan__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
-    <label>Study Program Version</label>
-    <referenceTo>Study_Program_Version__c</referenceTo>
+    <label>Study Plan</label>
+    <referenceTo>Study_Plan__c</referenceTo>
     <relationshipLabel>Program Outcomes</relationshipLabel>
     <relationshipName>Program_Outcomes</relationshipName>
     <required>false</required>

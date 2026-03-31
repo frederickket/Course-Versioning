@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Program_Outcome__c</fullName>
-    <deleteConstraint>Restrict</deleteConstraint>
     <label>Program Outcome</label>
     <referenceTo>Program_Outcome__c</referenceTo>
     <relationshipLabel>Course Outcome Program Outcomes</relationshipLabel>
     <relationshipName>Course_Outcome_Program_Outcomes</relationshipName>
-    <required>true</required>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
     <trackTrending>false</trackTrending>
-    <type>Lookup</type>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
 </CustomField>

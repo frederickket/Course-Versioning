@@ -36,19 +36,19 @@ public with sharing class REDU_CoPoMapping_LCTRL {
     }
 
     /**
-     * @description Returns all Program Outcomes, optionally filtered by a Study Program Version.
-     * @param       studyProgramVersionId  Id of the Study_Program_Version__c record (nullable).
+     * @description Returns all Program Outcomes, optionally filtered by a Study Plan.
+     * @param       studyPlanId  Id of the Study_Plan__c record (nullable).
      * @return      List of Program_Outcome__c records ordered by Program Outcome Code.
      */
     @AuraEnabled(cacheable=true)
-    public static List<Program_Outcome__c> getProgramOutcomes(String studyProgramVersionId) {
+    public static List<Program_Outcome__c> getProgramOutcomes(String studyPlanId) {
         try {
-            Id spvId = String.isNotBlank(studyProgramVersionId) ? (Id) studyProgramVersionId : null;
-            if (spvId != null) {
+            Id spId = String.isNotBlank(studyPlanId) ? (Id) studyPlanId : null;
+            if (spId != null) {
                 return [
                     SELECT Id, Name, Program_Outcome_Code__c
                     FROM   Program_Outcome__c
-                    WHERE  Study_Program_Version__c = :spvId
+                    WHERE  Study_Plan__c = :spId
                     ORDER BY Program_Outcome_Code__c ASC NULLS LAST
                 ];
             }
@@ -65,11 +65,12 @@ public with sharing class REDU_CoPoMapping_LCTRL {
 
     /**
      * @description Returns existing Course_Outcome_Program_Outcome__c records for the given sets of Course and Program Outcomes.
+     *              Not cacheable so that freshly saved weights are always returned.
      * @param       courseOutcomeIds   List of Course_Outcome__c Ids.
      * @param       programOutcomeIds  List of Program_Outcome__c Ids.
      * @return      List of Course_Outcome_Program_Outcome__c records with Weight values.
      */
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static List<Course_Outcome_Program_Outcome__c> getMappings(List<Id> courseOutcomeIds, List<Id> programOutcomeIds) {
         try {
             if (courseOutcomeIds == null || courseOutcomeIds.isEmpty()
@@ -82,6 +83,62 @@ public with sharing class REDU_CoPoMapping_LCTRL {
                 WHERE  Course_Outcome__c IN :courseOutcomeIds
                 AND    Program_Outcome__c IN :programOutcomeIds
             ];
+        } catch (Exception exp) {
+            REDU_Logging_UTIL.debug(exp);
+            throw REDU_Exception_UTIL.auraException(exp.getMessage());
+        }
+    }
+
+    /**
+     * @description Returns a single Course Outcome by Id.
+     * @param       courseOutcomeId  Id of the Course_Outcome__c record.
+     * @return      The Course_Outcome__c record.
+     */
+    @AuraEnabled(cacheable=true)
+    public static Course_Outcome__c getCourseOutcomeById(Id courseOutcomeId) {
+        try {
+            return [
+                SELECT Id, Name, Course_Outcome_Code__c, Blooms_Taxonomy_Level__c
+                FROM   Course_Outcome__c
+                WHERE  Id = :courseOutcomeId
+                LIMIT  1
+            ];
+        } catch (Exception exp) {
+            REDU_Logging_UTIL.debug(exp);
+            throw REDU_Exception_UTIL.auraException(exp.getMessage());
+        }
+    }
+
+    /**
+     * @description Returns a single Program Outcome by Id.
+     * @param       programOutcomeId  Id of the Program_Outcome__c record.
+     * @return      The Program_Outcome__c record.
+     */
+    @AuraEnabled(cacheable=true)
+    public static Program_Outcome__c getProgramOutcomeById(Id programOutcomeId) {
+        try {
+            return [
+                SELECT Id, Name, Program_Outcome_Code__c
+                FROM   Program_Outcome__c
+                WHERE  Id = :programOutcomeId
+                LIMIT  1
+            ];
+        } catch (Exception exp) {
+            REDU_Logging_UTIL.debug(exp);
+            throw REDU_Exception_UTIL.auraException(exp.getMessage());
+        }
+    }
+
+    /**
+     * @description Deletes a Course Outcome record.
+     *              Will fail (with AuraHandledException) if related mapping records exist
+     *              due to the Restrict delete constraint on the junction object.
+     * @param       courseOutcomeId  Id of the Course_Outcome__c record to delete.
+     */
+    @AuraEnabled
+    public static void deleteCourseOutcome(Id courseOutcomeId) {
+        try {
+            delete new Course_Outcome__c(Id = courseOutcomeId);
         } catch (Exception exp) {
             REDU_Logging_UTIL.debug(exp);
             throw REDU_Exception_UTIL.auraException(exp.getMessage());

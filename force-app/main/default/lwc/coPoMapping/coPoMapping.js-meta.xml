@@ -11,17 +11,17 @@
         <!--
             Record page: restrict to Study Unit Version records only.
             studyUnitVersionId is auto-set from recordId — no manual entry needed.
-            studyProgramVersionId is optional to narrow down which POs are shown.
+            studyPlanId is optional to narrow down which POs are shown.
         -->
         <targetConfig targets="lightning__RecordPage">
             <objects>
                 <object>Study_Unit_Version__c</object>
             </objects>
             <property
-                name="studyProgramVersionId"
+                name="studyPlanId"
                 type="String"
-                label="Study Program Version Id (optional)"
-                description="Leave blank to show all Program Outcomes. Set to a Study Program Version Id to filter."
+                label="Study Plan Id (optional)"
+                description="Leave blank to show all Program Outcomes. Set to a Study Plan Id to filter."
             />
         </targetConfig>
 
@@ -36,10 +36,10 @@
                 description="Filter Course Outcomes by this Study Unit Version record Id. Leave blank to show all."
             />
             <property
-                name="studyProgramVersionId"
+                name="studyPlanId"
                 type="String"
-                label="Study Program Version Id (optional)"
-                description="Leave blank to show all Program Outcomes. Set to a Study Program Version Id to filter."
+                label="Study Plan Id (optional)"
+                description="Leave blank to show all Program Outcomes. Set to a Study Plan Id to filter."
             />
         </targetConfig>
     </targetConfigs>
