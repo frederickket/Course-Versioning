@@ -12,15 +12,18 @@
 import { LightningElement, api, wire } from 'lwc';
 import { refreshApex } from '@salesforce/apex';
 import { NavigationMixin } from 'lightning/navigation';
+import LightningConfirm from 'lightning/confirm';
 import { promptSuccess, promptError } from 'c/toasterUtil';
 import { getErrorMessage, logInfo } from 'c/loggingUtil';
 import { customLabels } from 'c/labelLoader';
 
-import ctrlGetCourseOutcomes   from '@salesforce/apex/REDU_CoPoMapping_LCTRL.getCourseOutcomes';
-import ctrlGetProgramOutcomes  from '@salesforce/apex/REDU_CoPoMapping_LCTRL.getProgramOutcomes';
-import ctrlGetMappings         from '@salesforce/apex/REDU_CoPoMapping_LCTRL.getMappings';
-import ctrlSaveMappingWeight   from '@salesforce/apex/REDU_CoPoMapping_LCTRL.saveMappingWeight';
-import ctrlDeleteCourseOutcome from '@salesforce/apex/REDU_CoPoMapping_LCTRL.deleteCourseOutcome';
+import ctrlGetCourseOutcomes      from '@salesforce/apex/REDU_CoPoMapping_LCTRL.getCourseOutcomes';
+import ctrlGetProgramOutcomes     from '@salesforce/apex/REDU_CoPoMapping_LCTRL.getProgramOutcomes';
+import ctrlGetMappings            from '@salesforce/apex/REDU_CoPoMapping_LCTRL.getMappings';
+import ctrlSaveMappingWeight      from '@salesforce/apex/REDU_CoPoMapping_LCTRL.saveMappingWeight';
+import ctrlDeleteCourseOutcome  from '@salesforce/apex/REDU_CoPoMapping_LCTRL.deleteCourseOutcome';
+import ctrlDeleteProgramOutcome from '@salesforce/apex/REDU_CoPoMapping_LCTRL.deleteProgramOutcome';
+import ctrlUpdateCourseOutcomes   from '@salesforce/apex/REDU_CoPoMapping_LCTRL.updateCourseOutcomes';
 
 export default class CoPoMapping extends NavigationMixin(LightningElement) {
 
@@ -58,6 +61,30 @@ export default class CoPoMapping extends NavigationMixin(LightningElement) {
     _coWireResult;
     _poWireResult;
 
+    // natural host width captured before table data loads — used to lock
+    // the scroll container so the table can overflow and scroll horizontally
+    _scrollContainerWidth = null;
+
+    // ─── CO Detail view ───────────────────────────────────────────────────────
+    showCoDetail = false;
+    draftValues  = [];
+
+    coColumns = [
+        { label: 'CO Code', fieldName: 'coUrl', type: 'url', typeAttributes: { label: { fieldName: 'coCode' }, target: '_self' }, initialWidth: 110 },
+        { label: 'Name',          fieldName: 'name',         type: 'text',   editable: true  },
+        { label: 'Description',   fieldName: 'description',  type: 'text',   editable: true,  wrapText: true  },
+        { label: "Bloom's Level", fieldName: 'bloomsLevel',  type: 'text',   editable: false, initialWidth: 160 },
+        {
+            type: 'action',
+            typeAttributes: {
+                rowActions: [
+                    { label: 'Edit',   name: 'edit'   },
+                    { label: 'Delete', name: 'delete' }
+                ]
+            }
+        }
+    ];
+
     // labels
     label = customLabels;
 
@@ -78,16 +105,33 @@ export default class CoPoMapping extends NavigationMixin(LightningElement) {
     /**
      * @description rendered callback — positions the hover detail tooltip via direct DOM style
      *              to avoid VS Code CSS linter errors from dynamic style bindings in HTML.
+     *              Also locks the scroll container width to the component's natural layout
+     *              width (captured before data loads) so horizontal scroll works correctly.
      */
     renderedCallback() {
         const tooltip = this.template.querySelector('.record-tooltip');
-        if (!tooltip) return;
-        if (this.hoveredRecord) {
-            const { x, y } = this.hoveredRecord;
-            tooltip.style.cssText =
-                `position:fixed;top:${y}px;left:${x}px;z-index:9999;max-width:18rem;display:block;`;
-        } else {
-            tooltip.style.cssText = 'display:none;';
+        if (tooltip) {
+            if (this.hoveredRecord) {
+                const { x, y } = this.hoveredRecord;
+                tooltip.style.cssText =
+                    `position:fixed;top:${y}px;left:${x}px;z-index:9999;max-width:18rem;display:block;`;
+            } else {
+                tooltip.style.cssText = 'display:none;';
+            }
+        }
+
+        // Capture the host's natural layout width before table data expands it.
+        // Once saved, apply it as max-width on the scroll container so the table
+        // can overflow and trigger a horizontal scrollbar.
+        if (!this._scrollContainerWidth) {
+            const host = this.template.host;
+            if (host && host.offsetWidth > 0) {
+                this._scrollContainerWidth = host.offsetWidth;
+            }
+        }
+        const sc = this.template.querySelector('.table-scroll-container');
+        if (sc && this._scrollContainerWidth) {
+            sc.style.maxWidth = this._scrollContainerWidth + 'px';
         }
     }
 
@@ -163,9 +207,43 @@ export default class CoPoMapping extends NavigationMixin(LightningElement) {
             });
     }
 
+    // ─── Computed: Warning sets ───────────────────────────────────────────────
+
+    /**
+     * @description Returns two Sets:
+     *   warningCoIds — COs where no PO contributes a weight > 0 (entire row has no contribution)
+     *   warningPoIds — POs where no CO has a weight > 0 (entire column has no contribution)
+     */
+    _computeWarnings() {
+        const coIds = this.courseOutcomes.map(co => co.Id);
+        const poIds = this.programOutcomes.map(po => po.Id);
+
+        const warningCoIds = new Set();
+        const warningPoIds = new Set();
+
+        for (const coId of coIds) {
+            const hasContribution = poIds.some(poId => {
+                const entry = this.mappingMap[`${coId}_${poId}`];
+                return entry && entry.weight != null && Number(entry.weight) > 0;
+            });
+            if (!hasContribution) warningCoIds.add(coId);
+        }
+
+        for (const poId of poIds) {
+            const hasContribution = coIds.some(coId => {
+                const entry = this.mappingMap[`${coId}_${poId}`];
+                return entry && entry.weight != null && Number(entry.weight) > 0;
+            });
+            if (!hasContribution) warningPoIds.add(poId);
+        }
+
+        return { warningCoIds, warningPoIds };
+    }
+
     // ─── Computed: Matrix rows (COs sorted numerically by code) ──────────────
 
     get matrixRows() {
+        const { warningCoIds, warningPoIds } = this._computeWarnings();
         const sortedCos = [...this.courseOutcomes].sort((a, b) =>
             this._codeNum(this._coCode(a)) - this._codeNum(this._coCode(b))
         );
@@ -173,24 +251,27 @@ export default class CoPoMapping extends NavigationMixin(LightningElement) {
             this._codeNum(this._poCode(a)) - this._codeNum(this._poCode(b))
         );
         return sortedCos.map(co => {
+            const isCoWarning = warningCoIds.has(co.Id);
             const cells = sortedPos.map(po => {
+                const isPoWarning = warningPoIds.has(po.Id);
                 const key = `${co.Id}_${po.Id}`;
                 const existing = this.mappingMap[key];
-                const isUnconfigured = !existing;
+                let cellClass = 'slds-text-align_center slds-p-around_xx-small';
+                if (isCoWarning) cellClass += ' row-warning';
+                if (isPoWarning) cellClass += ' col-warning';
                 return {
                     key,
                     coId     : co.Id,
                     poId     : po.Id,
                     weight   : (existing && existing.weight != null) ? existing.weight : '',
-                    cellClass: isUnconfigured
-                        ? 'slds-text-align_center slds-p-around_xx-small weight-cell-warning'
-                        : 'slds-text-align_center slds-p-around_xx-small'
+                    cellClass
                 };
             });
             return {
-                id   : co.Id,
-                name : co.Name,
-                label: this._coCode(co) || co.Name,
+                id           : co.Id,
+                name         : co.Name,
+                label        : this._coCode(co) || co.Name,
+                coHeaderClass: isCoWarning ? 'cell-header row-warning' : 'cell-header',
                 cells
             };
         });
@@ -199,14 +280,18 @@ export default class CoPoMapping extends NavigationMixin(LightningElement) {
     // ─── Computed: PO headers sorted numerically by code ─────────────────────
 
     get poHeaders() {
+        const { warningPoIds } = this._computeWarnings();
         return [...this.programOutcomes]
             .sort((a, b) =>
                 this._codeNum(this._poCode(a)) - this._codeNum(this._poCode(b))
             )
             .map(po => ({
-                id   : po.Id,
-                name : po.Name,
-                label: this._poCode(po) || po.Name
+                id         : po.Id,
+                name       : po.Name,
+                label      : this._poCode(po) || po.Name,
+                headerClass: warningPoIds.has(po.Id)
+                    ? 'slds-text-align_center cell-header po-col col-warning'
+                    : 'slds-text-align_center cell-header po-col'
             }));
     }
 
@@ -234,6 +319,40 @@ export default class CoPoMapping extends NavigationMixin(LightningElement) {
 
     get hasError() {
         return !!this.errorMessage;
+    }
+
+    get hasCourseOutcomes() {
+        return this.courseOutcomes.length > 0;
+    }
+
+    get showCoDetailView() {
+        return !this.isLoading && !this.hasError && this.showCoDetail;
+    }
+
+    get showMappingView() {
+        return !this.isLoading && !this.hasError && !this.showCoDetail;
+    }
+
+    get toggleButtonLabel() {
+        return this.showCoDetail ? 'CO-PO Mapping' : 'CO Detail';
+    }
+
+    get toggleIconName() {
+        // table icon → switch to matrix view; list icon → switch to detail view
+        return this.showCoDetail ? 'utility:table' : 'utility:list';
+    }
+
+    get coDetailRows() {
+        return [...this.courseOutcomes]
+            .sort((a, b) => this._codeNum(this._coCode(a)) - this._codeNum(this._coCode(b)))
+            .map(co => ({
+                id          : co.Id,
+                coCode      : this._coCode(co),
+                coUrl       : `/lightning/r/Course_Outcome__c/${co.Id}/view`,
+                name        : co.Name || '',
+                description : co.Description__c || co['reduivy__Description__c'] || '',
+                bloomsLevel : co.Blooms_Taxonomy_Level__c || co['reduivy__Blooms_Taxonomy_Level__c'] || ''
+            }));
     }
 
     // ─── Computed: Hover popover ──────────────────────────────────────────────
@@ -304,10 +423,16 @@ export default class CoPoMapping extends NavigationMixin(LightningElement) {
     }
 
     /**
-     * @description Delete a Course Outcome record and remove it from the local matrix view.
+     * @description Delete a Course Outcome after user confirmation.
      */
-    handleDeleteCo(event) {
+    async handleDeleteCo(event) {
         const coId = event.currentTarget.dataset.id;
+        const confirmed = await LightningConfirm.open({
+            message: 'Are you sure you want to delete this Course Outcome? This action cannot be undone.',
+            variant: 'headerless',
+            label  : 'Confirm Delete'
+        });
+        if (!confirmed) return;
         ctrlDeleteCourseOutcome({ courseOutcomeId: coId })
             .then(() => {
                 this.courseOutcomes = this.courseOutcomes.filter(co => co.Id !== coId);
@@ -320,11 +445,85 @@ export default class CoPoMapping extends NavigationMixin(LightningElement) {
     }
 
     /**
-     * @description Remove a PO column from the matrix view (local only, no DB delete)
+     * @description Toggle between the CO-PO mapping matrix and the CO detail table.
      */
-    handleRemovePo(event) {
+    handleToggleView() {
+        this.showCoDetail = !this.showCoDetail;
+        this.draftValues  = [];
+    }
+
+    /**
+     * @description Save inline edits from the CO detail datatable.
+     */
+    handleCoDetailSave(event) {
+        const records = event.detail.draftValues.map(d => {
+            const record = { Id: d.id };
+            if (d.coCode      !== undefined) record.Course_Outcome_Code__c  = d.coCode;
+            if (d.name        !== undefined) record.Name                     = d.name;
+            if (d.description !== undefined) record.Description__c           = d.description;
+            return record;
+        });
+
+        ctrlUpdateCourseOutcomes({ records })
+            .then(() => {
+                this.draftValues = [];
+                promptSuccess(this.label.SUCCESS_LABEL, 'Course Outcomes updated successfully.');
+                return refreshApex(this._coWireResult);
+            })
+            .catch(error => {
+                promptError(this.label.ERROR_LABEL, getErrorMessage(error));
+            });
+    }
+
+    /**
+     * @description Handle row actions (Edit / Delete) from the CO detail datatable.
+     */
+    async handleCoDetailRowAction(event) {
+        const { action, row } = event.detail;
+        if (action.name === 'edit') {
+            this[NavigationMixin.Navigate]({
+                type      : 'standard__recordPage',
+                attributes: { recordId: row.id, actionName: 'edit' }
+            });
+        } else if (action.name === 'delete') {
+            const confirmed = await LightningConfirm.open({
+                message: 'Are you sure you want to delete this Course Outcome? This action cannot be undone.',
+                variant: 'headerless',
+                label  : 'Confirm Delete'
+            });
+            if (!confirmed) return;
+            ctrlDeleteCourseOutcome({ courseOutcomeId: row.id })
+                .then(() => {
+                    this.courseOutcomes = this.courseOutcomes.filter(co => co.Id !== row.id);
+                    promptSuccess(this.label.SUCCESS_LABEL, 'Course Outcome deleted successfully.');
+                    return refreshApex(this._coWireResult);
+                })
+                .catch(error => {
+                    promptError(this.label.ERROR_LABEL, getErrorMessage(error));
+                });
+        }
+    }
+
+    /**
+     * @description Delete a Program Outcome after user confirmation.
+     */
+    async handleRemovePo(event) {
         const poId = event.target.dataset.poid;
-        this.programOutcomes = this.programOutcomes.filter(po => po.Id !== poId);
+        const confirmed = await LightningConfirm.open({
+            message: 'Are you sure you want to delete this Program Outcome? This action cannot be undone.',
+            variant: 'headerless',
+            label  : 'Confirm Delete'
+        });
+        if (!confirmed) return;
+        ctrlDeleteProgramOutcome({ programOutcomeId: poId })
+            .then(() => {
+                this.programOutcomes = this.programOutcomes.filter(po => po.Id !== poId);
+                promptSuccess(this.label.SUCCESS_LABEL, 'Program Outcome deleted successfully.');
+                return refreshApex(this._poWireResult);
+            })
+            .catch(error => {
+                promptError(this.label.ERROR_LABEL, getErrorMessage(error));
+            });
     }
 
     /**

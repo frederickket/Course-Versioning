@@ -1,6 +1,16 @@
 <template>
     <lightning-card title="CO-PO Mapping" icon-name="standard:education">
 
+        <!-- Toggle icon button in card header -->
+        <lightning-button-icon
+            slot="actions"
+            icon-name={toggleIconName}
+            alternative-text={toggleButtonLabel}
+            title={toggleButtonLabel}
+            variant="border-filled"
+            onclick={handleToggleView}
+        ></lightning-button-icon>
+
         <!-- Loading spinner -->
         <template lwc:if={isLoading}>
             <div class="slds-p-around_large slds-text-align_center">
@@ -20,134 +30,174 @@
             </div>
         </template>
 
-        <!-- No data state -->
-        <template lwc:if={hasNoData}>
-            <div class="slds-p-around_medium slds-text-align_center slds-text-color_weak">
-                <p>No Course Outcomes or Program Outcomes found.</p>
+        <!-- ═══ CO Detail View ═══════════════════════════════════════════════ -->
+        <template lwc:if={showCoDetailView}>
+            <div class="slds-p-around_small">
+
+                <!-- CO datatable -->
+                <template lwc:if={hasCourseOutcomes}>
+                    <lightning-datatable
+                        key-field="id"
+                        data={coDetailRows}
+                        columns={coColumns}
+                        draft-values={draftValues}
+                        onsave={handleCoDetailSave}
+                        onrowaction={handleCoDetailRowAction}
+                        hide-checkbox-column
+                    ></lightning-datatable>
+                    <div class="slds-m-top_x-small slds-text-body_small slds-text-color_weak">
+                        Bloom&#39;s level values: Remember, Understand, Apply, Analyze, Evaluate, Create
+                    </div>
+                </template>
+
+                <!-- No COs -->
+                <template lwc:else>
+                    <div class="slds-p-around_medium slds-text-align_center slds-text-color_weak">
+                        <p>No Course Outcomes found.</p>
+                    </div>
+                </template>
+
+                <!-- + CO button -->
+                <div class="slds-m-top_small">
+                    <lightning-button label="+ CO" onclick={handleAddCo}></lightning-button>
+                </div>
+
             </div>
         </template>
 
-        <!-- Matrix table -->
-        <template lwc:if={hasData}>
-            <div class="slds-p-around_small">
+        <!-- ═══ CO-PO Mapping View ══════════════════════════════════════════ -->
+        <template lwc:if={showMappingView}>
 
-                <!-- + PO button above the table -->
-                <div class="slds-m-bottom_x-small slds-text-align_right">
-                    <lightning-button
-                        label="+ PO"
-                        onclick={handleAddPo}
-                    ></lightning-button>
+            <!-- No data state -->
+            <template lwc:if={hasNoData}>
+                <div class="slds-p-around_medium slds-text-align_center slds-text-color_weak">
+                    <p>No Course Outcomes or Program Outcomes found.</p>
                 </div>
+            </template>
 
-                <div class="slds-scrollable_x">
-                    <table class="slds-table slds-table_bordered slds-table_col-bordered co-po-table">
-                        <thead>
-                            <tr class="slds-line-height_reset">
-                                <!-- CO/PO corner header -->
-                                <th scope="col" class="slds-text-align_left cell-header co-col">
-                                    <span class="slds-truncate slds-text-title_bold slds-p-horizontal_x-small">CO/PO</span>
-                                </th>
-                                <!-- PO header columns -->
-                                <template for:each={poHeaders} for:item="ph">
-                                    <th key={ph.id} scope="col"
-                                        class="slds-text-align_center cell-header po-col"
-                                        title={ph.name}>
-                                        <a class="slds-truncate po-link"
-                                           data-id={ph.id}
-                                           data-type="po"
-                                           onclick={handleRecordNavigate}
-                                           onmouseenter={handleRecordMouseenter}
-                                           onmouseleave={handleRecordMouseleave}>{ph.label}</a>
+            <!-- Matrix table -->
+            <template lwc:if={hasData}>
+                <div class="slds-p-around_small matrix-wrapper">
+
+                    <!-- + PO button above the table -->
+                    <div class="slds-m-bottom_x-small slds-text-align_right">
+                        <lightning-button
+                            label="+ PO"
+                            onclick={handleAddPo}
+                        ></lightning-button>
+                    </div>
+
+                    <div class="table-scroll-container">
+                        <table class="slds-table slds-table_bordered slds-table_col-bordered co-po-table">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <!-- CO/PO corner header -->
+                                    <th scope="col" class="slds-text-align_left cell-header co-col">
+                                        <span class="slds-truncate slds-text-title_bold slds-p-horizontal_x-small">CO/PO</span>
                                     </th>
-                                </template>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <template for:each={matrixRows} for:item="row">
-                                <tr key={row.id}>
-                                    <!-- CO row label (grey) with inline edit/delete -->
-                                    <td class="cell-header" title={row.name}>
-                                        <div class="co-cell-content">
-                                            <a class="slds-text-title_bold co-link"
-                                               data-id={row.id}
-                                               data-type="co"
+                                    <!-- PO header columns -->
+                                    <template for:each={poHeaders} for:item="ph">
+                                        <th key={ph.id} scope="col"
+                                            class={ph.headerClass}
+                                            title={ph.name}>
+                                            <a class="slds-truncate po-link"
+                                               data-id={ph.id}
+                                               data-type="po"
                                                onclick={handleRecordNavigate}
                                                onmouseenter={handleRecordMouseenter}
-                                               onmouseleave={handleRecordMouseleave}>{row.label}</a>
-                                            <div class="co-actions">
-                                                <lightning-button-icon
-                                                    icon-name="utility:edit"
-                                                    variant="bare"
-                                                    size="medium"
-                                                    alternative-text="Edit"
-                                                    title="Edit Course Outcome"
-                                                    data-id={row.id}
-                                                    onclick={handleEditCo}
-                                                ></lightning-button-icon>
-                                                <lightning-button-icon
-                                                    icon-name="utility:delete"
-                                                    variant="bare"
-                                                    size="medium"
-                                                    alternative-text="Delete"
-                                                    title="Delete Course Outcome"
-                                                    data-id={row.id}
-                                                    onclick={handleDeleteCo}
-                                                    class="icon-delete"
-                                                ></lightning-button-icon>
+                                               onmouseleave={handleRecordMouseleave}>{ph.label}</a>
+                                        </th>
+                                    </template>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={matrixRows} for:item="row">
+                                    <tr key={row.id}>
+                                        <!-- CO row label (grey) with inline edit/delete -->
+                                        <td class={row.coHeaderClass} title={row.name}>
+                                            <div class="co-cell-content">
+                                                <a class="slds-text-title_bold co-link"
+                                                   data-id={row.id}
+                                                   data-type="co"
+                                                   onclick={handleRecordNavigate}
+                                                   onmouseenter={handleRecordMouseenter}
+                                                   onmouseleave={handleRecordMouseleave}>{row.label}</a>
+                                                <div class="co-actions">
+                                                    <lightning-button-icon
+                                                        icon-name="utility:edit"
+                                                        variant="bare"
+                                                        size="medium"
+                                                        alternative-text="Edit"
+                                                        title="Edit Course Outcome"
+                                                        data-id={row.id}
+                                                        onclick={handleEditCo}
+                                                    ></lightning-button-icon>
+                                                    <lightning-button-icon
+                                                        icon-name="utility:delete"
+                                                        variant="bare"
+                                                        size="medium"
+                                                        alternative-text="Delete"
+                                                        title="Delete Course Outcome"
+                                                        data-id={row.id}
+                                                        onclick={handleDeleteCo}
+                                                        class="icon-delete"
+                                                    ></lightning-button-icon>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </td>
+                                        <!-- Weight cells -->
+                                        <template for:each={row.cells} for:item="cell">
+                                            <td key={cell.key} class={cell.cellClass}>
+                                                <lightning-input
+                                                    type="number"
+                                                    variant="label-hidden"
+                                                    min="0"
+                                                    max="5"
+                                                    step="1"
+                                                    value={cell.weight}
+                                                    data-coid={cell.coId}
+                                                    data-poid={cell.poId}
+                                                    data-key={cell.key}
+                                                    onchange={handleWeightChange}
+                                                    class="weight-input"
+                                                ></lightning-input>
+                                            </td>
+                                        </template>
+                                    </tr>
+                                </template>
+                            </tbody>
+                            <!-- Footer row: +CO button + -PO buttons -->
+                            <tfoot>
+                                <tr>
+                                    <td class="cell-header slds-p-around_xx-small">
+                                        <lightning-button
+                                            label="+ CO"
+                                            onclick={handleAddCo}
+                                        ></lightning-button>
                                     </td>
-                                    <!-- Weight cells -->
-                                    <template for:each={row.cells} for:item="cell">
-                                        <td key={cell.key} class={cell.cellClass}>
-                                            <lightning-input
-                                                type="number"
-                                                variant="label-hidden"
-                                                min="0"
-                                                max="5"
-                                                step="1"
-                                                value={cell.weight}
-                                                data-coid={cell.coId}
-                                                data-poid={cell.poId}
-                                                data-key={cell.key}
-                                                onchange={handleWeightChange}
-                                                class="weight-input"
-                                            ></lightning-input>
+                                    <template for:each={poHeaders} for:item="ph">
+                                        <td key={ph.id} class="slds-text-align_center slds-p-around_xx-small">
+                                            <lightning-button
+                                                label="-PO"
+                                                variant="destructive-text"
+                                                data-poid={ph.id}
+                                                onclick={handleRemovePo}
+                                            ></lightning-button>
                                         </td>
                                     </template>
                                 </tr>
-                            </template>
-                        </tbody>
-                        <!-- Footer row: +CO button + -PO buttons + empty actions cell -->
-                        <tfoot>
-                            <tr>
-                                <td class="cell-header slds-p-around_xx-small">
-                                    <lightning-button
-                                        label="+ CO"
-                                        onclick={handleAddCo}
-                                    ></lightning-button>
-                                </td>
-                                <template for:each={poHeaders} for:item="ph">
-                                    <td key={ph.id} class="slds-text-align_center slds-p-around_xx-small">
-                                        <lightning-button
-                                            label="-PO"
-                                            variant="destructive-text"
-                                            data-poid={ph.id}
-                                            onclick={handleRemovePo}
-                                        ></lightning-button>
-                                    </td>
-                                </template>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
+                            </tfoot>
+                        </table>
+                    </div>
 
-                <!-- Legend -->
-                <div class="slds-m-top_small slds-text-body_small slds-text-color_weak">
-                    Weight values: 0 (no contribution) to 5 (highest contribution). Changes are saved automatically.
-                    <span class="legend-warning slds-m-left_x-small">&#9632; Unconfigured weight</span>
+                    <!-- Legend -->
+                    <div class="slds-m-top_small slds-text-body_small slds-text-color_weak">
+                        Weight values: 0 (no contribution) to 5 (highest contribution). Changes are saved automatically.</br>
+                        <span class="legend-warning slds-m-left_x-small">&#9632; No contribution (row or column has all zero weights)</span>
+                    </div>
                 </div>
-            </div>
+            </template>
+
         </template>
 
     </lightning-card>

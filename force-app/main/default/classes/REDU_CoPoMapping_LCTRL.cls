@@ -18,14 +18,14 @@ public with sharing class REDU_CoPoMapping_LCTRL {
             Id suvId = String.isNotBlank(studyUnitVersionId) ? (Id) studyUnitVersionId : null;
             if (suvId != null) {
                 return [
-                    SELECT Id, Name, Course_Outcome_Code__c, Blooms_Taxonomy_Level__c
+                    SELECT Id, Name, Course_Outcome_Code__c, Blooms_Taxonomy_Level__c, Description__c
                     FROM   Course_Outcome__c
                     WHERE  Study_Unit_Version__c = :suvId
                     ORDER BY Course_Outcome_Code__c ASC NULLS LAST
                 ];
             }
             return [
-                SELECT Id, Name, Course_Outcome_Code__c, Blooms_Taxonomy_Level__c
+                SELECT Id, Name, Course_Outcome_Code__c, Blooms_Taxonomy_Level__c, Description__c
                 FROM   Course_Outcome__c
                 ORDER BY Course_Outcome_Code__c ASC NULLS LAST
             ];
@@ -130,15 +130,42 @@ public with sharing class REDU_CoPoMapping_LCTRL {
     }
 
     /**
-     * @description Deletes a Course Outcome record.
-     *              Will fail (with AuraHandledException) if related mapping records exist
-     *              due to the Restrict delete constraint on the junction object.
+     * @description Updates a list of Course Outcome records with changed field values.
+     *              Called by the CO Detail inline-edit datatable.
+     * @param       records  List of Course_Outcome__c records with Id and any changed fields.
+     */
+    @AuraEnabled
+    public static void updateCourseOutcomes(List<Course_Outcome__c> records) {
+        try {
+            update records;
+        } catch (Exception exp) {
+            REDU_Logging_UTIL.debug(exp);
+            throw REDU_Exception_UTIL.auraException(exp.getMessage());
+        }
+    }
+
+    /**
+     * @description Deletes a Course Outcome record from the database.
      * @param       courseOutcomeId  Id of the Course_Outcome__c record to delete.
      */
     @AuraEnabled
     public static void deleteCourseOutcome(Id courseOutcomeId) {
         try {
             delete new Course_Outcome__c(Id = courseOutcomeId);
+        } catch (Exception exp) {
+            REDU_Logging_UTIL.debug(exp);
+            throw REDU_Exception_UTIL.auraException(exp.getMessage());
+        }
+    }
+
+    /**
+     * @description Deletes a Program Outcome record from the database.
+     * @param       programOutcomeId  Id of the Program_Outcome__c record to delete.
+     */
+    @AuraEnabled
+    public static void deleteProgramOutcome(Id programOutcomeId) {
+        try {
+            delete new Program_Outcome__c(Id = programOutcomeId);
         } catch (Exception exp) {
             REDU_Logging_UTIL.debug(exp);
             throw REDU_Exception_UTIL.auraException(exp.getMessage());

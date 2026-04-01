@@ -1,24 +1,59 @@
 /* ─── Table layout ────────────────────────────────────────────────────────── */
 
+/* Scroll container — max-width is set via JS in renderedCallback to lock it
+   to the component's natural layout width before the table can push it wider */
+.table-scroll-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 .co-po-table {
-    min-width: max-content;
+    width: max-content !important;
+    min-width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
 .co-col { min-width: 10rem; }
-.po-col { min-width: 4rem; }
+.po-col { min-width: 6rem; }
 
-/* ─── All body cells white ───────────────────────────────────────────────── */
+/* ─── Sticky first column ────────────────────────────────────────────────── */
+
+.co-po-table thead tr th:first-child,
+.co-po-table tbody tr td:first-child,
+.co-po-table tfoot tr td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+}
+
+.co-po-table tbody tr td:first-child,
+.co-po-table tfoot tr td:first-child {
+    border-right: 1px solid #dddbda;
+}
+
+/* ─── All cells: white background, zero hover effects ────────────────────── */
 
 .co-po-table th,
 .co-po-table td {
     background-color: #fff !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    outline: none !important;
 }
 
-/* ─── Grey: header row + first column (cell-header) ─────────────────────── */
-/* Must be more specific than the white rule above (.co-po-table th/td = 0,1,1)
-   so we use .co-po-table .cell-header (0,2,0) which wins on class count.     */
+.co-po-table tr:hover > th,
+.co-po-table tr:hover > td {
+    background-color: #fff !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    outline: none !important;
+}
 
-.co-po-table .cell-header {
+/* ─── Grey header cells ──────────────────────────────────────────────────── */
+
+.co-po-table .cell-header,
+.co-po-table tr:hover > .cell-header {
     background-color: #f3f3f3 !important;
 }
 
@@ -28,45 +63,29 @@
     border-bottom: 2px solid #c9c7c5 !important;
 }
 
-/* ─── Suppress SLDS row-hover box-shadow (blue left border) ──────────────── */
+/* ─── Row warning: CO has no contribution from any PO ───────────────────── */
 
-.co-po-table tr:hover > th,
-.co-po-table tr:hover > td {
-    box-shadow: none !important;
-}
-
-/* Body rows: white cells stay white, grey first-cells stay grey on hover */
-.co-po-table tbody tr:hover > td {
-    background-color: #fff !important;
-}
-
-.co-po-table tbody tr:hover > td.cell-header {
-    background-color: #f3f3f3 !important;
-}
-
-/* Warning cells stay orange on row hover */
-.co-po-table tbody tr:hover > td.weight-cell-warning {
+.co-po-table .row-warning,
+.co-po-table .cell-header.row-warning,
+.co-po-table tr:hover > .row-warning,
+.co-po-table tr:hover > .cell-header.row-warning {
     background-color: #fff3e0 !important;
 }
 
-/* ─── Orange unconfigured weight cells ───────────────────────────────────── */
+/* ─── Column warning: PO has no contribution to any CO ──────────────────── */
 
-.weight-cell-warning {
-    position: relative;
+.co-po-table .col-warning,
+.co-po-table .cell-header.col-warning,
+.co-po-table tr:hover > .col-warning,
+.co-po-table tr:hover > .cell-header.col-warning {
     background-color: #fff3e0 !important;
-    border-left: 2px solid #e65c00;
 }
 
-.weight-cell-warning::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 8px 8px 0;
-    border-color: transparent #e65c00 transparent transparent;
+/* ─── Intersection of both warnings ─────────────────────────────────────── */
+
+.co-po-table .row-warning.col-warning,
+.co-po-table tr:hover > .row-warning.col-warning {
+    background-color: #ffe0b2 !important;
 }
 
 /* ─── Weight input ────────────────────────────────────────────────────────── */
@@ -76,6 +95,11 @@
     display: block;
     margin: 0 auto;
     --sds-c-input-text-align: center;
+    text-align: center;
+}
+
+.weight-input input {
+    text-align: center !important;
 }
 
 /* ─── CO cell: code + inline edit/delete icons ───────────────────────────── */
@@ -96,7 +120,6 @@
     transition: opacity 0.15s;
 }
 
-/* Show icons only when the row is hovered */
 .co-po-table tbody tr:hover .co-actions {
     opacity: 1;
 }
